@@ -2,12 +2,11 @@ require("config.lazy")
 require("current-theme")
 require("options")
 
--- LSP Setup
-vim.lsp.enable({
-	"lua_ls", -- Lua
-	"ts_ls", -- TypeScript/JavaScript
-	"clangd", -- C/C++
-	"jdtls", -- Java
-	"rust_analyzer", -- Rust
-	"gopls", -- Go
-})
+local lsp_configs = {}
+
+for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+	local lsp_name = vim.fn.fnamemodify(f, ":t:r")
+	table.insert(lsp_configs, lsp_name)
+end
+
+vim.lsp.enable(lsp_configs)
