@@ -8,7 +8,16 @@ return {
 			auto_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
-			ensure_installed = { "lua", "tsx", "typescript", "javascript", "jsdoc", "markdown", "markdown_inline" },
+			ensure_installed = {
+				"lua",
+				"tsx",
+				"typescript",
+				"javascript",
+				"jsdoc",
+				"markdown",
+				"markdown_inline",
+				"regex",
+			},
 		})
 	end,
 }
