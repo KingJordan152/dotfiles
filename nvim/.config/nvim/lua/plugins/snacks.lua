@@ -72,6 +72,7 @@ return {
 				},
 			},
 		},
+		-- Cool central-hub page (like Alpha)
 		dashboard = {
 			enabled = true,
 			preset = {
@@ -116,11 +117,14 @@ return {
  ██████  █████████████████████ ████ █████ █████ ████ ██████]],
 			},
 		},
+		-- Display `lazygit` CLI tool in a floating window
+		lazygit = {
+			enabled = true,
+		},
 	},
 
-	-- These keybindings mainly apply to Picker
 	keys = {
-		-- Core Keybindings
+		-- (Picker) Core Keybindings
 		{
 			"<C-P>",
 			function()
@@ -206,7 +210,7 @@ return {
 			desc = "Colorschemes",
 		},
 
-		-- Search Keybindings (prefix 's')
+		-- (Picker) Search Keybindings (prefix 's')
 		{
 			"<leader>sp",
 			function()
@@ -362,7 +366,7 @@ return {
 			desc = "LSP Symbols",
 		},
 
-		-- Git Keybindings (prefix 'g')
+		-- (Picker) Git Keybindings (prefix 'g')
 		{
 			"<leader>gb",
 			function()
@@ -412,13 +416,21 @@ return {
 			end,
 			desc = "Git Log File",
 		},
-		-- Pull up dashboard from anywhere
+		-- (Dashboard) Pull up dashboard from anywhere
 		{
 			"<leader>d",
 			function()
 				Snacks.dashboard.open()
 			end,
 			desc = "Open Dashboard",
+		},
+		-- (Lazygit) Show Lazygit window
+		{
+			"<leader>lg",
+			function()
+				Snacks.lazygit.open()
+			end,
+			desc = "Open Lazygit",
 		},
 	},
 }
