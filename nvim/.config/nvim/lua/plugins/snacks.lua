@@ -121,6 +121,13 @@ return {
 		lazygit = {
 			enabled = true,
 		},
+		-- Reorganize the statuscolumn (and add clickable 'fold' icons)
+		statuscolumn = {
+			enabled = true,
+			folds = {
+				open = true,
+			},
+		},
 	},
 
 	keys = {
