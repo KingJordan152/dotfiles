@@ -87,17 +87,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function()
-		-- LSP-Related Keymaps
-		vim.keymap.set("n", "gh", function()
-			vim.lsp.buf.hover({
-				border = "rounded",
-				max_height = 25,
-			})
-		end, { desc = "View Hover Information" })
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-		vim.keymap.set({ "n", "v", "i" }, "<M-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
+		vim.keymap.set({ "n", "x", "i" }, "<M-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
 		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 
 		-- Diagnostic Config
