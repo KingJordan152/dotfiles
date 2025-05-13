@@ -7,10 +7,10 @@ return {
 				-- 'RainbowDelimiterRed', (usually "warning")
 				"RainbowDelimiterYellow",
 				"RainbowDelimiterBlue",
-				-- "RainbowDelimiterOrange", (usually indicates matching delimiter in native Neovim)
-				-- 'RainbowDelimiterGreen', (usually "string")
 				"RainbowDelimiterViolet",
 				"RainbowDelimiterCyan",
+				"RainbowDelimiterGreen",
+				"RainbowDelimiterOrange",
 			},
 
 			-- Don't colorize corresponding JSX/HTML tags
