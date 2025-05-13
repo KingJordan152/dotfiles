@@ -1,7 +1,7 @@
 ;; extends
 ; Code primarily written by Chat-GPT
 
-; By default, in TypeScript, a variable is only recognized as a `@constant` if it's written in all caps,
+; By default, in TypeScript/JavaScript, a variable is only recognized as a `@constant` if it's written in all caps,
 ; NOT if it's actually declared with `const`. These overrides ensure these variables are properly
 ; recognized/highlighted.
 
