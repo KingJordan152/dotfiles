@@ -1,12 +1,48 @@
+---@class tokyonight.Config
 return {
 	"folke/tokyonight.nvim",
 	lazy = false,
 	priority = 1000,
-	opts = {
-		-- on_highlights = function(hl)
-		-- 	hl.CursorLineNr = {
-		-- 		fg = "#737AA2",
-		-- 	}
-		-- end,
-	},
+	config = function()
+		require("tokyonight").setup({
+			---@param highlights tokyonight.Highlights
+			---@param colors ColorScheme
+			on_highlights = function(highlights, colors)
+				highlights["@variable"] = {
+					fg = colors.red,
+				}
+
+				highlights["@variable.parameter"] = {
+					fg = colors.red,
+					italic = true,
+				}
+
+				-- Constants (Treesitter)
+				highlights["@constant"] = {
+					fg = colors.yellow,
+				}
+
+				-- Constants (LSP)
+				highlights["@lsp.typemod.variable.readonly"] = {
+					fg = colors.yellow,
+				}
+
+				-- JSX composite components using object notation (e.g., <Modal.Dialog>)
+				highlights["@tag.builtin.tsx"] = {
+					fg = colors.red,
+				}
+
+				-- JSX props
+				highlights["@tag.attribute.tsx"] = {
+					fg = colors.purple,
+					italic = true,
+				}
+
+				-- Builtin functions (e.g., console.log)
+				highlights["@variable.builtin"] = {
+					fg = colors.blue1,
+				}
+			end,
+		})
+	end,
 }
