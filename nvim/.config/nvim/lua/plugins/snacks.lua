@@ -33,6 +33,13 @@ return {
 				enabled = true,
 				priority = 200,
 			},
+			-- Don't add indent lines to git commit messages while preserving default filters
+			filter = function(buf)
+				return vim.g.snacks_indent ~= false
+					and vim.b[buf].snacks_indent ~= false
+					and vim.bo[buf].buftype == ""
+					and vim.bo[buf].filetype ~= "gitcommit"
+			end,
 		},
 		-- Floating picker windows (like Telescope)
 		picker = {
