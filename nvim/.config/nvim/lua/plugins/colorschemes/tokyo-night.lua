@@ -34,7 +34,7 @@ return {
 
 				-- JSX props
 				highlights["@tag.attribute.tsx"] = {
-					fg = colors.purple,
+					fg = colors.magenta,
 					italic = true,
 				}
 
