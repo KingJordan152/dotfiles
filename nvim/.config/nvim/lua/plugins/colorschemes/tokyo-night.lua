@@ -38,8 +38,13 @@ return {
 					italic = true,
 				}
 
-				-- Builtin functions (e.g., console.log)
+				-- Builtin variables/functions (e.g., console.log)
 				highlights["@variable.builtin"] = {
+					fg = colors.blue1,
+				}
+
+				-- Builtin variables/functions - LSP (e.g., vim.--)
+				highlights["@lsp.typemod.variable.global"] = {
 					fg = colors.blue1,
 				}
 			end,
