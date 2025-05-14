@@ -34,11 +34,6 @@ return {
 				priority = 200,
 			},
 		},
-		-- File-tree explorer (like VS Code)
-		explorer = {
-			enabled = true,
-			replace_netrw = true, -- Activates when calling `nvim .`
-		},
 		-- Floating picker windows (like Telescope)
 		picker = {
 			enabled = true,
@@ -163,20 +158,8 @@ return {
 		{
 			"<leader>e",
 			function()
-				-- Use sidebar picker when manually toggling the explorer.
-				-- Otherwise, when invoking `netrw`, it's a floating window.
-				---@diagnostic disable-next-line: missing-fields
-				Snacks.explorer({
-					win = {
-						list = {
-							keys = {
-								-- Close picker upon selection (useful for Explorer `netrw`).
-								-- MUST open folder with 'l', not '<CR>', unfortunately.
-								---@diagnostic disable-next-line: assign-type-mismatch
-								["<CR>"] = { { "confirm", "close" }, mode = { "n", "i" } },
-							},
-						},
-					},
+				local explorer = Snacks.explorer({
+					auto_close = true,
 					layout = {
 						preset = "sidebar",
 						preview = false,
