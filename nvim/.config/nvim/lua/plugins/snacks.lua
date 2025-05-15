@@ -74,6 +74,9 @@ return {
 				},
 			},
 		},
+		terminal = {
+			enabled = true,
+		},
 		-- Cool central-hub page (like Alpha)
 		dashboard = {
 			enabled = true,
@@ -164,19 +167,29 @@ return {
 		},
 		{
 			"<leader>e",
+			-- If the explorer is already open, focus it.
+			-- Otherwise, open a new explorer picker.
 			function()
-				local explorer = Snacks.explorer({
-					auto_close = true,
+				local explorer = Snacks.picker.get({ source = "explorer" })[1]
+				local opts = {
 					layout = {
 						preset = "sidebar",
 						preview = false,
 					},
-				})
+				}
+
+				if explorer == nil then
+					Snacks.picker.explorer(opts)
+				elseif explorer:is_focused() then
+					Snacks.picker.explorer(opts)
+				elseif not explorer:is_focused() then
+					explorer:focus()
+				end
 			end,
 			desc = "File Explorer",
 		},
 		{
-			"<leader>th",
+			"<leader>cs",
 			function()
 				Snacks.picker.colorschemes({
 					confirm = function(picker, item)
@@ -412,6 +425,21 @@ return {
 				Snacks.picker.git_log_file()
 			end,
 			desc = "Git Log File",
+		},
+		-- (Terminal) Open and focus terminals
+		{
+			"<leader>tn",
+			function()
+				Snacks.terminal.open()
+			end,
+			desc = "Terminal - New",
+		},
+		{
+			"<leader>tt",
+			function()
+				Snacks.terminal.toggle()
+			end,
+			desc = "Terminal - Toggle",
 		},
 		-- (Dashboard) Pull up dashboard from anywhere
 		{
