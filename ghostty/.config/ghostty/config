@@ -1,14 +1,14 @@
 # ==== Style ====
 theme = tokyonight
 window-padding-balance = true
-window-padding-x = 8
+window-padding-x = 10
 window-padding-y = 4
 window-theme = ghostty
 window-colorspace = display-p3
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
-font-size = 13
+font-size = 16
 font-thicken = true
 font-feature = -calt
 adjust-underline-position = 5
