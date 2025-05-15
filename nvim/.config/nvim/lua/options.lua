@@ -34,15 +34,11 @@ vim.opt.number = true
 
 -- Dynamically turn on/off relative line numbers when entering Insert Mode
 local hybridLineNums = vim.api.nvim_create_augroup("hybridLineNums", { clear = true })
-local excludeFiles = { "snacks_dashboard", "snacks_explorer", "lazy", "snacks_picker_list" }
+local excludeFiles = { "snacks_dashboard", "snacks_explorer", "lazy", "snacks_picker_list", "snacks_terminal" }
 
+-- Determines whether the current buffer should show hybrid line numbers
 local function isValidFile()
-	for _, file in ipairs(excludeFiles) do
-		if vim.bo.filetype == file then
-			return false
-		end
-	end
-	return true
+	return not vim.tbl_contains(excludeFiles, vim.bo.filetype)
 end
 
 vim.api.nvim_create_autocmd("InsertEnter", {
