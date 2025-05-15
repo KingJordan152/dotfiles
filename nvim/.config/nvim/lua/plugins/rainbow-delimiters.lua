@@ -9,7 +9,7 @@ return {
 				"RainbowDelimiterBlue",
 				"RainbowDelimiterViolet",
 				"RainbowDelimiterCyan",
-				"RainbowDelimiterGreen",
+				-- "RainbowDelimiterGreen", (usually "string")
 				"RainbowDelimiterOrange",
 			},
 
