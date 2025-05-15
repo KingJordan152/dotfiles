@@ -8,7 +8,7 @@ window-colorspace = display-p3
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
-font-size = 16
+font-size = 15
 font-thicken = true
 font-feature = -calt
 adjust-underline-position = 5
