@@ -407,18 +407,18 @@ return {
 		},
 		-- (Terminal) Open and focus terminals
 		{
-			"<leader>tn",
+			"<leader>T",
 			function()
 				Snacks.terminal.open()
 			end,
-			desc = "Terminal - New",
+			desc = "Create new Terminal",
 		},
 		{
-			"<leader>tt",
+			"<leader>t",
 			function()
 				Snacks.terminal.toggle()
 			end,
-			desc = "Terminal - Toggle",
+			desc = "Toggle Terminal",
 		},
 		-- (Dashboard) Pull up dashboard from anywhere
 		{
