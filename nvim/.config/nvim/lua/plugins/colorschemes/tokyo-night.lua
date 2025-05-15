@@ -47,6 +47,11 @@ return {
 				highlights["@lsp.typemod.variable.global"] = {
 					fg = colors.blue1,
 				}
+
+				-- Default bracket color (when rainbow-delimiters isn't working)
+				highlights["@punctuation.bracket"] = {
+					fg = colors.purple,
+				}
 			end,
 		})
 	end,
