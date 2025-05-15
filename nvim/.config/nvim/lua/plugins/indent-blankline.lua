@@ -33,6 +33,7 @@ return {
 							"parenthesized_statement",
 							"object",
 							"object_pattern",
+							"arguments",
 						},
 					},
 				},
