@@ -13,6 +13,7 @@ return {
 				char = "▏",
 			},
 			scope = {
+				show_end = false,
 				highlight = {
 					-- 'RainbowDelimiterRed', (usually "warning")
 					"RainbowDelimiterYellow",
