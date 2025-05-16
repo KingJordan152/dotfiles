@@ -21,6 +21,7 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			javascript = { "prettierd", "prettier", stop_after_first = true },
+			markdown = { "prettierd", "prettier", stop_after_first = true },
 		},
 
 		default_format_opts = {
