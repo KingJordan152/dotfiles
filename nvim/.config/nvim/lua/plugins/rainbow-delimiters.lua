@@ -18,6 +18,7 @@ return {
 				javascript = "rainbow-parens",
 				tsx = "rainbow-parens",
 				typescript = "rainbow-parens",
+				html = "rainbow-parens",
 			},
 		})
 	end,
