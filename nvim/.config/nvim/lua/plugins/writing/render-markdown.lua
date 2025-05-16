@@ -6,6 +6,8 @@ return {
 	opts = {
 		completions = { blink = { enabled = true } },
 		render_modes = true, -- Show formatted text even while in insert mode
+		file_types = { "markdown", "gitcommit" },
+
 		pipe_table = {
 			preset = "round",
 		},
