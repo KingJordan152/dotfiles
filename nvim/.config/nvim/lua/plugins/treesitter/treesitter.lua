@@ -14,9 +14,12 @@ return {
 				"typescript",
 				"javascript",
 				"jsdoc",
+				"html",
+				"css",
 				"markdown",
 				"markdown_inline",
 				"regex",
+				"latex",
 			},
 		})
 	end,
