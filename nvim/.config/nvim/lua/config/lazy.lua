@@ -28,6 +28,7 @@ require("lazy").setup({
 		{ import = "plugins.completions" },
 		{ import = "plugins.debugging" },
 		{ import = "plugins.treesitter" },
+		{ import = "plugins.writing" },
 	},
 
 	ui = {
