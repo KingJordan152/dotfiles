@@ -52,6 +52,30 @@ return {
 				highlights["@punctuation.bracket"] = {
 					fg = colors.purple,
 				}
+
+				-- Language-specific keywords (e.g., `null`, `undefined`)
+				highlights["@constant.builtin"] = {
+					fg = colors.orange,
+				}
+				-- CSS value keywords (e.g., `flex`, `nowrap`, etc.)
+				highlights["@string.plain.css"] = {
+					fg = colors.orange,
+				}
+
+				-- CSS units (e.g., `rem`, `%`, etc.)
+				highlights["@string.css"] = {
+					fg = colors.orange,
+				}
+
+				-- CSS classes
+				highlights["@property.class.css"] = {
+					fg = colors.green,
+				}
+
+				-- CSS IDs
+				highlights["@property.id.css"] = {
+					fg = colors.red,
+				}
 			end,
 		})
 	end,
