@@ -20,7 +20,7 @@ return {
 					"RainbowDelimiterBlue",
 					"RainbowDelimiterViolet",
 					"RainbowDelimiterCyan",
-					-- "RainbowDelimiterGreen", (usually "string")
+					"RainbowDelimiterGreen",
 					"RainbowDelimiterOrange",
 				},
 				include = {
