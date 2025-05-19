@@ -16,9 +16,10 @@ return {
 				"jsdoc",
 				"html",
 				"css",
+				"styled", -- For styled-components
 				"markdown",
 				"markdown_inline",
-				"regex",
+				"regex", -- For certain pickers
 				"latex",
 			},
 		})
