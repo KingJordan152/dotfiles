@@ -24,9 +24,10 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 		{ import = "plugins.colorschemes" },
-		{ import = "plugins.lsp" },
 		{ import = "plugins.completions" },
 		{ import = "plugins.debugging" },
+		{ import = "plugins.git" },
+		{ import = "plugins.lsp" },
 		{ import = "plugins.treesitter" },
 		{ import = "plugins.writing" },
 	},
