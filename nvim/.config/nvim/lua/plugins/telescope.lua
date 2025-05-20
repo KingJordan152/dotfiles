@@ -39,6 +39,9 @@ return {
 				find_files = {
 					hidden = true,
 				},
+				oldfiles = {
+					only_cwd = true,
+				},
 				buffers = {
 					only_cwd = true,
 					sort_mru = true,
@@ -84,6 +87,7 @@ return {
 		-- Search Keymaps (prefix 's')
 		vim.keymap.set("n", '<leader>s"', builtin.registers, { desc = "Search registers" })
 		vim.keymap.set("n", "<leader>s/", builtin.search_history, { desc = "Search history" })
+		vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search oldfiles" })
 		vim.keymap.set("n", "<leader>sa", builtin.autocommands, { desc = "Search autocommands" })
 		vim.keymap.set("n", "<leader>sc", builtin.command_history, { desc = "Search command history" })
 		vim.keymap.set("n", "<leader>sC", builtin.commands, { desc = "Search commands" })
@@ -92,6 +96,26 @@ return {
 		vim.keymap.set("n", "<leader>sH", builtin.highlights, { desc = "Search highlights" })
 		vim.keymap.set("n", "<leader>sj", builtin.jumplist, { desc = "Search jumplist" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
-		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Search keymaps" })
+		vim.keymap.set("n", "<leader>sL", builtin.loclist, { desc = "Search location list" })
+		vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "Search marks" })
+		vim.keymap.set("n", "<leader>sM", builtin.man_pages, { desc = "Search man pages" })
+		vim.keymap.set("n", "<leader>sq", builtin.quickfix, { desc = "Search quickfix list" })
+		vim.keymap.set("n", "<leader>sQ", builtin.quickfixhistory, { desc = "Search quickfix history" })
+		vim.keymap.set("n", "<leader>sR", builtin.resume, { desc = "Search resume" })
+		vim.keymap.set("n", "<leader>st", builtin.tags, { desc = "Search tags" })
+
+		-- LSP-related Keymaps (still 'search')
+		vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search LSP references" })
+		vim.keymap.set("n", "<leader>ssd", builtin.lsp_document_symbols, { desc = "Search LSP document symbols" })
+		vim.keymap.set("n", "<leader>ssw", builtin.lsp_workspace_symbols, { desc = "Search LSP workspace symbols" })
+		vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, { desc = "Search LSP implementations" })
+		vim.keymap.set("n", "<leader>sD", builtin.lsp_definitions, { desc = "Search LSP definitions" })
+		vim.keymap.set("n", "<leader>sT", builtin.lsp_type_definitions, { desc = "Search LSP type definitions" })
+
+		-- Git Keymaps (prefix 'g')
+		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git commits" })
+		vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branches" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status" })
+		vim.keymap.set("n", "<leader>gS", builtin.git_stash, { desc = "Git stash" })
 	end,
 }
