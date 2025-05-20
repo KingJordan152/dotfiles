@@ -106,11 +106,11 @@ return {
 
 		-- LSP-related Keymaps (still 'search')
 		vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search LSP references" })
-		vim.keymap.set("n", "<leader>ssd", builtin.lsp_document_symbols, { desc = "Search LSP document symbols" })
-		vim.keymap.set("n", "<leader>ssw", builtin.lsp_workspace_symbols, { desc = "Search LSP workspace symbols" })
-		vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, { desc = "Search LSP implementations" })
-		vim.keymap.set("n", "<leader>sD", builtin.lsp_definitions, { desc = "Search LSP definitions" })
-		vim.keymap.set("n", "<leader>sT", builtin.lsp_type_definitions, { desc = "Search LSP type definitions" })
+		vim.keymap.set("n", "<leader>sD", builtin.lsp_document_symbols, { desc = "Search LSP document symbols" })
+		-- vim.keymap.set("n", "<leader>ssw", builtin.lsp_workspace_symbols, { desc = "Search LSP workspace symbols" })
+		-- vim.keymap.set("n", "<leader>si", builtin.lsp_implementations, { desc = "Search LSP implementations" })
+		-- vim.keymap.set("n", "<leader>sD", builtin.lsp_definitions, { desc = "Search LSP definitions" })
+		-- vim.keymap.set("n", "<leader>sT", builtin.lsp_type_definitions, { desc = "Search LSP type definitions" })
 
 		-- Git Keymaps (prefix 'g')
 		vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git commits" })
