@@ -7,7 +7,7 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.showmode = false -- Prevents modes, like INSERT, from being shown (lualine takes care of this).
 vim.opt.wrap = false -- Prevent line wrapping
-vim.opt.scrolloff = 8 -- Scroll offset
+vim.opt.scrolloff = 10 -- Scroll offset
 vim.opt.mouse = "a" -- Enable mouse usage
 vim.opt.undofile = true -- Save undo history
 vim.opt.updatetime = 250 -- Decrease amount of time it takes for swapfile to be auto-saved
@@ -34,7 +34,15 @@ vim.opt.number = true
 
 -- Dynamically turn on/off relative line numbers when entering Insert Mode
 local hybridLineNums = vim.api.nvim_create_augroup("hybridLineNums", { clear = true })
-local excludeFiles = { "snacks_dashboard", "snacks_explorer", "lazy", "snacks_picker_list", "snacks_terminal" }
+local excludeFiles = {
+	"snacks_dashboard",
+	"snacks_explorer",
+	"lazy",
+	"mason",
+	"snacks_picker_list",
+	"snacks_terminal",
+	"TelescopePrompt",
+}
 
 -- Determines whether the current buffer should show hybrid line numbers
 local function isValidFile()
