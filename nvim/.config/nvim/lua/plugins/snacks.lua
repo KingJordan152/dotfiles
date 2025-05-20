@@ -12,6 +12,9 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
+		input = {
+			enabled = true,
+		},
 		-- Allow images to be previewed in Picker (only works in terminals that support it)
 		image = {
 			enabled = true,
