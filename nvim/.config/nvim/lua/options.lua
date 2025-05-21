@@ -1,10 +1,10 @@
 -- Editor Settings
 vim.g.have_nerd_font = true -- States that I'm using a nerd font
 vim.o.termguicolors = true -- Enable 24-bit RGB color
-vim.o.expandtab = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-vim.o.shiftwidth = 2
+vim.o.expandtab = true -- Use spaces instead of <Tab>
+vim.o.tabstop = 2 -- Number of spaces to use for a <Tab>
+vim.o.softtabstop = 2 -- Number of spaces to use for a <Tab> while performing insert actions
+vim.o.shiftwidth = 2 -- Number of spaces to use for auto/manual indents
 vim.o.showmode = false -- Prevents modes, like INSERT, from being shown (lualine takes care of this).
 vim.o.wrap = false -- Prevent line wrapping
 vim.o.scrolloff = 10 -- Scroll offset
@@ -21,10 +21,10 @@ vim.o.linebreak = true -- When line-wrapping is enabled, this causes full words 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Indentation options
-vim.o.autoindent = true
-vim.o.smartindent = true
-vim.o.breakindent = true
-vim.o.breakindentopt = "list:-1"
+vim.o.autoindent = true -- Preserves previous indentation level when entering a newline.
+vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation)
+vim.o.breakindent = true -- Wrapped lines are indented based on the initial line's indentation level
+vim.o.breakindentopt = "list:-1" -- Properly indents markdown bullet points
 
 -- Screen splitting direction preference
 vim.o.splitright = true
@@ -75,19 +75,19 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
+-- Only highlight the current line number (specific color depends on colorscheme)
+vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
+
 -- Sync clipboard between OS and Neovim
 -- Using `schedule` can increase startup time
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
 
--- Only highlight the current line number (specific color depends on colorscheme)
-vim.o.cursorline = true
-vim.o.cursorlineopt = "number"
-
 -- Briefly highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-	-- group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	desc = "Briefly highlight yanked text",
 	callback = function()
 		vim.hl.on_yank()
