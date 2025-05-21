@@ -4,12 +4,17 @@
 -- ]]
 return {
 	"gbprod/substitute.nvim",
-	opts = {},
 	init = function()
 		-- Delete default LSP keymaps so they don't interfere
 		vim.keymap.del("n", "gri")
 		vim.keymap.del({ "n", "x" }, "gra")
 	end,
+	opts = {
+		highlight_substituted_text = {
+			enabled = true,
+			timer = 150, -- Match highlight on yank timeout
+		},
+	},
 	keys = {
 		-- Substitute (Replace)
 		{
