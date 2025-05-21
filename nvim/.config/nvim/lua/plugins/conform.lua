@@ -14,22 +14,35 @@ return {
 		},
 	},
 
-	---@module "conform"
-	---@type conform.setupOpts
-	opts = {
-		formatters_by_ft = {
-			lua = { "stylua" },
-			python = { "isort", "black" },
-			javascript = { "prettierd", "prettier", stop_after_first = true },
-			markdown = { "prettierd", "prettier", stop_after_first = true },
-		},
+	config = function()
+		-- Initializes ESLint as the formatter if an ESLint config file is present in the cwd.
+		-- Otherwise, Prettier is used.
+		local eslintWithPrettierFallback = function(bufnr)
+			if require("conform").get_formatter_info("eslint_d", bufnr).available then
+				return { "eslint_d" }
+			else
+				return { "prettierd", "prettier", stop_after_first = true }
+			end
+		end
 
-		default_format_opts = {
-			lsp_format = "fallback",
-		},
+		require("conform").setup({
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = { "isort", "black" },
+				javascript = eslintWithPrettierFallback,
+				typescript = eslintWithPrettierFallback,
+				typescriptreact = { "eslint_d", "prettierd", "prettier", stop_after_first = true },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
+			},
 
-		format_on_save = {
-			timeout_ms = 500,
-		},
-	},
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+
+			format_on_save = {
+				lsp_format = "fallback",
+				timeout_ms = 500,
+			},
+		})
+	end,
 }
