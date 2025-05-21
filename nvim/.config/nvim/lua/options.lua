@@ -94,7 +94,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-		vim.keymap.set({ "n", "x", "i" }, "<M-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
+		if vim.fn.has("mac") then
+			vim.keymap.set({ "n", "x", "i" }, "<D-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
+		else
+			vim.keymap.set({ "n", "x", "i" }, "<A-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
+		end
 		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 
 		-- Diagnostic Config
