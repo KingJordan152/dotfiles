@@ -27,7 +27,7 @@ return {
 					fg = colors.yellow,
 				}
 
-				-- JSX composite components using object notation (e.g., <Modal.Dialog>)
+				-- JSX composite components using object notation (e.g., <Modal.Dialog>); normal HTML elements
 				highlights["@tag.builtin.tsx"] = {
 					fg = colors.red,
 				}
