@@ -40,7 +40,7 @@ return {
 				}
 
 				-- Angle brackets for JSX and HTML elements
-				highlights["@tag.delimiter"] = {
+				highlights["@tag.delimiter.tsx"] = {
 					fg = "#BA3C97", -- Special color from VS Code Tokyonight theme
 				}
 
