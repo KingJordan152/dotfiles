@@ -5,6 +5,8 @@ return {
 	priority = 1000,
 	config = function()
 		require("tokyonight").setup({
+			lualine_bold = true,
+
 			---@param highlights tokyonight.Highlights
 			---@param colors ColorScheme
 			on_highlights = function(highlights, colors)
@@ -28,12 +30,22 @@ return {
 				}
 
 				-- JSX composite components using object notation (e.g., <Modal.Dialog>); normal HTML elements
-				highlights["@tag.builtin.tsx"] = {
+				highlights["@tag.builtin"] = {
 					fg = colors.red,
 				}
 
+				-- JSX Elements
+				highlights["@_jsx_element"] = {
+					fg = colors.red,
+				}
+
+				-- Angle brackets for JSX and HTML elements
+				highlights["@tag.delimiter"] = {
+					fg = "#BA3C97", -- Special color from VS Code Tokyonight theme
+				}
+
 				-- JSX props
-				highlights["@tag.attribute.tsx"] = {
+				highlights["@tag.attribute"] = {
 					fg = colors.magenta,
 					italic = true,
 				}
