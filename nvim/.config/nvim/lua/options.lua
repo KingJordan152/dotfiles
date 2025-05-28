@@ -6,7 +6,6 @@ vim.o.tabstop = 2 -- Number of spaces to use for a <Tab>
 vim.o.softtabstop = 2 -- Number of spaces to use for a <Tab> while performing insert actions
 vim.o.shiftwidth = 2 -- Number of spaces to use for auto/manual indents
 vim.o.showmode = false -- Prevents modes, like INSERT, from being shown (lualine takes care of this).
-vim.o.wrap = false -- Prevent line wrapping
 vim.o.scrolloff = 10 -- Scroll offset
 vim.o.mouse = "a" -- Enable mouse usage
 vim.o.undofile = true -- Save undo history
@@ -15,7 +14,7 @@ vim.o.timeoutlen = 500 -- Decrease allotted time to perform an operation
 vim.o.inccommand = "split" -- Live-preview substitutions
 vim.o.signcolumn = "yes" -- Reserves extra space in gutter for diagnostic icons
 vim.o.confirm = true -- Show dialog instead of erroring when trying to exit an unsaved file
-vim.o.linebreak = true -- When line-wrapping is enabled, this causes full words to wrap instead of individual characters.
+vim.o.wrap = false -- Prevent line wrapping
 
 -- Options for persisting Neovim state across sessions (also used by `auto-session` plugin)
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
@@ -23,8 +22,6 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 -- Indentation options
 vim.o.autoindent = true -- Preserves previous indentation level when entering a newline.
 vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation)
-vim.o.breakindent = true -- Wrapped lines are indented based on the initial line's indentation level
-vim.o.breakindentopt = "list:-1" -- Properly indents markdown bullet points
 
 -- Screen splitting direction preference
 vim.o.splitright = true
@@ -101,7 +98,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-		if vim.fn.has("mac") then
+		if vim.fn.has("mac") == 1 then
 			vim.keymap.set({ "n", "x", "i" }, "<D-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
 		else
 			vim.keymap.set({ "n", "x", "i" }, "<A-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
