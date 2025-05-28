@@ -1,7 +1,14 @@
 return {
-	"williamboman/mason-lspconfig.nvim",
-	lazy = false,
+	"mason-org/mason-lspconfig.nvim",
+	dependencies = {
+		"mason-org/mason.nvim",
+		"neovim/nvim-lspconfig",
+	},
 	opts = {
-		automatic_installation = true,
+		automatic_enable = {
+			exclude = {
+				"ts_ls", -- Should be handled by `typescript-tools`
+			},
+		},
 	},
 }
