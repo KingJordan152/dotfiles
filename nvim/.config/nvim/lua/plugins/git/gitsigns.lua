@@ -49,18 +49,15 @@ return {
 			end, { buffer = bufnr, desc = "Go to Previous Hunk" })
 
 			-- Actions
-			vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, { buffer = bufnr, desc = "Hunk - Diff (Gitsigns)" })
+			vim.keymap.set("n", "<leader>ghd", gitsigns.diffthis, { buffer = bufnr, desc = "Git Hunk - Open Diff" })
+			vim.keymap.set("n", "<leader>ghs", gitsigns.stage_hunk, { desc = "Git Hunk - Stage" })
+			vim.keymap.set("n", "<leader>ghr", gitsigns.reset_hunk, { desc = "Git Hunk - Reset" })
+			vim.keymap.set("n", "<leader>ghp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Git Hunk - Preview" })
 			vim.keymap.set(
 				"n",
-				"<leader>hp",
-				gitsigns.preview_hunk,
-				{ buffer = bufnr, desc = "Hunk - Preview (Gitsigns)" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>hP",
+				"<leader>ghP",
 				gitsigns.preview_hunk_inline,
-				{ buffer = bufnr, desc = "Hunk - Preview Inline (Gitsigns)" }
+				{ buffer = bufnr, desc = "Git Hunk - Preview Inline" }
 			)
 		end,
 	},
