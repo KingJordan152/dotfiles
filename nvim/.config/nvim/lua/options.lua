@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 -- Only highlight the current line number (specific color depends on colorscheme)
 vim.o.cursorline = true
-vim.o.cursorlineopt = "number"
+vim.o.cursorlineopt = "both"
 
 -- Sync clipboard between OS and Neovim
 -- Using `schedule` can increase startup time
