@@ -17,11 +17,11 @@ return {
 			preset = "super-tab",
 
 			-- Custom keymaps
-			["<C-J>"] = { "select_next", "fallback" },
-			["<C-K>"] = { "select_prev", "fallback" },
 			["<CR>"] = { "accept", "fallback" },
-			["<C-U>"] = { "scroll_documentation_up", "fallback" },
-			["<C-D>"] = { "scroll_documentation_down", "fallback" },
+			["<C-n>"] = { "select_next", "fallback" },
+			["<C-p>"] = { "select_prev", "fallback" },
+			["<C-u>"] = { "scroll_documentation_up", "fallback" },
+			["<C-d>"] = { "scroll_documentation_down", "fallback" },
 		},
 
 		appearance = {
