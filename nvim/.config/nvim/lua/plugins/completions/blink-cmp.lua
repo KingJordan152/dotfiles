@@ -1,7 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	-- optional: provides snippets for the snippet source
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = { "L3MON4D3/LuaSnip" },
 	version = "1.*",
 
 	---@module 'blink.cmp'
@@ -57,6 +56,10 @@ return {
 					max_height = 25,
 				},
 			},
+		},
+
+		snippets = {
+			preset = "luasnip",
 		},
 
 		sources = {
