@@ -20,8 +20,8 @@ return {
 			["<C-J>"] = { "select_next", "fallback" },
 			["<C-K>"] = { "select_prev", "fallback" },
 			["<CR>"] = { "accept", "fallback" },
-			["<C-N>"] = { "scroll_documentation_down" },
-			["<C-P>"] = { "scroll_documentation_up" },
+			["<C-U>"] = { "scroll_documentation_up", "fallback" },
+			["<C-D>"] = { "scroll_documentation_down", "fallback" },
 		},
 
 		appearance = {
@@ -60,6 +60,11 @@ return {
 
 		snippets = {
 			preset = "luasnip",
+		},
+
+		cmdline = {
+			keymap = { preset = "inherit" },
+			completion = { menu = { auto_show = false } },
 		},
 
 		sources = {
