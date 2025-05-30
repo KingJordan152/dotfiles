@@ -20,12 +20,12 @@ return {
 
 	keys = {
 		{
-			"gh",
+			"K",
 			function(opts)
 				local api = vim.api
 				local hover_win = vim.b.hover_preview
 
-				-- If the hover window is already open, jump into that.
+				-- If the hover window is already open, jump into it.
 				if hover_win and api.nvim_win_is_valid(hover_win) then
 					api.nvim_set_current_win(hover_win)
 				else
@@ -35,7 +35,7 @@ return {
 			desc = "Show Hover Information",
 		},
 		{
-			"gH",
+			"gK",
 			function(opts)
 				require("hover").hover_select(opts)
 			end,
