@@ -1,2 +1,4 @@
 # Neovim theme file
 nvim/.config/nvim/lua/current-theme.lua
+tmux/.config/tmux/plugins/
+.DS_Store
