@@ -1,10 +1,11 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.8",
+	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"andrew-george/telescope-themes",
+		"nvim-telescope/telescope-file-browser.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = function()
@@ -12,6 +13,7 @@ return {
 		local actions = require("telescope.actions")
 		local builtin = require("telescope.builtin")
 		local themes = require("telescope.themes")
+		local fb_actions = require("telescope").extensions.file_browser.actions
 
 		telescope.setup({
 			defaults = {
@@ -51,6 +53,10 @@ return {
 						width = 0.4,
 						height = 0.5,
 					},
+					path_display = function(_, path)
+						local tail = require("telescope.utils").path_tail(path)
+						return string.format("%s  %s", tail, path)
+					end,
 				},
 			},
 			extensions = {
@@ -64,6 +70,19 @@ return {
 						enabled = true,
 					},
 				},
+				file_browser = {
+					initial_mode = "normal",
+					grouped = true,
+					select_buffer = true,
+					path = "%:p:h",
+					hijack_netrw = true,
+
+					mappings = {
+						["n"] = {
+							["<bs>"] = fb_actions.backspace, -- Go up a directory in Normal mode
+						},
+					},
+				},
 			},
 		})
 
@@ -71,17 +90,20 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("themes")
+		telescope.load_extension("file_browser")
 
 		-- Core Keymaps
-		if vim.fn.has("mac") == 1 then
-			vim.keymap.set("n", "<D-p>", builtin.find_files, { desc = "Find file" })
-		else
-			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find file" })
-		end
+		-- if vim.fn.has("mac") == 1 then
+		-- 	vim.keymap.set("n", "<D-p>", builtin.find_files, { desc = "Find file" })
+		-- else
+		-- 	vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find file" })
+		-- end
+		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find file" })
 		vim.keymap.set("n", "<leader>;", function()
 			builtin.buffers(themes.get_dropdown({ previewer = false }))
 		end, { desc = "List buffers" })
 		vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
+		vim.keymap.set("n", "<leader>e", " <Cmd>Telescope file_browser<CR> ", { desc = "Open File Explorer" })
 		vim.keymap.set("n", "<leader>cs", "<Cmd>Telescope themes<CR>", { desc = "List colorschemes" })
 
 		-- Search Keymaps (prefix 's')
