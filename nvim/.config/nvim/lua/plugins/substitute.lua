@@ -4,11 +4,6 @@
 -- ]]
 return {
 	"gbprod/substitute.nvim",
-	init = function()
-		-- Delete default LSP keymaps so they don't interfere
-		vim.keymap.del("n", "gri")
-		vim.keymap.del({ "n", "x" }, "gra")
-	end,
 	opts = {
 		highlight_substituted_text = {
 			enabled = true,
@@ -18,28 +13,28 @@ return {
 	keys = {
 		-- Substitute (Replace)
 		{
-			"gr",
+			"gs",
 			function()
 				require("substitute").operator()
 			end,
 			desc = "Replace with Register",
 		},
 		{
-			"grr",
+			"gss",
 			function()
 				require("substitute").line()
 			end,
 			desc = "Replace Line with Register",
 		},
 		{
-			"gR",
+			"gS",
 			function()
 				require("substitute").eol()
 			end,
 			desc = "Replace with Register (up to EOL)",
 		},
 		{
-			"gr",
+			"gs",
 			function()
 				require("substitute").visual()
 			end,
