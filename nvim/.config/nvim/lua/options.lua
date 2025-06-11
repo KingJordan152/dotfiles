@@ -95,15 +95,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function()
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-		if vim.fn.has("mac") == 1 then
-			vim.keymap.set({ "n", "x", "i" }, "<D-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
-		else
-			vim.keymap.set({ "n", "x", "i" }, "<A-.>", vim.lsp.buf.code_action, { desc = "See Code Actions" })
-		end
-		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults)
+		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+		vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 
 		-- Diagnostic Config
 		vim.diagnostic.config({
@@ -141,10 +135,10 @@ vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-vim.keymap.set("n", "<C-S-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-S-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-S-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-S-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Focus left split" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Focus right split" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Focus bottom split" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Focus top split" })
 
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
