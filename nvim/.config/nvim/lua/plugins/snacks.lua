@@ -52,9 +52,10 @@ return {
 				},
 			},
 		},
-		terminal = {
-			enabled = true,
-		},
+		-- terminal = {
+		-- 	enabled = true,
+		-- 	auto_close = false,
+		-- },
 		-- Cool central-hub page (like Alpha)
 		dashboard = {
 			enabled = true,
@@ -114,43 +115,43 @@ return {
 	},
 
 	keys = {
-		{
-			"<leader>e",
-			-- If the explorer is already open, focus it.
-			-- Otherwise, open a new explorer picker.
-			function()
-				local explorer = Snacks.picker.get({ source = "explorer" })[1]
-				local opts = {
-					layout = {
-						preset = "sidebar",
-						preview = false,
-					},
-				}
-
-				if explorer == nil then
-					Snacks.picker.explorer(opts)
-				elseif explorer:is_focused() then
-					Snacks.picker.explorer(opts)
-				elseif not explorer:is_focused() then
-					explorer:focus()
-				end
-			end,
-			desc = "File Explorer",
-		},
-		{
-			"<leader>T",
-			function()
-				Snacks.terminal.open()
-			end,
-			desc = "Create new Terminal",
-		},
-		{
-			"<leader>t",
-			function()
-				Snacks.terminal.toggle()
-			end,
-			desc = "Toggle Terminal",
-		},
+		-- {
+		-- 	"<leader>e",
+		-- 	-- If the explorer is already open, focus it.
+		-- 	-- Otherwise, open a new explorer picker.
+		-- 	function()
+		-- 		local explorer = Snacks.picker.get({ source = "explorer" })[1]
+		-- 		local opts = {
+		-- 			layout = {
+		-- 				preset = "sidebar",
+		-- 				preview = false,
+		-- 			},
+		-- 		}
+		--
+		-- 		if explorer == nil then
+		-- 			Snacks.picker.explorer(opts)
+		-- 		elseif explorer:is_focused() then
+		-- 			Snacks.picker.explorer(opts)
+		-- 		elseif not explorer:is_focused() then
+		-- 			explorer:focus()
+		-- 		end
+		-- 	end,
+		-- 	desc = "File Explorer",
+		-- },
+		-- {
+		-- 	"<leader>T",
+		-- 	function()
+		-- 		Snacks.terminal.open()
+		-- 	end,
+		-- 	desc = "Create new Terminal",
+		-- },
+		-- {
+		-- 	"<leader>t",
+		-- 	function()
+		-- 		Snacks.terminal.toggle()
+		-- 	end,
+		-- 	desc = "Toggle Terminal",
+		-- },
 		-- (Dashboard) Pull up dashboard from anywhere
 		{
 			"<leader>d",
