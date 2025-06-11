@@ -10,6 +10,10 @@ return {
 			---@param highlights tokyonight.Highlights
 			---@param colors ColorScheme
 			on_highlights = function(highlights, colors)
+				highlights["WinSeparator"] = {
+					fg = colors.blue,
+				}
+
 				highlights["@variable"] = {
 					fg = colors.red,
 				}
@@ -70,12 +74,12 @@ return {
 					fg = colors.orange,
 				}
 				-- CSS value keywords (e.g., `flex`, `nowrap`, etc.)
-				highlights["@string.plain.css"] = {
+				highlights["@string.css"] = {
 					fg = colors.orange,
 				}
 
-				-- CSS units (e.g., `rem`, `%`, etc.)
-				highlights["@string.css"] = {
+				-- SCSS value keywords (e.g., `flex`, `nowrap`, etc.)
+				highlights["@string.scss"] = {
 					fg = colors.orange,
 				}
 
@@ -84,9 +88,34 @@ return {
 					fg = colors.green,
 				}
 
+				-- SCSS classes
+				highlights["@property.class.scss"] = {
+					fg = colors.green,
+				}
+
 				-- CSS IDs
 				highlights["@property.id.css"] = {
 					fg = colors.red,
+				}
+
+				-- SCSS IDs
+				highlights["@property.id.scss"] = {
+					fg = colors.red,
+				}
+
+				-- SCSS Variables
+				highlights["@odp.variable.scss"] = {
+					fg = colors.red,
+				}
+
+				-- CSS properties
+				highlights["@property.css"] = {
+					fg = colors.blue,
+				}
+
+				-- SCSS properties
+				highlights["@property.scss"] = {
+					fg = colors.blue,
 				}
 			end,
 		})
