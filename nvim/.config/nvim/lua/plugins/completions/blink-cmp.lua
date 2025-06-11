@@ -18,8 +18,8 @@ return {
 
 			-- Custom keymaps
 			["<CR>"] = { "accept", "fallback" },
-			["<C-n>"] = { "select_next", "fallback" },
-			["<C-p>"] = { "select_prev", "fallback" },
+			-- ["<C-n>"] = { "select_next", "fallback" },
+			-- ["<C-p>"] = { "select_prev", "fallback" },
 			["<C-u>"] = { "scroll_documentation_up", "fallback" },
 			["<C-d>"] = { "scroll_documentation_down", "fallback" },
 		},
@@ -62,10 +62,10 @@ return {
 			preset = "luasnip",
 		},
 
-		cmdline = {
-			keymap = { preset = "inherit" },
-			completion = { menu = { auto_show = false } },
-		},
+		-- cmdline = {
+		-- 	keymap = { preset = "inherit" },
+		-- 	completion = { menu = { auto_show = false } },
+		-- },
 
 		sources = {
 			default = { "lazydev", "lsp", "path", "snippets" },
