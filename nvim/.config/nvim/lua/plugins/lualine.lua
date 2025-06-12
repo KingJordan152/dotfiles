@@ -13,12 +13,8 @@ return {
 			globalstatus = true,
 		},
 		sections = {
-			lualine_a = {
-				{
-					"mode",
-					color = { gui = "bold" },
-				},
-			},
+			-- lualine_x = { "lsp_status", "encoding", "fileformat", "filetype" },
+			lualine_x = { "lsp_status", "filetype" },
 		},
 	},
 }
