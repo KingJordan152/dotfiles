@@ -22,7 +22,8 @@ return {
 		},
 		current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 		current_line_blame_opts = {
-			virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+			virt_text_pos = "eol",
+			virt_text_priority = 5000,
 			delay = 500,
 		},
 		current_line_blame_formatter = "        <author>, <author_time:%R> • <summary>",
