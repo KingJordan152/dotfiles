@@ -38,8 +38,11 @@ return {
 					},
 				},
 				exclude = {
+					language = { "yaml" },
 					node_type = {
-						["*"] = { "jsx_element" },
+						["*"] = {
+							"jsx_element",
+						},
 					},
 				},
 			},
