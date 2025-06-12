@@ -23,7 +23,7 @@ return {
 		current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 		current_line_blame_opts = {
 			virt_text_pos = "eol",
-			virt_text_priority = 5000,
+			virt_text_priority = 5000, -- MUST be higher than 4096 to appear after diagnostics (https://github.com/lewis6991/gitsigns.nvim/issues/605)
 			delay = 500,
 		},
 		current_line_blame_formatter = "        <author>, <author_time:%R> • <summary>",
