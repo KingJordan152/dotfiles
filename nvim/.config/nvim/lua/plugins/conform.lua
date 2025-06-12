@@ -19,7 +19,7 @@ end
 --- Attempts to format the given buffer with `prettier` *first*, then formats with `eslint_d`.
 ---
 --- This is useful for projects where code styles are enforced through `eslint` rules rather than in a `.prettierrc` file, but you still want to apply `prettier`'s clean formatting wherever possible.
----@param bufnr integer
+---@param bufnr integer The buffer this formatting will be applied to.
 local function format_with_prettier_then_eslint(bufnr)
 	return { first(bufnr, "prettierd", "prettier"), "eslint_d" }
 end
