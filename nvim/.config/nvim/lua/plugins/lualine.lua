@@ -13,8 +13,17 @@ return {
 			globalstatus = true,
 		},
 		sections = {
-			-- lualine_x = { "lsp_status", "encoding", "fileformat", "filetype" },
-			lualine_x = { "lsp_status", "filetype" },
+			lualine_x = {
+				{
+					"lsp_status",
+					icon = " ",
+					symbols = {
+						done = "",
+						separator = "   ",
+					},
+				},
+				"filetype",
+			},
 		},
 	},
 }
