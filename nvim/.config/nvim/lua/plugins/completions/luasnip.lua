@@ -30,8 +30,6 @@ return {
 
 				if string.find(text1, substring1, 0, true) ~= nil then
 					require("luasnip.loaders.from_vscode").load_standalone({ lazy = true, path = file })
-					vim.cmd.echo(string.find(text1, substring1, 0, true))
-					print(string.find(text1, substring1, 0, true))
 				end
 			end
 		end
