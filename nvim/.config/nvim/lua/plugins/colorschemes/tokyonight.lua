@@ -7,6 +7,10 @@ return {
 		require("tokyonight").setup({
 			lualine_bold = true,
 
+			on_colors = function(colors)
+				colors.bg_statusline = colors.none
+			end,
+
 			---@param highlights tokyonight.Highlights
 			---@param colors ColorScheme
 			on_highlights = function(highlights, colors)
