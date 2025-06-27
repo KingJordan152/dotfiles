@@ -42,27 +42,27 @@ return {
 			desc = "Replace with Register",
 		},
 		-- Exchange (swap values); might conflict with another operator...
-		{
-			"gx",
-			function()
-				require("substitute.exchange").operator()
-			end,
-			desc = "Exchange",
-		},
-		{
-			"gxx",
-			function()
-				require("substitute.exchange").line()
-			end,
-			desc = "Exchange Line",
-		},
-		{
-			"gx",
-			function()
-				require("substitute.exchange").visual()
-			end,
-			mode = "x",
-			desc = "Exchange",
-		},
+		-- {
+		-- 	"gx",
+		-- 	function()
+		-- 		require("substitute.exchange").operator()
+		-- 	end,
+		-- 	desc = "Exchange",
+		-- },
+		-- {
+		-- 	"gxx",
+		-- 	function()
+		-- 		require("substitute.exchange").line()
+		-- 	end,
+		-- 	desc = "Exchange Line",
+		-- },
+		-- {
+		-- 	"gx",
+		-- 	function()
+		-- 		require("substitute.exchange").visual()
+		-- 	end,
+		-- 	mode = "x",
+		-- 	desc = "Exchange",
+		-- },
 	},
 }
