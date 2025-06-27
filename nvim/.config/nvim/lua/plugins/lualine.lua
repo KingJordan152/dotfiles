@@ -1,3 +1,9 @@
+-- Displays the formatters that will run against the current buffer.
+--
+-- If there aren't any configured formatters for the current buffer but it has an LSP,
+-- `"LSP"` will be displayed instead.
+--
+-- If there aren't any formatters or LSPs configured for the current buffer, the component isn't displayed.
 local function formatter_status()
 	local conform = require("conform")
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
@@ -21,7 +27,10 @@ local function formatter_status()
 	return result
 end
 
-local function disable_on_filetypes(files)
+---Controls whether certain components are disabled for certain filetypes.
+---@param files string[] List of filetypes that the component will be disabled for.
+---@return boolean
+local function disabled_filetypes(files)
 	for _, file in ipairs(files) do
 		if vim.bo.filetype == file then
 			return false
@@ -79,7 +88,7 @@ return {
 						"grapple",
 						color = { fg = colors.blue },
 						cond = function()
-							return disable_on_filetypes({ "TelescopePrompt" })
+							return disabled_filetypes({ "TelescopePrompt" })
 						end,
 					},
 				},
@@ -113,7 +122,7 @@ return {
 						symbols = { error = " ", warn = " ", hint = " ", info = " " },
 						always_visible = true,
 						cond = function()
-							return disable_on_filetypes({ "help", "TelescopePrompt", "gitcommit" })
+							return disabled_filetypes({ "help", "TelescopePrompt", "gitcommit" })
 						end,
 					},
 				},
