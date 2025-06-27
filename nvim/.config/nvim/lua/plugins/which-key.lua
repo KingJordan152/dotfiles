@@ -4,9 +4,16 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	event = "VeryLazy",
+	---@class wk.Opts
 	opts = {
 		preset = "modern",
-		delay = 1000,
+		delay = 1500,
+		---@type wk.Spec
+		spec = {
+			{ "<leader>g", group = "Git" },
+			{ "<leader>gh", group = "Git Hunk" },
+			{ "<leader>s", group = "Search (Telescope)" },
+		},
 	},
 	keys = {
 		{
