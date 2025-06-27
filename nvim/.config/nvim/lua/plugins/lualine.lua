@@ -9,7 +9,6 @@ local function formatter_status()
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
 	local result = ""
 
-	-- TODO: Customize appearance based on whether formatter is active.
 	if next(formatters_for_current_buffer) == nil then
 		if lsp_fallback then
 			result = result .. "LSP"
@@ -52,7 +51,7 @@ return {
 		filename_with_icon.apply_icon = require("lualine.components.filetype").apply_icon
 		filename_with_icon.icon_hl_cache = {}
 
-		-- Initialize custom highlight groups.
+		-- Allows usage of custom colors in different components.
 		local colors = require("tokyonight.colors").setup()
 
 		require("lualine").setup({
@@ -105,7 +104,7 @@ return {
 					{
 						formatter_status,
 						icon = { "", color = { fg = colors.yellow } },
-            -- If formatting is disabled, make the component red with a strikethrough.
+						-- If formatting is disabled, make the component red with a strikethrough.
 						color = function()
 							if vim.b.disable_autoformat or vim.g.disable_autoformat then
 								return { fg = colors.red, gui = "strikethrough" }
