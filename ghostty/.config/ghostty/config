@@ -29,6 +29,7 @@ gtk-wide-tabs = false
 
 # ==== Mac-Only ====
 macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = left
 
 # ==== Keybindings ====
 
