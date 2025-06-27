@@ -135,11 +135,6 @@ vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Focus left split" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Focus right split" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Focus bottom split" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Focus top split" })
-
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
