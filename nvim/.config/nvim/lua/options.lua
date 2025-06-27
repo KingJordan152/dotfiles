@@ -138,3 +138,15 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+
+-- Copy lines of text up or down
+vim.keymap.set({ "n", "x" }, "<M-S-J>", ":co -1<CR>j", { desc = "Copy line down" })
+vim.keymap.set({ "n", "x" }, "<M-S-K>", ":co +0<CR>k", { desc = "Copy line up" })
+
+-- LSP Configurations
+vim.lsp.config["cssmodules_ls"] = {
+	init_options = {
+		camelCase = false,
+	},
+}
+
