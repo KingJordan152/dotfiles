@@ -22,6 +22,15 @@ local function formatter_status()
 	return result
 end
 
+local function disable_on_filetypes(files)
+	for _, file in ipairs(files) do
+		if vim.bo.filetype == file then
+			return false
+		end
+	end
+	return true
+end
+
 -- [[
 --    Renders an aesthetic statusbar towards the bottom of the screen containing
 --    information such as my current mode, filename, LSP, etc.
@@ -61,8 +70,15 @@ return {
 				lualine_c = {
 					{ filename_with_icon, colored = true },
 					{
-						"diagnostics",
-						symbols = { error = " ", warn = " ", hint = " ", info = " " },
+						filename_with_icon,
+						colored = true,
+					},
+					{
+						"grapple",
+						color = { fg = colors.blue },
+						cond = function()
+							return disable_on_filetypes({ "TelescopePrompt" })
+						end,
 					},
 				},
 				lualine_x = {
