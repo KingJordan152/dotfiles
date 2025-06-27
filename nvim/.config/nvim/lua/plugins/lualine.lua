@@ -1,8 +1,7 @@
 local function formatter_status()
 	local conform = require("conform")
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
-	local icon = "%#LualineFormatterIcon# %#lualine_c_normal#"
-	local result = icon
+	local result = ""
 
 	-- TODO: Customize appearance based on whether formatter is active.
 	if next(formatters_for_current_buffer) == nil then
@@ -46,8 +45,6 @@ return {
 
 		-- Initialize custom highlight groups.
 		local colors = require("tokyonight.colors").setup()
-		vim.api.nvim_set_hl(0, "LualineLspIcon", { fg = colors.blue1 })
-		vim.api.nvim_set_hl(0, "LualineFormatterIcon", { fg = colors.yellow })
 
 		require("lualine").setup({
 			options = {
@@ -57,6 +54,12 @@ return {
 				globalstatus = true,
 			},
 			sections = {
+				lualine_a = {
+					{
+						"mode",
+						separator = { left = "", right = "" },
+					},
+				},
 				lualine_b = {
 					{
 						"branch",
@@ -68,7 +71,6 @@ return {
 					},
 				},
 				lualine_c = {
-					{ filename_with_icon, colored = true },
 					{
 						filename_with_icon,
 						colored = true,
@@ -82,18 +84,38 @@ return {
 					},
 				},
 				lualine_x = {
-
 					{
 						"lsp_status",
-						icon = "%#LualineLspIcon# %#lualine_c_normal#",
+						icon = { " ", color = { fg = colors.blue1 } },
 						symbols = {
 							done = "",
 							separator = ", ",
 						},
 						ignore_lsp = { "cssmodules_ls" },
 					},
-					{ formatter_status },
-					"filetype",
+					{
+						formatter_status,
+						icon = { "", color = { fg = colors.yellow } },
+					},
+					{
+						"filetype",
+					},
+					{
+						"diagnostics",
+						sections = { "error", "warn", "hint" },
+						symbols = { error = " ", warn = " ", hint = " ", info = " " },
+						always_visible = true,
+						cond = function()
+							return disable_on_filetypes({ "help", "TelescopePrompt", "gitcommit" })
+						end,
+					},
+				},
+				lualine_y = { "progress" },
+				lualine_z = {
+					{
+						"location",
+						separator = { left = "", right = "" },
+					},
 				},
 			},
 			extensions = {
