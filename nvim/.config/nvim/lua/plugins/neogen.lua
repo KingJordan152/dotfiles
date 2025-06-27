@@ -7,7 +7,7 @@ return {
 			function()
 				require("neogen").generate()
 			end,
-			{ desc = "Generate annotation" },
+			desc = "Generate annotation",
 		},
 	},
 }
