@@ -17,7 +17,7 @@ local function first(bufnr, ...)
 end
 
 --[[
---  Formatter plugin (with "format on save")
+--  Formatter plugin (with "format on save").
 --]]
 return {
 	"stevearc/conform.nvim",
