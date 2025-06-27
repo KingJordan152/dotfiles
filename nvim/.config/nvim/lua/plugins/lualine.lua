@@ -96,6 +96,13 @@ return {
 					{
 						formatter_status,
 						icon = { "", color = { fg = colors.yellow } },
+            -- If formatting is disabled, make the component red with a strikethrough.
+						color = function()
+							if vim.b.disable_autoformat or vim.g.disable_autoformat then
+								return { fg = colors.red, gui = "strikethrough" }
+							end
+							return "lualine_c_normal"
+						end,
 					},
 					{
 						"filetype",
