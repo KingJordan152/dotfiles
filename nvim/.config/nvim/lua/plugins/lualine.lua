@@ -99,7 +99,7 @@ return {
 							done = "",
 							separator = ", ",
 						},
-						ignore_lsp = { "cssmodules_ls" },
+						ignore_lsp = { "cssmodules_ls", "eslint" },
 					},
 					{
 						formatter_status,
