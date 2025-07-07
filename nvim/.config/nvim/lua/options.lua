@@ -96,8 +96,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function()
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults)
-		vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-		vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 
 		-- Diagnostic Config
 		vim.diagnostic.config({
