@@ -134,6 +134,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
 
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -149,4 +150,3 @@ vim.lsp.config["cssmodules_ls"] = {
 		camelCase = false,
 	},
 }
-
