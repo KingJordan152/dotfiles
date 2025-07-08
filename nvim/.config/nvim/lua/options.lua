@@ -17,7 +17,6 @@ vim.o.confirm = true -- Show dialog instead of erroring when trying to exit an u
 vim.o.wrap = false -- Prevent line wrapping
 
 -- Options for persisting Neovim state across sessions (also used by `auto-session` plugin)
--- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Options for syntax-based folding via Treesitter.
