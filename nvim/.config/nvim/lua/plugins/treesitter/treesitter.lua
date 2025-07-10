@@ -21,6 +21,7 @@ return {
 				"styled", -- For styled-components
 				"markdown",
 				"markdown_inline",
+				"yaml",
 				"regex", -- For certain pickers
 				"latex",
 			},
