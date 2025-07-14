@@ -30,6 +30,7 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			css = { "prettierd" },
+			scss = { "prettierd" },
 			javascript = { "prettierd", "eslint_d" },
 			typescript = { "prettierd", "eslint_d" },
 			typescriptreact = { "prettierd", "eslint_d" },
