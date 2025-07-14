@@ -2,9 +2,8 @@ return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 	ft = { "markdown", "gitcommit" },
-
 	opts = {
-		completions = { blink = { enabled = true } },
+		completions = { lsp = { enabled = true } },
 		render_modes = true, -- Show formatted text even while in insert mode
 		file_types = { "markdown", "gitcommit" },
 
@@ -25,10 +24,12 @@ return {
 			preset = "round",
 			border_virtual = true,
 		},
-		-- quote = {
-		-- 	repeat_linebreak = true,
-		-- },
 		-- Allows word-wrapping to work in markdown
+		overrides = {
+			filetype = {
+				gitcommit = { heading = { enabled = false } },
+			},
+		},
 		win_options = {
 			wrap = { default = true, rendered = true },
 			breakindent = { default = true, rendered = true },
