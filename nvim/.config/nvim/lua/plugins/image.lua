@@ -2,8 +2,8 @@ return {
 	"3rd/image.nvim",
 	build = false,
 	opts = {
-		-- processor = "magick_cli",
-		-- backend = "kitty",
+		processor = "magick_cli",
+		backend = "kitty",
 		integrations = {
 			markdown = {
 				resolve_image_path = function(document_path, image_path, fallback)
