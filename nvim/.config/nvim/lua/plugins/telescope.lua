@@ -91,7 +91,6 @@ return {
 		telescope.load_extension("ui-select")
 		telescope.load_extension("themes")
 		telescope.load_extension("file_browser")
-		telescope.load_extension("grapple")
 
 		-- Core Keymaps
 		vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
