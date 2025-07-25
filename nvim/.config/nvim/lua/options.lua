@@ -23,6 +23,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,help,tabpages,winsize,winpos,termin
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
+vim.o.foldnestmax = 5
 
 -- Indentation options
 vim.o.autoindent = true -- Preserves previous indentation level when entering a newline.
