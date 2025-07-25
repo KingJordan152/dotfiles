@@ -7,7 +7,8 @@ return {
 	opts = {
 		automatic_enable = {
 			exclude = {
-				"ts_ls", -- Should be handled by `typescript-tools`
+				"ts_ls", -- Handled by `typescript-tools`
+				"tailwindcss", -- Handled by `tailwind-tools`
 			},
 		},
 	},
