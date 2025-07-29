@@ -6,10 +6,10 @@ $directory\
 [](fg:#769ff0 bg:#394260)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#1d2230)\
-$time\
-[ ](fg:#1d2230)\
+[](#394260)\
 \n$character"""
+
+# follow_symlinks = false
 
 [character]
 success_symbol = '[](bold #9ece6a) '
@@ -33,27 +33,27 @@ style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
 [nodejs]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [php]
-symbol = ""
+symbol = " "
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [time]
-disabled = false
+disabled = true
 time_format = '%I:%M %p'
 style = "bg:#1d2230"
 format = '[[   $time ](fg:#a0a9cb bg:#1d2230)]($style)'
