@@ -90,18 +90,18 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("themes")
-		telescope.load_extension("file_browser")
+		-- telescope.load_extension("file_browser")
 
 		-- Core Keymaps
 		vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
-		vim.keymap.set("n", "<leader>e", "<Cmd>Telescope file_browser<CR>", { desc = "Open File Explorer" })
-		vim.keymap.set("n", "<leader>cs", "<Cmd>Telescope themes<CR>", { desc = "List colorschemes" })
+		-- vim.keymap.set("n", "<leader>e", "<Cmd>Telescope file_browser<CR>", { desc = "Open File Explorer" })
+		-- vim.keymap.set("n", "<leader>cs", "<Cmd>Telescope themes<CR>", { desc = "List colorschemes" })
 
 		-- Search Keymaps (prefix 's')
 		vim.keymap.set("n", "<leader>sb", function()
 			builtin.buffers(themes.get_dropdown({ previewer = false }))
 		end, { desc = "Search buffers" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Find file" })
+		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
 		vim.keymap.set("n", '<leader>s"', builtin.registers, { desc = "Search registers" })
 		vim.keymap.set("n", "<leader>s/", builtin.search_history, { desc = "Search history" })
 		vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search oldfiles" })
