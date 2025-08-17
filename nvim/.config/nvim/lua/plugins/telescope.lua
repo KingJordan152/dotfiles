@@ -94,6 +94,7 @@ return {
 
 		-- Core Keymaps
 		vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Grep files" })
+		vim.keymap.set("x", "<leader>/", '"zy<Cmd>Telescope live_grep<CR><C-r>z', { desc = "Grep files for selection" })
 		-- vim.keymap.set("n", "<leader>e", "<Cmd>Telescope file_browser<CR>", { desc = "Open File Explorer" })
 		-- vim.keymap.set("n", "<leader>cs", "<Cmd>Telescope themes<CR>", { desc = "List colorschemes" })
 
