@@ -6,6 +6,7 @@ return {
 		"nvim-telescope/telescope-ui-select.nvim",
 		"andrew-george/telescope-themes",
 		"nvim-telescope/telescope-file-browser.nvim",
+		"danielvolchek/tailiscope.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	config = function()
@@ -86,6 +87,15 @@ return {
 						},
 					},
 				},
+				tailiscope = {
+					register = '"',
+					default = "categories",
+					maps = {
+						n = {
+							open_doc = "o",
+						},
+					},
+				},
 			},
 		})
 
@@ -93,6 +103,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("themes")
+		telescope.load_extension("tailiscope")
 		-- telescope.load_extension("file_browser")
 
 		-- Core Keymaps
@@ -124,6 +135,7 @@ return {
 		vim.keymap.set("n", "<leader>sQ", builtin.quickfixhistory, { desc = "Search quickfix history" })
 		vim.keymap.set("n", "<leader>sR", builtin.resume, { desc = "Search resume" })
 		vim.keymap.set("n", "<leader>st", builtin.tags, { desc = "Search tags" })
+		vim.keymap.set("n", "<leader>sT", "<cmd>Telescope tailiscope<CR>", { desc = "Search Tailwind classes" })
 
 		-- LSP-related Keymaps (still 'search')
 		vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search LSP references" })
