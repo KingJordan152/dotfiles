@@ -21,6 +21,7 @@ return {
 				selection_caret = " ❯ ",
 				entry_prefix = "   ",
 				sorting_strategy = "ascending",
+				file_ignore_patterns = { "^.git/" },
 				layout_config = {
 					prompt_position = "top",
 				},
@@ -40,6 +41,8 @@ return {
 			pickers = {
 				find_files = {
 					hidden = true,
+					no_ignore = true,
+					no_ignore_parent = true,
 				},
 				oldfiles = {
 					only_cwd = true,
