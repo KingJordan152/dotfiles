@@ -139,6 +139,7 @@ return {
 				"lazy",
 				"mason",
 				"man",
+				"oil",
 			},
 		})
 	end,
