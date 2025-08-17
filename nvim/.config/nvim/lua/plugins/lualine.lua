@@ -45,6 +45,7 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
 	config = function()
 		-- Extend `filename` component to include an icon that corresponds to the filetype.
 		local filename_with_icon = require("lualine.components.filename"):extend()
