@@ -18,8 +18,6 @@ return {
 
 			-- Custom keymaps
 			["<CR>"] = { "accept", "fallback" },
-			-- ["<C-n>"] = { "select_next", "fallback" },
-			-- ["<C-p>"] = { "select_prev", "fallback" },
 			["<C-u>"] = { "scroll_documentation_up", "fallback" },
 			["<C-d>"] = { "scroll_documentation_down", "fallback" },
 		},
@@ -56,16 +54,17 @@ return {
 					max_height = 25,
 				},
 			},
+
+			accept = {
+				auto_brackets = {
+					enabled = false, -- Disabling because it doesn't always work and I've also turned it off in VS Code.
+				},
+			},
 		},
 
 		snippets = {
 			preset = "luasnip",
 		},
-
-		-- cmdline = {
-		-- 	keymap = { preset = "inherit" },
-		-- 	completion = { menu = { auto_show = false } },
-		-- },
 
 		sources = {
 			default = { "lazydev", "lsp", "path", "snippets" },
