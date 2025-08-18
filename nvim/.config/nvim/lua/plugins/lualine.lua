@@ -114,9 +114,6 @@ return {
 						end,
 					},
 					{
-						"filetype",
-					},
-					{
 						"diagnostics",
 						sections = { "error", "warn", "hint" },
 						symbols = { error = " ", warn = " ", hint = " ", info = " " },
