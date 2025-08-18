@@ -57,7 +57,8 @@ return {
 
 			accept = {
 				auto_brackets = {
-					enabled = false, -- Disabling because it doesn't always work and I've also turned it off in VS Code.
+					-- Disabling because it doesn't always work and VS Code doesn't have it enabled by default.
+					enabled = false,
 				},
 			},
 		},
