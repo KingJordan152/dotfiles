@@ -7,13 +7,30 @@
 ---@return string
 local function first(bufnr, ...)
 	local conform = require("conform")
+
 	for i = 1, select("#", ...) do
 		local formatter = select(i, ...)
 		if conform.get_formatter_info(formatter, bufnr).available then
 			return formatter
 		end
 	end
+
 	return select(1, ...)
+end
+
+--- Returns whether the current buffer will use `"eslint_d"` for formatting.
+---@param bufnr integer
+---@return boolean
+local function uses_eslint(bufnr)
+	local conform = require("conform")
+
+	for _, formatter in ipairs(conform.list_formatters_to_run(bufnr)) do
+		if formatter.name == "eslint_d" then
+			return true
+		end
+	end
+
+	return false
 end
 
 --[[
@@ -29,6 +46,7 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "isort", "black" },
+			go = { "goimports", "gofmt", stop_after_first = true },
 			css = { "prettierd" },
 			scss = { "prettierd" },
 			javascript = { "prettierd", "eslint_d" },
@@ -43,9 +61,29 @@ return {
 			lsp_format = "fallback",
 		},
 
+		--[[ 
+     Only enabled when one of the running formatters is **NOT** "eslint_d".
+     Since nearly all other formatters are far more performant when run synchronously, this should be
+     the default option most of the time.
+    ]]
+		format_on_save = function(bufnr)
+			local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
+
+			if is_formatting_disabled or uses_eslint(bufnr) then
+				return
+			end
+			return { lsp_format = "fallback" }
+		end,
+
+		--[[ 
+     Only enabled when one of the running formatters **IS** "eslint_d". 
+     This is because "eslint_d" might not be running in the background the moment it's requested, which would cause
+     a timeout error if `format_on_save` were the default option.
+    ]]
 		format_after_save = function(bufnr)
-			-- Disable with a global or buffer-local variable
-			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
+
+			if is_formatting_disabled or not uses_eslint(bufnr) then
 				return
 			end
 			return { lsp_format = "fallback" }
