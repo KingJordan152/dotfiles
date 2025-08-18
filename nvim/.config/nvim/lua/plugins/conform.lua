@@ -72,7 +72,7 @@ return {
 			if is_formatting_disabled or uses_eslint(bufnr) then
 				return
 			end
-			return { lsp_format = "fallback" }
+			return { lsp_format = "fallback", timeout_ms = 500 }
 		end,
 
 		--[[ 
