@@ -143,8 +143,13 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
 
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
-vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+vim.keymap.set("n", "j", function()
+	return vim.v.count > 0 and "j" or "gj"
+end, { expr = true, silent = true })
+
+vim.keymap.set("n", "k", function()
+	return vim.v.count > 0 and "k" or "gk"
+end, { expr = true, silent = true })
 
 -- Copy lines of text up or down
 vim.keymap.set({ "n", "x" }, "<M-S-J>", ":co -1<CR>j", { desc = "Copy line down" })
