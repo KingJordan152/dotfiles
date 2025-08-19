@@ -108,7 +108,7 @@ return {
 				vim.g.disable_autoformat = true
 			end
 		end, {
-			desc = "Disable Format After Save",
+			desc = "Disable Format on Save",
 			bang = true,
 		})
 
@@ -116,16 +116,46 @@ return {
 			vim.b.disable_autoformat = false
 			vim.g.disable_autoformat = false
 		end, {
-			desc = "Enable Format After Save",
+			desc = "Enable Format on Save",
 		})
 	end,
 	keys = {
 		{
 			"<leader>f",
 			function()
-				require("conform").format({ async = true })
+				require("conform").format({ async = true, lsp_format = "fallback" }, function(err)
+					if not err then
+						local mode = vim.api.nvim_get_mode().mode
+						if vim.startswith(string.lower(mode), "v") then
+							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+						end
+					end
+				end)
 			end,
-			desc = "Format buffer",
+			mode = "",
+			desc = "Format code",
+		},
+		{
+			"<leader>tf",
+			function()
+				if vim.g.disable_autoformat or vim.b.disable_autoformat then
+					vim.cmd("FormatEnable")
+				else
+					vim.cmd("FormatDisable")
+				end
+			end,
+			desc = "Toggle Auto-Formatting",
+		},
+		{
+			"<leader>tF",
+			function()
+				if vim.g.disable_autoformat or vim.b.disable_autoformat then
+					vim.cmd("FormatEnable")
+				else
+					vim.cmd("FormatDisable!")
+				end
+			end,
+			desc = "Toggle Auto-Formatting for the Current Buffer",
 		},
 	},
 }
