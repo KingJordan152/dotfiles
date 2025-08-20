@@ -18,6 +18,16 @@ return {
 		default_file_explorer = true,
 		watch_for_changes = true,
 		skip_confirm_for_simple_edits = true,
+		view_options = {
+			show_hidden = true,
+			is_always_hidden = function(name)
+				local files = {
+					[".DS_Store"] = true,
+					[".git"] = true,
+				}
+				return files[name]
+			end,
+		},
 		keymaps = {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
