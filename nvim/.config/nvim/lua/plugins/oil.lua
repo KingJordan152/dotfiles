@@ -32,6 +32,15 @@ return {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
 			["<C-q>"] = "actions.send_to_qflist",
+			["<CR>"] = {
+				--- Open the file under the cursor, but also remove all search highlights.
+				--- This is helpful for when you're searching for a file inside a Oil buffer but don't want
+				--- that search highlighting to persist once you've made a selection.
+				function()
+					require("oil").select()
+					vim.cmd("nohlsearch")
+				end,
+			},
 			["gd"] = {
 				desc = "Toggle file detail view",
 				callback = function()
