@@ -104,8 +104,10 @@ return {
 			if args.bang then
 				-- FormatDisable! will disable formatting just for this buffer
 				vim.b.disable_autoformat = true
+				vim.api.nvim_echo({ { "Auto-formatting disabled for the current buffer", "Removed" } }, true, {})
 			else
 				vim.g.disable_autoformat = true
+				vim.api.nvim_echo({ { "Auto-formatting disabled", "Removed" } }, true, {})
 			end
 		end, {
 			desc = "Disable Format on Save",
@@ -115,6 +117,7 @@ return {
 		vim.api.nvim_create_user_command("FormatEnable", function()
 			vim.b.disable_autoformat = false
 			vim.g.disable_autoformat = false
+			vim.api.nvim_echo({ { "Auto-formatting enabled", "Added" } }, true, {})
 		end, {
 			desc = "Enable Format on Save",
 		})
