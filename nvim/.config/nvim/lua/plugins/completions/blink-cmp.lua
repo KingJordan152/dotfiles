@@ -14,12 +14,26 @@ return {
 		--
 		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
-			preset = "super-tab",
+			preset = "default",
 
-			-- Custom keymaps
-			["<CR>"] = { "accept", "fallback" },
-			["<C-u>"] = { "scroll_documentation_up", "fallback" },
-			["<C-d>"] = { "scroll_documentation_down", "fallback" },
+			-- Overrides
+			["<CR>"] = { "select_and_accept", "fallback" }, -- Enable selection via "Enter"
+			["<Tab>"] = { "select_and_accept", "fallback" }, -- Enable selection via "Tab" (remove snippet forward jump feature)
+			["<S-Tab>"] = false, -- Remove snippet backward jump feature
+
+			-- New snippet commands
+			["<C-y>"] = {
+				function(cmp)
+					if cmp.snippet_active() then
+						return cmp.accept()
+					else
+						return cmp.select_and_accept()
+					end
+				end,
+				"snippet_forward",
+				"fallback",
+			},
+			["<C-S-Y>"] = { "snippet_backward", "fallback" },
 		},
 
 		appearance = {
