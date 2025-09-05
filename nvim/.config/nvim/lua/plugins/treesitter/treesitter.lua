@@ -24,6 +24,8 @@ return {
 				"yaml",
 				"regex", -- For certain pickers
 				"latex",
+				"query",
+				"c",
 			},
 		})
 	end,
