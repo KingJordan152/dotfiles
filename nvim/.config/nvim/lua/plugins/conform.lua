@@ -1,7 +1,7 @@
---- Runs the first available formatter given as an argument.
---- You can use this function to run one formatter first *then* another one.
+---Runs the first available formatter given as an argument.
+---You can use this function to run one formatter first *then* another one.
 ---
---- This code can be found on the [GitHub page](https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#run-the-first-available-formatter-followed-by-more-formatters) for `conform.nvim`.
+---This code can be found on the [GitHub page](https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#run-the-first-available-formatter-followed-by-more-formatters) for `conform.nvim`.
 ---@param bufnr integer The buffer this formatting will be applied to.
 ---@param ... string The formatters you want to attempt to run.
 ---@return string
@@ -18,8 +18,8 @@ local function first(bufnr, ...)
 	return select(1, ...)
 end
 
---- Returns whether the current buffer will use `"eslint_d"` for formatting.
----@param bufnr integer
+---Returns whether the current buffer will use `eslint_d` for formatting.
+---@param bufnr integer The buffer that is going to be formatted.
 ---@return boolean
 local function uses_eslint(bufnr)
 	local conform = require("conform")
@@ -98,7 +98,11 @@ return {
 		},
 	},
 	init = function()
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		-- TODO: Reassess how this should work
+		-- local bufnr = vim.api.nvim_get_current_buf()
+		-- vim.o.formatexpr = "v:lua.require'conform'.formatexpr("
+		-- 	.. (uses_eslint(bufnr) and "{ async = true }" or "")
+		-- 	.. ")"
 
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
