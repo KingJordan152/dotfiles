@@ -33,9 +33,5 @@ return {
 				end
 			end
 		end
-
-		-- Remove default snippet jump commands because they usually activate at the wrong time
-		vim.keymap.del("i", "<Tab>")
-		vim.keymap.del("i", "<S-Tab>")
 	end,
 }
