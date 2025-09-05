@@ -26,8 +26,9 @@ vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (
 vim.o.foldnestmax = 5
 
 -- Indentation options
-vim.o.autoindent = true -- Preserves previous indentation level when entering a newline.
-vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation)
+-- vim.o.autoindent = true -- Preserves previous indentation level when entering a newline.
+-- vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation)
+vim.o.breakindent = true -- Preserves indentation across wrapped lines.
 
 -- Screen splitting direction preference
 vim.o.splitright = true
