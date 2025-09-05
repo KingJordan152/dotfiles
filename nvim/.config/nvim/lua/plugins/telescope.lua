@@ -22,7 +22,7 @@ return {
 				selection_caret = " ❯ ",
 				entry_prefix = "   ",
 				sorting_strategy = "ascending",
-				file_ignore_patterns = { "^.git/" },
+				file_ignore_patterns = { "^.git/", "node_modules/", "public/", "dist/", "build/" },
 				layout_config = {
 					prompt_position = "top",
 				},
@@ -32,8 +32,7 @@ return {
 						["q"] = actions.close,
 					},
 					i = {
-						-- Exit Telescope prompt when pressing Escape instead of entering Normal mode.
-						["<esc>"] = actions.close,
+						["<esc>"] = actions.close, -- Exit Telescope prompt when pressing Escape instead of entering Normal mode.
 						["<C-j>"] = actions.move_selection_next,
 						["<C-k>"] = actions.move_selection_previous,
 					},
