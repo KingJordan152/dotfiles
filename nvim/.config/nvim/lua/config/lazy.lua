@@ -19,7 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -33,14 +33,20 @@ require("lazy").setup({
 		{ import = "plugins.treesitter" },
 		{ import = "plugins.writing" },
 	},
-
 	ui = {
 		border = "rounded",
 		title = "Lazy.nvim",
 	},
-
-	-- Colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "tokyonight" } },
-	-- Don't automatically check for plugin updates because the message can prevent Neovim from loading properly.
-	checker = { enabled = false },
+	install = {
+		missing = true,
+		colorscheme = { "tokyonight" },
+	},
+	checker = {
+		enabled = true,
+		notify = false, -- Don't automatically notify plugin updates because the message can prevent Neovim from loading properly.
+	},
+	change_detection = {
+		enabled = true,
+		notify = false, -- Notifications are very annoying and often mess up UI when many updates are made.
+	},
 })
