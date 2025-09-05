@@ -12,8 +12,17 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
+		bigfile = {
+			enabled = true,
+		},
 		input = {
 			enabled = true,
+		},
+		image = {
+			enabled = true,
+			convert = {
+				notify = false,
+			},
 		},
 		-- Auto-highlight LSP references
 		words = {
