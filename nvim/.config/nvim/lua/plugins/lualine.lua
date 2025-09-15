@@ -95,7 +95,7 @@ return {
 				lualine_x = {
 					{
 						"lsp_status",
-						icon = { " ", color = { fg = colors.blue1 } },
+						icon = { "", color = { fg = colors.blue1 } },
 						symbols = {
 							done = "",
 							separator = ", ",
