@@ -32,6 +32,20 @@ return {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
 			["<C-q>"] = "actions.send_to_qflist",
+			["yp"] = {
+				desc = "Copy relative path",
+				"actions.yank_entry",
+				opts = {
+					modify = ":p:.",
+				},
+			},
+			["yP"] = {
+				desc = "Copy full path",
+				"actions.yank_entry",
+				opts = {
+					modify = ":p:~",
+				},
+			},
 			["<CR>"] = {
 				--- Open the file under the cursor, but also remove all search highlights.
 				--- This is helpful for when you're searching for a file inside a Oil buffer but don't want
