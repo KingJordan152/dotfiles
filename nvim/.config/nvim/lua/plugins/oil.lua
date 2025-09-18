@@ -18,6 +18,11 @@ return {
 		default_file_explorer = true,
 		watch_for_changes = true,
 		skip_confirm_for_simple_edits = true,
+		lsp_file_methods = {
+			enabled = true,
+			timeout_ms = 1000,
+			autosave_changes = true,
+		},
 		view_options = {
 			show_hidden = true,
 			is_always_hidden = function(name)
