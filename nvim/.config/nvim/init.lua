@@ -1,4 +1,4 @@
-require("config.lazy")
+require("core.lazy")
 require("core.lsp")
 require("current-theme")
 
