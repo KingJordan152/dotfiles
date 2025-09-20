@@ -24,10 +24,19 @@ return {
 			preset = "round",
 			border_virtual = true,
 		},
-		-- Allows word-wrapping to work in markdown
 		overrides = {
 			filetype = {
 				gitcommit = { heading = { enabled = false } },
+			},
+			buftype = {
+				-- Applies to LSP Hover windows
+				nofile = {
+					code = {
+						language = false,
+						left_pad = 0,
+						right_pad = 0,
+					},
+				},
 			},
 		},
 		win_options = {
