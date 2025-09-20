@@ -34,6 +34,7 @@ require("lazy").setup({
 		{ import = "plugins.lsp" },
 		{ import = "plugins.treesitter" },
 		{ import = "plugins.writing" },
+		{ import = "plugins.qol" }, -- "Quality of Life" plugins
 	},
 	ui = {
 		border = "rounded",
