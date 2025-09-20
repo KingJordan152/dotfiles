@@ -39,45 +39,8 @@ vim.o.splitbelow = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
------- Hybrid Line Numbers (relative except for current line) ------
-local hybridLineNums = vim.api.nvim_create_augroup("hybridLineNums", { clear = true })
-local excludeFiles = {
-	"snacks_dashboard",
-	"snacks_explorer",
-	"lazy",
-	"mason",
-	"snacks_picker_list",
-	"snacks_terminal",
-	"TelescopePrompt",
-}
-
--- Determines whether the current buffer should show hybrid line numbers
-local function isValidFile()
-	return not vim.tbl_contains(excludeFiles, vim.bo.filetype)
-end
-
 vim.o.relativenumber = true
 vim.o.number = true
-
-vim.api.nvim_create_autocmd("InsertEnter", {
-	desc = "Disengage Relative Line numbers when entering Insert Mode",
-	group = hybridLineNums,
-	callback = function()
-		if isValidFile() then
-			vim.o.relativenumber = false
-		end
-	end,
-})
-
-vim.api.nvim_create_autocmd("InsertLeave", {
-	desc = "Engage Relative Line numbers when leaving Insert Mode",
-	group = hybridLineNums,
-	callback = function()
-		if isValidFile() then
-			vim.o.relativenumber = true
-		end
-	end,
-})
 
 -- Only highlight the current line number (specific color depends on colorscheme)
 vim.o.cursorline = true
@@ -88,15 +51,6 @@ vim.o.cursorlineopt = "both"
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
-
--- Briefly highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-	desc = "Briefly highlight yanked text",
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
 
 -- Options that only become active once an LSP has been attached
 vim.api.nvim_create_autocmd("LspAttach", {
