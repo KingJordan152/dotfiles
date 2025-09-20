@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("core.utils")
 
 local hybridLineNums = vim.api.nvim_create_augroup("hybridLineNums", { clear = true })
 
