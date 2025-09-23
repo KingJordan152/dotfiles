@@ -45,20 +45,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				end,
 			},
 		})
-
-		-- Configurations for specific LSPs
-		local cssls_capabilities = vim.lsp.protocol.make_client_capabilities()
-		cssls_capabilities.textDocument.hover.contentFormat = { "plaintext" }
-		cssls_capabilities.textDocument.hover.dynamicRegistration = true
-
-		vim.lsp.config["cssls"] = {
-			capabilities = cssls_capabilities, -- Remove hover window formatting because it doesn't render properly.
-		}
-
-		vim.lsp.config["cssmodules_ls"] = {
-			init_options = {
-				camelCase = false,
-			},
-		}
 	end,
 })
+
+-- Configurations for specific LSPs
+local cssls_capabilities = vim.lsp.protocol.make_client_capabilities()
+cssls_capabilities.textDocument.hover.contentFormat = { "plaintext" }
+cssls_capabilities.textDocument.hover.dynamicRegistration = true
+
+vim.lsp.config["cssls"] = {
+	capabilities = cssls_capabilities, -- Remove hover window formatting because it doesn't render properly.
+}
+
+vim.lsp.config["cssmodules_ls"] = {
+	init_options = {
+		camelCase = false,
+	},
+}
