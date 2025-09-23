@@ -23,9 +23,7 @@ quit-after-last-window-closed = true
 title = " "
 
 # ==== Linux-Only ====
-gtk-single-instance = true
-gtk-adwaita = true
-adw-toolbar-style = flat
+gtk-toolbar-style = flat
 gtk-wide-tabs = false
 app-notifications = no-clipboard-copy
 
