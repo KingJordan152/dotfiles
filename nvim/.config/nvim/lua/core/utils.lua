@@ -13,4 +13,11 @@ function M.Set(list)
 	return set
 end
 
+---Determines whether the given executable is installed on the user's system.
+---@param executable string The name of the executable you want to check.
+---@return boolean
+function M.executable_exists(executable)
+	return vim.fn.executable(executable) == 1
+end
+
 return M
