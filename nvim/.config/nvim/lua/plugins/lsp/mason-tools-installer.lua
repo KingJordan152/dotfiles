@@ -17,8 +17,6 @@ return {
 
 			-- Formatters
 			"prettier",
-			"goimports",
-			"prettier",
 			"prettierd",
 			"stylua",
 
