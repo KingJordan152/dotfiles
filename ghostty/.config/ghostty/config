@@ -5,7 +5,7 @@ window-padding-x = 10
 window-padding-y = 4
 window-theme = ghostty
 window-colorspace = display-p3
-# adjust-cursor-thickness = 2
+adjust-cursor-thickness = 2
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
