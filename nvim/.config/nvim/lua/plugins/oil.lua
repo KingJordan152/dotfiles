@@ -37,14 +37,14 @@ return {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
 			["<C-q>"] = "actions.send_to_qflist",
-			["yp"] = {
+			["gy"] = {
 				desc = "Copy relative path",
 				"actions.yank_entry",
 				opts = {
 					modify = ":p:.",
 				},
 			},
-			["yP"] = {
+			["gY"] = {
 				desc = "Copy full path",
 				"actions.yank_entry",
 				opts = {
