@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+
 -- Displays the formatters that will run against the current buffer.
 --
 -- If there aren't any configured formatters for the current buffer but it has an LSP,
@@ -24,18 +26,6 @@ local function formatter_status()
 	end
 
 	return result
-end
-
----Controls whether certain components are disabled for certain filetypes.
----@param files string[] List of filetypes that the component will be disabled for.
----@return boolean
-local function disabled_filetypes(files)
-	for _, file in ipairs(files) do
-		if vim.bo.filetype == file then
-			return false
-		end
-	end
-	return true
 end
 
 -- [[
@@ -88,7 +78,7 @@ return {
 						"grapple",
 						color = { fg = colors.blue },
 						cond = function()
-							return disabled_filetypes({ "TelescopePrompt" })
+							return not utils.Set({ "TelescopePrompt" })[vim.bo.filetype]
 						end,
 					},
 				},
@@ -119,7 +109,7 @@ return {
 						symbols = { error = " ", warn = " ", hint = " ", info = " " },
 						always_visible = true,
 						cond = function()
-							return disabled_filetypes({ "help", "TelescopePrompt", "gitcommit" })
+							return not utils.Set({ "help", "TelescopePrompt", "gitcommit" })[vim.bo.filetype]
 						end,
 					},
 				},
