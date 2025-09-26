@@ -8,7 +8,6 @@ return {
 		automatic_enable = {
 			exclude = {
 				"ts_ls", -- Handled by `typescript-tools`
-				"tailwindcss", -- Handled by `tailwind-tools`
 			},
 		},
 	},
