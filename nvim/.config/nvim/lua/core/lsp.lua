@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Customize how diagnostics work
 		vim.diagnostic.config({
 			severity_sort = true,
-			update_in_insert = true,
+			-- update_in_insert = true,
 			float = { border = "rounded", source = "if_many" },
 			underline = { severity = vim.diagnostic.severity.ERROR },
 			signs = vim.g.have_nerd_font and {
