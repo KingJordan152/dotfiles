@@ -52,6 +52,7 @@ return {
 			javascript = { "prettierd", "eslint_d" },
 			typescript = { "prettierd", "eslint_d" },
 			typescriptreact = { "prettierd", "eslint_d" },
+			json = { "prettierd" },
 			markdown = function(bufnr)
 				return { first(bufnr, "prettierd", "prettier"), "injected" }
 			end,
