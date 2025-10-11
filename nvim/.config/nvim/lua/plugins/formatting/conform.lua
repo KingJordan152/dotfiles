@@ -73,11 +73,7 @@ return {
 		},
 	},
 	init = function()
-		-- TODO: Reassess how this should work
-		-- local bufnr = vim.api.nvim_get_current_buf()
-		-- vim.o.formatexpr = "v:lua.require'conform'.formatexpr("
-		-- 	.. (uses_eslint(bufnr) and "{ async = true }" or "")
-		-- 	.. ")"
+		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
