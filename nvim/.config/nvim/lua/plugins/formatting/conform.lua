@@ -18,21 +18,6 @@ local function first(bufnr, ...)
 	return select(1, ...)
 end
 
----Returns whether the current buffer will use `eslint_d` for formatting.
----@param bufnr integer The buffer that is going to be formatted.
----@return boolean
-local function uses_eslint(bufnr)
-	local conform = require("conform")
-
-	for _, formatter in ipairs(conform.list_formatters_to_run(bufnr)) do
-		if formatter.name == "eslint_d" then
-			return true
-		end
-	end
-
-	return false
-end
-
 --[[
 --  Formatter plugin (with "format on save").
 --]]
@@ -49,9 +34,9 @@ return {
 			go = { "goimports", "gofmt", stop_after_first = true },
 			css = { "prettierd" },
 			scss = { "prettierd" },
-			javascript = { "prettierd", "eslint_d" },
-			typescript = { "prettierd", "eslint_d" },
-			typescriptreact = { "prettierd", "eslint_d" },
+			javascript = { "prettierd" },
+			typescript = { "prettierd" },
+			typescriptreact = { "prettierd" },
 			json = { "prettierd" },
 			markdown = function(bufnr)
 				return { first(bufnr, "prettierd", "prettier"), "injected" }
@@ -62,40 +47,29 @@ return {
 			lsp_format = "fallback",
 		},
 
-		--[[ 
-     Only enabled when one of the running formatters is **NOT** "eslint_d".
-     Since nearly all other formatters are far more performant when run synchronously, this should be
-     the default option most of the time.
-    ]]
 		format_on_save = function(bufnr)
-			local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
-
-			if is_formatting_disabled or uses_eslint(bufnr) then
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
 			return { lsp_format = "fallback", timeout_ms = 500 }
 		end,
 
-		--[[ 
-     Only enabled when one of the running formatters **IS** "eslint_d". 
-     This is because "eslint_d" might not be running in the background the moment it's requested, which would cause
-     a timeout error if `format_on_save` were the default option.
-    ]]
-		format_after_save = function(bufnr)
-			local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
-
-			if is_formatting_disabled or not uses_eslint(bufnr) then
-				return
-			end
-			return { lsp_format = "fallback" }
-		end,
-
 		formatters = {
-			eslint_d = {
-				env = {
-					ESLINT_D_PPID = vim.fn.getpid(),
-				},
-			},
+			prettierd = function(bufnr)
+				local buffer_filetype = vim.bo[bufnr].filetype
+				local eslint_files = require("core.utils").Set(vim.lsp.config.eslint.filetypes)
+
+				return {
+					--[[ 
+						Must have a `.prettierrc` file in the cwd to run `prettierd` if the current 
+						buffer *also* receives linting from ESLint.
+
+						This allows filetypes like `.json` and `.md` to still be formatted by Prettier 
+						even if a `.prettierrc` hasn't been setup in the cwd.  
+					]]
+					require_cwd = eslint_files[buffer_filetype],
+				}
+			end,
 		},
 	},
 	init = function()
