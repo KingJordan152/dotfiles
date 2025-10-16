@@ -4,11 +4,5 @@ return {
 		"mason-org/mason.nvim",
 		"neovim/nvim-lspconfig",
 	},
-	opts = {
-		automatic_enable = {
-			exclude = {
-				"ts_ls", -- Handled by `typescript-tools`
-			},
-		},
-	},
+	opts = {},
 }
