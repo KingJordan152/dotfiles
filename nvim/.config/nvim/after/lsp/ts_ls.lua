@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	-- Prevents `ts_ls` from running within Deno projects.
 	root_dir = function(bufnr, on_dir)
