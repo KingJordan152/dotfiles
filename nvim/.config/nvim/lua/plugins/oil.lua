@@ -33,6 +33,9 @@ return {
 				return files[name]
 			end,
 		},
+		confirmation = {
+			border = "rounded",
+		},
 		keymaps = {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
