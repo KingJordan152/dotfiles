@@ -63,6 +63,28 @@ return {
 					cwd = "${workspaceFolder}",
 					sourceMaps = true,
 				},
+				{
+					type = "pwa-chrome",
+					request = "launch",
+					name = "Launch Brave",
+					url = "http://localhost:5173",
+					webRoot = "${workspaceFolder}",
+					port = 9222,
+					sourceMaps = true,
+					runtimeExecutable = "/usr/bin/brave-browser",
+					runtimeArgs = {
+						"--remote-debugging-port=9222",
+					},
+				},
+				{
+					type = "pwa-chrome",
+					request = "attach",
+					name = "Attach to Brave",
+					webRoot = "${workspaceFolder}",
+					urlFilter = "http://localhost:5173/*",
+					port = 9222,
+					sourceMaps = true,
+				},
 			}
 		end
 
