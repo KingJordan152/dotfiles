@@ -10,33 +10,39 @@ return {
 		local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
 		local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 
-		dap.adapters = {
-			["pwa-node"] = {
-				type = "server",
-				host = "localhost",
-				port = "${port}",
-				executable = {
-					command = "node",
-					args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
-				},
+		local js_debug_adapter = {
+			type = "server",
+			host = "localhost",
+			port = "${port}",
+			executable = {
+				command = "node",
+				args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
 			},
-			-- Commonly used in VS Code `launch.json` configurations
-			["node"] = function(callback, config)
-				-- Use `pwa-node` adapter for `node`; they're exactly the same.
-				local pwa_node_adapter = dap.adapters["pwa-node"]
+		}
 
-				-- DAP config must use "pwa-node", otherwise the debugger will always fail.
-				if config.type == "node" then
-					config.type = "pwa-node"
-				end
+		---Configures common VS Code adapters from a given `launch.json` file to use correlating Neovim adapters.
+		---@param callback fun(adapter: dap.Adapter)
+		---@param config dap.Configuration
+		local function js_debug_adapter_for_vscode(callback, config)
+			local pwa_name = "pwa-" .. config.type
+			local pwa_adapter = dap.adapters[pwa_name]
 
-				-- Perform type narrowing to avoid error (else-condition should always run).
-				if type(pwa_node_adapter) == "function" then
-					pwa_node_adapter(callback, config)
-				else
-					callback(pwa_node_adapter)
-				end
-			end,
+			-- Intercept the user's config and change the `type` to match the `pwa_adapter`'s name.
+			config.type = pwa_name
+
+			-- Perform type narrowing to avoid error (either condition has the same outcome).
+			if type(pwa_adapter) == "function" then
+				pwa_adapter(callback, config)
+			else
+				callback(pwa_adapter)
+			end
+		end
+
+		dap.adapters = {
+			["pwa-node"] = js_debug_adapter,
+			["pwa-chrome"] = js_debug_adapter,
+			["node"] = js_debug_adapter_for_vscode,
+			["chrome"] = js_debug_adapter_for_vscode,
 		}
 
 		for _, filetype in ipairs(js_filetypes) do
