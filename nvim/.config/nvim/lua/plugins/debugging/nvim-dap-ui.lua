@@ -8,6 +8,10 @@ return {
 	config = function()
 		local dap, dapui = require("dap"), require("dapui")
 
+		-- Initialize `dap-ui`
+		dapui.setup()
+
+		-- Automatically open/close `dap-ui` based on debugger statuses
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
@@ -20,7 +24,5 @@ return {
 		dap.listeners.before.event_exited.dapui_config = function()
 			dapui.close()
 		end
-
-		require("dapui").setup({})
 	end,
 }
