@@ -22,6 +22,8 @@ return {
 			"lua_ls",
 			"rust_analyzer",
 			"tailwindcss",
+			"jsonls",
+			"yamlls",
 
 			-- Formatters
 			"prettier",
