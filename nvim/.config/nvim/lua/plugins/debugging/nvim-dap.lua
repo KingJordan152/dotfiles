@@ -7,6 +7,7 @@ return {
 	config = function()
 		local dap = require("dap")
 		local dap_utils = require("dap.utils")
+		local has_mac = vim.fn.has("mac") == 1
 		local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
 		local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 
@@ -67,13 +68,14 @@ return {
 					type = "pwa-chrome",
 					request = "launch",
 					name = "Launch Brave",
-					url = "http://localhost:5173",
+					url = "http://localhost:5173", -- Assume Vite
 					webRoot = "${workspaceFolder}",
-					port = 9222,
 					sourceMaps = true,
-					runtimeExecutable = "/usr/bin/brave-browser",
+					runtimeExecutable = has_mac and "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+						or "/usr/bin/brave-browser",
 					runtimeArgs = {
 						"--remote-debugging-port=9222",
+						"--user-data-dir=remote-debug-profile",
 					},
 				},
 				{
@@ -81,7 +83,7 @@ return {
 					request = "attach",
 					name = "Attach to Brave",
 					webRoot = "${workspaceFolder}",
-					urlFilter = "http://localhost:5173/*",
+					urlFilter = "http://localhost:5173/*", -- Assume Vite
 					port = 9222,
 					sourceMaps = true,
 				},
