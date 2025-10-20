@@ -64,6 +64,15 @@ vim.lsp.config.cssmodules_ls = {
 }
 
 vim.lsp.config.ts_ls = {
+	init_options = {
+		plugins = {
+			{
+				name = "@styled/typescript-styled-plugin",
+				-- TODO: Add check for NVM
+				location = vim.fn.expand("$NVM_BIN/../lib"),
+			},
+		},
+	},
 	-- Prevents `ts_ls` from running within Deno projects.
 	root_dir = function(bufnr, on_dir)
 		local project_root = vim.fs.root(bufnr, {
