@@ -90,6 +90,10 @@ vim.lsp.config.ts_ls = {
 			on_dir(project_root)
 		end
 	end,
+	settings = {
+		-- Ideally, you should use either Prettier or Stylistic ESLint for formatting instead.
+		format = { enable = false },
+	},
 }
 
 vim.lsp.config.denols = {
