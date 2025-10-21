@@ -37,6 +37,7 @@ return {
 			"eslint_d",
 
 			-- Debuggers (DAP)
+			"js-debug-adapter",
 		},
 	},
 }
