@@ -15,6 +15,7 @@ vim.o.inccommand = "split" -- Live-preview substitutions
 vim.o.signcolumn = "yes" -- Reserves extra space in gutter for diagnostic icons
 vim.o.confirm = true -- Show dialog instead of erroring when trying to exit an unsaved file
 vim.o.wrap = false -- Prevent line wrapping
+vim.o.linebreak = true -- When `wrap` is true, causes full words to wrap rather than individual characters
 vim.opt.fillchars:append({ diff = "╱" }) -- Defines the character to use for different segments of a diffsplit
 
 -- Options for syntax-based folding via Treesitter
