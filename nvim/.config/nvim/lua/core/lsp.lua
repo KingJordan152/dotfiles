@@ -120,8 +120,9 @@ vim.lsp.config.eslint = {
 			buffer = bufnr,
 			callback = function()
 				local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
+				local is_diffview_enabled = vim.b[bufnr].diffview_enabled
 
-				if not is_formatting_disabled then
+				if not (is_formatting_disabled or is_diffview_enabled) then
 					vim.cmd("LspEslintFixAll")
 				end
 			end,
