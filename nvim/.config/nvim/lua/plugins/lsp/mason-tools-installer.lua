@@ -13,6 +13,8 @@ return {
 		ensure_installed = {
 			-- LSPs
 			"ts_ls",
+			"svelte",
+			"vue_ls",
 			"clangd",
 			"cssls",
 			"css_variables",
