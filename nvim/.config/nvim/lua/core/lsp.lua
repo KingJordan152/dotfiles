@@ -2,6 +2,12 @@
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function()
+		local floating_window = {
+			border = "rounded",
+			max_width = 100,
+			max_height = 25,
+		}
+
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
@@ -11,16 +17,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		---@diagnostic disable-next-line: duplicate-set-field
 		vim.lsp.buf.hover = function()
 			return default_hover({
-				border = "rounded",
-				max_height = 25,
-				max_width = 100,
+				border = floating_window.border,
+				max_width = floating_window.max_width,
+				max_height = floating_window.max_height,
 			})
 		end
 
 		-- Customize how diagnostics work
 		vim.diagnostic.config({
 			severity_sort = true,
-			float = { border = "rounded", source = "if_many", max_width = 100 },
+			float = { source = "if_many", border = floating_window.border, max_width = floating_window.max_width },
 			underline = { severity = vim.diagnostic.severity.ERROR },
 			signs = vim.g.have_nerd_font and {
 				text = {
