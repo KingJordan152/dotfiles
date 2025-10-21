@@ -39,6 +39,7 @@ return {
 			typescriptreact = { "prettierd" },
 			javascriptreact = { "prettierd" },
 			svelte = { "prettierd" },
+			vue = { "prettierd" },
 			json = { "prettierd" },
 			markdown = function(bufnr)
 				return { first(bufnr, "prettierd", "prettier"), "injected" }

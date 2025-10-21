@@ -64,6 +64,10 @@ vim.lsp.config.cssmodules_ls = {
 }
 
 local nvm_lib_dir = vim.fn.expand("$NVM_BIN/../lib")
+local vue_language_server_path = vim.fn.expand("$MASON/packages")
+	.. "/vue-language-server"
+	.. "/node_modules/@vue/language-server"
+
 vim.lsp.config.ts_ls = {
 	init_options = {
 		plugins = {
@@ -76,7 +80,20 @@ vim.lsp.config.ts_ls = {
 				name = "typescript-svelte-plugin",
 				location = nvm_lib_dir,
 			},
+			{
+				name = "@vue/typescript-plugin",
+				location = vue_language_server_path,
+				languages = { "vue" },
+				configNamespace = "typescript",
+			},
 		},
+	},
+	filetypes = {
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"vue",
 	},
 	-- Prevents `ts_ls` from running within Deno projects.
 	root_dir = function(bufnr, on_dir)
