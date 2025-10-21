@@ -63,13 +63,18 @@ vim.lsp.config.cssmodules_ls = {
 	},
 }
 
+local nvm_lib_dir = vim.fn.expand("$NVM_BIN/../lib")
 vim.lsp.config.ts_ls = {
 	init_options = {
 		plugins = {
 			{
 				name = "@styled/typescript-styled-plugin",
 				-- TODO: Add check for NVM
-				location = vim.fn.expand("$NVM_BIN/../lib"),
+				location = nvm_lib_dir,
+			},
+			{
+				name = "typescript-svelte-plugin",
+				location = nvm_lib_dir,
 			},
 		},
 	},
