@@ -1,4 +1,5 @@
 local utils = require("core.utils")
+local colors = require("tokyonight.colors").setup()
 
 -- Displays the formatters that will run against the current buffer.
 --
@@ -37,13 +38,36 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 	config = function()
-		-- Extend `filename` component to include an icon that corresponds to the filetype.
-		local filename_with_icon = require("lualine.components.filename"):extend()
-		filename_with_icon.apply_icon = require("lualine.components.filetype").apply_icon
-		filename_with_icon.icon_hl_cache = {}
+		-- A `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
+		local custom_filename = require("lualine.components.filename"):extend()
+		custom_filename.apply_icon = require("lualine.components.filetype").apply_icon
+		custom_filename.icon_hl_cache = {} -- Ensures the filename component renders properly with the right colors.
+		local highlight = require("lualine.highlight")
 
-		-- Allows usage of custom colors in different components.
-		local colors = require("tokyonight.colors").setup()
+		---Initialize the filename component to have different colors when modified/saved.
+		function custom_filename:init(options)
+			custom_filename.super.init(self, options)
+			self.status_colors = {
+				saved = highlight.create_component_highlight_group({ gui = "" }, "filename_status_saved", self.options),
+				modified = highlight.create_component_highlight_group(
+					{ gui = "bold" },
+					"filename_status_modified",
+					self.options
+				),
+			}
+			if self.options.color == nil then
+				self.options.color = ""
+			end
+		end
+
+		---Ensure the filename's color updates whenever the buffer is either modified or saved.
+		function custom_filename:update_status()
+			local data = custom_filename.super.update_status(self)
+			data = highlight.component_format_highlight(
+				vim.bo.modified and self.status_colors.modified or self.status_colors.saved
+			) .. data
+			return data
+		end
 
 		require("lualine").setup({
 			options = {
@@ -71,7 +95,7 @@ return {
 				},
 				lualine_c = {
 					{
-						filename_with_icon,
+						custom_filename,
 						colored = true,
 						symbols = {
 							modified = "●",
