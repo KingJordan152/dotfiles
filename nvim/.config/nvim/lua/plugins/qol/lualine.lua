@@ -73,6 +73,10 @@ return {
 					{
 						filename_with_icon,
 						colored = true,
+						symbols = {
+							modified = "●",
+							readonly = "",
+						},
 					},
 					{
 						"grapple",
