@@ -83,7 +83,7 @@ return {
 				preset = "inherit",
 
 				-- Overrides
-				["<CR>"] = false, -- Prevents quick commands (e.g., `:q` or `:wa`) from being replaced by completion items.
+				["<CR>"] = false, -- Prevents commands that are purposely entered from being replaced by the first completion item.
 				["<C-n>"] = { "select_next", "fallback" }, -- Use "fallback" so that I can still cycle between previous commands when completion menu isn't open.
 				["<C-p>"] = { "select_prev", "fallback" }, -- ""
 			},
@@ -112,6 +112,16 @@ return {
 					module = "lazydev.integrations.blink",
 					-- Make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
+				},
+				cmdline = {
+					min_keyword_length = function(ctx)
+						-- When typing a command, only show when the keyword is 3 characters or longer
+						if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
+							return 3
+						end
+
+						return 0
+					end,
 				},
 			},
 		},
