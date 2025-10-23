@@ -89,6 +89,17 @@ return {
 			},
 		},
 
+		-- Can be shown/hidden with `<C-k>`.
+		signature = {
+			enabled = true,
+			trigger = {
+				enabled = false, -- Prevents signature window from automatically showing.
+			},
+			window = {
+				border = "rounded",
+			},
+		},
+
 		snippets = {
 			preset = "luasnip",
 		},
