@@ -84,7 +84,7 @@ return {
 
 				-- Overrides
 				["<CR>"] = false, -- Prevents commands that are purposely entered from being replaced by the first completion item.
-				["<C-n>"] = { "select_next", "fallback" }, -- Use "fallback" so that I can still cycle between previous commands when completion menu isn't open.
+				["<C-n>"] = { "select_next", "fallback" }, -- Use "fallback" so that you can still cycle between previous commands when completion menu isn't open.
 				["<C-p>"] = { "select_prev", "fallback" }, -- ""
 			},
 		},
