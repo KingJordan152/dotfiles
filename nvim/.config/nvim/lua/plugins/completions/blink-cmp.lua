@@ -77,6 +77,18 @@ return {
 			},
 		},
 
+		cmdline = {
+			completion = { menu = { auto_show = true } },
+			keymap = {
+				preset = "inherit",
+
+				-- Overrides
+				["<CR>"] = false, -- Prevents quick commands (e.g., `:q` or `:wa`) from being replaced by completion items.
+				["<C-n>"] = { "select_next", "fallback" }, -- Use "fallback" so that I can still cycle between previous commands when completion menu isn't open.
+				["<C-p>"] = { "select_prev", "fallback" }, -- ""
+			},
+		},
+
 		snippets = {
 			preset = "luasnip",
 		},
