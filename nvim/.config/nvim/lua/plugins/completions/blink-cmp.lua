@@ -89,7 +89,7 @@ return {
 			},
 		},
 
-		-- Can be shown/hidden with `<C-k>`.
+		-- Can be toggled with `<C-k>`.
 		signature = {
 			enabled = true,
 			trigger = {
