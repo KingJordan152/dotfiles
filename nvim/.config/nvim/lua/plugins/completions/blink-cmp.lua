@@ -22,7 +22,7 @@ return {
 			["<S-Tab>"] = false, -- Remove snippet backward jump feature
 
 			-- New snippet commands
-			["<C-y>"] = {
+			["<C-t>"] = {
 				function(cmp)
 					if cmp.snippet_active() then
 						return cmp.accept()
@@ -33,7 +33,7 @@ return {
 				"snippet_forward",
 				"fallback",
 			},
-			["<C-S-Y>"] = { "snippet_backward", "fallback" },
+			["<C-d>"] = { "snippet_backward", "fallback" },
 		},
 
 		appearance = {
