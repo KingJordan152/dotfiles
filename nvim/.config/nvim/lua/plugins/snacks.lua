@@ -124,9 +124,10 @@ return {
 					filter = {
 						cwd = true,
 					},
+					title = "Find File",
 				})
 			end,
-			desc = "Smart Find Files",
+			desc = "Find File",
 		},
 		{
 			"<leader>,",
