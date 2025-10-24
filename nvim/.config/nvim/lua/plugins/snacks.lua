@@ -337,7 +337,9 @@ return {
 		{
 			"<leader>sP",
 			function()
-				Snacks.picker.lazy()
+				Snacks.picker.lazy({
+					title = "Lazy Plugin Spec",
+				})
 			end,
 			desc = "Lazy Plugin Spec",
 		},
