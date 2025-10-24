@@ -294,6 +294,17 @@ return {
 			desc = "Location List",
 		},
 		{
+			"<leader>sL",
+			function()
+				Snacks.picker.lsp_config({
+					configured = true,
+					attached = true,
+					title = "Attached LSPs",
+					layout = "dropdown",
+				})
+			end,
+		},
+		{
 			"<leader>sm",
 			function()
 				Snacks.picker.marks()
