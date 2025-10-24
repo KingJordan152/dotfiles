@@ -19,7 +19,7 @@ return {
 			enabled = true,
 		},
 		image = {
-			enabled = false, -- Causes copy register to spill into buffer when using tmux
+			enabled = true,
 			convert = {
 				notify = false,
 			},
