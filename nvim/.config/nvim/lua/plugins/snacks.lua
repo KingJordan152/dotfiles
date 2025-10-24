@@ -48,7 +48,7 @@ return {
 					},
 				},
 				projects = {
-					dev = { "~/dev", "~/projects", "~/Documents" },
+					dev = { "~/dev", "~/Projects" },
 				},
 			},
 			win = {
