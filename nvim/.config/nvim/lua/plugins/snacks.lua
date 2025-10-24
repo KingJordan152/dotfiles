@@ -339,7 +339,7 @@ return {
 			function()
 				Snacks.picker.lazy()
 			end,
-			desc = "Search for Plugin Spec",
+			desc = "Lazy Plugin Spec",
 		},
 		{
 			"<leader>sq",
