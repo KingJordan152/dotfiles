@@ -238,9 +238,11 @@ return {
 			desc = "Autocmds",
 		},
 		{
-			"<leader>sc",
+			"<leader>sC",
 			function()
-				Snacks.picker.colorschemes()
+				Snacks.picker.colorschemes({
+					layout = "vscode", -- WARN: Breaks colorpicker live preview
+				})
 			end,
 			desc = "Colorschemes",
 		},
