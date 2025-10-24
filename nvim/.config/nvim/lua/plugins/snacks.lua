@@ -8,6 +8,7 @@
 -- ]]
 return {
 	"folke/snacks.nvim",
+	dependencies = { "folke/todo-comments.nvim" },
 	priority = 1000,
 	lazy = false,
 	---@type snacks.Config
@@ -357,6 +358,22 @@ return {
 				Snacks.picker.lsp_workspace_symbols()
 			end,
 			desc = "LSP Workspace Symbols",
+		},
+		{
+			"<leader>st",
+			function()
+				---@diagnostic disable-next-line: undefined-field
+				Snacks.picker.todo_comments()
+			end,
+			desc = "All Todo Comments",
+		},
+		{
+			"<leader>sT",
+			function()
+				---@diagnostic disable-next-line: undefined-field
+				Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } })
+			end,
+			desc = "Todo/Fix/Fixme Comments",
 		},
 		{
 			"<leader>su",
