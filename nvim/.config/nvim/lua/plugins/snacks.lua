@@ -158,6 +158,13 @@ return {
 			end,
 			desc = "View Command History",
 		},
+		{
+			"<leader>.",
+			function()
+				Snacks.picker.resume()
+			end,
+			desc = "Resume Previous Picker",
+		},
 		-- Git Pickers
 		{
 			"<leader>gb",
@@ -349,13 +356,6 @@ return {
 				})
 			end,
 			desc = "Recent",
-		},
-		{
-			"<leader>sR",
-			function()
-				Snacks.picker.resume()
-			end,
-			desc = "Resume",
 		},
 		{
 			"<leader>ss",
