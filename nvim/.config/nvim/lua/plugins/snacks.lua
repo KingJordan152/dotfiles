@@ -47,7 +47,7 @@ return {
 				input = {
 					keys = {
 						["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
-						["<c-/>"] = { "toggle_help_input", mode = "i" }, -- Currently doesn't work in tmux
+						["<m-/>"] = { "toggle_help_input", mode = "i" },
 					},
 				},
 			},
