@@ -241,7 +241,10 @@ return {
 			"<leader>sC",
 			function()
 				Snacks.picker.colorschemes({
-					layout = "vscode", -- WARN: Breaks colorpicker live preview
+					layout = {
+						preset = "vscode",
+						hidden = {},
+					},
 				})
 			end,
 			desc = "Colorschemes",
