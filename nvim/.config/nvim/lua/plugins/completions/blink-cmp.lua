@@ -44,7 +44,6 @@ return {
 
 		completion = {
 			menu = {
-				border = "rounded",
 				max_height = 12,
 				min_width = 25,
 			},
@@ -63,7 +62,6 @@ return {
 				treesitter_highlighting = true,
 				auto_show_delay_ms = 0,
 				window = {
-					border = "rounded",
 					max_width = 50,
 					max_height = 25,
 				},
@@ -94,9 +92,6 @@ return {
 			enabled = true,
 			trigger = {
 				enabled = false, -- Prevents signature window from automatically showing.
-			},
-			window = {
-				border = "rounded",
 			},
 		},
 

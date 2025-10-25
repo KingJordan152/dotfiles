@@ -3,7 +3,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function()
 		local floating_window = {
-			border = "rounded",
 			max_width = 100,
 			max_height = 25,
 		}
@@ -17,7 +16,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		---@diagnostic disable-next-line: duplicate-set-field
 		vim.lsp.buf.hover = function()
 			return default_hover({
-				border = floating_window.border,
 				max_width = floating_window.max_width,
 				max_height = floating_window.max_height,
 			})
@@ -26,7 +24,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Customize how diagnostics work
 		vim.diagnostic.config({
 			severity_sort = true,
-			float = { source = "if_many", border = floating_window.border, max_width = floating_window.max_width },
+			float = { source = "if_many", max_width = floating_window.max_width },
 			underline = { severity = vim.diagnostic.severity.ERROR },
 			signs = vim.g.have_nerd_font and {
 				text = {

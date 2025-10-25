@@ -33,21 +33,6 @@ return {
 				return files[name]
 			end,
 		},
-		confirmation = {
-			border = "rounded",
-		},
-		float = {
-			border = "rounded",
-		},
-		keymaps_help = {
-			border = "rounded",
-		},
-		ssh = {
-			border = "rounded",
-		},
-		progress = {
-			border = "rounded",
-		},
 		keymaps = {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
