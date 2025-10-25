@@ -52,6 +52,12 @@ return {
 						cwd = true,
 					},
 				},
+				lsp_config = {
+					configured = true,
+					attached = true,
+					title = "Attached LSPs",
+					layout = "dropdown",
+				},
 			},
 			win = {
 				input = {
@@ -313,12 +319,7 @@ return {
 		{
 			"<leader>sL",
 			function()
-				Snacks.picker.lsp_config({
-					configured = true,
-					attached = true,
-					title = "Attached LSPs",
-					layout = "dropdown",
-				})
+				Snacks.picker.lsp_config()
 			end,
 		},
 		{

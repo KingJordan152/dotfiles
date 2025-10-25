@@ -119,6 +119,9 @@ return {
 							separator = ", ",
 						},
 						ignore_lsp = { "cssmodules_ls", "css_variables", "eslint", "stylua", "tailwindcss" },
+						on_click = function()
+							Snacks.picker.lsp_config()
+						end,
 					},
 					{
 						formatter_status,
