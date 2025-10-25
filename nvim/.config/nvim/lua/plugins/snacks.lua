@@ -42,6 +42,17 @@ return {
 				projects = {
 					dev = { "~/dev", "~/Projects" },
 				},
+				smart = {
+					filter = {
+						cwd = true,
+					},
+					title = "Find File",
+				},
+				recent = {
+					filter = {
+						cwd = true,
+					},
+				},
 			},
 			win = {
 				input = {
@@ -120,12 +131,7 @@ return {
 		{
 			"<leader><space>",
 			function()
-				Snacks.picker.smart({
-					filter = {
-						cwd = true,
-					},
-					title = "Find File",
-				})
+				Snacks.picker.smart()
 			end,
 			desc = "Find File",
 		},
@@ -356,11 +362,7 @@ return {
 		{
 			"<leader>sr",
 			function()
-				Snacks.picker.recent({
-					filter = {
-						cwd = true,
-					},
-				})
+				Snacks.picker.recent()
 			end,
 			desc = "Recent",
 		},
