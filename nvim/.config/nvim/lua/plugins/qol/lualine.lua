@@ -118,7 +118,14 @@ return {
 							done = "",
 							separator = ", ",
 						},
-						ignore_lsp = { "cssmodules_ls", "css_variables", "eslint", "stylua", "tailwindcss" },
+						ignore_lsp = {
+							"cssmodules_ls",
+							"css_variables",
+							"eslint",
+							"stylua",
+							"tailwindcss",
+							"emmet_language_server",
+						},
 						on_click = function()
 							Snacks.picker.lsp_config()
 						end,
