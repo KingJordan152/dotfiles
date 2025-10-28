@@ -6,6 +6,7 @@
 return {
 	"L3MON4D3/LuaSnip",
 	version = "v2.*",
+	event = { "InsertEnter", "CmdlineEnter", "TermEnter" },
 	dependencies = { "rafamadriz/friendly-snippets", "nvim-lua/plenary.nvim" },
 	config = function()
 		-- Load snippets from `friendly-snippets`
