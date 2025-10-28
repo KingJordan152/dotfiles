@@ -19,7 +19,7 @@ return {
 	},
 	keys = {
 		-- Recommended keymaps
-		{ "<leader>m", "<cmd>Grapple toggle<cr>", desc = "Grapple - Toggle tag" }, -- Think of this like an elevated `mark` command
+		{ "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Grapple - Toggle tag" }, -- Think of this like "Add" or "Append" (inspired by Harpoon keymap)
 		{ "<leader>;", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple - Open tags window" },
 		{ "<C-S-N>", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple - Cycle next tag" },
 		{ "<C-S-P>", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple - Cycle previous tag" },
