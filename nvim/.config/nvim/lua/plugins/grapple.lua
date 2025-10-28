@@ -30,12 +30,9 @@ return {
 		{ "<leader>3", "<cmd>Grapple select index=3<cr>", desc = "Grapple - Select third tag" },
 		{ "<leader>4", "<cmd>Grapple select index=4<cr>", desc = "Grapple - Select fourth tag" },
 		{ "<leader>5", "<cmd>Grapple select index=5<cr>", desc = "Grapple - Select fifth tag" },
-
-		-- [[
-		-- I initially wanted to have index-specific keymaps mapped to Ctrl+7-0 so that they would function similarly to <C-6> and
-		-- so I could use my right hand to activate them instead of my left. However, I cannot seem to get Tmux running under Ghostty
-		-- to recognize <C-#> keymaps. Until Tmux has some magical update or I can dedicate more time to this issue, I believe shortcuts
-		-- of this nature are a worthless endeavor.
-		-- ]]
+		{ "<leader>6", "<cmd>Grapple select index=5<cr>", desc = "Grapple - Select fifth tag" },
+		{ "<leader>7", "<cmd>Grapple select index=5<cr>", desc = "Grapple - Select fifth tag" },
+		{ "<leader>8", "<cmd>Grapple select index=5<cr>", desc = "Grapple - Select fifth tag" },
+		{ "<leader>9", "<cmd>Grapple select index=5<cr>", desc = "Grapple - Select fifth tag" },
 	},
 }
