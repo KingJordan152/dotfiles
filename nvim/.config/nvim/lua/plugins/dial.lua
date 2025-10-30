@@ -76,13 +76,6 @@ return {
 
 		local javascript_filetypes = {
 			augend.constant.new({ elements = { "let", "const" } }),
-			augend.paren.new({
-				patterns = {
-					{ '"', '"' },
-					{ "'", "'" },
-					{ "`", "`" },
-				},
-			}),
 		}
 
 		return {
@@ -94,8 +87,6 @@ return {
 				augend.date.alias["%d/%m/%Y"], -- (02/19/2022, ...)
 				augend.date.alias["%d/%m/%y"], -- (02/19/22, ...)
 				augend.constant.alias.bool, -- (true <-> false)
-				augend.paren.alias.quote, -- ("", '', ...)
-				augend.paren.alias.brackets, -- ([], {}, ...)
 				capitalized_bool,
 				ordinal_numbers,
 				weekdays,
