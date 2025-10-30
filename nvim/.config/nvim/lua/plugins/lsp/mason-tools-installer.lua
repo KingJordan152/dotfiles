@@ -27,7 +27,7 @@ return {
 			"tailwindcss",
 			"jsonls",
 			"yamlls",
-			"emmet_language_server",
+			-- "emmet_language_server",
 
 			-- Formatters
 			"prettier",
