@@ -87,7 +87,6 @@ return {
 				augend.date.alias["%d/%m/%Y"], -- (02/19/2022, ...)
 				augend.date.alias["%d/%m/%y"], -- (02/19/22, ...)
 				augend.constant.alias.bool, -- (true <-> false)
-				capitalized_bool,
 				ordinal_numbers,
 				weekdays,
 				months,
@@ -122,6 +121,7 @@ return {
 				},
 				python = {
 					logical_word_operators,
+					capitalized_bool,
 				},
 			},
 		}
