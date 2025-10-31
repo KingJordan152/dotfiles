@@ -321,6 +321,7 @@ return {
 			function()
 				Snacks.picker.lsp_config()
 			end,
+			desc = "Attached LSPs",
 		},
 		{
 			"<leader>sm",
