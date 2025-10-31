@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.diagnostic.config({
 			severity_sort = true,
 			float = { source = "if_many", max_width = floating_window.max_width },
-			underline = { severity = vim.diagnostic.severity.ERROR },
 			signs = vim.g.have_nerd_font and {
 				text = {
 					[vim.diagnostic.severity.ERROR] = " ",
