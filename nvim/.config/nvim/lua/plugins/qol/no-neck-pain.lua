@@ -5,7 +5,7 @@ return {
 	keys = {
 		{
 			"<leader>zz",
-			"<cmd>:NoNeckPain<cr>",
+			"<cmd>NoNeckPain<cr>",
 			desc = "Center current window",
 		},
 	},
