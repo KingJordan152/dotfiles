@@ -11,6 +11,12 @@ return {
 		local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
 		local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 
+		-- Define custom icons
+		vim.fn.sign_define("DapBreakpoint", { text = "󰄯", texthl = "Error" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "󰍶", texthl = "Error" })
+		vim.fn.sign_define("DapLogPoint", { text = "󰜋", texthl = "Error" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
+
 		local js_debug_adapter = {
 			type = "server",
 			host = "localhost",
