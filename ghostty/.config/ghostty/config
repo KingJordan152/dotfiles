@@ -12,7 +12,7 @@ font-family = CaskaydiaCove Nerd Font
 font-size = 15
 font-thicken = true
 font-feature = -calt
-adjust-underline-position = 5
+adjust-underline-position = 4
 
 # ==== Editor Behavior ====
 window-theme = ghostty
