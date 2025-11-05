@@ -419,7 +419,7 @@ return {
 		-- },
 		-- (Dashboard) Pull up dashboard from anywhere
 		{
-			"<leader><Esc>",
+			"<leader><CR>",
 			function()
 				Snacks.dashboard.open()
 			end,
