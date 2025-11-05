@@ -51,7 +51,7 @@ return {
 
 			list = {
 				selection = {
-					-- Highlight first option
+					-- Highlight first option.
 					preselect = true,
 					-- Don't auto insert on selection.
 					auto_insert = false,
@@ -77,7 +77,19 @@ return {
 		},
 
 		cmdline = {
-			completion = { menu = { auto_show = true } },
+			completion = {
+				menu = {
+					auto_show = true, -- Not default `true` for `cmdline`.
+				},
+				list = {
+					selection = {
+						-- Highlight first option.
+						preselect = true,
+						-- Don't auto insert on selection.
+						auto_insert = false,
+					},
+				},
+			},
 			keymap = {
 				preset = "inherit",
 
