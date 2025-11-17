@@ -82,30 +82,6 @@ vim.lsp.config.ts_ls = {
 			},
 		},
 	},
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"vue",
-	},
-	-- Prevents `ts_ls` from running within Deno projects.
-	root_dir = function(bufnr, on_dir)
-		local project_root = vim.fs.root(bufnr, {
-			"package.json",
-			"tsconfig.json",
-			"package-lock.json",
-			"yarn.lock",
-			"pnpm-lock.yaml",
-			"bun.lockb",
-			"bun.lock",
-			"jsconfig.json",
-		})
-
-		if project_root ~= nil then
-			on_dir(project_root)
-		end
-	end,
 	settings = {
 		-- Ideally, you should use either Prettier or Stylistic ESLint for formatting instead.
 		format = { enable = false },
@@ -113,10 +89,12 @@ vim.lsp.config.ts_ls = {
 }
 
 vim.lsp.config.denols = {
+	-- Prevents `denols` from running inside Node/Bun projects.
 	root_markers = { "deno.json", "deno.jsonc" },
-	workspace_required = true, -- Prevents `denols` from running inside Node/Bun projects.
+	workspace_required = true,
+
+	-- Needed to appropriately highlight codefences returned from `denols`.
 	on_attach = function()
-		-- Needed to appropriately highlight codefences returned from `denols`.
 		vim.g.markdown_fenced_languages = {
 			"ts=typescript",
 		}
