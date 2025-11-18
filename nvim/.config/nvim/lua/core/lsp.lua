@@ -82,10 +82,6 @@ vim.lsp.config.ts_ls = {
 			},
 		},
 	},
-	settings = {
-		-- Ideally, you should use either Prettier or Stylistic ESLint for formatting instead.
-		format = { enable = false },
-	},
 }
 
 vim.lsp.config.denols = {
@@ -98,39 +94,6 @@ vim.lsp.config.denols = {
 		vim.g.markdown_fenced_languages = {
 			"ts=typescript",
 		}
-	end,
-}
-
-local base_on_attach = vim.lsp.config.eslint.on_attach
-vim.lsp.config.eslint = {
-	on_attach = function(client, bufnr)
-		if not base_on_attach then
-			return
-		end
-
-		base_on_attach(client, bufnr)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			desc = "Automatically fix all fixable ESLint errors on save",
-			buffer = bufnr,
-			callback = function()
-				local is_formatting_disabled = vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat
-
-				if not is_formatting_disabled then
-					-- Make a protected call to prevent any errors from obstructing the current buffer.
-					local ok, _ = pcall(function()
-						vim.cmd("LspEslintFixAll")
-					end)
-
-					if not ok then
-						vim.api.nvim_echo(
-							{ { 'Unable to auto-fix errors in this buffer with "LspEslintFixAll"', "Removed" } },
-							true,
-							{}
-						)
-					end
-				end
-			end,
-		})
 	end,
 }
 
