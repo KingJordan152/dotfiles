@@ -21,6 +21,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end
 
+		-- TODO: Add when v0.12 is released
+		-- Colorize document symbols if the LSP supports doing that.
+		-- local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- if client ~= nil and client:supports_method("textDocument/documentColor") then
+		-- 	vim.lsp.document_color.enable(true, args.buf)
+		-- end
+
 		-- Customize how diagnostics work
 		vim.diagnostic.config({
 			severity_sort = true,
