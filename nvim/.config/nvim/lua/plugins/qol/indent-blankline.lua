@@ -33,7 +33,12 @@ return {
 							"parenthesized_statement",
 							"object",
 							"object_pattern",
-							"arguments",
+							"arguments", -- TS/JS: argument list that's written across multiple lines
+							"type_alias_declaration", -- TS: type decalrations
+							"property_signature", -- TS: objects in types
+							"interface_declaration",
+							"enum_declaration",
+							"import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
 						},
 					},
 				},
