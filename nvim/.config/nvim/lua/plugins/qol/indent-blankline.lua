@@ -17,7 +17,9 @@ return {
 			"RainbowDelimiterYellow",
 		}
 
+		-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
 		vim.g.rainbow_delimiters = { highlight = highlight }
+		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 		require("ibl").setup({
 			indent = {
@@ -55,8 +57,5 @@ return {
 				},
 			},
 		})
-
-		-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
-		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 	end,
 }
