@@ -18,7 +18,7 @@ return {
 		}
 
 		-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
-		vim.g.rainbow_delimiters = { highlight = highlight }
+		vim.g.rainbow_delimiters = vim.tbl_deep_extend("keep", vim.g.rainbow_delimiters, { highlight = highlight })
 		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 		require("ibl").setup({
