@@ -5,12 +5,13 @@ return {
 		local npairs = require("nvim-autopairs")
 		local Rule = require("nvim-autopairs.rule")
 		local cond = require("nvim-autopairs.conds")
+		local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
 
 		npairs.setup({})
 
 		-- New Rule: add spaces between braces when pressing <Space>
 		-- e.g., (|) -> <Space> -> ( | )
-		local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+		-- Sourced from https://github.com/windwp/nvim-autopairs/wiki/Custom-rules#add-spaces-between-parentheses
 		npairs.add_rules({
 			-- Rule for a pair with left-side ' ' and right side ' '
 			Rule(" ", " ")
