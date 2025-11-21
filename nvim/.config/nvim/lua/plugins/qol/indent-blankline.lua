@@ -7,6 +7,17 @@ return {
 	main = "ibl",
 	config = function()
 		local hooks = require("ibl.hooks")
+		local highlight = {
+			-- "RainbowDelimiterRed", (usually indicates error)
+			-- "RainbowDelimiterOrange", (too similar to yellow)
+			"RainbowDelimiterBlue",
+			"RainbowDelimiterViolet",
+			"RainbowDelimiterCyan",
+			"RainbowDelimiterGreen",
+			"RainbowDelimiterYellow",
+		}
+
+		vim.g.rainbow_delimiters = { highlight = highlight }
 
 		require("ibl").setup({
 			indent = {
@@ -14,15 +25,7 @@ return {
 			},
 			scope = {
 				show_end = false,
-				highlight = {
-					-- 'RainbowDelimiterRed', (usually "warning")
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterCyan",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterOrange",
-				},
+				highlight = highlight,
 				include = {
 					node_type = {
 						["*"] = {
