@@ -8,6 +8,7 @@ local hybrid_line_exclude_files = utils.Set({
 	"snacks_picker_list",
 	"snacks_terminal",
 	"TelescopePrompt",
+	"help",
 })
 
 local hybrid_line_numbers = vim.api.nvim_create_augroup("hybrid_line_numbers", { clear = true })
