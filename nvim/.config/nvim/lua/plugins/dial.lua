@@ -32,20 +32,6 @@ return {
 			cyclic = true,
 		})
 
-		local weekdays = augend.constant.new({
-			elements = {
-				"Monday",
-				"Tuesday",
-				"Wednesday",
-				"Thursday",
-				"Friday",
-				"Saturday",
-				"Sunday",
-			},
-			word = true,
-			cyclic = true,
-		})
-
 		local months = augend.constant.new({
 			elements = {
 				"January",
@@ -65,15 +51,6 @@ return {
 			cyclic = true,
 		})
 
-		local capitalized_bool = augend.constant.new({
-			elements = {
-				"True",
-				"False",
-			},
-			word = true,
-			cyclic = true,
-		})
-
 		local javascript_filetypes = {
 			augend.constant.new({ elements = { "let", "const" } }),
 		}
@@ -87,8 +64,9 @@ return {
 				augend.date.alias["%d/%m/%Y"], -- (02/19/2022, ...)
 				augend.date.alias["%d/%m/%y"], -- (02/19/22, ...)
 				augend.constant.alias.bool, -- (true <-> false)
+				augend.constant.alias.en_weekday_full, -- (Monday, Tuesday, Wednesday, ...)
+				augend.constant.alias.en_weekday, -- (Mon, Tue, ...)
 				ordinal_numbers,
-				weekdays,
 				months,
 				logical_symbol_operators,
 			},
@@ -121,7 +99,7 @@ return {
 				},
 				python = {
 					logical_word_operators,
-					capitalized_bool,
+					augend.constant.alias.Bool,
 				},
 			},
 		}
