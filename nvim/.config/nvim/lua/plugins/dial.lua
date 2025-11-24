@@ -28,7 +28,7 @@ return {
 				"ninth",
 				"tenth",
 			},
-			word = false,
+			word = false, -- enables use in camelCase and snake_case variables
 			cyclic = true,
 		})
 
@@ -51,9 +51,19 @@ return {
 			cyclic = true,
 		})
 
-		local javascript_filetypes = {
-			augend.constant.new({ elements = { "let", "const" } }),
+		local javascript_augends = {
+			augend.constant.new({
+				elements = { "let", "const" },
+				word = true,
+				cyclic = true,
+			}),
 		}
+
+		local css_augends = {
+			augend.hexcolor.new({ case = "prefer_upper" }),
+		}
+
+		local web_framework_augends = vim.list_extend(vim.list_slice(javascript_augends), css_augends)
 
 		return {
 			default = {
@@ -66,28 +76,18 @@ return {
 				augend.constant.alias.bool, -- (true <-> false)
 				augend.constant.alias.en_weekday_full, -- (Monday, Tuesday, Wednesday, ...)
 				augend.constant.alias.en_weekday, -- (Mon, Tue, ...)
-				ordinal_numbers,
 				months,
+				ordinal_numbers,
 				logical_symbol_operators,
 			},
 			filetypes = {
-				vue = {
-					augend.constant.new({ elements = { "let", "const" } }),
-					augend.hexcolor.new({ case = "lower" }),
-					augend.hexcolor.new({ case = "upper" }),
-				},
-				javascript = javascript_filetypes,
-				typescript = javascript_filetypes,
-				javascriptreact = javascript_filetypes,
-				typescriptreact = javascript_filetypes,
-				css = {
-					augend.hexcolor.new({
-						case = "lower",
-					}),
-					augend.hexcolor.new({
-						case = "upper",
-					}),
-				},
+				javascript = javascript_augends,
+				typescript = javascript_augends,
+				javascriptreact = web_framework_augends,
+				typescriptreact = web_framework_augends,
+				vue = web_framework_augends,
+				svelte = web_framework_augends,
+				css = css_augends,
 				markdown = {
 					augend.misc.alias.markdown_header,
 				},
@@ -99,7 +99,7 @@ return {
 				},
 				python = {
 					logical_word_operators,
-					augend.constant.alias.Bool,
+					augend.constant.alias.Bool, -- (True <-> False)
 				},
 			},
 		}
