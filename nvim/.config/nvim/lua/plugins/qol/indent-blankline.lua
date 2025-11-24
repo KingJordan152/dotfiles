@@ -52,6 +52,7 @@ return {
 					node_type = {
 						["*"] = {
 							"jsx_element",
+							"element",
 						},
 					},
 				},
