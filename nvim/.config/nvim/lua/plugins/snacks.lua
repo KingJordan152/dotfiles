@@ -261,14 +261,14 @@ return {
 			desc = "Colorschemes",
 		},
 		{
-			"<leader>sd",
+			"<leader>sD",
 			function()
 				Snacks.picker.diagnostics()
 			end,
 			desc = "All Diagnostics",
 		},
 		{
-			"<leader>sD",
+			"<leader>sd",
 			function()
 				Snacks.picker.diagnostics_buffer()
 			end,
