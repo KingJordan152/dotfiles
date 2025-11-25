@@ -144,7 +144,7 @@ return {
 					},
 					{
 						"diagnostics",
-						sections = { "error", "warn", "hint" },
+						sections = { "error", "warn" },
 						symbols = { error = " ", warn = " ", hint = " ", info = " " },
 						always_visible = true,
 						cond = function()
