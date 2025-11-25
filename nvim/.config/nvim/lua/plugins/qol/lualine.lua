@@ -125,6 +125,7 @@ return {
 							"stylua",
 							"tailwindcss",
 							"emmet_language_server",
+							"render-markdown",
 						},
 						on_click = function()
 							Snacks.picker.lsp_config()
