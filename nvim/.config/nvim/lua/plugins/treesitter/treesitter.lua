@@ -1,32 +1,41 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = "master",
-	lazy = false,
-	build = ":TSUpdate",
-	config = function()
-		---@diagnostic disable-next-line: missing-fields
-		require("nvim-treesitter.configs").setup({
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
-				"lua",
-				"luadoc",
-				"tsx",
-				"typescript",
-				"javascript",
-				"jsdoc",
-				"html",
-				"css",
-				"styled", -- For styled-components
-				"markdown",
-				"markdown_inline",
-				"yaml",
-				"regex", -- For certain pickers
-				"latex",
-				"query",
-				"c",
-			},
-		})
-	end,
+	"MeanderingProgrammer/treesitter-modules.nvim",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+	},
+	---@module 'treesitter-modules'
+	---@type ts.mod.UserConfig
+	opts = {
+		auto_install = true,
+		ensure_installed = {
+			"lua",
+			"luadoc",
+			"tsx",
+			"typescript",
+			"javascript",
+			"jsdoc",
+			"html",
+			"css",
+			"styled", -- For styled-components
+			"markdown",
+			"markdown_inline",
+			"yaml",
+			"regex", -- For certain pickers
+			"latex",
+			"query",
+			"gitcommit",
+			"c",
+		},
+		highlight = {
+			enable = true,
+		},
+		fold = {
+			enable = true,
+		},
+		indent = {
+			enable = true,
+		},
+	},
 }
