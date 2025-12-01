@@ -17,12 +17,8 @@ vim.o.confirm = true -- Show dialog instead of erroring when trying to exit an u
 vim.o.wrap = false -- Prevent line wrapping
 vim.o.linebreak = true -- When `wrap` is true, causes full words to wrap rather than individual characters
 vim.o.winborder = "rounded" -- Make all floating windows have the "rounded" border.
-vim.opt.fillchars:append({ diff = "╱", lastline = "." }) -- Defines the character to use for different segments of a diffsplit and trailing text
-
--- Options for syntax-based folding via Treesitter
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
+vim.opt.fillchars:append({ diff = "╱", lastline = "." }) -- Defines the character to use for different segments of a diffsplit and trailing text
 
 -- Indentation options
 -- vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
