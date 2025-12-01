@@ -1,8 +1,9 @@
+local utils = require("core.utils")
+
 return {
 	"MeanderingProgrammer/treesitter-modules.nvim",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-	},
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	enabled = utils.tree_sitter_cli_exists,
 	---@module 'treesitter-modules'
 	---@type ts.mod.UserConfig
 	opts = {
