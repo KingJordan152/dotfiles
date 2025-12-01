@@ -37,6 +37,7 @@ return {
 				if vim.wo.diff then
 					vim.cmd.normal({ "]c", bang = true })
 				else
+					---@diagnostic disable-next-line: param-type-mismatch
 					gitsigns.nav_hunk("next")
 				end
 			end, { buffer = bufnr, desc = "Go to Next Hunk" })
@@ -45,6 +46,7 @@ return {
 				if vim.wo.diff then
 					vim.cmd.normal({ "[c", bang = true })
 				else
+					---@diagnostic disable-next-line: param-type-mismatch
 					gitsigns.nav_hunk("prev")
 				end
 			end, { buffer = bufnr, desc = "Go to Previous Hunk" })
