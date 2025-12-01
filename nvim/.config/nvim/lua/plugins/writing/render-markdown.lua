@@ -31,6 +31,9 @@ return {
 			buftype = {
 				-- Applies to LSP Hover windows
 				nofile = {
+					anti_conceal = {
+						enabled = false,
+					},
 					code = {
 						language = false,
 						left_pad = 0,
