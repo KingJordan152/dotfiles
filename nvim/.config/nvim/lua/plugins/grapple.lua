@@ -21,8 +21,8 @@ return {
 		-- Recommended keymaps
 		{ "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Grapple - Toggle tag" }, -- Think of this like "Add" or "Append" (inspired by Harpoon keymap)
 		{ "<leader>;", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple - Open tags window" },
-		{ "<C-S-N>", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple - Cycle next tag" },
-		{ "<C-S-P>", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple - Cycle previous tag" },
+		{ "]g", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple - Cycle next tag" },
+		{ "[g", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple - Cycle previous tag" },
 
 		-- Index-specific keymaps
 		{ "<leader>1", "<cmd>Grapple select index=1<cr>", desc = "Grapple - Select tag 1" },
