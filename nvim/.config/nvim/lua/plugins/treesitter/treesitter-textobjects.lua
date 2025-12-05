@@ -36,28 +36,28 @@ return {
 	keys = {
 		-- Swap
 		{
-			"<leader>Sa",
+			"<leader>Xa",
 			function()
 				require("nvim-treesitter-textobjects.swap").swap_next("@attribute.outer")
 			end,
 			desc = "Next attribute",
 		},
 		{
-			"<leader>SA",
+			"<leader>XA",
 			function()
 				require("nvim-treesitter-textobjects.swap").swap_previous("@attribute.outer")
 			end,
 			desc = "Previous attribute",
 		},
 		{
-			"<leader>Sr",
+			"<leader>Xr",
 			function()
 				require("nvim-treesitter-textobjects.swap").swap_next("@parameter.outer")
 			end,
 			desc = "Next pa[r]ameter/a[r]gument",
 		},
 		{
-			"<leader>SR",
+			"<leader>XR",
 			function()
 				require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
 			end,

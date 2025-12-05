@@ -14,7 +14,7 @@ return {
 			{ "<leader>gh", group = "Git Hunk" },
 			{ "<leader>ga", group = "Git Add (Stage)" },
 			{ "<leader>s", group = "Search" },
-			{ "<leader>S", group = "Swap (Textobject)" },
+			{ "<leader>X", group = "Exchange Treesitter node" },
 		},
 	},
 	keys = {
