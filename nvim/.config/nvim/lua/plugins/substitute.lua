@@ -15,14 +15,18 @@ return {
 		{
 			"gs",
 			function()
-				require("substitute").operator()
+				require("substitute").operator({
+					modifiers = { "reindent" },
+				})
 			end,
 			desc = "Replace with Register",
 		},
 		{
 			"gss",
 			function()
-				require("substitute").line()
+				require("substitute").line({
+					modifiers = { "reindent" },
+				})
 			end,
 			desc = "Replace Line with Register",
 		},
