@@ -21,8 +21,8 @@ vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (
 vim.opt.fillchars:append({ diff = "╱", lastline = ".", eob = " " }) -- Defines the characters to use for different special lines throughout Neovim
 
 -- Indentation options
--- vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
--- vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation)
+vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
+vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation) *only* when `indentexpr` isn't set
 vim.o.breakindent = true -- Preserves indentation across wrapped lines
 
 -- Screen splitting direction preference
