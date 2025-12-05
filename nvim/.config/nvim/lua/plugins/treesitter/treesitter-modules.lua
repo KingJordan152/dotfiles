@@ -35,7 +35,7 @@ return {
 		},
 		indent = {
 			enable = true,
-			disable = { "scss" },
+			disable = { "scss", "gitcommit" },
 		},
 	},
 }
