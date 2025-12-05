@@ -11,7 +11,7 @@ return {
 		},
 	},
 	keys = {
-		-- Substitute (Replace)
+		-- Substitute (replace)
 		{
 			"gs",
 			function()
@@ -19,7 +19,7 @@ return {
 					modifiers = { "reindent" },
 				})
 			end,
-			desc = "Replace with Register",
+			desc = "Substitute",
 		},
 		{
 			"gss",
@@ -28,14 +28,14 @@ return {
 					modifiers = { "reindent" },
 				})
 			end,
-			desc = "Replace Line with Register",
+			desc = "Substitute line",
 		},
 		{
 			"gS",
 			function()
 				require("substitute").eol()
 			end,
-			desc = "Replace with Register (up to EOL)",
+			desc = "Substitute (up to EOL)",
 		},
 		{
 			"gs",
