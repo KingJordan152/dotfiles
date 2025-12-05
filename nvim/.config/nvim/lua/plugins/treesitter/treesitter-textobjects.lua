@@ -78,7 +78,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@call.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "function call",
+			desc = "inner function call",
 		},
 		{
 			"am",
@@ -94,7 +94,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "method",
+			desc = "inner method",
 		},
 		{
 			"ac",
@@ -110,7 +110,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "class",
+			desc = "inner class",
 		},
 		{
 			"aa",
@@ -126,7 +126,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@attribute.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "attribute",
+			desc = "inner attribute",
 		},
 		{
 			"ar",
@@ -142,7 +142,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "pa[r]ameter / a[r]gument",
+			desc = "inner pa[r]ameter / a[r]gument",
 		},
 		{
 			"a?",
