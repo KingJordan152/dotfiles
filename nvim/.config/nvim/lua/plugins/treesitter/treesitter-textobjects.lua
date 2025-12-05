@@ -31,6 +31,35 @@ return {
 		vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 	end,
 	keys = {
+		-- Swap
+		{
+			"<leader>Sa",
+			function()
+				require("nvim-treesitter-textobjects.swap").swap_next("@attribute.outer")
+			end,
+			desc = "Next attribute",
+		},
+		{
+			"<leader>SA",
+			function()
+				require("nvim-treesitter-textobjects.swap").swap_previous("@attribute.outer")
+			end,
+			desc = "Previous attribute",
+		},
+		{
+			"<leader>Sr",
+			function()
+				require("nvim-treesitter-textobjects.swap").swap_next("@parameter.outer")
+			end,
+			desc = "Next pa[r]ameter/a[r]gument",
+		},
+		{
+			"<leader>SR",
+			function()
+				require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+			end,
+			desc = "Previous pa[r]ameter/a[r]gument",
+		},
 		-- Selections
 		{
 			"af",

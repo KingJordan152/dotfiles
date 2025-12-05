@@ -12,7 +12,8 @@ return {
 		spec = {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>gh", group = "Git Hunk" },
-			{ "<leader>s", group = "Search (Telescope)" },
+			{ "<leader>s", group = "Search" },
+			{ "<leader>S", group = "Swap (Textobject)" },
 		},
 	},
 	keys = {
