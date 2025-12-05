@@ -43,30 +43,30 @@ return {
 				require("substitute").visual()
 			end,
 			mode = "x",
-			desc = "Replace with Register",
+			desc = "Substitute",
 		},
-		-- Exchange (swap values); might conflict with another operator...
-		-- {
-		-- 	"gx",
-		-- 	function()
-		-- 		require("substitute.exchange").operator()
-		-- 	end,
-		-- 	desc = "Exchange",
-		-- },
-		-- {
-		-- 	"gxx",
-		-- 	function()
-		-- 		require("substitute.exchange").line()
-		-- 	end,
-		-- 	desc = "Exchange Line",
-		-- },
-		-- {
-		-- 	"gx",
-		-- 	function()
-		-- 		require("substitute.exchange").visual()
-		-- 	end,
-		-- 	mode = "x",
-		-- 	desc = "Exchange",
-		-- },
+		-- Exchange (swap values)
+		{
+			"<leader>x",
+			function()
+				require("substitute.exchange").operator()
+			end,
+			desc = "Exchange",
+		},
+		{
+			"<leader>xx",
+			function()
+				require("substitute.exchange").line()
+			end,
+			desc = "Exchange line",
+		},
+		{
+			"<leader>x",
+			function()
+				require("substitute.exchange").visual()
+			end,
+			mode = "x",
+			desc = "Exchange",
+		},
 	},
 }
