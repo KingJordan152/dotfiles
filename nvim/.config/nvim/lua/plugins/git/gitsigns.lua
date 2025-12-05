@@ -67,19 +67,23 @@ return {
 				end
 			end, { buffer = bufnr, desc = "Go to Previous Hunk" })
 
-			-- Keymaps
 			-- stylua: ignore start
-			vim.keymap.set("n", "<leader>g%", gitsigns.stage_buffer, { desc = "Git Stage Buffer" })
+			-- Staging Keymaps
+			vim.keymap.set("n", "<leader>ga%", gitsigns.stage_buffer, { desc = "Buffer" })
+			vim.keymap.set("n", "<leader>gah", gitsigns.stage_hunk, { desc = "Hunk" })
+
+			-- Blame Keymaps
 			vim.keymap.set("n", "<leader>gB", function() gitsigns.blame_line({ full = true }) end, { desc = "Git Blame Line" })
+
+			-- Hunk Keymaps
 			vim.keymap.set("n", "<leader>ghd", gitsigns.diffthis, { buffer = bufnr, desc = "Git Hunk - Open Diff" })
-			vim.keymap.set("n", "<leader>ghs", gitsigns.stage_hunk, { desc = "Git Hunk - Stage" })
 			vim.keymap.set("n", "<leader>ghr", gitsigns.reset_hunk, { desc = "Git Hunk - Reset" })
 			vim.keymap.set("n", "<leader>ghp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Git Hunk - Preview" })
 			vim.keymap.set( "n", "<leader>ghP", gitsigns.preview_hunk_inline, { buffer = bufnr, desc = "Git Hunk - Preview Inline" })
 			-- stylua: ignore end
 
 			-- Text object
-			vim.keymap.set({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select inner Git hunk" })
+			vim.keymap.set({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "inner Git hunk" })
 		end,
 	},
 }

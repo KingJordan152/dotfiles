@@ -12,6 +12,7 @@ return {
 		spec = {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>gh", group = "Git Hunk" },
+			{ "<leader>ga", group = "Git Add (Stage)" },
 			{ "<leader>s", group = "Search" },
 			{ "<leader>S", group = "Swap (Textobject)" },
 		},
