@@ -1,5 +1,8 @@
+local utils = require("core.utils")
+
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
+	enabled = utils.tree_sitter_cli_exists,
 	branch = "main",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
