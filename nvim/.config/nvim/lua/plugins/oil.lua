@@ -33,6 +33,9 @@ return {
 				return files[name]
 			end,
 		},
+		win_options = {
+			signcolumn = vim.o.signcolumn,
+		},
 		keymaps = {
 			["<C-c>"] = false, -- Replace with below keymap
 			["q"] = "actions.close",
