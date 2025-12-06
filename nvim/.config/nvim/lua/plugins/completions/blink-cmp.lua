@@ -7,6 +7,11 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
+		-- Controls which filetypes `blink.cmp` is enabled for
+		enabled = function()
+			return not vim.tbl_contains({ "oil" }, vim.bo.filetype)
+		end,
+
 		-- All presets have the following mappings:
 		-- C-space: Open menu or open docs if already open
 		-- C-n/C-p or Up/Down: Select next/previous item
