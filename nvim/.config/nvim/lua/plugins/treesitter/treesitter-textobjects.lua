@@ -134,7 +134,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@parameter.outer", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "pa[r]ameter / a[r]gument",
+			desc = "pa[r]ameter/a[r]gument",
 		},
 		{
 			"ir",
@@ -142,7 +142,7 @@ return {
 				require("nvim-treesitter-textobjects.select").select_textobject("@parameter.inner", "textobjects")
 			end,
 			mode = { "x", "o" },
-			desc = "inner pa[r]ameter / a[r]gument",
+			desc = "inner pa[r]ameter/a[r]gument",
 		},
 		{
 			"a?",
@@ -232,7 +232,7 @@ return {
 				require("nvim-treesitter-textobjects.move").goto_next_start("@argument.outer", "textobjects")
 			end,
 			mode = { "n", "x", "o" },
-			desc = "Next pa[r]ameter / a[r]gument start",
+			desc = "Next pa[r]ameter/a[r]gument start",
 		},
 		{
 			"[r",
@@ -240,7 +240,7 @@ return {
 				require("nvim-treesitter-textobjects.move").goto_previous_start("@argument.outer", "textobjects")
 			end,
 			mode = { "n", "x", "o" },
-			desc = "Previous pa[r]ameter / a[r]gument start",
+			desc = "Previous pa[r]ameter/a[r]gument start",
 		},
 		{
 			"]?",
@@ -362,7 +362,7 @@ return {
 				require("nvim-treesitter-textobjects.move").goto_next_end("@argument.outer", "textobjects")
 			end,
 			mode = { "n", "x", "o" },
-			desc = "Next pa[r]ameter / a[r]gument end",
+			desc = "Next pa[r]ameter/a[r]gument end",
 		},
 		{
 			"[R",
@@ -370,7 +370,7 @@ return {
 				require("nvim-treesitter-textobjects.move").goto_previous_end("@argument.outer", "textobjects")
 			end,
 			mode = { "n", "x", "o" },
-			desc = "Previous pa[r]ameter / a[r]gument end",
+			desc = "Previous pa[r]ameter/a[r]gument end",
 		},
 		{
 			"]Z",
