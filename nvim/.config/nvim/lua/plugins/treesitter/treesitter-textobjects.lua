@@ -8,8 +8,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	config = function()
-		local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
-
 		require("nvim-treesitter-textobjects").setup({
 			select = {
 				lookahead = true,
