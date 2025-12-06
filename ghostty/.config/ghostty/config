@@ -23,7 +23,6 @@ title = " "
 
 # ==== Linux-Only ====
 gtk-toolbar-style = flat
-gtk-wide-tabs = false
 app-notifications = no-clipboard-copy
 
 # ==== Mac-Only ====
