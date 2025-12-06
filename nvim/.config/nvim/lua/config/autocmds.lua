@@ -40,14 +40,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
-
--- Credit: https://old.reddit.com/r/neovim/comments/1nlypjk/neovim_keeps_my_cursor_shape_hostage_in_tmux/nfc1fhl/
--- FIX: Cursor remains blinking on "VimSuspend" and doesn't change
-vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-	group = vim.api.nvim_create_augroup("restore_cursor_on_exit", { clear = true }),
-	desc = "Restore cursor style upon exiting Neovim",
-	callback = function()
-		vim.o.guicursor = ""
-		vim.fn.chansend(vim.v.stderr, "\x1b[ q")
-	end,
-})
