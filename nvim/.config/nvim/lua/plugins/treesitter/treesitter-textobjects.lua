@@ -10,7 +10,10 @@ return {
 	config = function()
 		require("nvim-treesitter-textobjects").setup({
 			select = {
+				-- Makes custom textobjects work more closely to native textobjects
 				lookahead = true,
+				include_surrounding_whitespace = true,
+
 				selection_modes = {
 					["@function.outer"] = "V",
 					["@class.outer"] = "V",
