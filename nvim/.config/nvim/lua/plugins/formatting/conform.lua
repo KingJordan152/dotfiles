@@ -88,7 +88,7 @@ return {
 				vim.api.nvim_echo({ { "Disabled auto-formatting", "Removed" } }, true, {})
 			end
 		end, {
-			desc = "Disable Format on Save",
+			desc = "Disable auto-formatting on save",
 			bang = true,
 		})
 
@@ -97,7 +97,22 @@ return {
 			vim.g.disable_autoformat = false
 			vim.api.nvim_echo({ { "Enabled auto-formatting", "Added" } }, true, {})
 		end, {
-			desc = "Enable Format on Save",
+			desc = "Enable auto-formatting on save",
+		})
+
+		vim.api.nvim_create_user_command("FormatToggle", function(args)
+			if vim.b.disable_autoformat or vim.g.disable_autoformat then
+				vim.cmd("FormatEnable")
+			else
+				if args.bang then
+					vim.cmd("FormatDisable!")
+				else
+					vim.cmd("FormatDisable")
+				end
+			end
+		end, {
+			desc = "Toggle auto-formatting on save",
+			bang = true,
 		})
 	end,
 	keys = {
