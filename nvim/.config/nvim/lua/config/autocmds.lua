@@ -1,4 +1,6 @@
 local utils = require("core.utils")
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 local hybrid_line_exclude_files = utils.Set({
 	"snacks_dashboard",
@@ -11,9 +13,9 @@ local hybrid_line_exclude_files = utils.Set({
 	"help",
 })
 
-local hybrid_line_numbers = vim.api.nvim_create_augroup("hybrid_line_numbers", { clear = true })
+local hybrid_line_numbers = augroup("hybrid_line_numbers", { clear = true })
 
-vim.api.nvim_create_autocmd("InsertEnter", {
+autocmd("InsertEnter", {
 	desc = "Disable relative line numbers when entering Insert mode",
 	group = hybrid_line_numbers,
 	callback = function()
@@ -23,7 +25,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("InsertLeave", {
+autocmd("InsertLeave", {
 	desc = "Enable relative line numbers when leaving Insert mode",
 	group = hybrid_line_numbers,
 	callback = function()
@@ -33,9 +35,9 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+autocmd("TextYankPost", {
 	desc = "Briefly highlight yanked text",
+	group = augroup("highlight_yank", { clear = true }),
 	callback = function()
 		vim.hl.on_yank()
 	end,
