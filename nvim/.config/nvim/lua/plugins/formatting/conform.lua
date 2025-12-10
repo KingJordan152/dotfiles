@@ -132,26 +132,18 @@ return {
 			desc = "Format code",
 		},
 		{
-			"<leader>tf",
-			function()
-				if vim.g.disable_autoformat or vim.b.disable_autoformat then
-					vim.cmd("FormatEnable")
-				else
-					vim.cmd("FormatDisable")
-				end
-			end,
-			desc = "Toggle Auto-Formatting",
-		},
-		{
 			"<leader>tF",
 			function()
-				if vim.g.disable_autoformat or vim.b.disable_autoformat then
-					vim.cmd("FormatEnable")
-				else
-					vim.cmd("FormatDisable!")
-				end
+				vim.cmd("FormatToggle")
 			end,
-			desc = "Toggle Auto-Formatting for the Current Buffer",
+			desc = "Toggle auto-formatting globally",
+		},
+		{
+			"<leader>tf",
+			function()
+				vim.cmd("FormatToggle!")
+			end,
+			desc = "Toggle auto-formatting for the current buffer",
 		},
 	},
 }
