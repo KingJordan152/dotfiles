@@ -141,6 +141,12 @@ return {
 							end
 							return "lualine_c_normal"
 						end,
+						on_click = function(_, _, modifier)
+							-- See `:h stl` for info on using `stridx`
+							-- Can't use "shift" because Ghostty uses it as a global click modifier.
+							local pressed_alt = vim.fn.stridx(modifier, "a") ~= -1
+							vim.cmd("FormatToggle" .. (not pressed_alt and "!" or ""))
+						end,
 					},
 					{
 						"diagnostics",
