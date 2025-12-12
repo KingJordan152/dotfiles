@@ -11,11 +11,24 @@ return {
 
 		save_extra_data = function()
 			local extra_data = {
-				autoformatting = {
+				autoformat = {
 					global = vim.g.disable_autoformat,
 					buffer = vim.b.disable_autoformat,
 				},
 			}
+
+			-- Save all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
+			local ok, breakpoints = pcall(require, "dap.breakpoints")
+			if ok and breakpoints then
+				local bps = {}
+				local breakpoints_by_buf = breakpoints.get()
+				for buf, buf_bps in pairs(breakpoints_by_buf) do
+					bps[vim.api.nvim_buf_get_name(buf)] = buf_bps
+				end
+				if not vim.tbl_isempty(bps) then
+					extra_data.breakpoints = bps
+				end
+			end
 
 			return vim.fn.json_encode(extra_data)
 		end,
@@ -23,8 +36,27 @@ return {
 		restore_extra_data = function(_, json_data)
 			local extra_data = vim.fn.json_decode(json_data)
 
-			vim.g.disable_autoformat = extra_data.autoformatting.global
-			vim.b.disable_autoformat = extra_data.autoformatting.buffer
+			vim.g.disable_autoformat = extra_data.autoformat.global
+			vim.b.disable_autoformat = extra_data.autoformat.buffer
+
+			-- Restore all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
+			if extra_data.breakpoints then
+				local ok, breakpoints = pcall(require, "dap.breakpoints")
+
+				if ok and breakpoints then
+					for buf_name, buf_bps in pairs(extra_data.breakpoints) do
+						for _, bp in pairs(buf_bps) do
+							local line = bp.line
+							local opts = {
+								condition = bp.condition,
+								log_message = bp.logMessage,
+								hit_condition = bp.hitCondition,
+							}
+							breakpoints.set(opts, vim.fn.bufnr(buf_name), line)
+						end
+					end
+				end
+			end
 		end,
 	},
 	init = function()
