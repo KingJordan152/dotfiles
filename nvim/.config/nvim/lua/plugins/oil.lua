@@ -34,7 +34,7 @@ return {
 			end,
 		},
 		win_options = {
-			signcolumn = vim.o.signcolumn,
+			signcolumn = "yes:2",
 		},
 		keymaps = {
 			["<C-c>"] = false, -- Replace with below keymap
