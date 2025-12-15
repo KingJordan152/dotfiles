@@ -13,9 +13,14 @@ return {
 			local extra_data = {
 				autoformat = {
 					global = vim.g.disable_autoformat,
-					buffer = vim.b.disable_autoformat,
+					buffer = {},
 				},
 			}
+
+			-- Save all buffer-scoped auto-formatting states based on buffer ID
+			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+				extra_data.autoformat.buffer[bufnr] = vim.b[bufnr].disable_autoformat
+			end
 
 			-- Save all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
 			local ok, breakpoints = pcall(require, "dap.breakpoints")
@@ -37,7 +42,11 @@ return {
 			local extra_data = vim.fn.json_decode(json_data)
 
 			vim.g.disable_autoformat = extra_data.autoformat.global
-			vim.b.disable_autoformat = extra_data.autoformat.buffer
+
+			-- Restore all buffer-scoped auto-formatting states based on buffer ID
+			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+				vim.b[bufnr].disable_autoformat = extra_data.autoformat.buffer[bufnr]
+			end
 
 			-- Restore all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
 			if extra_data.breakpoints then
