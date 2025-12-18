@@ -27,23 +27,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- if client ~= nil and client:supports_method("textDocument/documentColor") then
 		-- 	vim.lsp.document_color.enable(true, args.buf)
 		-- end
-
-		-- Customize how diagnostics work
-		vim.diagnostic.config({
-			severity_sort = true,
-			float = { source = "if_many", max_width = floating_window.max_width },
-			signs = vim.g.have_nerd_font and {
-				text = {
-					[vim.diagnostic.severity.ERROR] = " ",
-					[vim.diagnostic.severity.WARN] = " ",
-					[vim.diagnostic.severity.INFO] = " ",
-					[vim.diagnostic.severity.HINT] = " ",
-				},
-			} or {},
-			virtual_text = {
-				source = "if_many",
-				spacing = 2,
-			},
-		})
 	end,
 })
