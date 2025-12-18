@@ -1,5 +1,4 @@
 -- Editor Settings
-vim.g.have_nerd_font = true -- States that I'm using a nerd font
 vim.o.termguicolors = true -- Enable 24-bit RGB color
 vim.o.expandtab = true -- Use spaces instead of <Tab>
 vim.o.tabstop = 2 -- Number of spaces to use for a <Tab>
