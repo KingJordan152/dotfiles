@@ -6,12 +6,13 @@ local winbar_disabled_filetypes = utils.Set({
 	"fugitive",
 })
 
--- Displays the formatters that will run against the current buffer.
---
--- If there aren't any configured formatters for the current buffer but it has an LSP,
--- `"LSP"` will be displayed instead.
---
--- If there aren't any formatters or LSPs configured for the current buffer, the component isn't displayed.
+---Determines the formatters that will run against the current buffer.
+---
+---If there aren't any configured formatters for the current buffer *but* it has an LSP,
+---`"LSP"` will be returned.
+---
+---If there are neither formatters nor LSPs configured for the current buffer, the empty string will be returned.
+---@return string
 local function formatter_status()
 	local conform = require("conform")
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
