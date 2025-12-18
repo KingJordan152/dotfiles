@@ -7,6 +7,7 @@ vim.o.softtabstop = 2 -- Number of spaces to use for a <Tab> while performing in
 vim.o.shiftwidth = 2 -- Number of spaces to use for auto/manual indents
 vim.o.showmode = false -- Prevents modes, like INSERT, from being shown (lualine takes care of this).
 vim.o.scrolloff = 10 -- Scroll offset
+vim.o.sidescrolloff = 10 -- Horizontal scroll offset
 vim.o.mouse = "a" -- Enable mouse usage
 vim.o.undofile = true -- Save undo history
 vim.o.updatetime = 250 -- Decrease amount of time it takes for swapfile to be auto-saved
