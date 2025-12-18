@@ -4,7 +4,8 @@ local colors = require("tokyonight.colors").setup()
 local winbar_disabled_filetypes = utils.Set({
 	"oil",
 	"fugitive",
-})
+	"dap-repl",
+}
 
 ---Determines the formatters that will run against the current buffer.
 ---
