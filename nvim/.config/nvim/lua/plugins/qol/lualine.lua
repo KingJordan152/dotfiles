@@ -1,7 +1,7 @@
 local utils = require("core.utils")
 local colors = require("tokyonight.colors").setup()
 
-local winbar_disabled_filetypes = utils.Set({
+local winbar_disabled_filetypes = {
 	"oil",
 	"fugitive",
 	"dap-repl",
@@ -57,14 +57,12 @@ end
 ---Determines whether the winbar (`:h winbar`) should be displayed.
 ---
 ---The winbar is only shown under the following circumstances:
----  - the current window contains splits
 ---  - the current buffer has a name (i.e., not "No Name")
 ---  - the current buffer's filetype isn't explicitly disallowed (e.g., `Oil` buffers)
 ---@return boolean
 local function should_display_winbar()
-	local not_disabled_filetype = not winbar_disabled_filetypes[vim.bo.filetype]
 	local not_no_name = vim.api.nvim_buf_get_name(0) ~= ""
-	return not_no_name and not_disabled_filetype and has_splits()
+	return not_no_name and has_splits()
 end
 
 -- [[
@@ -113,6 +111,9 @@ return {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				globalstatus = true,
+				disabled_filetypes = {
+					winbar = winbar_disabled_filetypes,
+				},
 			},
 			sections = {
 				lualine_a = {
@@ -140,7 +141,10 @@ return {
 							readonly = "",
 						},
 						cond = function()
-							return not should_display_winbar()
+							local winbar_displayed = should_display_winbar()
+							local winbar_hidden_for_buffer = utils.Set(winbar_disabled_filetypes)[vim.bo.filetype]
+
+							return not winbar_displayed or (winbar_displayed and winbar_hidden_for_buffer)
 						end,
 					},
 					{
