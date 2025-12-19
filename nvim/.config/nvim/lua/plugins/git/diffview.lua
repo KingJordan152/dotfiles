@@ -10,6 +10,7 @@ return {
 			pattern = "DiffviewViewEnter",
 			group = diffview_winbars,
 			callback = function()
+				vim.g.diffview_open = true
 				require("lualine").hide({ place = { "winbar" }, unhide = false })
 			end,
 		})
@@ -19,6 +20,7 @@ return {
 			pattern = "DiffviewViewLeave",
 			group = diffview_winbars,
 			callback = function()
+				vim.g.diffview_open = false
 				require("lualine").hide({ place = { "winbar" }, unhide = true })
 			end,
 		})
