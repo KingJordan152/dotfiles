@@ -96,3 +96,13 @@ autocmd("LspAttach", {
 		end
 	end,
 })
+
+autocmd("VimEnter", {
+	desc = "Load chosen colorscheme",
+	group = augroup("load_colorscheme", { clear = true }),
+	callback = function()
+		if vim.g.COLORSCHEME then
+			vim.cmd.colorscheme(vim.g.COLORSCHEME)
+		end
+	end,
+})

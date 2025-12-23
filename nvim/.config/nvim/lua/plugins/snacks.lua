@@ -256,6 +256,18 @@ return {
 						preset = "vscode",
 						hidden = {},
 					},
+					confirm = function(picker, item)
+						picker:close()
+
+						if item then
+							picker.preview.state.colorscheme = nil
+							vim.schedule(function()
+								vim.cmd("colorscheme " .. item.text)
+							end)
+
+							vim.g.COLORSCHEME = item.text -- Ensures colorscheme persists after exiting Neovim
+						end
+					end,
 				})
 			end,
 			desc = "Colorschemes",
