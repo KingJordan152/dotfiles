@@ -1,8 +1,3 @@
--- Choose default colorscheme
-if not vim.g.COLORSCHEME then
-	vim.g.COLORSCHEME = "tokyonight-night"
-end
-
 -- Editor Settings
 vim.o.termguicolors = true -- Enable 24-bit RGB color
 vim.o.expandtab = true -- Use spaces instead of <Tab>
