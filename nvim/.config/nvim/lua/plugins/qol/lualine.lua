@@ -1,12 +1,19 @@
 local utils = require("core.utils")
 local colors = require("tokyonight.colors").setup()
 
--- Displays the formatters that will run against the current buffer.
---
--- If there aren't any configured formatters for the current buffer but it has an LSP,
--- `"LSP"` will be displayed instead.
---
--- If there aren't any formatters or LSPs configured for the current buffer, the component isn't displayed.
+local winbar_disabled_filetypes = {
+	"oil",
+	"fugitive",
+	"dap-repl",
+}
+
+---Determines the formatters that will run against the current buffer.
+---
+---If there aren't any configured formatters for the current buffer *but* it has an LSP,
+---`"LSP"` will be returned.
+---
+---If there are neither formatters nor LSPs configured for the current buffer, the empty string will be returned.
+---@return string
 local function formatter_status()
 	local conform = require("conform")
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
@@ -27,6 +34,35 @@ local function formatter_status()
 	end
 
 	return result
+end
+
+---Determines whether the current window contains any splits.
+---@return boolean
+local function has_splits()
+	local wins = vim.api.nvim_tabpage_list_wins(0)
+	local split_count = 0
+
+	for _, win in ipairs(wins) do
+		local win_config = vim.api.nvim_win_get_config(win)
+
+		-- Filter out all floating windows to get the true split count.
+		if win_config.relative == "" then
+			split_count = split_count + 1
+		end
+	end
+
+	return split_count > 1
+end
+
+---Determines whether the winbar (`:h winbar`) should be displayed.
+---
+---The winbar is only shown under the following circumstances:
+---  - the current buffer has a name (i.e., not "No Name")
+---  - the current buffer's filetype isn't explicitly disallowed (e.g., `Oil` buffers)
+---@return boolean
+local function should_display_winbar()
+	local not_no_name = vim.api.nvim_buf_get_name(0) ~= ""
+	return not_no_name and has_splits()
 end
 
 -- [[
@@ -75,6 +111,9 @@ return {
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				globalstatus = true,
+				disabled_filetypes = {
+					winbar = winbar_disabled_filetypes,
+				},
 			},
 			sections = {
 				lualine_a = {
@@ -101,6 +140,14 @@ return {
 							modified = "●",
 							readonly = "",
 						},
+						cond = function()
+							local winbar_displayed = should_display_winbar()
+							local winbar_hidden_for_buffer = utils.Set(winbar_disabled_filetypes)[vim.bo.filetype]
+
+							return not winbar_displayed
+								or (winbar_displayed and winbar_hidden_for_buffer)
+								or vim.g.diffview_open
+						end,
 					},
 					{
 						"grapple",
@@ -163,6 +210,36 @@ return {
 					{
 						"location",
 						separator = { left = "", right = "" },
+					},
+				},
+			},
+			winbar = {
+				lualine_c = {
+					{
+						custom_filename,
+						colored = true,
+						symbols = {
+							modified = "●",
+							readonly = "",
+						},
+						cond = should_display_winbar,
+						separator = { left = "", right = "" },
+						color = "lualine_b_normal",
+					},
+				},
+			},
+			inactive_winbar = {
+				lualine_c = {
+					{
+						custom_filename,
+						colored = true,
+						symbols = {
+							modified = "●",
+							readonly = "",
+						},
+						cond = should_display_winbar,
+						separator = { left = "", right = "" },
+						padding = 2,
 					},
 				},
 			},

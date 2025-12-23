@@ -16,6 +16,7 @@ return {
 		vim.fn.sign_define("DapBreakpointCondition", { text = "󰍶", texthl = "Error" })
 		vim.fn.sign_define("DapLogPoint", { text = "󰜋", texthl = "Error" })
 		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIDecoration" })
 
 		local js_debug_adapter = {
 			type = "server",

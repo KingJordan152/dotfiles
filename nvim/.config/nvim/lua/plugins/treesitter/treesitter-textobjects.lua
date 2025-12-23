@@ -7,17 +7,17 @@ return {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 	},
+	init = function()
+		-- Disable entire built-in ftplugin mappings to avoid conflicts.
+		-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+		vim.g.no_plugin_maps = true
+	end,
 	config = function()
 		require("nvim-treesitter-textobjects").setup({
 			select = {
 				-- Makes custom textobjects work more closely to native textobjects
 				lookahead = true,
 				include_surrounding_whitespace = true,
-
-				selection_modes = {
-					["@function.outer"] = "V",
-					["@class.outer"] = "V",
-				},
 			},
 			move = {
 				set_jumps = true,
