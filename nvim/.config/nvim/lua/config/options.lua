@@ -1,3 +1,8 @@
+-- Choose default colorscheme
+if not vim.g.COLORSCHEME then
+	vim.g.COLORSCHEME = "tokyonight-night"
+end
+
 -- Editor Settings
 vim.g.have_nerd_font = true -- States that I'm using a nerd font
 vim.o.termguicolors = true -- Enable 24-bit RGB color
