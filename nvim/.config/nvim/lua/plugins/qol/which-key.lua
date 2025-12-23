@@ -15,6 +15,7 @@ return {
 			{ "<leader>ga", group = "Git Add (Stage)" },
 			{ "<leader>s", group = "Search" },
 			{ "<leader>X", group = "Exchange Treesitter node" },
+			{ "<leader>d", group = "Debugger" },
 		},
 	},
 	keys = {

@@ -1,9 +1,30 @@
+---Prompts the user for a message to use for a logpoint breakpoint.
+local function toggle_logpoint()
+	return vim.ui.input({ prompt = "Logpoint Message (expressions within {} are interpolated)" }, function(input)
+		if input == nil then
+			return
+		end
+
+		require("dap").set_breakpoint(nil, nil, input)
+	end)
+end
+
+---Prompts the user for an expression to use for a conditional breakpoint.
+local function toggle_conditional_breakpoint()
+	return vim.ui.input({ prompt = "Break when the following expression evaluates to true" }, function(input)
+		if input == nil then
+			return
+		end
+
+		require("dap").set_breakpoint(input, nil, nil)
+	end)
+end
+
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
 	},
-	event = "VeryLazy",
 	config = function()
 		local dap = require("dap")
 		local dap_utils = require("dap.utils")
@@ -96,24 +117,135 @@ return {
 				},
 			}
 		end
-
-		vim.keymap.set("n", "<F5>", function()
-			dap.continue()
-		end, { desc = "Debugger: Continue" })
-		vim.keymap.set("n", "<F10>", function()
-			dap.step_over()
-		end, { desc = "Debugger: Step Over" })
-		vim.keymap.set("n", "<F11>", function()
-			dap.step_into()
-		end, { desc = "Debugger: Step Into" })
-		vim.keymap.set("n", "<F12>", function()
-			dap.step_out()
-		end, { desc = "Debugger: Step Out" })
-		vim.keymap.set("n", "<Leader>b", function()
-			dap.toggle_breakpoint()
-		end, { desc = "Debugger: Toggle Breakpoint" })
-		vim.keymap.set("n", "<Leader>lp", function()
-			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-		end, { desc = "Debugger: Add Log Point" })
 	end,
+	keys = {
+		-- VS Code-flavored Keymaps
+		{
+			"<F5>",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Debugger: Continue",
+		},
+		{
+			"<F53>", -- <F53> = <M-F5> (<C-S-F5>) doesn't work in Ghostty
+			function()
+				require("dap").restart()
+			end,
+			desc = "Debugger: Restart session",
+		},
+		{
+			"<F17>", -- <F17> = <S-F5>
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Debugger: Quit/Terminate session",
+		},
+		{
+			"<F9>",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Debugger: Toggle breakpoint",
+		},
+		{
+			"<F21>", -- <F21> = <S-F9>
+			toggle_logpoint,
+			desc = "Debugger: Toggle logpoint",
+		},
+		{
+			"<F57>", -- <F57> = <M-F9>
+			toggle_conditional_breakpoint,
+			desc = "Debugger: Toggle conditional breakpoint",
+		},
+		{
+			"<F10>",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Debugger: Step over",
+		},
+		{
+			"<F11>",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Debugger: Step into",
+		},
+		{
+			"<F12>",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Debugger: Step out",
+		},
+
+		-- Neovim-flavored Keymaps
+		{
+			"<leader>dc",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Continue",
+		},
+		{
+			"<leader>dr",
+			function()
+				require("dap").restart()
+			end,
+			desc = "Restart session",
+		},
+		{
+			"<leader>dq",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Quit/Terminate session",
+		},
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Toggle breakpoint",
+		},
+		{
+			"<leader>dB",
+			toggle_logpoint,
+			desc = "Toggle logpoint",
+		},
+		{
+			"<leader>d?",
+			toggle_conditional_breakpoint,
+			desc = "Toggle conditional breakpoint",
+		},
+		{
+			"<leader>dl",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Step over",
+		},
+		{
+			"<leader>dh",
+			function()
+				require("dap").step_back()
+			end,
+			desc = "Step back",
+		},
+		{
+			"<leader>dj",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Step into",
+		},
+		{
+			"<leader>dk",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Step out",
+		},
+	},
 }
