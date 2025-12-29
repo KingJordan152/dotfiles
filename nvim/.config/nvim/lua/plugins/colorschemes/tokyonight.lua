@@ -14,6 +14,10 @@ return {
 			---@param highlights tokyonight.Highlights
 			---@param colors ColorScheme
 			on_highlights = function(highlights, colors)
+				highlights["MatchParen"] = {
+					link = "LspReferenceRead",
+				}
+
 				highlights["WinSeparator"] = {
 					fg = colors.blue,
 				}
