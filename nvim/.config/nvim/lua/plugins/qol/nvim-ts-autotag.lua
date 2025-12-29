@@ -1,6 +1,6 @@
 return {
 	"windwp/nvim-ts-autotag",
-	lazy = false,
+	event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		opts = {
 			enable_close = true, -- Auto close tags
