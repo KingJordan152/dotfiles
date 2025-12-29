@@ -32,6 +32,7 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			go = { "goimports", "gofmt", stop_after_first = true },
+			html = { "prettierd" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
 			javascript = { "prettierd" },
@@ -119,7 +120,7 @@ return {
 		{
 			"<leader>f",
 			function()
-				require("conform").format({ async = true, lsp_format = "fallback" }, function(err)
+				require("conform").format({ async = false, timeout_ms = 500, lsp_format = "fallback" }, function(err)
 					if not err then
 						local mode = vim.api.nvim_get_mode().mode
 						if vim.startswith(string.lower(mode), "v") then
@@ -128,7 +129,7 @@ return {
 					end
 				end)
 			end,
-			mode = "",
+			mode = { "n", "v" },
 			desc = "Format code",
 		},
 		{
