@@ -45,6 +45,12 @@ return {
 							"enum_declaration",
 							"import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
 						},
+						scss = {
+							"rule_set",
+						},
+						css = {
+							"rule_set",
+						},
 					},
 				},
 				exclude = {
