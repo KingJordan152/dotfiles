@@ -46,6 +46,10 @@ return {
 					bg = util.darken(colors.git.delete, git_inline_diff_darken_amount),
 				}
 
+				highlights["RainbowDelimiterGreen"] = {
+					fg = util.darken(colors.green, 0.8),
+				}
+
 				highlights["MatchParen"] = {
 					link = "LspReferenceRead",
 				}
