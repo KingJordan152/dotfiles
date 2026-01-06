@@ -4,6 +4,9 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
+		local util = require("tokyonight.util")
+		local git_staged_darken_amount = 0.4
+
 		require("tokyonight").setup({
 			lualine_bold = true,
 
@@ -18,6 +21,22 @@ return {
 			---@param highlights tokyonight.Highlights
 			---@param colors ColorScheme
 			on_highlights = function(highlights, colors)
+				highlights["GitSignsStagedAdd"] = {
+					fg = util.darken(colors.git.add, git_staged_darken_amount),
+				}
+
+				highlights["GitSignsStagedChange"] = {
+					fg = util.darken(colors.git.change, git_staged_darken_amount),
+				}
+
+				highlights["GitSignsStagedDelete"] = {
+					fg = util.darken(colors.git.delete, git_staged_darken_amount),
+				}
+
+				highlights["GitSignsStagedTopdelete"] = {
+					link = "GitSignsStagedDelete",
+				}
+
 				highlights["MatchParen"] = {
 					link = "LspReferenceRead",
 				}
