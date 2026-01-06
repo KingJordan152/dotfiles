@@ -6,6 +6,7 @@ return {
 	config = function()
 		local util = require("tokyonight.util")
 		local git_staged_darken_amount = 0.4
+		local git_inline_diff_darken_amount = 0.5
 
 		require("tokyonight").setup({
 			lualine_bold = true,
@@ -35,6 +36,14 @@ return {
 
 				highlights["GitSignsStagedTopdelete"] = {
 					link = "GitSignsStagedDelete",
+				}
+
+				highlights["GitSignsChangeInline"] = {
+					bg = util.darken(colors.git.add, git_inline_diff_darken_amount),
+				}
+
+				highlights["GitSignsDeleteInline"] = {
+					bg = util.darken(colors.git.delete, git_inline_diff_darken_amount),
 				}
 
 				highlights["MatchParen"] = {
