@@ -9,6 +9,10 @@ return {
 
 			on_colors = function(colors)
 				colors.bg_statusline = colors.none
+
+				-- Git overrides
+				colors.git.change = colors.yellow
+				colors.git.delete = colors.red
 			end,
 
 			---@param highlights tokyonight.Highlights
