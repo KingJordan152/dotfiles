@@ -1,38 +1,35 @@
 -- [[
 -- Plugin for loading and using snippets from various sources.
 -- I'm primarily using it so that I can use both `friendly-snippets` and VS Code snippets
--- that are declared in any project that I'm working on.
+-- that are defined in any project that I'm working on.
 -- ]]
 return {
 	"L3MON4D3/LuaSnip",
 	version = "v2.*",
 	event = { "InsertEnter", "CmdlineEnter", "TermEnter" },
-	dependencies = { "rafamadriz/friendly-snippets", "nvim-lua/plenary.nvim" },
+	dependencies = { "rafamadriz/friendly-snippets" },
 	config = function()
+		local luasnip_vscode = require("luasnip.loaders.from_vscode")
+		local vscode_dir = vim.fn.getcwd() .. "/.vscode"
+		local vscode_dir_exists = vim.fn.isdirectory(vscode_dir) == 1
+
+		---@type string[]
+		local code_snippet_files = vscode_dir_exists
+				---@diagnostic disable-next-line: param-type-mismatch
+				and vim.fn.readdir(vscode_dir, function(name)
+					return name:match(".code[-]snippets$") ~= nil
+				end)
+			or {}
+
 		-- Load snippets from `friendly-snippets`
-		require("luasnip.loaders.from_vscode").lazy_load()
+		luasnip_vscode.lazy_load()
 
-		-- Apply snippets from all `.vscode/*.code-snippets` files in the cwd.
-		-- Code sourced from https://github.com/erlangparasu/dot-config-nvim/blob/6146f6edbd99225c7d74c12b1e769ad4ebd6c6a9/lua/config/autocmds.lua#L55
-		local plenary = require("plenary.scandir")
-		local cwd = vim.fn.getcwd()
+		-- Apply snippets from all `.vscode/*.code-snippets` files in the cwd, if they exist.
+		-- See https://github.com/L3MON4D3/LuaSnip/issues/1186
+		for _, file in ipairs(code_snippet_files) do
+			local filepath = vscode_dir .. "/" .. file
 
-		local files = plenary.scan_dir(cwd .. "/.vscode", {
-			depth = 2,
-			hidden = true,
-			silent = true, -- Prevents error message from echoing when "/.vscode" isn't found
-			search_pattern = ".code[-]snippets$", -- extension ".code-snippets"
-		})
-
-		if #files > 0 then
-			for _, file in ipairs(files) do
-				local text1 = file
-				local substring1 = ".code-snippets"
-
-				if string.find(text1, substring1, 0, true) ~= nil then
-					require("luasnip.loaders.from_vscode").load_standalone({ lazy = true, path = file })
-				end
-			end
+			luasnip_vscode.load_standalone({ lazy = true, path = filepath })
 		end
 	end,
 }
