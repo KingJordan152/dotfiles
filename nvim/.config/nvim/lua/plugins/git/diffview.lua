@@ -32,6 +32,13 @@ return {
 					layout = "diff3_mixed",
 				},
 			},
+			hooks = {
+				diff_buf_win_enter = function(_, winid)
+					-- Turn off cursor line for diffview windows because of bg conflict.
+					-- See https://github.com/neovim/neovim/issues/9800
+					vim.wo[winid].culopt = "number"
+				end,
+			},
 		})
 	end,
 }
