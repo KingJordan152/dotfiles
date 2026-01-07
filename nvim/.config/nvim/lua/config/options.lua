@@ -67,3 +67,10 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+-- Customize which filetypes are assigned to different extensions
+vim.filetype.add({
+	extension = {
+		["code-snippets"] = "json",
+	},
+})
