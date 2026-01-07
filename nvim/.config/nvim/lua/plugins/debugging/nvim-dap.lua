@@ -33,11 +33,11 @@ return {
 		local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 
 		-- Define custom icons
-		vim.fn.sign_define("DapBreakpoint", { text = "󰄯", texthl = "Error" })
-		vim.fn.sign_define("DapBreakpointCondition", { text = "󰍶", texthl = "Error" })
-		vim.fn.sign_define("DapLogPoint", { text = "󰜋", texthl = "Error" })
-		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
-		vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIDecoration" })
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "Error" })
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "Error" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIStop", linehl = "DapStoppedLine" })
 
 		local js_debug_adapter = {
 			type = "server",

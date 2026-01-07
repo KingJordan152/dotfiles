@@ -58,6 +58,10 @@ return {
 					fg = colors.blue,
 				}
 
+				highlights["DapStoppedLine"] = {
+					bg = colors.blue7,
+				}
+
 				highlights["@variable"] = {
 					fg = colors.red,
 				}
