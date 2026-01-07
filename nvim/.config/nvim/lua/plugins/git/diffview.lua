@@ -1,7 +1,7 @@
 return {
 	"sindrets/diffview.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	cmd = "DiffviewOpen",
+	cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 	config = function()
 		local diffview_winbars = vim.api.nvim_create_augroup("diffview_hide_winbars", { clear = true })
 
