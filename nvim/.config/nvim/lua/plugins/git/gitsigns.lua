@@ -7,7 +7,7 @@ return {
 		signs = {
 			add = { text = "┃" },
 			change = { text = "┃" },
-			delete = { text = "-", show_count = true },
+			delete = { text = "", show_count = true },
 			topdelete = { text = "┃", show_count = true },
 			changedelete = { text = "~", show_count = true },
 			untracked = { text = "┆" },
@@ -15,7 +15,7 @@ return {
 		signs_staged = {
 			add = { text = "┃" },
 			change = { text = "┃" },
-			delete = { text = "-", show_count = true },
+			delete = { text = "", show_count = true },
 			topdelete = { text = "┃", show_count = true },
 			changedelete = { text = "~", show_count = true },
 			untracked = { text = "┆" },
