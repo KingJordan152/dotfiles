@@ -92,6 +92,7 @@ autocmd("LspAttach", {
 
 			vim.diagnostic.config({
 				virtual_text = false,
+				update_in_insert = true,
 			}, ns)
 		end
 	end,
