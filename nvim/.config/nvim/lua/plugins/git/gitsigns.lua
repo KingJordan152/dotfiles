@@ -1,3 +1,21 @@
+---Formats the blame line to show the committer, relative commit date, and commit message.
+---However, if the current line is blank, the blame line isn't shown. This ensures that
+---only relevant, important code has an associated blame line.
+---@param name string
+---@param blame_info Gitsigns.BlameInfo | Gitsigns.CommitInfo
+---@return [string,string][]
+local function current_line_blame_formatter(name, blame_info)
+	if blame_info.author == name then
+		blame_info.author = "You"
+	end
+
+	local should_display = vim.fn.getline(".") ~= ""
+	local date_time = require("gitsigns.util").get_relative_time(blame_info.author_time)
+	local formatted_text = string.format("        %s, %s • %s", blame_info.author, date_time, blame_info.summary)
+
+	return { { should_display and formatted_text or "", "GitSignsCurrentLineBlame" } }
+end
+
 -- [[
 --    Adds git related signs to the gutter, as well as utilities for managing changes
 -- ]]
@@ -40,8 +58,8 @@ return {
 			delay = 500,
 			use_focus = true,
 		},
-		current_line_blame_formatter = "        <author>, <author_time:%R> • <summary>",
-		current_line_blame_formatter_nc = "        Uncommitted changes",
+		current_line_blame_formatter = current_line_blame_formatter,
+		current_line_blame_formatter_nc = "",
 		attach_to_untracked = true,
 		gh = true,
 
