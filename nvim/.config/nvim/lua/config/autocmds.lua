@@ -75,19 +75,19 @@ autocmd("TextYankPost", {
 	end,
 })
 
-local virtual_text_disabled_filetypes = utils.Set({
+local prose_filetypes = utils.Set({
 	"markdown",
 	"text",
 	"gitcommit",
 })
 
 autocmd("LspAttach", {
-	desc = "Disable diagnostic virtual text for specific filetypes",
-	group = augroup("disable_virtual_text", { clear = true }),
+	desc = "Adjust diagnostic config for prose-based filetypes",
+	group = augroup("prose_filetype_diagnostics", { clear = true }),
 	callback = function(args)
 		local buf_ft = vim.bo[args.buf].filetype
 
-		if virtual_text_disabled_filetypes[buf_ft] then
+		if prose_filetypes[buf_ft] then
 			local ns = vim.lsp.diagnostic.get_namespace(args.data.client_id)
 
 			vim.diagnostic.config({
