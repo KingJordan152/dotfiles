@@ -62,7 +62,7 @@ end
 ---@return boolean
 local function should_display_winbar()
 	local buf_name = vim.api.nvim_buf_get_name(0)
-	local no_name = buf_name == "" and buf_name == "null"
+	local no_name = buf_name == "" or buf_name == "null"
 
 	return not no_name and has_splits()
 end
