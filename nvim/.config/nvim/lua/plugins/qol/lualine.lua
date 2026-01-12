@@ -142,14 +142,6 @@ return {
 							modified = "●",
 							readonly = "",
 						},
-						cond = function()
-							local winbar_displayed = should_display_winbar()
-							local winbar_hidden_for_buffer = utils.Set(winbar_disabled_filetypes)[vim.bo.filetype]
-
-							return not winbar_displayed
-								or (winbar_displayed and winbar_hidden_for_buffer)
-								or vim.g.diffview_open
-						end,
 					},
 					{
 						"grapple",
