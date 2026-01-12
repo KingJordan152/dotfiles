@@ -58,11 +58,13 @@ end
 ---
 ---The winbar is only shown under the following circumstances:
 ---  - the current buffer has a name (i.e., not "No Name")
----  - the current buffer's filetype isn't explicitly disallowed (e.g., `Oil` buffers)
+---  - there's at least one active split
 ---@return boolean
 local function should_display_winbar()
-	local not_no_name = vim.api.nvim_buf_get_name(0) ~= ""
-	return not_no_name and has_splits()
+	local buf_name = vim.api.nvim_buf_get_name(0)
+	local no_name = buf_name == "" and buf_name == "null"
+
+	return not no_name and has_splits()
 end
 
 -- [[
