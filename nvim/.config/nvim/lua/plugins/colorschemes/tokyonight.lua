@@ -126,44 +126,26 @@ return {
 					fg = colors.orange,
 				}
 
-				-- SCSS value keywords (e.g., `flex`, `nowrap`, etc.)
 				highlights["@string.scss"] = {
 					fg = colors.orange,
 				}
-
-				-- CSS classes
-				highlights["@property.class.css"] = {
-					fg = colors.green,
+				highlights["@character.special.css"] = {
+					fg = colors.yellow,
 				}
 
-				-- SCSS classes
-				highlights["@property.class.scss"] = {
-					fg = colors.green,
+				highlights["@character.special.scss"] = {
+					fg = colors.yellow,
+				}
+				highlights["@keyword.import.scss"] = {
+					fg = colors.purple,
 				}
 
-				-- CSS IDs
-				highlights["@property.id.css"] = {
-					fg = colors.red,
+				highlights["@keyword.directive.css"] = {
+					fg = colors.purple,
 				}
 
-				-- SCSS IDs
-				highlights["@property.id.scss"] = {
-					fg = colors.red,
-				}
-
-				-- SCSS Variables
-				highlights["@odp.variable.scss"] = {
-					fg = colors.red,
-				}
-
-				-- CSS properties
-				highlights["@property.css"] = {
-					fg = colors.blue,
-				}
-
-				-- SCSS properties
-				highlights["@property.scss"] = {
-					fg = colors.blue,
+				highlights["@keyword.directive.scss"] = {
+					fg = colors.purple,
 				}
 			end,
 		})
