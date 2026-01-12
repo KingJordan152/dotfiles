@@ -4,9 +4,31 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highl
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
 
--- Copy and paste lines up and down.
-vim.keymap.set({ "n", "x" }, "<M-S-J>", ":co -1<CR>j", { desc = "Copy line down" })
-vim.keymap.set({ "n", "x" }, "<M-S-K>", ":co +0<CR>k", { desc = "Copy line up" })
+-- Helix-inspired
+vim.keymap.set({ "n", "v", "o" }, "gl", "$", { desc = "Go to end of line" })
+vim.keymap.set({ "n", "v", "o" }, "gh", "^", { desc = "Go to start of line" })
+
+-- Stay in visual mode when indenting
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+-- Copy and paste lines down (VS Code-inspired)
+vim.keymap.set({ "n", "v" }, "<M-S-J>", function()
+	local command = ":co -1<CR>j"
+	local mode = vim.api.nvim_get_mode().mode
+	local is_visual = mode == "v" or mode == "V" or mode == "\22"
+
+	return is_visual and command .. "gv" or command
+end, { expr = true, silent = true })
+
+-- Copy and paste lines up (VS Code-inspired)
+vim.keymap.set({ "n", "v" }, "<M-S-K>", function()
+	local command = ":co +0<CR>k"
+	local mode = vim.api.nvim_get_mode().mode
+	local is_visual = mode == "v" or mode == "V" or mode == "\22"
+
+	return is_visual and command .. "gv" or command
+end, { expr = true, silent = true })
 
 -- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
 vim.keymap.set({ "n", "x" }, "j", function()
