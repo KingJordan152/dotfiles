@@ -147,7 +147,7 @@ return {
 						"grapple",
 						color = { fg = colors.blue },
 						cond = function()
-							return not utils.Set({ "TelescopePrompt" })[vim.bo.filetype]
+							return not utils.Set({ "snacks_picker_input", "snacks_picker_list" })[vim.bo.filetype]
 						end,
 					},
 				},
@@ -195,7 +195,12 @@ return {
 						symbols = { error = " ", warn = " ", hint = " ", info = " " },
 						always_visible = true,
 						cond = function()
-							return not utils.Set({ "help", "TelescopePrompt", "gitcommit" })[vim.bo.filetype]
+							return not utils.Set({
+								"help",
+								"snacks_picker_input",
+								"snacks_picker_list",
+								"gitcommit",
+							})[vim.bo.filetype]
 						end,
 					},
 				},
