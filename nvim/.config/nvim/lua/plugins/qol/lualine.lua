@@ -77,7 +77,7 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = "VeryLazy",
+	event = "BufEnter",
 	config = function()
 		-- A `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
 		local custom_filename = require("lualine.components.filename"):extend()
