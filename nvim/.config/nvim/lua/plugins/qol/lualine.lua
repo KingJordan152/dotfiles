@@ -111,7 +111,7 @@ return {
 			options = {
 				theme = "auto",
 				component_separators = { left = "", right = "" },
-				section_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				globalstatus = true,
 				disabled_filetypes = {
 					winbar = winbar_disabled_filetypes,
@@ -121,7 +121,7 @@ return {
 				lualine_a = {
 					{
 						"mode",
-						separator = { left = "", right = "" },
+						separator = { left = "", right = "" },
 					},
 				},
 				lualine_b = {
