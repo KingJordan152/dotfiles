@@ -29,7 +29,10 @@ local function formatter_status()
 		for i, formatter in ipairs(formatters_for_current_buffer) do
 			local separator = i == 1 and "" or ", "
 
-			result = result .. separator .. formatter.name
+			-- Ignore generic "injected" formatter
+			if formatter.name ~= "injected" then
+				result = result .. separator .. formatter.name
+			end
 		end
 	end
 
