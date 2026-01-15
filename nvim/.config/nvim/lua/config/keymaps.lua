@@ -16,7 +16,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({ "n", "v" }, "<M-S-J>", function()
 	local command = ":co -1<CR>j"
 	local mode = vim.api.nvim_get_mode().mode
-	local is_visual = mode == "v" or mode == "V" or mode == "\22"
+	local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
 
 	return is_visual and command .. "gv" or command
 end, { expr = true, silent = true })
@@ -25,7 +25,7 @@ end, { expr = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<M-S-K>", function()
 	local command = ":co +0<CR>k"
 	local mode = vim.api.nvim_get_mode().mode
-	local is_visual = mode == "v" or mode == "V" or mode == "\22"
+	local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
 
 	return is_visual and command .. "gv" or command
 end, { expr = true, silent = true })
