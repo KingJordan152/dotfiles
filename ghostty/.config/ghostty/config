@@ -30,9 +30,7 @@ macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = left
 
 # ==== Keybindings ====
-
-## Undo some 'fixterm' encodings (Useful for Neovim)
 keybind = ctrl+i=text:\x09
-keybind = ctrl+[=text:\x1B
+keybind = ctrl+[=text:\x1b
 keybind = ctrl+tab=text:\x1b[9;5u
 keybind = ctrl+shift+tab=text:\x1b[9;6u
