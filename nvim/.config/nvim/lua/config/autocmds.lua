@@ -97,3 +97,17 @@ autocmd("LspAttach", {
 		end
 	end,
 })
+
+autocmd("FileType", {
+	desc = "Add unique keymaps to readonly files",
+	group = augroup("readonly_keymaps", { clear = true }),
+	pattern = "*",
+	callback = function(args)
+		if vim.bo[args.buf].readonly then
+			vim.keymap.set("n", "gq", "<cmd>q<cr>", {
+				desc = "Quit the current window",
+				buffer = true,
+			})
+		end
+	end,
+})
