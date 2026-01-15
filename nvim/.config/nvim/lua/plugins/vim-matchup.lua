@@ -8,6 +8,7 @@ return {
 			},
 			matchparen = {
 				deferred = 1, -- Improve performance
+				deferred_show_delay = 200,
 				hi_surround_always = 1, -- Keep highlight active when inside (but not directly on) matching pair
 				offscreen = {}, -- Prevents statusline flickering
 			},
