@@ -12,7 +12,7 @@ modules=(
 
 for package in "${packages[@]}"; do
   echo "Installing $package..."
-  /home/linuxbrew/.linuxbrew/brew install "$package"
+  /home/linuxbrew/.linuxbrew/Homebrew install "$package"
 done
 
 for module in "${modules[@]}"; do
