@@ -2,7 +2,7 @@
 theme = TokyoNight
 window-padding-balance = true
 window-padding-x = 10
-window-padding-y = 4
+window-padding-y = 5
 window-theme = ghostty
 window-colorspace = display-p3
 adjust-cursor-thickness = 2
@@ -15,6 +15,7 @@ font-feature = -calt
 adjust-underline-position = 4
 
 # ==== Editor Behavior ====
+window-inherit-working-directory = false
 shell-integration = detect
 shell-integration-features = true
 mouse-hide-while-typing = true
