@@ -34,3 +34,6 @@ keybind = ctrl+i=text:\x09
 keybind = ctrl+[=text:\x1b
 keybind = ctrl+tab=text:\x1b[9;5u
 keybind = ctrl+shift+tab=text:\x1b[9;6u
+
+# Use this optional config file to make platform-specific overrides
+config-file = ?platform-overrides/config

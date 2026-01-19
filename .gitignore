@@ -1,4 +1,5 @@
 # Neovim theme file
 nvim/.config/nvim/lua/current-theme.lua
 tmux/.config/tmux/plugins/
+ghostty/.config/ghostty/platform-overrides/
 .DS_Store
