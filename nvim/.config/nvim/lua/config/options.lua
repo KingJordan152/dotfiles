@@ -4,6 +4,7 @@ vim.o.expandtab = true -- Use spaces instead of <Tab>
 vim.o.tabstop = 2 -- Number of spaces to use for a <Tab>
 vim.o.softtabstop = 2 -- Number of spaces to use for a <Tab> while performing insert actions
 vim.o.shiftwidth = 2 -- Number of spaces to use for auto/manual indents
+vim.o.shiftround = true -- Round indent to multiple of `shiftwidth`
 vim.o.showmode = false -- Prevents modes, like INSERT, from being shown (lualine takes care of this).
 vim.o.scrolloff = 10 -- Scroll offset
 vim.o.sidescrolloff = 10 -- Horizontal scroll offset
@@ -18,7 +19,14 @@ vim.o.wrap = false -- Prevent line wrapping
 vim.o.linebreak = true -- When `wrap` is true, causes full words to wrap rather than individual characters
 vim.o.winborder = "rounded" -- Make all floating windows have the "rounded" border.
 vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
-vim.opt.fillchars:append({ diff = "╱", lastline = ".", eob = " " }) -- Defines the characters to use for different special lines throughout Neovim
+vim.o.swapfile = false -- Disable swapfile creation
+
+-- Defines the characters to use for different special lines throughout Neovim
+vim.opt.fillchars:append({
+	diff = "╱",
+	lastline = ".",
+	eob = " ",
+})
 
 -- Indentation options
 vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
