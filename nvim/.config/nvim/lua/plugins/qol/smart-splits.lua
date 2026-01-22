@@ -9,6 +9,7 @@ return {
 			default_amount = 2,
 			cursor_follows_swapped_bufs = true,
 			float_win_behavior = "mux", -- Ensures floating windows are properly focused when leaving/entering a split
+			at_edge = "stop",
 		})
 
 		-- stylua: ignore start
