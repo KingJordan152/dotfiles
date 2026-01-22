@@ -20,6 +20,7 @@ vim.o.linebreak = true -- When `wrap` is true, causes full words to wrap rather 
 vim.o.winborder = "rounded" -- Make all floating windows have the "rounded" border.
 vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
 vim.o.swapfile = false -- Disable swapfile creation
+vim.g.markdown_recommended_style = 0 -- Disable all preset Markdown styles (they overwrite the ones set here)
 
 -- Defines the characters to use for different special lines throughout Neovim
 vim.opt.fillchars:append({
