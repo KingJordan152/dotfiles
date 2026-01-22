@@ -111,3 +111,14 @@ autocmd("FileType", {
 		end
 	end,
 })
+
+autocmd("VimResized", {
+	desc = "Automatically resize splits when the terminal's window is resized",
+	group = augroup("equalize_splits", { clear = true }),
+	callback = function()
+		local current_tab = vim.api.nvim_get_current_tabpage()
+
+		vim.cmd("tabdo wincmd =")
+		vim.api.nvim_set_current_tabpage(current_tab)
+	end,
+})
