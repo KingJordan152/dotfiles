@@ -6,13 +6,13 @@ window-padding-y = 5
 window-theme = ghostty
 window-colorspace = display-p3
 adjust-cursor-thickness = 2
+adjust-underline-position = 4
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
 font-size = 15
 font-thicken = true
 font-feature = -calt
-adjust-underline-position = 4
 
 # ==== Editor Behavior ====
 window-inherit-working-directory = false
