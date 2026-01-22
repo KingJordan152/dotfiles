@@ -1,0 +1,1 @@
+/Users/joking/.config/nvim/after/queries/html/rainbow-script.scm
