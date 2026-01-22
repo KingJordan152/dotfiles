@@ -55,27 +55,6 @@ vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
 
--- Customize how diagnostics work
-vim.diagnostic.config({
-	severity_sort = true,
-	float = {
-		source = "if_many",
-		max_width = 100,
-	},
-	virtual_text = {
-		source = "if_many",
-		spacing = 2,
-	},
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.INFO] = " ",
-			[vim.diagnostic.severity.HINT] = " ",
-		},
-	},
-})
-
 -- Customize which filetypes are assigned to different extensions
 vim.filetype.add({
 	extension = {

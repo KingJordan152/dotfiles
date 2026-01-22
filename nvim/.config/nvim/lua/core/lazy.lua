@@ -26,6 +26,7 @@ vim.g.maplocalleader = " "
 require("config.options")
 require("config.autocmds")
 require("config.keymaps")
+require("config.diagnostics")
 
 -- Setup lazy.nvim
 require("lazy").setup({

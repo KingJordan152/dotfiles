@@ -75,29 +75,6 @@ autocmd("TextYankPost", {
 	end,
 })
 
-local prose_filetypes = utils.Set({
-	"markdown",
-	"text",
-	"gitcommit",
-})
-
-autocmd("LspAttach", {
-	desc = "Adjust diagnostic config for prose-based filetypes",
-	group = augroup("prose_filetype_diagnostics", { clear = true }),
-	callback = function(args)
-		local buf_ft = vim.bo[args.buf].filetype
-
-		if prose_filetypes[buf_ft] then
-			local ns = vim.lsp.diagnostic.get_namespace(args.data.client_id)
-
-			vim.diagnostic.config({
-				virtual_text = false,
-				update_in_insert = true,
-			}, ns)
-		end
-	end,
-})
-
 autocmd("FileType", {
 	desc = "Add unique keymaps to readonly files",
 	group = augroup("readonly_keymaps", { clear = true }),
