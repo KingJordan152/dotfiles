@@ -33,6 +33,7 @@ return {
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			go = { "goimports", "gofmt", stop_after_first = true },
+			rust = { "rustfmt" },
 
 			-- Web Dev
 			html = { "prettierd" },
