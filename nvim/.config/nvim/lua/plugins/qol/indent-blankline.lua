@@ -16,6 +16,10 @@ return {
 			"RainbowDelimiterGreen",
 			"RainbowDelimiterYellow",
 		}
+		local css_nodes = {
+			"rule_set",
+			"media_statement",
+		}
 
 		-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
 		vim.g.rainbow_delimiters = vim.tbl_deep_extend("keep", vim.g.rainbow_delimiters, { highlight = highlight })
@@ -44,12 +48,9 @@ return {
 							"arguments", -- TS/JS: argument list that's written across multiple lines
 							"import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
 						},
-						scss = {
-							"rule_set",
-						},
-						css = {
-							"rule_set",
-						},
+						css = css_nodes,
+						scss = css_nodes,
+						less = css_nodes,
 					},
 				},
 				exclude = {
