@@ -29,18 +29,25 @@ return {
 	---@type conform.setupOpts
 	opts = {
 		formatters_by_ft = {
+			-- Individual Languages
 			lua = { "stylua" },
 			python = { "isort", "black" },
 			go = { "goimports", "gofmt", stop_after_first = true },
+
+			-- Web Dev
 			html = { "prettierd" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
+			less = { "prettierd" },
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			typescriptreact = { "prettierd" },
 			javascriptreact = { "prettierd" },
 			svelte = { "prettierd" },
 			vue = { "prettierd" },
+			astro = { "prettierd" },
+
+			-- Etc.
 			json = { "prettierd" },
 			markdown = function(bufnr)
 				return { first(bufnr, "prettierd", "prettier"), "injected" }

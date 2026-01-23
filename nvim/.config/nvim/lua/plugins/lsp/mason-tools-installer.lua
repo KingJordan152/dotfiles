@@ -13,23 +13,28 @@ return {
 		auto_update = true,
 		ensure_installed = {
 			-- LSPs
+			"html",
+			-- "emmet_language_server",
 			"ts_ls",
+			"denols",
+			"eslint",
+			"biome",
 			"svelte",
 			"vue_ls",
-			"clangd",
+			"astro",
+			"angularls",
 			"cssls",
 			"css_variables",
+			"tailwindcss",
 			"cssmodules_ls",
-			"eslint",
+
+			"clangd",
 			{ "gopls", condition = go_exists },
 			"lua_ls",
 			"rust_analyzer",
-			"tailwindcss",
 			"jsonls",
 			"yamlls",
 			"harper_ls",
-			"html",
-			-- "emmet_language_server",
 
 			-- Formatters
 			"prettier",
