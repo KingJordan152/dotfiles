@@ -32,14 +32,16 @@ return {
 			{ "gopls", condition = go_exists },
 			"lua_ls",
 			"rust_analyzer",
+			"basedpyright",
 			"jsonls",
 			"yamlls",
 			"harper_ls",
 
 			-- Formatters
-			"prettier",
-			"prettierd",
-			"stylua",
+			"prettierd", -- Web Dev
+			"stylua", -- Lua
+			"isort", -- Python
+			"black", -- Python
 			{ "goimports", condition = go_exists },
 
 			-- Linters
