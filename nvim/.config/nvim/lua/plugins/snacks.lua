@@ -39,7 +39,12 @@ return {
 			},
 			sources = {
 				projects = {
-					dev = { "~/dev", "~/Projects" },
+					dev = { "~/Documents", "~/Projects" },
+					filter = {
+						paths = {
+							["/opt"] = false,
+						},
+					},
 				},
 				smart = {
 					filter = {
