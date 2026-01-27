@@ -114,6 +114,11 @@ return {
 					italic = true,
 				}
 
+				-- Treesitter hlgroup for built-in "defaultLibrary" tokens
+				highlights["@variable.builtin"] = {
+					fg = colors.blue1,
+				}
+
 				-- Fix the coloring for some built-in utilies (e.g., JS `Reflect`)
 				highlights["@lsp.typemod.namespace.defaultLibrary"] = {
 					fg = colors.blue1,
