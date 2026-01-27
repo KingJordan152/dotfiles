@@ -23,7 +23,6 @@ return {
 			"svelte",
 			"vue_ls",
 			"astro",
-			"angularls",
 			"cssls",
 			"css_variables",
 			"tailwindcss",
