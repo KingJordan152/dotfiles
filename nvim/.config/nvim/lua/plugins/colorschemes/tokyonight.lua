@@ -12,7 +12,9 @@ return {
 			lualine_bold = true,
 
 			on_colors = function(colors)
+				-- General overrides
 				colors.bg_statusline = colors.none
+				colors.magenta2 = "#BA3C97" -- Special color from VS Code Tokyonight theme
 
 				-- Git overrides
 				colors.git.change = colors.yellow
@@ -81,35 +83,55 @@ return {
 					fg = colors.yellow,
 				}
 
-				-- JSX composite components using object notation (e.g., <Modal.Dialog>); normal HTML elements
+				-- HTML/JSX/TSX tags
+				highlights["@tag"] = {
+					fg = colors.red,
+				}
+
+				-- JSX/TSX composite components using object notation (e.g., <Modal.Dialog>); normal HTML elements
 				highlights["@tag.builtin"] = {
 					fg = colors.red,
 				}
 
-				-- JSX Elements
-				highlights["@_jsx_element"] = {
-					fg = colors.red,
+				-- Angle brackets for HTML elements
+				highlights["@tag.delimiter"] = {
+					fg = colors.magenta2,
 				}
 
-				-- Angle brackets for JSX and HTML elements
+				-- Angle brackets for TSX elements
 				highlights["@tag.delimiter.tsx"] = {
-					fg = "#BA3C97", -- Special color from VS Code Tokyonight theme
+					fg = colors.magenta2,
 				}
 
-				-- JSX props
+				-- Angle brackets for JSX elements
+				highlights["@tag.delimiter.jsx"] = {
+					fg = colors.magenta2,
+				}
+
+				-- JSX props / HTML attributes
 				highlights["@tag.attribute"] = {
 					fg = colors.magenta,
 					italic = true,
 				}
 
-				-- Builtin variables/functions (e.g., console.log)
-				highlights["@variable.builtin"] = {
+				-- Fix the coloring for some built-in utilies (e.g., JS `Reflect`)
+				highlights["@lsp.typemod.namespace.defaultLibrary"] = {
 					fg = colors.blue1,
 				}
 
-				-- Builtin variables/functions - LSP (e.g., vim.--)
+				-- Built-in variables/functions - LSP (e.g., vim.--)
 				highlights["@lsp.typemod.variable.global"] = {
 					fg = colors.blue1,
+				}
+
+				-- Methods belonging to built-in variables/functions (these should remain blue)
+				highlights["@lsp.typemod.method.defaultLibrary"] = {
+					fg = colors.blue,
+				}
+
+				-- Functions belonging to built-in classes/namespaces (these should remain blue)
+				highlights["@lsp.typemod.function.defaultLibrary"] = {
+					fg = colors.blue,
 				}
 
 				-- Default bracket color (when rainbow-delimiters isn't working)
