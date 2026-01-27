@@ -73,10 +73,10 @@ return {
 				},
 			},
 		},
-		-- terminal = {
-		-- 	enabled = true,
-		-- 	auto_close = false,
-		-- },
+		terminal = {
+			enabled = true,
+			auto_close = false,
+		},
 		-- Cool central-hub page (like Alpha)
 		dashboard = {
 			enabled = true,
@@ -446,20 +446,21 @@ return {
 			end,
 			desc = "C[a]lls Outgoing",
 		},
-		-- {
-		-- 	"<leader>T",
-		-- 	function()
-		-- 		Snacks.terminal.open()
-		-- 	end,
-		-- 	desc = "Create new Terminal",
-		-- },
-		-- {
-		-- 	"<leader>t",
-		-- 	function()
-		-- 		Snacks.terminal.toggle()
-		-- 	end,
-		-- 	desc = "Toggle Terminal",
-		-- },
+		-- Toggle Terminals
+		{
+			"<leader>tt",
+			function()
+				Snacks.terminal.toggle()
+			end,
+			desc = "Toggle terminal",
+		},
+		{
+			"<leader>tT",
+			function()
+				Snacks.terminal.open()
+			end,
+			desc = "Toggle new terminal",
+		},
 		-- (Dashboard) Pull up dashboard from anywhere
 		{
 			"<leader><CR>",
