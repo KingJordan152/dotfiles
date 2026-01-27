@@ -114,14 +114,24 @@ return {
 					italic = true,
 				}
 
-				-- Builtin variables/functions (e.g., console.log)
-				highlights["@variable.builtin"] = {
+				-- Fix the coloring for some built-in utilies (e.g., JS `Reflect`)
+				highlights["@lsp.typemod.namespace.defaultLibrary"] = {
 					fg = colors.blue1,
 				}
 
-				-- Builtin variables/functions - LSP (e.g., vim.--)
+				-- Built-in variables/functions - LSP (e.g., vim.--)
 				highlights["@lsp.typemod.variable.global"] = {
 					fg = colors.blue1,
+				}
+
+				-- Methods belonging to built-in variables/functions (these should remain blue)
+				highlights["@lsp.typemod.method.defaultLibrary"] = {
+					fg = colors.blue,
+				}
+
+				-- Functions belonging to built-in classes/namespaces (these should remain blue)
+				highlights["@lsp.typemod.function.defaultLibrary"] = {
+					fg = colors.blue,
 				}
 
 				-- Default bracket color (when rainbow-delimiters isn't working)
