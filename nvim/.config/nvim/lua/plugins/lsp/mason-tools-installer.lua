@@ -16,6 +16,7 @@ return {
 			"html",
 			-- "emmet_language_server",
 			"ts_ls",
+			"vtsls",
 			"denols",
 			"eslint",
 			"biome",
