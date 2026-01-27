@@ -29,6 +29,11 @@ end
 ---@param data VariableData
 local function restore_variables(variables, data)
 	for _, variable in ipairs(variables) do
+		-- Initialize default values if they don't exist
+		data[variable] = data[variable] or {}
+		data[variable].global = data[variable].global or nil
+		data[variable].buffer = data[variable].buffer or {}
+
 		vim.g[variable] = data[variable].global
 
 		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
