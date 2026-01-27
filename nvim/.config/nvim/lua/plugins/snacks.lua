@@ -122,10 +122,6 @@ return {
  ██████  █████████████████████ ████ █████ █████ ████ ██████]],
 			},
 		},
-		-- Display `lazygit` CLI tool in a floating window
-		lazygit = {
-			enabled = true,
-		},
 		-- Reorganize the statuscolumn (and add clickable 'fold' icons)
 		statuscolumn = {
 			enabled = true,
@@ -468,14 +464,6 @@ return {
 				Snacks.dashboard.open()
 			end,
 			desc = "Open Dashboard",
-		},
-		-- (Lazygit) Show Lazygit window
-		{
-			"<leader>lg",
-			function()
-				Snacks.lazygit.open()
-			end,
-			desc = "Open Lazygit",
 		},
 	},
 }
