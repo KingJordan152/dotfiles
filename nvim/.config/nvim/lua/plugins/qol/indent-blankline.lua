@@ -17,8 +17,7 @@ return {
 			"RainbowDelimiterYellow",
 		}
 		local css_nodes = {
-			"rule_set",
-			"media_statement",
+			"block",
 		}
 
 		-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
