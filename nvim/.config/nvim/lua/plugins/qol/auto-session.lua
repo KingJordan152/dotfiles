@@ -1,3 +1,43 @@
+---@alias VariableData { [string]: { global: any, buffer: any[] } }
+
+---Creates a table of all the global and buffer-local variables that the user wishes to save.
+---This can then be used by `AutoSession` to preserve those variables after Neovim exits.
+---@param variables string[]
+---@return VariableData
+local function save_variables(variables)
+	---@type VariableData
+	local variable_data = {}
+
+	for _, variable in ipairs(variables) do
+		variable_data[variable] = {
+			global = vim.g[variable],
+			buffer = {},
+		}
+
+		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+			local bufname = vim.fn.bufname(bufnr) -- Since bufnr can change between sessions, bufname must be used
+			variable_data[variable].buffer[bufname] = vim.b[bufnr][variable]
+		end
+	end
+
+	return variable_data
+end
+
+---Takes a table created by `save_variables` and re-initializes its respective global and buffer-local variables.
+---This can be used by `AutoSession` to restore those variables after opening Neovim and restoring a session.
+---@param variables string[]
+---@param data VariableData
+local function restore_variables(variables, data)
+	for _, variable in ipairs(variables) do
+		vim.g[variable] = data[variable].global
+
+		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+			local bufname = vim.fn.bufname(bufnr) -- Since bufnr can change between sessions, bufname must be used
+			vim.b[bufnr][variable] = data[variable].buffer[bufname]
+		end
+	end
+end
+
 return {
 	"rmagatti/auto-session",
 	lazy = false,
@@ -10,17 +50,7 @@ return {
 		bypass_save_filetypes = { "netrw", "snacks_dashboard" },
 
 		save_extra_data = function()
-			local extra_data = {
-				autoformat = {
-					global = vim.g.disable_autoformat,
-					buffer = {},
-				},
-			}
-
-			-- Save all buffer-scoped auto-formatting states based on buffer ID
-			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-				extra_data.autoformat.buffer[bufnr] = vim.b[bufnr].disable_autoformat
-			end
+			local extra_data = save_variables({ "disable_autoformat" })
 
 			-- Save all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
 			local ok, breakpoints = pcall(require, "dap.breakpoints")
@@ -41,12 +71,7 @@ return {
 		restore_extra_data = function(_, json_data)
 			local extra_data = vim.fn.json_decode(json_data)
 
-			vim.g.disable_autoformat = extra_data.autoformat.global
-
-			-- Restore all buffer-scoped auto-formatting states based on buffer ID
-			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-				vim.b[bufnr].disable_autoformat = extra_data.autoformat.buffer[bufnr]
-			end
+			restore_variables({ "disable_autoformat" }, extra_data)
 
 			-- Restore all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
 			if extra_data.breakpoints then
