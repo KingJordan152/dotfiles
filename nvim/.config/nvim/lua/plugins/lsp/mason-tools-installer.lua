@@ -14,7 +14,7 @@ return {
 		ensure_installed = {
 			-- LSPs
 			"html",
-			-- "emmet_language_server",
+			"emmet_language_server",
 			"ts_ls",
 			"vtsls",
 			"denols",
