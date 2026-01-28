@@ -39,6 +39,7 @@ return {
 						language = false,
 						left_pad = 0,
 						right_pad = 0,
+						border = "hide",
 					},
 				},
 			},
