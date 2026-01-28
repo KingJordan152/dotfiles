@@ -16,11 +16,10 @@ return {
 			left_pad = 2,
 		},
 		code = {
+			-- Don't add any padding/margin because it **will** mess up indent lines
 			width = "block",
-			left_pad = 2,
-			right_pad = 2,
-			language_pad = 2,
 			min_width = 45,
+			border = "thick",
 		},
 		pipe_table = {
 			preset = "round",
