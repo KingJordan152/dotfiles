@@ -57,7 +57,7 @@ return {
 				}
 
 				highlights["WinSeparator"] = {
-					fg = colors.blue,
+					fg = colors.border_highlight,
 				}
 
 				highlights["DapStoppedLine"] = {
