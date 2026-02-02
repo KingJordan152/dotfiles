@@ -6,6 +6,8 @@ return {
 
 		lint.linters_by_ft = {
 			python = { "pylint" },
+			css = { "stylelint" },
+			scss = { "stylelint" },
 		}
 
 		-- Configure autocmd for automatic linting
