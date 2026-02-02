@@ -16,6 +16,9 @@ vim.diagnostic.config({
 		source = "if_many",
 		spacing = 2,
 	},
+	jump = {
+		float = true,
+	},
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = " ",
