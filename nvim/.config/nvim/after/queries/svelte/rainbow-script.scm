@@ -1,1 +1,2 @@
-/Users/joking/.config/nvim/after/queries/html/rainbow-script.scm
+; This empty file will override HTML tag rainbow delimiters **only**.
+; Rainbow parens/brackets will be preserved.
