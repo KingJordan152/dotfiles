@@ -30,6 +30,7 @@ local styled_components_plugin = {
 	enableForWorkspaceTypeScriptVersions = true,
 }
 
+---@type vim.lsp.Config
 return {
 	filetypes = {
 		"typescript",

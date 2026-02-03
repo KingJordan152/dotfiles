@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	-- Prevents `denols` from running inside Node/Bun projects.
 	root_markers = { "deno.json", "deno.jsonc" },
