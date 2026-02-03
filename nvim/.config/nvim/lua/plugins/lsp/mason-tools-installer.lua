@@ -1,10 +1,17 @@
 local utils = require("core.utils")
 
----Determines whether Go exists on the user's system.
----@return boolean
-local function go_exists()
-	return utils.executable_exists("go")
-end
+---Returns whether various packages are installed on the user's system.
+local is_installed = {
+	go = function()
+		return utils.executable_exists("go")
+	end,
+	ruby = function()
+		return utils.executable_exists("ruby") and utils.executable_exists("gem")
+	end,
+	java = function()
+		return utils.executable_exists("java")
+	end,
+}
 
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -26,12 +33,14 @@ return {
 			"css_variables",
 			"tailwindcss",
 			"cssmodules_ls",
+			-- { "ruby_lsp", condition = ruby_exists },
 
 			"clangd",
-			{ "gopls", condition = go_exists },
+			{ "gopls", condition = is_installed.go },
 			"lua_ls",
 			"rust_analyzer",
 			"basedpyright",
+			{ "jdtls", condition = is_installed.java },
 			"jsonls",
 			"yamlls",
 			"harper_ls",
@@ -41,7 +50,7 @@ return {
 			"stylua", -- Lua
 			"isort", -- Python
 			"black", -- Python
-			{ "goimports", condition = go_exists },
+			{ "goimports", condition = is_installed.go },
 
 			-- Linters
 			"eslint_d",
