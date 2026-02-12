@@ -56,9 +56,14 @@ vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
 
--- Customize which filetypes are assigned to different extensions
+-- Customize which filetypes are assigned to different extensions/filenames
 vim.filetype.add({
 	extension = {
 		["code-snippets"] = "json",
+	},
+	pattern = {
+		["[jt]sconfig.*%.json"] = "jsonc", -- TS/JS config files
+		[".*/%.vscode/.*%.json"] = "jsonc", -- All special VS Code files
+		[".*/%.zed/.*%.json"] = "jsonc", -- All special Zed files
 	},
 })
