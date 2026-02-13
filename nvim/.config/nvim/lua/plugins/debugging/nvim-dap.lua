@@ -72,6 +72,10 @@ return {
 			["pwa-chrome"] = js_debug_adapter,
 			["node"] = js_debug_adapter_for_vscode,
 			["chrome"] = js_debug_adapter_for_vscode,
+			["codelldb"] = {
+				type = "executable",
+				command = mason_package_path .. "/codelldb/codelldb",
+			},
 		}
 
 		for _, filetype in ipairs(js_filetypes) do
@@ -131,6 +135,21 @@ return {
 				},
 			}
 		end
+
+		dap.configurations.cpp = {
+			{
+				name = "Launch file",
+				type = "codelldb",
+				request = "launch",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
+				stopOnEntry = false,
+			},
+		}
+		dap.configurations.c = dap.configurations.cpp
+		dap.configurations.rust = dap.configurations.cpp
 	end,
 	keys = {
 		-- VS Code-flavored Keymaps
