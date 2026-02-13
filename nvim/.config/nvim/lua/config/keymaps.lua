@@ -34,11 +34,13 @@ vim.keymap.set({ "n", "v" }, "<M-S-K>", function()
 	return is_visual and command .. "gv" or command
 end, { expr = true, silent = true })
 
--- Move up and down across wrapped lines while allowing for count-based vertical movement (useful for Markdown files)
+-- Efficiently move across wrapped lines and add current position to jumplist before relative line movement
 vim.keymap.set({ "n", "x" }, "j", function()
-	return vim.v.count > 0 and "j" or "gj"
-end, { expr = true, silent = true })
+	local j = utils.wrapped_lines_movement("j")
+	return vim.v.count > 1 and "m'" .. vim.v.count .. j or j
+end, { expr = true })
 
 vim.keymap.set({ "n", "x" }, "k", function()
-	return vim.v.count > 0 and "k" or "gk"
-end, { expr = true, silent = true })
+	local k = utils.wrapped_lines_movement("k")
+	return vim.v.count > 1 and "m'" .. vim.v.count .. k or k
+end, { expr = true })

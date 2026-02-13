@@ -39,4 +39,16 @@ function M.tree_sitter_cli_exists(print_message)
 	return tree_sitter_cli_exists
 end
 
+---Move up and down across wrapped lines while allowing for count-based vertical movement
+---This is particularly useful for Markdown files, where line wrapping is common.
+---@param char string
+---@return string
+function M.wrapped_lines_movement(char)
+	if not vim.o.wrap then
+		return char
+	end
+
+	return vim.v.count > 0 and char or "g" .. char
+end
+
 return M
