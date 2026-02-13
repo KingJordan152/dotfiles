@@ -150,6 +150,7 @@ return {
 		}
 		dap.configurations.c = dap.configurations.cpp
 		dap.configurations.rust = dap.configurations.cpp
+		dap.configurations.zig = dap.configurations.cpp
 	end,
 	keys = {
 		-- VS Code-flavored Keymaps
