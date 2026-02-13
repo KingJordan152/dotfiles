@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+
 -- General Keymaps
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
