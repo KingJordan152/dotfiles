@@ -115,6 +115,20 @@ return {
 					port = 9222,
 					sourceMaps = true,
 				},
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "Launch file (Deno)",
+					runtimeExecutable = "deno",
+					runtimeArgs = {
+						"run",
+						"--inspect-wait",
+						"--allow-all",
+					},
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+					attachSimplePort = 9229,
+				},
 			}
 		end
 	end,
