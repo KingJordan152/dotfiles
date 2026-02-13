@@ -34,11 +34,11 @@ return {
 				include = {
 					node_type = {
 						["*"] = {
-							"return_statement",
 							"table_constructor",
 							"if_statement",
 							"ternary_expression",
 							"parenthesized_statement",
+							"parenthesized_expression",
 							"object",
 							"object_pattern",
 							"object_type",
