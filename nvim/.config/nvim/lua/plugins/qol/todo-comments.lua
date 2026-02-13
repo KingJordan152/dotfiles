@@ -10,9 +10,13 @@ return {
 			keywords = {
 				TODO = { icon = " ", color = "hint" },
 				NOTE = { icon = " ", color = "info", alt = { "INFO" } },
+				TICKET = { icon = " ", color = "ticket", alt = { "JIRA", "LINEAR" } },
 			},
 			highlight = {
 				multiline = false,
+			},
+			colors = {
+				ticket = { "#339CFF" },
 			},
 		})
 
