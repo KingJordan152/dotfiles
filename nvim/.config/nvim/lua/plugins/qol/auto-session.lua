@@ -53,6 +53,8 @@ return {
 		suppressed_dirs = { "~/", "/", "~/Downloads" },
 		args_allow_single_directory = false, -- Allows Netrw/Oil to be opened using `nvim .`
 		bypass_save_filetypes = { "netrw", "snacks_dashboard" },
+		git_use_branch_name = true,
+		git_auto_restore_on_branch_change = true,
 
 		save_extra_data = function()
 			local extra_data = save_variables({ "disable_autoformat" })
