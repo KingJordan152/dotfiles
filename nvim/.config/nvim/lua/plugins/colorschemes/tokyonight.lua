@@ -134,11 +134,6 @@ return {
 					fg = colors.blue,
 				}
 
-				-- Functions belonging to built-in classes/namespaces (these should remain blue)
-				highlights["@lsp.typemod.function.defaultLibrary"] = {
-					fg = colors.blue,
-				}
-
 				-- Default bracket color (when rainbow-delimiters isn't working)
 				highlights["@punctuation.bracket"] = {
 					fg = colors.purple,
