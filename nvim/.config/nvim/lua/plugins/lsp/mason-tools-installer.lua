@@ -60,6 +60,7 @@ return {
 			"js-debug-adapter",
 			"codelldb", -- C/C++/Rust/Zig
 			"debugpy", -- Python
+			"delve", -- Go
 		},
 	},
 }
