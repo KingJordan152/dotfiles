@@ -61,6 +61,7 @@ return {
 
 			-- Debuggers (DAP)
 			"js-debug-adapter",
+			"java-debug-adapter",
 			"codelldb", -- C/C++/Rust/Zig
 			{ "debugpy", condition = is_installed.python }, -- Python
 			"delve", -- Go
