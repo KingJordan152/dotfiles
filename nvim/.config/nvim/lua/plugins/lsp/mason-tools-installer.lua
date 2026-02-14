@@ -59,6 +59,7 @@ return {
 			-- Debuggers (DAP)
 			"js-debug-adapter",
 			"codelldb", -- C/C++/Rust/Zig
+			"debugpy", -- Python
 		},
 	},
 }
