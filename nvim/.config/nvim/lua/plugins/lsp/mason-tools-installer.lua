@@ -11,6 +11,9 @@ local is_installed = {
 	java = function()
 		return utils.executable_exists("java")
 	end,
+	python = function()
+		return utils.executable_exists("python") and utils.executable_exists("pip")
+	end,
 }
 
 return {
@@ -49,8 +52,8 @@ return {
 			-- Formatters
 			"prettierd", -- Web Dev
 			"stylua", -- Lua
-			"isort", -- Python
-			"black", -- Python
+			{ "isort", condition = is_installed.python }, -- Python
+			{ "black", condition = is_installed.python }, -- Python
 			{ "goimports", condition = is_installed.go },
 
 			-- Linters
@@ -59,7 +62,7 @@ return {
 			-- Debuggers (DAP)
 			"js-debug-adapter",
 			"codelldb", -- C/C++/Rust/Zig
-			"debugpy", -- Python
+			{ "debugpy", condition = is_installed.python }, -- Python
 			"delve", -- Go
 		},
 	},
