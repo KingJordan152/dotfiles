@@ -44,7 +44,6 @@ return {
 			"rust_analyzer",
 			"basedpyright",
 			{ "jdtls", condition = is_installed.java },
-			{ "kotlin_lsp", condition = is_installed.java },
 			"jsonls",
 			"yamlls",
 			"harper_ls",
