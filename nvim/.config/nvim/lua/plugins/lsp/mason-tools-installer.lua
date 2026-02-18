@@ -68,8 +68,8 @@ return {
 			"js-debug-adapter",
 			"java-debug-adapter",
 			"codelldb", -- C/C++/Rust/Zig
+			{ "delve", condition = is_installed.go }, -- Go
 			{ "debugpy", condition = is_installed.python }, -- Python
-			"delve", -- Go
 		},
 	},
 }
