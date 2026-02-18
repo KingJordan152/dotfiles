@@ -21,6 +21,12 @@ return {
 	opts = {
 		auto_update = true,
 		ensure_installed = {
+			--[[
+			-- Tooling for the following languages have been purposely omitted:
+			-- - Kotlin (use IntelliJ)
+			-- - C# (use Visual Studio)
+			--]]
+
 			-- LSPs
 			"html",
 			"emmet_language_server",
