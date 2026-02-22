@@ -49,6 +49,7 @@ return {
 			"lua_ls",
 			"rust_analyzer",
 			"basedpyright",
+			"zls",
 			{ "jdtls", condition = is_installed.java },
 			"jsonls",
 			"yamlls",
