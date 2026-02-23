@@ -6,7 +6,8 @@ local is_installed = {
 		return utils.executable_exists("go")
 	end,
 	ruby = function()
-		return utils.executable_exists("ruby") and utils.executable_exists("gem")
+		-- `ruby_lsp` will consistently fail to install unless Ruby is installed through `mise`
+		return utils.executable_exists("mise") and utils.executable_exists("ruby") and utils.executable_exists("gem")
 	end,
 	java = function()
 		return utils.executable_exists("java")
@@ -42,7 +43,7 @@ return {
 			"css_variables",
 			"tailwindcss",
 			"cssmodules_ls",
-			-- { "ruby_lsp", condition = ruby_exists },
+			{ "ruby_lsp", condition = is_installed.ruby },
 
 			"clangd",
 			{ "gopls", condition = is_installed.go },
@@ -61,6 +62,7 @@ return {
 			{ "isort", condition = is_installed.python }, -- Python
 			{ "black", condition = is_installed.python }, -- Python
 			{ "goimports", condition = is_installed.go },
+			{ "rubocop", condition = is_installed.ruby },
 
 			-- Linters
 			"eslint_d",
@@ -71,6 +73,7 @@ return {
 			"codelldb", -- C/C++/Rust/Zig
 			{ "delve", condition = is_installed.go }, -- Go
 			{ "debugpy", condition = is_installed.python }, -- Python
+			{ "rdbg", condition = is_installed.ruby }, -- Ruby
 		},
 	},
 }
