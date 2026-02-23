@@ -1,6 +1,7 @@
 return {
 	"mfussenegger/nvim-dap-python",
 	ft = "python",
+	dependencies = { "mfussenegger/nvim-dap" },
 	config = function()
 		local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
 		local dap_python = require("dap-python")
