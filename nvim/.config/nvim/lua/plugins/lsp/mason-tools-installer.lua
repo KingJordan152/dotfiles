@@ -49,7 +49,7 @@ return {
 			{ "gopls", condition = is_installed.go },
 			"lua_ls",
 			"rust_analyzer",
-			"basedpyright",
+			{ "basedpyright", condition = is_installed.python },
 			"zls",
 			{ "jdtls", condition = is_installed.java },
 			"jsonls",
