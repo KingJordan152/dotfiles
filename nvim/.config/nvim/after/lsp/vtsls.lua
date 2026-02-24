@@ -1,4 +1,6 @@
-local nvm_path = vim.fn.expand("$NVM_BIN/../lib")
+local npm_global_install_path = vim.trim(
+	vim.system({ "npm", "config", "get", "prefix" }, { text = true }):wait().stdout
+) .. "/lib"
 
 local vue_language_server_path = vim.fn.expand("$MASON/packages")
 	.. "/vue-language-server"
@@ -7,8 +9,6 @@ local vue_language_server_path = vim.fn.expand("$MASON/packages")
 local svelte_language_server_path = vim.fn.expand("$MASON/packages")
 	.. "/svelte-language-server"
 	.. "/node_modules/typescript-svelte-plugin"
-
-local styled_components_plugin_path = (vim.fn.isdirectory(nvm_path) and nvm_path or "/usr/local/lib") .. "/node_modules"
 
 local vue_plugin = {
 	name = "@vue/typescript-plugin",
@@ -26,7 +26,7 @@ local svelte_plugin = {
 
 local styled_components_plugin = {
 	name = "@styled/typescript-styled-plugin",
-	location = styled_components_plugin_path,
+	location = npm_global_install_path,
 	enableForWorkspaceTypeScriptVersions = true,
 }
 
