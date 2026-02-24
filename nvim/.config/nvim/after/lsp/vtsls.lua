@@ -41,7 +41,7 @@ return {
 	},
 	settings = {
 		vtsls = {
-			autoUseWorkspaceTsdk = vim.bo.filetype ~= "vue", -- Currently a bug with Vue's default workspace TypeScript version
+			autoUseWorkspaceTsdk = true,
 			tsserver = {
 				maxTsServerMemory = 8092, -- 8 GiB
 				globalPlugins = {
