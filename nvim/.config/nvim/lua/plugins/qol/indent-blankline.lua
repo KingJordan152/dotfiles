@@ -46,6 +46,7 @@ return {
 							"enum_body",
 							"arguments", -- TS/JS: argument list that's written across multiple lines
 							"import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
+							"class_body",
 						},
 						css = css_nodes,
 						scss = css_nodes,
