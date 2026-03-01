@@ -9,6 +9,7 @@ return {
 			exclude = {
 				"tsgo",
 				"ts_ls",
+				"stylua", -- Only use for formatting
 				-- "vtsls",
 				-- "emmet_language_server",
 			},
