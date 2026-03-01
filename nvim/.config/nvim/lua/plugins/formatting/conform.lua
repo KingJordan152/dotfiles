@@ -31,9 +31,16 @@ return {
 		formatters_by_ft = {
 			-- Individual Languages
 			lua = { "stylua" },
-			python = { "isort", "black" },
 			go = { "goimports", "gofmt", stop_after_first = true },
 			rust = { "rustfmt" },
+			python = {
+				-- To fix auto-fixable lint errors.
+				"ruff_fix",
+				-- To run the Ruff formatter.
+				"ruff_format",
+				-- To organize the imports.
+				"ruff_organize_imports",
+			},
 
 			-- Web Dev
 			html = { "prettierd" },

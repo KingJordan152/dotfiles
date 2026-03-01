@@ -46,23 +46,22 @@ return {
 			{ "ruby_lsp", condition = is_installed.ruby },
 
 			"clangd",
-			{ "gopls", condition = is_installed.go },
 			"lua_ls",
 			"rust_analyzer",
-			{ "basedpyright", condition = is_installed.python },
 			"zls",
-			{ "jdtls", condition = is_installed.java },
 			"jsonls",
 			"yamlls",
 			"harper_ls",
+			{ "basedpyright", condition = is_installed.python },
+			{ "gopls", condition = is_installed.go },
+			{ "jdtls", condition = is_installed.java },
 
 			-- Formatters
 			"prettierd", -- Web Dev
 			"stylua", -- Lua
-			{ "isort", condition = is_installed.python }, -- Python
-			{ "black", condition = is_installed.python }, -- Python
 			{ "goimports", condition = is_installed.go },
 			{ "rubocop", condition = is_installed.ruby },
+			{ "ruff", condition = is_installed.python },
 
 			-- Linters
 			"eslint_d",
