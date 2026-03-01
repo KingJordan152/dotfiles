@@ -8,6 +8,7 @@ return {
 			python = { "pylint" },
 			css = { "stylelint" },
 			scss = { "stylelint" },
+			less = { "stylelint" },
 		}
 
 		-- Configure autocmd for automatic linting
