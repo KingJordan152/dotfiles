@@ -21,14 +21,4 @@ return {
 			end,
 		})
 	end,
-
-	keys = {
-		{
-			"<leader>l",
-			function()
-				require("lint").try_lint()
-			end,
-			desc = "Lint buffer",
-		},
-	},
 }
