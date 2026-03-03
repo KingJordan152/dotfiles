@@ -36,6 +36,7 @@ return {
 			"denols",
 			"eslint",
 			"biome",
+			"oxlint",
 			"svelte",
 			"vue_ls",
 			"astro",
@@ -59,6 +60,7 @@ return {
 			-- Formatters
 			"prettierd", -- Web Dev
 			"stylua", -- Lua
+			"oxfmt",
 			{ "goimports", condition = is_installed.go },
 			{ "rubocop", condition = is_installed.ruby },
 			{ "ruff", condition = is_installed.python },
