@@ -1,5 +1,7 @@
+local utils = require("core.utils")
+
 ---Runs the first available formatter given as an argument.
----You can use this function to run one formatter first *then* another one.
+---You can use this function to run one formatter from a list first *then* another one.
 ---
 ---This code can be found on the [GitHub page](https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#run-the-first-available-formatter-followed-by-more-formatters) for `conform.nvim`.
 ---@param bufnr integer The buffer this formatting will be applied to.
@@ -18,6 +20,48 @@ local function first(bufnr, ...)
 	return select(1, ...)
 end
 
+---When the given filetype receives linting from a web dev LSP, only assign
+---formatters if their config files exists in the current working directory.
+---Otherwise, fallback to LSP formatting.
+---
+---When the given filetype *does not* receive linting, also assign formatters
+---when their corresponding config files exist, but fallback to a default config.
+---
+---Effectively, non-linted files will always be formatted by a dedicated formatter
+---while linted files will fallback to LSP formatting if config files don't exist.
+---@param bufnr integer Current buffer index
+---@return conform.FiletypeFormatter
+local function web_dev_config(bufnr)
+	local conform = require("conform")
+	local linted_filetypes = {}
+	local config = {}
+	local base_config = {
+		"oxfmt", -- Default formatter when no config files are found
+		"prettierd",
+	}
+
+	linted_filetypes = utils.Set(
+		utils.list_extend_dedupe(
+			linted_filetypes,
+			vim.lsp.config.oxlint.filetypes,
+			vim.lsp.config.eslint.filetypes,
+			vim.lsp.config.cssls.filetypes
+		)
+	)
+
+	for _, formatter in pairs(base_config) do
+		if conform.get_formatter_info(formatter, bufnr).cwd ~= nil then
+			table.insert(config, formatter)
+		end
+	end
+
+	if vim.tbl_isempty(config) and not linted_filetypes[vim.bo[bufnr].filetype] then
+		return vim.tbl_extend("keep", base_config, { stop_after_first = true })
+	end
+
+	return config
+end
+
 --[[
 --  Formatter plugin (with "format on save").
 --]]
@@ -31,8 +75,8 @@ return {
 		formatters_by_ft = {
 			-- Individual Languages
 			lua = { "stylua" },
-			go = { "goimports", "gofmt", stop_after_first = true },
 			rust = { "rustfmt" },
+			go = { "goimports", "gofmt", stop_after_first = true },
 			python = {
 				-- To fix auto-fixable lint errors.
 				"ruff_fix",
@@ -43,23 +87,28 @@ return {
 			},
 
 			-- Web Dev
-			html = { "prettierd" },
-			css = { "prettierd" },
-			scss = { "prettierd" },
-			less = { "prettierd" },
-			javascript = { "prettierd" },
-			typescript = { "prettierd" },
-			typescriptreact = { "prettierd" },
-			javascriptreact = { "prettierd" },
-			svelte = { "prettierd" },
-			vue = { "prettierd" },
-			astro = { "prettierd" },
+			html = web_dev_config,
+			css = web_dev_config,
+			scss = web_dev_config,
+			less = web_dev_config,
+			javascript = web_dev_config,
+			typescript = web_dev_config,
+			typescriptreact = web_dev_config,
+			javascriptreact = web_dev_config,
+			vue = web_dev_config,
+			astro = { "prettierd" }, -- No oxfmt support *yet*
+			svelte = { "prettierd" }, -- No oxfmt support *yet*
 
 			-- Etc.
-			json = { "prettierd" },
-			markdown = function(bufnr)
-				return { first(bufnr, "prettierd", "prettier"), "injected" }
-			end,
+			json = web_dev_config,
+			jsonc = web_dev_config,
+			json5 = web_dev_config,
+			yaml = web_dev_config,
+			toml = web_dev_config,
+			markdown = web_dev_config, -- TODO: Figure out way to add "injected" formatter
+			-- mdx = function(bufnr)
+			-- 	return { first(bufnr, "oxfmt", "prettierd"), "injected" }
+			-- end,
 		},
 
 		default_format_opts = {
@@ -72,24 +121,6 @@ return {
 			end
 			return { lsp_format = "fallback", timeout_ms = 500 }
 		end,
-
-		formatters = {
-			prettierd = function(bufnr)
-				local buffer_filetype = vim.bo[bufnr].filetype
-				local eslint_files = require("core.utils").Set(vim.lsp.config.eslint.filetypes)
-
-				return {
-					--[[ 
-						Must have a `.prettierrc` file in the cwd to run `prettierd` if the current 
-						buffer *also* receives linting from ESLint.
-
-						This allows filetypes like `.json` and `.md` to still be formatted by Prettier 
-						even if a `.prettierrc` hasn't been setup in the cwd.  
-					]]
-					require_cwd = eslint_files[buffer_filetype],
-				}
-			end,
-		},
 	},
 	init = function()
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
