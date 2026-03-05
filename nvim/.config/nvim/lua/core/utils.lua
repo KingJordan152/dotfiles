@@ -1,5 +1,10 @@
----Collection of global methods that I might use throughout my config.
+---Collection of global methods and variables that I might use throughout my config.
 local M = {}
+
+M.floating_windows = {
+	max_width = 100,
+	max_height = 25,
+}
 
 ---Creates a collection of unique strings.
 ---@param list string[] All the strings you wish to place in the Set. Any duplicated string will be ignored.

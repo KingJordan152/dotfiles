@@ -5,25 +5,20 @@ local augroup = vim.api.nvim_create_augroup
 autocmd("LspAttach", {
 	desc = "Applies various keymaps and settings for LSPs",
 	group = augroup("lsp_configs", { clear = true }),
-	callback = function()
-		local default_hover = vim.lsp.buf.hover
-		local floating_window = {
-			max_width = 100,
-			max_height = 25,
-		}
-
-		-- Customize the LSP hover window
-		---@diagnostic disable-next-line: duplicate-set-field
-		vim.lsp.buf.hover = function()
-			return default_hover({
-				max_width = floating_window.max_width,
-				max_height = floating_window.max_height,
-			})
-		end
-
+	callback = function(event)
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Go to Definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "Go to Declaration" })
+
+		-- Although this keymap is automatically set by Neovim, it must be redefined in order
+		-- to consistently overwrite the `keywordprg` keymap on session restoration.
+		-- (see https://github.com/rmagatti/auto-session/issues/512#issuecomment-3999927434)
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover({
+				max_width = utils.floating_windows.max_width,
+				max_height = utils.floating_windows.max_height,
+			})
+		end, { buffer = event.buf, desc = "Hover Documentation" })
 
 		-- TODO: Add when v0.12 is released
 		-- Colorize document symbols if the LSP supports doing that.

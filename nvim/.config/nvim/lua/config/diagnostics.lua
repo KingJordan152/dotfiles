@@ -10,7 +10,7 @@ vim.diagnostic.config({
 	severity_sort = true,
 	float = {
 		source = "if_many",
-		max_width = 100,
+		max_width = utils.floating_windows.max_width,
 	},
 	virtual_text = {
 		source = "if_many",
