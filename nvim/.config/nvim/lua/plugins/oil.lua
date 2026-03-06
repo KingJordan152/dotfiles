@@ -7,8 +7,56 @@ return {
 		"nvim-tree/nvim-web-devicons",
 
 		-- Third-party extensions
-		-- "benomahony/oil-git.nvim", -- No longer using until author addresses performance issues
-		{ "JezerM/oil-lsp-diagnostics.nvim", opts = {} },
+		{
+			"JezerM/oil-lsp-diagnostics.nvim",
+			opts = {
+				diagnostic_symbols = {
+					error = " ",
+					warn = "",
+					info = "",
+					hint = "󰌶",
+				},
+			},
+		},
+		{
+			"malewicz1337/oil-git.nvim",
+			opts = {
+				show_directory_highlights = false,
+				symbol_position = "signcolumn",
+				symbols = {
+					file = {
+						added = "",
+						modified = "",
+						deleted = "",
+						copied = "",
+						renamed = "",
+						untracked = "",
+						conflict = "",
+						ignored = "",
+					},
+					directory = {
+						added = "󱞩",
+						modified = "󱞩",
+						renamed = "󱞩",
+						deleted = "󱞩",
+						copied = "󱞩",
+						conflict = "",
+						untracked = "",
+						ignored = "",
+					},
+				},
+				highlights = {
+					OilGitAdded = { link = "GitSignsAdd" },
+					OilGitModified = { link = "GitSignsChange" },
+					OilGitDeleted = { link = "GitSignsDelete" },
+					OilGitUntracked = { link = "GitSignsUntracked" },
+					-- OilGitRenamed = { fg = "#cba6f7" },
+					-- OilGitCopied = { fg = "#cba6f7" },
+					-- OilGitConflict = { fg = "#fab387" },
+					-- OilGitIgnored = { fg = "#6c7086" },
+				},
+			},
+		},
 	},
 	-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 	lazy = false,
