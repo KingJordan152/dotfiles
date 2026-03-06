@@ -6,9 +6,18 @@ autocmd("LspAttach", {
 	desc = "Applies various keymaps and settings for LSPs",
 	group = augroup("lsp_configs", { clear = true }),
 	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Go to Definition" })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "Go to Declaration" })
+		vim.keymap.set("n", "<leader>th", function()
+			if client and client:supports_method("textDocument/inlayHint", event.buf) then
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+			else
+				vim.api.nvim_echo({ { "Inlay Hints aren't supported by this LSP", "Removed" } }, true, {})
+			end
+		end, { buffer = event.buf, desc = "Toggle Inlay Hints" })
 
 		-- Although this keymap is automatically set by Neovim, it must be redefined in order
 		-- to consistently overwrite the `keywordprg` keymap on session restoration.
