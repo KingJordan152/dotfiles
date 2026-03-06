@@ -4,7 +4,13 @@ local utils = require("core.utils")
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Common word-processor shortcuts
 vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
+vim.keymap.set("i", "<M-Del>", "<C-o>dw", { desc = "Delete word forwards" })
+vim.keymap.set("i", "<M-f>", "<C-o>w", { desc = "Move forward word" })
+vim.keymap.set("i", "<M-b>", "<C-o>b", { desc = "Move backward word" })
+
 vim.keymap.set("n", "<C-CR>", function()
 	-- Must specify count because `]<Space>` will ignore it by default.
 	return "[<Space>" .. vim.v.count1 .. "]<Space>"
