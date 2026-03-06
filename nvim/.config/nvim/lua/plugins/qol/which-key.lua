@@ -6,8 +6,9 @@ return {
 	event = "VeryLazy",
 	---@class wk.Opts
 	opts = {
-		preset = "modern",
+		preset = "helix",
 		delay = 1500,
+
 		---@type wk.Spec
 		spec = {
 			{ "<leader>g", group = "Git" },
@@ -18,6 +19,7 @@ return {
 			{ "<leader>d", group = "Debugger" },
 		},
 	},
+
 	keys = {
 		{
 			"<leader>?",
