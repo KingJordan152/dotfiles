@@ -16,9 +16,13 @@ font-feature = -calt
 
 # ==== Editor Behavior ====
 window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = true
 shell-integration = detect
 shell-integration-features = true
 mouse-hide-while-typing = true
+cursor-style-blink = false
+notify-on-command-finish = unfocused
 quit-after-last-window-closed = true
 title = " "
 
