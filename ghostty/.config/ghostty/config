@@ -4,14 +4,12 @@ window-padding-balance = true
 window-padding-x = 10
 window-padding-y = 5
 window-theme = ghostty
-window-colorspace = display-p3
 adjust-cursor-thickness = 2
 adjust-underline-position = 4
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
 font-size = 15
-font-thicken = true
 font-feature = -calt
 
 # ==== Editor Behavior ====
@@ -33,6 +31,8 @@ app-notifications = no-clipboard-copy
 # ==== Mac-Only ====
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = left
+font-thicken = true
+window-colorspace = display-p3
 
 # ==== Keybindings ====
 keybind = ctrl+i=text:\x09
