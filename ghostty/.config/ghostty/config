@@ -28,6 +28,9 @@ title = " "
 gtk-toolbar-style = flat
 app-notifications = no-clipboard-copy
 
+# Prevents fonts from stretching vertically
+freetype-load-flags = no-autohint
+
 # ==== Mac-Only ====
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = left
