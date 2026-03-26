@@ -7,7 +7,11 @@ return {
 	---@class wk.Opts
 	opts = {
 		preset = "helix",
-		delay = 1500,
+
+		---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
+		delay = function(ctx)
+			return ctx.plugin and 0 or 1000
+		end,
 
 		---@type wk.Spec
 		spec = {
