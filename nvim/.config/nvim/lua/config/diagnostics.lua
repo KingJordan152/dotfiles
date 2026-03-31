@@ -12,7 +12,14 @@ vim.diagnostic.config({
 		spacing = 2,
 	},
 	jump = {
-		float = true,
+		-- Preserve old `jump.float = true` behavior
+		on_jump = function(_, bufnr)
+			vim.diagnostic.open_float({
+				bufnr = bufnr,
+				scope = "cursor",
+				focus = false,
+			})
+		end,
 	},
 	signs = {
 		text = {
