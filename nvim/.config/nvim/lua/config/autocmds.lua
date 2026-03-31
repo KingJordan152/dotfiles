@@ -28,13 +28,6 @@ autocmd("LspAttach", {
 				max_height = utils.floating_windows.max_height,
 			})
 		end, { buffer = event.buf, desc = "Hover Documentation" })
-
-		-- TODO: Add when v0.12 is released
-		-- Colorize document symbols if the LSP supports doing that.
-		-- local client = vim.lsp.get_client_by_id(args.data.client_id)
-		-- if client ~= nil and client:supports_method("textDocument/documentColor") then
-		-- 	vim.lsp.document_color.enable(true, args.buf)
-		-- end
 	end,
 })
 
