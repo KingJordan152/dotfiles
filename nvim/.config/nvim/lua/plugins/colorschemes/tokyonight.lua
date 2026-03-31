@@ -64,6 +64,13 @@ return {
 					bg = colors.blue7,
 				}
 
+				highlights["TreesitterContextBottom"] = {
+					underline = true,
+					sp = colors.fg_gutter,
+				}
+
+				highlights["TreesitterContext"] = colors.none
+
 				highlights["@variable"] = {
 					fg = colors.red,
 				}
