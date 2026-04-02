@@ -52,3 +52,16 @@ vim.keymap.set({ "n", "x" }, "k", function()
 	local k = utils.wrapped_lines_movement("k")
 	return vim.v.count > 1 and "m'" .. vim.v.count .. k or k
 end, { expr = true })
+
+-- Copy filepaths (excludes filename)
+vim.keymap.set("n", "<leader>%", function()
+	local path = vim.fn.expand("%:h")
+	vim.fn.setreg("+", path)
+	vim.notify('Copied relative path: "' .. path .. '"')
+end, { desc = "Copy relative path" })
+
+vim.keymap.set("n", "<leader>~", function()
+	local path = vim.fn.expand("%:p:~:h")
+	vim.fn.setreg("+", path)
+	vim.notify('Copied absolute path: "' .. path .. '"')
+end, { desc = "Copy absolute path" })
