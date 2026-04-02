@@ -20,5 +20,8 @@ return {
 				stopline = 500, -- Stop trying to find matching pair after 500 lines
 			},
 		})
+
+		-- Interferes with `vim-sneak`, and I don't use it
+		vim.keymap.del({ "n", "x", "o" }, "z%")
 	end,
 }
