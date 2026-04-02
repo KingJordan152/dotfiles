@@ -102,6 +102,8 @@ return {
 					modify = ":p:~",
 				},
 			},
+			["gy"] = "actions.copy_to_system_clipboard",
+			["gp"] = "actions.paste_from_system_clipboard",
 			["<CR>"] = {
 				--- Open the file under the cursor, but also remove all search highlights.
 				--- This is helpful for when you're searching for a file inside a Oil buffer but don't want
