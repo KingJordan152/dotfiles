@@ -7,17 +7,11 @@ autocmd("LspAttach", {
 	group = augroup("lsp_configs", { clear = true }),
 	callback = function(event)
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		local buf = event.buf
 
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = event.buf, desc = "Go to Definition" })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "Go to Declaration" })
-		vim.keymap.set("n", "<leader>th", function()
-			if client and client:supports_method("textDocument/inlayHint", event.buf) then
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-			else
-				vim.api.nvim_echo({ { "Inlay Hints aren't supported by this LSP", "Removed" } }, true, {})
-			end
-		end, { buffer = event.buf, desc = "Toggle Inlay Hints" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = buf })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = buf })
 
 		-- Although this keymap is automatically set by Neovim, it must be redefined in order
 		-- to consistently overwrite the `keywordprg` keymap on session restoration.
@@ -27,7 +21,32 @@ autocmd("LspAttach", {
 				max_width = utils.floating_windows.max_width,
 				max_height = utils.floating_windows.max_height,
 			})
-		end, { buffer = event.buf, desc = "Hover Documentation" })
+		end, { desc = "Hover Documentation", buffer = buf })
+
+		-- The following are keymaps that only work with LSP clients that support them
+
+		if not client then
+			return
+		end
+
+		if client:supports_method("textDocument/inlayHint") then
+			vim.keymap.set("n", "<leader>th", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
+			end, { desc = "Toggle Inlay Hints", buffer = buf })
+		end
+
+		if client:supports_method("textDocument/documentColor") then
+			vim.keymap.set({ "n", "x" }, "<leader>lc", function()
+				vim.lsp.document_color.color_presentation()
+			end, { desc = "Select a different color presentation", buffer = buf })
+		end
+
+		if client.name == "eslint" or client.name == "oxlint" then
+			vim.keymap.set("n", "<leader>lf", function()
+				local Name = client.name:gsub("^%l", string.upper)
+				vim.cmd("Lsp" .. Name .. "FixAll")
+			end, { desc = string.format("Fix all fixable issues"), buffer = buf })
+		end
 	end,
 })
 

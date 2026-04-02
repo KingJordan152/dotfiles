@@ -21,6 +21,7 @@ return {
 			{ "<leader>s", group = "Search" },
 			{ "<leader>X", group = "Exchange Treesitter node" },
 			{ "<leader>d", group = "Debugger" },
+			{ "<leader>l", group = "LSP Method" },
 		},
 	},
 
