@@ -6,7 +6,7 @@ autocmd("LspAttach", {
 	desc = "Applies various keymaps and settings for LSPs",
 	group = augroup("lsp_configs", { clear = true }),
 	callback = function(event)
-		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 		local buf = event.buf
 
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
@@ -22,12 +22,6 @@ autocmd("LspAttach", {
 				max_height = utils.floating_windows.max_height,
 			})
 		end, { desc = "Hover Documentation", buffer = buf })
-
-		-- The following are keymaps that only work with LSP clients that support them
-
-		if not client then
-			return
-		end
 
 		if client:supports_method("textDocument/inlayHint") then
 			vim.keymap.set("n", "<leader>th", function()
