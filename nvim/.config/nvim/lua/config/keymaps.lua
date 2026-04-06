@@ -1,15 +1,19 @@
 local utils = require("core.utils")
 
--- General Keymaps
+-- Misc. Keymaps
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
+vim.keymap.set({ "i", "c" }, "<M-Del>", "<C-o>dw", { desc = "Delete word forwards" })
 
--- Common word-processor shortcuts
-vim.keymap.set("i", "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
-vim.keymap.set("i", "<M-Del>", "<C-o>dw", { desc = "Delete word forwards" })
-vim.keymap.set("i", "<M-f>", "<C-o>w", { desc = "Move forward word" })
-vim.keymap.set("i", "<M-b>", "<C-o>b", { desc = "Move backward word" })
+-- Emacs-inspired Insert/Command-line mode keymaps
+vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { desc = "Move to beginning of line" })
+vim.keymap.set({ "i", "c" }, "<C-e>", "<End>", { desc = "Move to end of line" })
+vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { desc = "Move right one character" })
+vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { desc = "Move left one character" })
+vim.keymap.set({ "i", "c" }, "<M-f>", "<S-Right>", { desc = "Move right one word" })
+vim.keymap.set({ "i", "c" }, "<M-b>", "<S-Left>", { desc = "Move left one word" })
 
 vim.keymap.set("n", "<C-CR>", function()
 	-- Must specify count because `]<Space>` will ignore it by default.
