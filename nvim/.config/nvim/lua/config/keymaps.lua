@@ -6,6 +6,10 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highl
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
 vim.keymap.set({ "i", "c" }, "<M-Del>", "<C-o>dw", { desc = "Delete word forwards" })
+vim.keymap.set("n", "<C-CR>", function()
+	-- Must specify count because `]<Space>` will ignore it by default.
+	return "[<Space>" .. vim.v.count1 .. "]<Space>"
+end, { remap = true, expr = true, desc = "Add empty line above and below cursor" })
 
 -- Emacs-inspired Insert/Command-line mode keymaps
 vim.keymap.set({ "i", "c" }, "<C-a>", "<Home>", { desc = "Move to beginning of line" })
@@ -14,11 +18,6 @@ vim.keymap.set({ "i", "c" }, "<C-f>", "<Right>", { desc = "Move right one charac
 vim.keymap.set({ "i", "c" }, "<C-b>", "<Left>", { desc = "Move left one character" })
 vim.keymap.set({ "i", "c" }, "<M-f>", "<S-Right>", { desc = "Move right one word" })
 vim.keymap.set({ "i", "c" }, "<M-b>", "<S-Left>", { desc = "Move left one word" })
-
-vim.keymap.set("n", "<C-CR>", function()
-	-- Must specify count because `]<Space>` will ignore it by default.
-	return "[<Space>" .. vim.v.count1 .. "]<Space>"
-end, { remap = true, expr = true, desc = "Add empty line above and below cursor" })
 
 -- Helix-inspired
 vim.keymap.set({ "n", "v", "o" }, "gl", "$", { desc = "Go to end of line" })
