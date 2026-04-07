@@ -62,12 +62,15 @@ autocmd("LspAttach", {
 			buffer = buf,
 			callback = function(ev)
 				local value = ev.data.params.value
-				vim.api.nvim_echo({ { value.message or "done" } }, false, {
+				local status = value.kind ~= "end" and "running" or "success"
+				local message = (not value.message and status ~= "success") and status or value.message or "done"
+
+				vim.api.nvim_echo({ { message } }, false, {
 					id = "lsp." .. ev.data.client_id,
 					kind = "progress",
 					source = "vim.lsp",
 					title = value.title,
-					status = value.kind ~= "end" and "running" or "success",
+					status = status,
 					percent = value.percentage,
 				})
 			end,
