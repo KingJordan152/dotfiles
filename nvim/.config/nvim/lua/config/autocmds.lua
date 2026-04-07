@@ -9,6 +9,9 @@ autocmd("LspAttach", {
 		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 		local buf = event.buf
 
+		-- Enable certain capabilities by default.
+		vim.lsp.codelens.enable(true)
+
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = buf })
@@ -38,10 +41,10 @@ autocmd("LspAttach", {
 			end, { desc = "Toggle Inlay Hints", buffer = buf })
 		end
 
-		if client:supports_method("textDocument/documentColor") then
-			vim.keymap.set({ "n", "x" }, "<leader>lc", function()
-				vim.lsp.document_color.color_presentation()
-			end, { desc = "Select a different color presentation", buffer = buf })
+		if client:supports_method("textDocument/codeLens") then
+			vim.keymap.set("n", "<leader>th", function()
+				vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = buf }))
+			end, { desc = "Toggle CodeLens", buffer = buf })
 		end
 
 		if client.name == "eslint" or client.name == "oxlint" then
