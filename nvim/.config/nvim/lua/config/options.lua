@@ -83,6 +83,8 @@ if os.getenv("TMUX") then
 
 	---@diagnostic disable-next-line: duplicate-set-field
 	vim.api.nvim_ui_send = function(content)
-		original_ui_send(wrap_tmux(content))
+		-- Enable "Progress Bar" sequences within `tmux`
+		local is_progress_bar = content:find("\27]9;4;")
+		original_ui_send(is_progress_bar and wrap_tmux(content) or content)
 	end
 end
