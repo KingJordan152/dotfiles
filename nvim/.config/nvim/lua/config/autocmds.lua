@@ -2,9 +2,11 @@ local utils = require("core.utils")
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+local lsp_config_group = augroup("lsp_config", { clear = true })
+
 autocmd("LspAttach", {
 	desc = "Applies various keymaps and settings for LSPs",
-	group = augroup("lsp_configs", { clear = true }),
+	group = lsp_config_group,
 	callback = function(event)
 		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 		local buf = event.buf
@@ -53,6 +55,23 @@ autocmd("LspAttach", {
 				vim.cmd("Lsp" .. Name .. "FixAll")
 			end, { desc = "Fix all fixable issues", buffer = buf })
 		end
+
+		autocmd("LspProgress", {
+			nested = true,
+			group = lsp_config_group,
+			buffer = buf,
+			callback = function(ev)
+				local value = ev.data.params.value
+				vim.api.nvim_echo({ { value.message or "done" } }, false, {
+					id = "lsp." .. ev.data.client_id,
+					kind = "progress",
+					source = "vim.lsp",
+					title = value.title,
+					status = value.kind ~= "end" and "running" or "success",
+					percent = value.percentage,
+				})
+			end,
+		})
 	end,
 })
 
