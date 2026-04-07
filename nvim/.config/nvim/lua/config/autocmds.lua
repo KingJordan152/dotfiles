@@ -23,6 +23,15 @@ autocmd("LspAttach", {
 			})
 		end, { desc = "Hover Documentation", buffer = buf })
 
+		if client:supports_method("textDocument/documentColor") then
+			vim.keymap.set(
+				{ "n", "x" },
+				"grc",
+				vim.lsp.document_color.color_presentation,
+				{ desc = "Select a different color presentation", buffer = buf }
+			)
+		end
+
 		if client:supports_method("textDocument/inlayHint") then
 			vim.keymap.set("n", "<leader>th", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
