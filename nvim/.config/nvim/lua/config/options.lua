@@ -67,3 +67,22 @@ vim.filetype.add({
 		[".*/%.zed/.*%.json"] = "jsonc", -- All special Zed files
 	},
 })
+
+if os.getenv("TMUX") then
+	---Wraps `content` with `tmux` prefix so that the terminal can interpret it correctly.
+	---Needs `set-option -g allow-passthrough on` in tmux config.
+	---
+	---See [[https://www.reddit.com/r/neovim/comments/1sacc91/comment/oe1n62i/]]
+	---@param content string
+	---@return string
+	local function wrap_tmux(content)
+		return string.format("\27Ptmux;\27%s\27\\", content)
+	end
+
+	local original_ui_send = vim.api.nvim_ui_send
+
+	---@diagnostic disable-next-line: duplicate-set-field
+	vim.api.nvim_ui_send = function(content)
+		original_ui_send(wrap_tmux(content))
+	end
+end
