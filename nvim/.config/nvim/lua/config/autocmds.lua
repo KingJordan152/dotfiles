@@ -51,7 +51,7 @@ autocmd("LspAttach", {
 			vim.keymap.set("n", "<leader>lf", function()
 				local Name = client.name:gsub("^%l", string.upper)
 				vim.cmd("Lsp" .. Name .. "FixAll")
-			end, { desc = string.format("Fix all fixable issues"), buffer = buf })
+			end, { desc = "Fix all fixable issues", buffer = buf })
 		end
 	end,
 })
