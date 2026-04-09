@@ -68,6 +68,15 @@ vim.filetype.add({
 	},
 })
 
+require("vim._core.ui2").enable({
+	enable = true,
+	msg = {
+		targets = {
+			progress = "msg",
+		},
+	},
+})
+
 if os.getenv("TMUX") then
 	---Wraps `content` with `tmux` prefix so that the terminal can interpret it correctly.
 	---Needs `set-option -g allow-passthrough on` in tmux config.
