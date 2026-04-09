@@ -66,8 +66,9 @@ end
 local function should_display_winbar()
 	local buf_name = vim.api.nvim_buf_get_name(0)
 	local no_name = buf_name == "" or buf_name == "null"
+	local ft_ignore_list = utils.Set({ "qf" })
 
-	return not no_name and has_splits()
+	return not no_name and not ft_ignore_list[vim.bo.filetype] and has_splits()
 end
 
 -- [[
