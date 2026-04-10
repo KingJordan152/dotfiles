@@ -52,6 +52,10 @@ return {
 					fg = util.darken(colors.green, 0.8),
 				}
 
+				highlights["QuickFixLineNr"] = {
+					link = "qfLineNr",
+				}
+
 				highlights["MatchParen"] = {
 					link = "LspReferenceRead",
 				}
