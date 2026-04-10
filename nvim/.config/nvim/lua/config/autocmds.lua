@@ -65,6 +65,11 @@ autocmd("LspAttach", {
 				local status = value.kind ~= "end" and "running" or "success"
 				local message = (not value.message and status ~= "success") and status or value.message or "done"
 
+				-- Truncate messages if they're too long (e.g., Rust Analyzer)
+				if #message > 40 then
+					message = message:sub(1, 37) .. "..."
+				end
+
 				vim.api.nvim_echo({ { message } }, false, {
 					id = "lsp." .. ev.data.client_id,
 					kind = "progress",
