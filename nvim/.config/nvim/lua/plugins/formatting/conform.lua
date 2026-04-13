@@ -113,8 +113,8 @@ return {
 			typescriptreact = web_dev_config,
 			javascriptreact = web_dev_config,
 			vue = web_dev_config,
-			astro = { "prettierd" }, -- No oxfmt support *yet*
-			svelte = { "prettierd" }, -- No oxfmt support *yet*
+			astro = web_dev_config,
+			svelte = web_dev_config,
 
 			-- Etc.
 			json = web_dev_adjacent_config,
