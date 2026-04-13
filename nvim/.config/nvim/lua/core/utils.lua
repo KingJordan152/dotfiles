@@ -18,25 +18,17 @@ function M.Set(list)
 	return set
 end
 
----Works similarly to `vim.list_extend` except the final list is deduplicated.
----@generic T: table<any,any>
----@param source T
----@param ... T[]
----@return T
-function M.list_extend_dedupe(source, ...)
-	local new_list = {}
+---Combines any number of arrays into a single one.
+---@param ... any[]
+---@return any[]
+function M.merge_arrays(...)
+	local result = {}
 
-	-- Combine all given lists
 	for _, list in ipairs({ ... }) do
-		vim.list_extend(source, list)
+		vim.list_extend(result, list)
 	end
 
-	-- Extract all keys from `Set`
-	for k, _ in pairs(M.Set(source)) do
-		table.insert(new_list, k)
-	end
-
-	return new_list
+	return result
 end
 
 ---Determines whether the given executable is installed on the user's system.
