@@ -117,15 +117,17 @@ return {
 			svelte = { "prettierd" }, -- No oxfmt support *yet*
 
 			-- Etc.
-			json = web_dev_config,
-			jsonc = web_dev_config,
-			json5 = web_dev_config,
-			yaml = web_dev_config,
-			toml = web_dev_config,
-			markdown = web_dev_config, -- TODO: Figure out way to add "injected" formatter
-			-- mdx = function(bufnr)
-			-- 	return { first(bufnr, "oxfmt", "prettierd"), "injected" }
-			-- end,
+			json = web_dev_adjacent_config,
+			jsonc = web_dev_adjacent_config,
+			json5 = web_dev_adjacent_config,
+			yaml = web_dev_adjacent_config,
+			toml = web_dev_adjacent_config,
+			markdown = function(bufnr)
+				return utils.merge_arrays(web_dev_adjacent_config(bufnr), { "injected" })
+			end,
+			mdx = function(bufnr)
+				return utils.merge_arrays(web_dev_adjacent_config(bufnr), { "injected" })
+			end,
 		},
 
 		default_format_opts = {
