@@ -26,6 +26,13 @@ local function first(bufnr, ...)
 	return select(1, ...)
 end
 
+---Adds the `injected` formatter to a list of formatters.
+---@param formatters string[] List of formatters to add `injected` to.
+---@return string[]
+local function add_injected(formatters)
+	return vim.list_extend(formatters, { "injected" })
+end
+
 ---Takes a list of formatters and filters out the ones that don't have a current
 ---working directory (i.e., a dedicated configuration file).
 ---
@@ -123,10 +130,10 @@ return {
 			yaml = web_dev_adjacent_config,
 			toml = web_dev_adjacent_config,
 			markdown = function(bufnr)
-				return utils.merge_arrays(web_dev_adjacent_config(bufnr), { "injected" })
+				return add_injected(web_dev_adjacent_config(bufnr))
 			end,
 			mdx = function(bufnr)
-				return utils.merge_arrays(web_dev_adjacent_config(bufnr), { "injected" })
+				return add_injected(web_dev_adjacent_config(bufnr))
 			end,
 		},
 
