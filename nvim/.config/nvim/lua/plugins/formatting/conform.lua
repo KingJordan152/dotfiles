@@ -1,4 +1,10 @@
 local utils = require("core.utils")
+local web_dev_formatters = {
+	"oxfmt",
+	"prettierd",
+	"biome",
+	"biome-organize-imports",
+}
 
 ---Runs the first available formatter given as an argument.
 ---You can use this function to run one formatter from a list first *then* another one.
@@ -20,43 +26,54 @@ local function first(bufnr, ...)
 	return select(1, ...)
 end
 
----When the given filetype receives linting from a web dev LSP, only assign
----formatters if their config files exists in the current working directory.
----Otherwise, fallback to LSP formatting.
+---Takes a list of formatters and filters out the ones that don't have a current
+---working directory (i.e., a dedicated configuration file).
 ---
----When the given filetype *does not* receive linting, also assign formatters
----when their corresponding config files exist, but fallback to a default config.
----
----Effectively, non-linted files will always be formatted by a dedicated formatter
----while linted files will fallback to LSP formatting if config files don't exist.
----@param bufnr integer Current buffer index
----@return conform.FiletypeFormatter
-local function web_dev_config(bufnr)
+---This function makes it so that the `require_cwd` formatter option doesn't have to
+---be applied globally.
+---@param bufnr integer Current buffer index.
+---@param formatters string[] List of formatters to filter.
+---@return string[]
+local function require_cwd(bufnr, formatters)
 	local conform = require("conform")
-	local linted_filetypes = {}
 	local config = {}
-	local base_config = {
-		"oxfmt", -- Default formatter when no config files are found
-		"prettierd",
-	}
 
-	linted_filetypes = utils.Set(
-		utils.list_extend_dedupe(
-			linted_filetypes,
-			vim.lsp.config.oxlint.filetypes,
-			vim.lsp.config.eslint.filetypes,
-			vim.lsp.config.cssls.filetypes
-		)
-	)
-
-	for _, formatter in pairs(base_config) do
+	for _, formatter in ipairs(formatters) do
 		if conform.get_formatter_info(formatter, bufnr).cwd ~= nil then
 			table.insert(config, formatter)
 		end
 	end
 
-	if vim.tbl_isempty(config) and not linted_filetypes[vim.bo[bufnr].filetype] then
-		return vim.tbl_extend("keep", base_config, { stop_after_first = true })
+	return config
+end
+
+---Determines the formatters that will be used for all web development filetypes.
+---
+---A formatter must have a dedicated configuration file in order to be activated.
+---Otherwise, fallback to LSP formatters.
+---
+---Examples of formatter configuration files include `.prettierrc`, `.oxfmtrc.json`, etc.
+---@param bufnr integer Current buffer index.
+---@return string[]
+local function web_dev_config(bufnr)
+	return require_cwd(bufnr, web_dev_formatters)
+end
+
+---Determines the formatters that will be used for all web development-adjacent filetypes
+---(i.e., files that can reasonably be found both inside and outside web development projects).
+---
+---For these files, the `web_dev_config` is applied, but rather than falling back to the LSP when
+---formatter configuration files aren't found, we default to the first available formatter provided.
+---
+---This makes it so that filetypes like `Markdown` can still receive dedicated formatting even when
+---they're outside a web development project and don't have an associated configuration file.
+---@param bufnr integer Current buffer index.
+---@return string[]
+local function web_dev_adjacent_config(bufnr)
+	local config = web_dev_config(bufnr)
+
+	if vim.tbl_isempty(config) then
+		config = { first(bufnr, unpack(web_dev_formatters)) }
 	end
 
 	return config
