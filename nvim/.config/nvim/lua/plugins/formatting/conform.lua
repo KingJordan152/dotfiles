@@ -1,4 +1,3 @@
-local utils = require("core.utils")
 local web_dev_formatters = {
 	"oxfmt",
 	"prettierd",
