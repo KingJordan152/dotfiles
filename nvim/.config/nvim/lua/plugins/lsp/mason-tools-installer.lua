@@ -20,7 +20,7 @@ local is_installed = {
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	opts = {
-		auto_update = true,
+		auto_update = false, -- Potential security vulnerability (and it can be annoying)
 		ensure_installed = {
 			--[[
 			-- Tooling for the following languages have been purposely omitted:
