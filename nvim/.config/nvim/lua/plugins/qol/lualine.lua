@@ -166,7 +166,6 @@ return {
 						ignore_lsp = {
 							"cssmodules_ls",
 							"css_variables",
-							"eslint",
 							"stylua",
 							"tailwindcss",
 							"emmet_language_server",
