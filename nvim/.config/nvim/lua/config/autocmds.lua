@@ -71,7 +71,7 @@ autocmd("LspAttach", {
 		end
 
 		if client:supports_method("textDocument/codeLens") then
-			vim.keymap.set("n", "<leader>th", function()
+			vim.keymap.set("n", "<leader>tl", function()
 				vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = buf }))
 			end, { desc = "Toggle CodeLens", buffer = buf })
 		end
