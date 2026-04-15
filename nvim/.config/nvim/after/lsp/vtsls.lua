@@ -60,6 +60,11 @@ return {
 			preferences = {
 				preferTypeOnlyAutoImports = true,
 			},
+			tsserver = {
+				experimental = {
+					enableProjectDiagnostics = true,
+				},
+			},
 		},
 	},
 	on_attach = function(client, bufnr)
