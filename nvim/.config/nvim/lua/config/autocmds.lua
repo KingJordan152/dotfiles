@@ -15,8 +15,10 @@ autocmd("LspAttach", {
 		vim.lsp.codelens.enable(true)
 
 		-- Neovim creates keymaps for most LSP actions automatically (see https://neovim.io/doc/user/lsp.html#_global-defaults), but these aren't.
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buffer = buf })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = buf })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buf = buf })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buf = buf })
+		vim.keymap.set("n", "grq", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to location list" })
+		vim.keymap.set("n", "grQ", vim.diagnostic.setqflist, { desc = "Add all diagnostics to quickfix list" })
 
 		-- Although this keymap is automatically set by Neovim, it must be redefined in order
 		-- to consistently overwrite the `keywordprg` keymap on session restoration.
