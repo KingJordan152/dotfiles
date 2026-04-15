@@ -10,7 +10,7 @@ return {
 
 		---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
 		delay = function(ctx)
-			return ctx.plugin and 0 or 1000
+			return (ctx.plugin and ctx.plugin ~= "marks") and 0 or 1000
 		end,
 
 		---@type wk.Spec
