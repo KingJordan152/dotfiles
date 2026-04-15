@@ -28,6 +28,33 @@ autocmd("LspAttach", {
 			})
 		end, { desc = "Hover Documentation", buffer = buf })
 
+		if client:supports_method("textDocument/codeAction") then
+			-- Use to generate actions that are relevant to where the cursor is currently positioned.
+			vim.keymap.set({ "n", "x" }, "gra", function()
+				vim.lsp.buf.code_action({
+					---@diagnostic disable-next-line: missing-fields
+					context = {
+						only = {
+							"refactor", -- "Move to...", "Extract to...", etc.
+							"quickfix", -- Disable error, Fix issue, etc.
+						},
+					},
+				})
+			end, { desc = "LSP Code Action" })
+
+			-- Use to generate actions that are relevant anywhere in the current file.
+			vim.keymap.set({ "n", "x" }, "grs", function()
+				vim.lsp.buf.code_action({
+					context = {
+						only = {
+							"source", -- Sort imports, fix all issues, remove unused code, etc.
+						},
+						diagnostics = {},
+					},
+				})
+			end, { desc = "LSP Source Action" })
+		end
+
 		if client:supports_method("textDocument/documentColor") then
 			vim.keymap.set(
 				{ "n", "x" },
