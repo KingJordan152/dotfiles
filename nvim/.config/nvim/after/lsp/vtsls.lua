@@ -68,7 +68,7 @@ return {
 		},
 	},
 	on_attach = function(client, bufnr)
-		vim.api.nvim_buf_create_user_command(bufnr, "SelectTypeScriptVersion", function()
+		vim.api.nvim_buf_create_user_command(bufnr, "LspSelectTypescriptVersion", function()
 			client:request_sync("workspace/executeCommand", {
 				command = "typescript.selectTypeScriptVersion",
 			}, nil, bufnr)
