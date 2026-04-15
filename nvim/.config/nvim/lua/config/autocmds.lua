@@ -158,10 +158,12 @@ autocmd("FileType", {
 	group = augroup("readonly_keymaps", { clear = true }),
 	pattern = "*",
 	callback = function(args)
-		if vim.bo[args.buf].readonly or not vim.bo[args.buf].modifiable then
+		local bufnr = args.buf
+
+		if vim.bo[bufnr].readonly or not vim.bo[bufnr].modifiable then
 			vim.keymap.set("n", "gq", "<cmd>q<cr>", {
 				desc = "Quit the current window",
-				buffer = true,
+				buf = bufnr,
 			})
 		end
 	end,
