@@ -26,7 +26,7 @@ autocmd("LspAttach", {
 				max_width = utils.floating_windows.max_width,
 				max_height = utils.floating_windows.max_height,
 			})
-		end, { desc = "Hover Documentation", buffer = buf })
+		end, { desc = "Hover Documentation", buf = buf })
 
 		if client:supports_method("textDocument/codeAction") then
 			-- Use to generate actions that are relevant to where the cursor is currently positioned.
@@ -60,27 +60,27 @@ autocmd("LspAttach", {
 				{ "n", "x" },
 				"grc",
 				vim.lsp.document_color.color_presentation,
-				{ desc = "Select a different color presentation", buffer = buf }
+				{ desc = "Select a different color presentation", buf = buf }
 			)
 		end
 
 		if client:supports_method("textDocument/inlayHint") then
 			vim.keymap.set("n", "<leader>th", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buf }))
-			end, { desc = "Toggle Inlay Hints", buffer = buf })
+			end, { desc = "Toggle Inlay Hints", buf = buf })
 		end
 
 		if client:supports_method("textDocument/codeLens") then
 			vim.keymap.set("n", "<leader>tl", function()
 				vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = buf }))
-			end, { desc = "Toggle CodeLens", buffer = buf })
+			end, { desc = "Toggle CodeLens", buf = buf })
 		end
 
 		if client.name == "eslint" or client.name == "oxlint" then
 			vim.keymap.set("n", "<leader>lf", function()
 				local Name = client.name:gsub("^%l", string.upper)
 				vim.cmd("Lsp" .. Name .. "FixAll")
-			end, { desc = "Fix all fixable issues", buffer = buf })
+			end, { desc = "Fix all fixable issues", buf = buf })
 		end
 
 		autocmd("LspProgress", {
