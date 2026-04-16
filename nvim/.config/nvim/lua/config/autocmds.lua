@@ -18,7 +18,16 @@ autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", buf = buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration", buf = buf })
 		vim.keymap.set("n", "grq", vim.diagnostic.setloclist, { desc = "Add buffer diagnostics to location list" })
-		vim.keymap.set("n", "grQ", vim.diagnostic.setqflist, { desc = "Add all diagnostics to quickfix list" })
+		vim.keymap.set("n", "grQ", function()
+			-- Prompt the user for their desired severity level.
+			vim.ui.select(vim.list_extend({ "ALL" }, vim.diagnostic.severity), {
+				prompt = "Select severity level",
+			}, function(choice)
+				vim.diagnostic.setqflist(choice ~= "ALL" and {
+					severity = choice,
+				} or {})
+			end)
+		end, { desc = "Add all diagnostics to quickfix list" })
 
 		-- Although this keymap is automatically set by Neovim, it must be redefined in order
 		-- to consistently overwrite the `keywordprg` keymap on session restoration.
