@@ -23,6 +23,10 @@ autocmd("LspAttach", {
 			vim.ui.select(vim.list_extend({ "ALL" }, vim.diagnostic.severity), {
 				prompt = "Select severity level",
 			}, function(choice)
+				if choice == nil then
+					return
+				end
+
 				vim.diagnostic.setqflist(choice ~= "ALL" and {
 					severity = choice,
 				} or {})
