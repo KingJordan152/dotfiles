@@ -13,9 +13,6 @@ return {
 				-- Prefer formatting with Conform
 				"stylua",
 				"oxfmt",
-
-				-- "vtsls",
-				-- "emmet_language_server",
 			},
 		},
 	},
