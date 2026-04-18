@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+
 return {
 	"saghen/blink.cmp",
 	dependencies = {
@@ -121,7 +123,13 @@ return {
 		},
 
 		sources = {
-			default = { "lazydev", "lsp", "path", "snippets" },
+			default = function()
+				if utils.treesitter_node_equals({ "comment", "line_comment", "block_comment", "comment_content" }) then
+					return {} -- Ignore all completion sources while inside comments
+				else
+					return { "lazydev", "lsp", "path", "git", "snippets" }
+				end
+			end,
 			providers = {
 				lazydev = {
 					name = "LazyDev",

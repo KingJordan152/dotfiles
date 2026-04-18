@@ -69,4 +69,21 @@ function M.wrapped_lines_movement(char)
 	return vim.v.count > 0 and char or "g" .. char
 end
 
+---Determines whether the Treesitter node at the cursor's current position
+---is equal to one of the nodes from the provided list.
+---@param node_list string[] List of Treesitter nodes to check against the current one.
+---@return boolean
+function M.treesitter_node_equals(node_list)
+	local row, column = unpack(vim.api.nvim_win_get_cursor(0))
+	local success, node = pcall(vim.treesitter.get_node, {
+		pos = { row - 1, math.max(0, column - 1) }, -- Properly captures node at the cursor (0-indexed)
+	})
+
+	if not success or not node then
+		return false
+	end
+
+	return vim.tbl_contains(node_list, node:type())
+end
+
 return M
