@@ -147,7 +147,7 @@ return {
 					---@type blink-cmp-git.Options
 					opts = {
 						commit = {
-							triggers = { "~" }, -- Default is "~"
+							triggers = { "~" }, -- Default is ":"
 						},
 					},
 				},
