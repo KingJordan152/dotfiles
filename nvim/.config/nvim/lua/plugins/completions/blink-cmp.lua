@@ -153,8 +153,11 @@ return {
 				},
 				cmdline = {
 					min_keyword_length = function(ctx)
-						-- When typing a command, only show when the keyword is 3 characters or longer
-						if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
+						-- Look for the first occurrence of "=", ".", or a space.
+						local found_trigger_character = string.find(ctx.line, "[.= ]") ~= nil
+
+						-- When typing a command, only show completion menu when the keyword is 3 or more characters
+						if ctx.mode == "cmdline" and not found_trigger_character then
 							return 3
 						end
 
