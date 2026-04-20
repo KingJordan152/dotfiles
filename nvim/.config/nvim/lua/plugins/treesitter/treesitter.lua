@@ -29,6 +29,7 @@ return {
 			"query",
 			"gitcommit",
 			"c",
+			"diff", -- For diff hover previews
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {
