@@ -77,7 +77,7 @@ return {
 			{ "rdbg", condition = is_installed.ruby }, -- Ruby
 
 			-- Misc.
-			"tree-sitter-cli",
+			{ "tree-sitter-cli", auto_update = true },
 		},
 	},
 }
