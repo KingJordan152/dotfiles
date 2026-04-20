@@ -75,6 +75,9 @@ return {
 			{ "delve", condition = is_installed.go }, -- Go
 			{ "debugpy", condition = is_installed.python }, -- Python
 			{ "rdbg", condition = is_installed.ruby }, -- Ruby
+
+			-- Misc.
+			"tree-sitter-cli",
 		},
 	},
 }
