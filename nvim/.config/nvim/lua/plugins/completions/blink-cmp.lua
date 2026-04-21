@@ -4,7 +4,6 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"L3MON4D3/LuaSnip",
-		"Kaiser-Yang/blink-cmp-git",
 	},
 	version = "1.*",
 	event = { "InsertEnter", "CmdlineEnter", "TermEnter" },
@@ -130,30 +129,12 @@ return {
 					return { "lazydev", "lsp", "path", "snippets" }
 				end
 			end,
-			per_filetype = {
-				gitcommit = { "git", "snippets" },
-				markdown = { "lsp", "git", "path", "snippets" },
-			},
 			providers = {
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
 					-- Make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
-				},
-				git = {
-					module = "blink-cmp-git",
-					name = "Git",
-					enabled = function()
-						return vim.tbl_contains({ "gitcommit", "markdown" }, vim.bo.filetype)
-					end,
-					---@module 'blink-cmp-git'
-					---@type blink-cmp-git.Options
-					opts = {
-						commit = {
-							triggers = { "~" }, -- Default is ":"
-						},
-					},
 				},
 				cmdline = {
 					min_keyword_length = function(ctx)
