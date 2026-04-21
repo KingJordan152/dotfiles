@@ -127,9 +127,13 @@ return {
 				if utils.treesitter_node_equals({ "comment", "line_comment", "block_comment", "comment_content" }) then
 					return {} -- Ignore all completion sources while inside comments
 				else
-					return { "lazydev", "lsp", "path", "git", "snippets" }
+					return { "lazydev", "lsp", "path", "snippets" }
 				end
 			end,
+			per_filetype = {
+				gitcommit = { "git", "snippets" },
+				markdown = { "lsp", "git", "path", "snippets" },
+			},
 			providers = {
 				lazydev = {
 					name = "LazyDev",
@@ -141,7 +145,7 @@ return {
 					module = "blink-cmp-git",
 					name = "Git",
 					enabled = function()
-						return vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
+						return vim.tbl_contains({ "gitcommit", "markdown" }, vim.bo.filetype)
 					end,
 					---@module 'blink-cmp-git'
 					---@type blink-cmp-git.Options
