@@ -39,11 +39,11 @@ return {
 		"typescriptreact",
 		"vue",
 	},
+	---@type lspconfig.settings.vtsls
 	settings = {
 		vtsls = {
 			autoUseWorkspaceTsdk = true,
 			tsserver = {
-				maxTsServerMemory = 8092, -- 8 GiB
 				globalPlugins = {
 					vue_plugin,
 					svelte_plugin,
