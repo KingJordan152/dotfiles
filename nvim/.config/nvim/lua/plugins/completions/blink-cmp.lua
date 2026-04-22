@@ -124,7 +124,7 @@ return {
 		sources = {
 			default = function()
 				if utils.treesitter_node_equals({ "comment", "line_comment", "block_comment", "comment_content" }) then
-					return { "lazydev", "lsp" } -- Ignore "path" and "snippets" sources inside comments
+					return { "lsp" } -- Ignore "path" and "snippets" sources inside comments
 				else
 					return { "lazydev", "lsp", "path", "snippets" }
 				end
