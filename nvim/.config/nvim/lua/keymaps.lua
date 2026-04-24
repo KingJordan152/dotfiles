@@ -1,4 +1,4 @@
-local utils = require("core.utils")
+local utils = require("utils")
 
 -- Misc. Keymaps
 vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
