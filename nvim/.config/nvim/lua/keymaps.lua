@@ -1,13 +1,14 @@
 local utils = require("utils")
 
--- Misc. Keymaps
-vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
+-- General Keymaps
+vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>e", "<Cmd>Ex<CR>", { desc = "Open file explorer [Netrw]" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
 vim.keymap.set({ "i", "c" }, "<M-Del>", "<C-o>dw", { desc = "Delete word forwards" })
-vim.keymap.set("n", "]p", "<Cmd>ip<CR>")
-vim.keymap.set("n", "[p", "<Cmd>ip!<CR>")
+vim.keymap.set("n", "]p", "<Cmd>ip<CR>", { desc = "Paste clipboard below current line" })
+vim.keymap.set("n", "[p", "<Cmd>ip!<CR>", { desc = "Paste clipboard above current line" })
 vim.keymap.set("n", "<C-CR>", function()
 	-- Must specify count because `]<Space>` will ignore it by default.
 	return "[<Space>" .. vim.v.count1 .. "]<Space>"
