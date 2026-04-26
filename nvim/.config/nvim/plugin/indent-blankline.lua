@@ -1,0 +1,65 @@
+vim.pack.add({
+	-- Dependencies
+	"https://github.com/HiPhish/rainbow-delimiters.nvim",
+
+	"https://github.com/lukas-reineke/indent-blankline.nvim",
+})
+
+local hooks = require("ibl.hooks")
+local highlight = {
+	-- "RainbowDelimiterRed", (usually indicates error)
+	-- "RainbowDelimiterOrange", (too similar to yellow)
+	"RainbowDelimiterBlue",
+	"RainbowDelimiterViolet",
+	"RainbowDelimiterCyan",
+	"RainbowDelimiterGreen",
+	"RainbowDelimiterYellow",
+}
+local css_nodes = {
+	"block",
+}
+
+-- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
+vim.g.rainbow_delimiters = vim.tbl_deep_extend("keep", vim.g.rainbow_delimiters, { highlight = highlight })
+hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+
+require("ibl").setup({
+	indent = {
+		char = "▏",
+	},
+	scope = {
+		show_end = false,
+		highlight = highlight,
+		include = {
+			node_type = {
+				["*"] = {
+					"table_constructor",
+					"if_statement",
+					"ternary_expression",
+					"parenthesized_statement",
+					"parenthesized_expression",
+					"object",
+					"object_pattern",
+					"object_type",
+					"interface_body",
+					"enum_body",
+					"arguments", -- TS/JS: argument list that's written across multiple lines
+					"import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
+					"class_body",
+				},
+				css = css_nodes,
+				scss = css_nodes,
+				less = css_nodes,
+			},
+		},
+		exclude = {
+			language = { "yaml" },
+			node_type = {
+				["*"] = {
+					"jsx_element",
+					"element",
+				},
+			},
+		},
+	},
+})
