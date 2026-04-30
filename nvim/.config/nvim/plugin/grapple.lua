@@ -18,7 +18,7 @@ require("grapple").setup({
 	},
 	---@type grapple.vim.win_opts
 	win_opts = {
-		border = "rounded",
+		border = vim.o.winborder,
 	},
 })
 
