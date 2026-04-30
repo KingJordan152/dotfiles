@@ -53,7 +53,7 @@ end
 ---If there are neither formatters nor LSPs configured for the current buffer, the empty string will be returned.
 ---@return string
 local function formatter_status()
-	local conform = require("nvim.config.nvim.plugin.conform")
+	local conform = require("conform")
 	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
 	local result = ""
 
