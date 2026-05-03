@@ -1,7 +1,8 @@
 local utils = require("core.utils")
 
--- Misc. Keymaps
-vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save File" })
+-- General Keymaps
+vim.keymap.set("n", "<leader>w", "<Cmd>w<CR>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>e", "<Cmd>Ex<CR>", { desc = "Open file explorer [Netrw]" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word backwards" })
