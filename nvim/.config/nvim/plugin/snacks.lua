@@ -1,118 +1,106 @@
----@module 'snacks'
+vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 
--- [[
---    A collection of small plugins that provide various QoL upgrades to Neovim.
---
---    The most important one here is Picker, which provides a dropdown menu for
---    files and other important lists.
--- ]]
-return {
-	"folke/snacks.nvim",
-	priority = 1000,
-	lazy = false,
-	---@type snacks.Config
-	opts = {
-		bigfile = {
-			enabled = true,
+require("snacks").setup({
+	bigfile = {
+		enabled = true,
+	},
+	-- Custom `vim.ui.input`
+	input = {
+		enabled = true,
+	},
+	image = {
+		enabled = true,
+		convert = {
+			notify = false,
 		},
-		input = {
-			enabled = true,
-		},
-		image = {
-			enabled = true,
-			convert = {
-				notify = false,
+	},
+	-- Auto-highlight LSP references
+	words = {
+		enabled = true,
+	},
+	-- Floating picker windows (like Telescope)
+	picker = {
+		enabled = true,
+		ui_select = true, -- Custom `vim.ui.select`
+		formatters = {
+			file = {
+				filename_first = true,
 			},
 		},
-		-- Auto-highlight LSP references
-		words = {
-			enabled = true,
-		},
-		-- Floating picker windows (like Telescope)
-		picker = {
-			enabled = true,
-			ui_select = true,
-			formatters = {
-				file = {
-					filename_first = true,
-				},
-			},
-			sources = {
-				projects = {
-					dev = { "~/Documents", "~/Projects" },
-					filter = {
-						paths = {
-							["/opt"] = false,
-						},
-					},
-				},
-				smart = {
-					filter = {
-						cwd = true,
-					},
-					title = "Find File",
-				},
-				recent = {
-					filter = {
-						cwd = true,
-					},
-				},
-				lsp_config = {
-					configured = true,
-					attached = true,
-					title = "Attached LSPs",
-					layout = "dropdown",
-				},
-			},
-			win = {
-				input = {
-					keys = {
-						["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
-						["<m-/>"] = { "toggle_help_input", mode = "i" },
+		sources = {
+			projects = {
+				dev = { "~/Documents", "~/Projects" },
+				filter = {
+					paths = {
+						["/opt"] = false,
+						["~/.local/share"] = false,
 					},
 				},
 			},
+			smart = {
+				filter = {
+					cwd = true,
+				},
+				title = "Find File",
+			},
+			recent = {
+				filter = {
+					cwd = true,
+				},
+			},
+			lsp_config = {
+				configured = true,
+				attached = true,
+				title = "Attached LSPs",
+				layout = "dropdown",
+			},
 		},
-		terminal = {
-			enabled = true,
-			auto_close = false,
-		},
-		-- Cool central-hub page (like Alpha)
-		dashboard = {
-			enabled = true,
-			preset = {
-				---@type snacks.dashboard.Item[]
+		win = {
+			input = {
 				keys = {
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-					{
-						icon = " ",
-						key = "r",
-						desc = "Recent Files",
-						action = ":lua Snacks.dashboard.pick('oldfiles')",
-					},
-					{
-						icon = " ",
-						key = "p",
-						desc = "Recent Projects",
-						action = ":lua Snacks.dashboard.pick('projects')",
-					},
-					{
-						icon = " ",
-						key = "c",
-						desc = "Config",
-						action = ":e ~/.config/nvim/lua/options.lua",
-					},
-					{
-						icon = "󰒲 ",
-						key = "L",
-						desc = "Lazy",
-						action = ":Lazy",
-						enabled = package.loaded.lazy ~= nil,
-					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
+					["<m-/>"] = { "toggle_help_input", mode = "i" },
 				},
-				header = [[
+			},
+		},
+	},
+	terminal = {
+		enabled = true,
+		auto_close = false,
+	},
+	-- Cool central-hub page (like Alpha)
+	dashboard = {
+		enabled = true,
+		sections = {
+			{ section = "header" },
+			{ section = "keys", gap = 1, padding = 1 },
+		},
+		preset = {
+			---@type snacks.dashboard.Item[]
+			keys = {
+				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+				{
+					icon = " ",
+					key = "r",
+					desc = "Recent Files",
+					action = ":lua Snacks.dashboard.pick('oldfiles')",
+				},
+				{
+					icon = " ",
+					key = "p",
+					desc = "Recent Projects",
+					action = ":lua Snacks.dashboard.pick('projects')",
+				},
+				{
+					icon = " ",
+					key = "c",
+					desc = "Config",
+					action = ":e ~/.config/nvim/lua/options.lua",
+				},
+				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+			},
+			header = [[
        ████ ██████           █████      ██                     
       ███████████             █████                             
       █████████ ███████████████████ ███   ███████████   
@@ -120,350 +108,67 @@ return {
     █████████ ██████████ █████████ █████ █████ ████ █████   
   ███████████ ███    ███ █████████ █████ █████ ████ █████  
  ██████  █████████████████████ ████ █████ █████ ████ ██████]],
-			},
-		},
-		-- Reorganize the statuscolumn (and add clickable 'fold' icons)
-		statuscolumn = {
-			enabled = true,
-			folds = {
-				open = true,
-				git_hl = true,
-			},
 		},
 	},
-	init = function()
-		vim.api.nvim_create_autocmd("User", {
-			desc = "LSP file renaming integration for Oil",
-			pattern = "OilActionsPost",
-			callback = function(event)
-				if event.data.actions[1].type == "move" then
-					Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
-				end
-			end,
-		})
-	end,
-	keys = {
-		-- Primary Pickers
-		{
-			"<leader><space>",
-			function()
-				Snacks.picker.smart()
-			end,
-			desc = "Find File",
-		},
-		{
-			"<leader>,",
-			function()
-				Snacks.picker.buffers()
-			end,
-			desc = "View Buffers",
-		},
-		{
-			"<leader>/",
-			function()
-				Snacks.picker.grep()
-			end,
-			desc = "Grep Files",
-		},
-		{
-			"<leader>/",
-			function()
-				Snacks.picker.grep_word()
-			end,
-			desc = "Grep Selection",
-			mode = "x",
-		},
-		{
-			"<leader>:",
-			function()
-				Snacks.picker.command_history()
-			end,
-			desc = "View Command History",
-		},
-		{
-			"<leader>.",
-			function()
-				Snacks.picker.resume()
-			end,
-			desc = "Resume Previous Picker",
-		},
-		-- Git Pickers
-		{
-			"<leader>gb",
-			function()
-				Snacks.picker.git_branches()
-			end,
-			desc = "Git Branches",
-		},
-		{
-			"<leader>gl",
-			function()
-				Snacks.picker.git_log()
-			end,
-			desc = "Git Log",
-		},
-		{
-			"<leader>gL",
-			function()
-				Snacks.picker.git_log_line()
-			end,
-			desc = "Git Log Line",
-		},
-		{
-			"<leader>gs",
-			function()
-				Snacks.picker.git_status()
-			end,
-			desc = "Git Status",
-		},
-		{
-			"<leader>gS",
-			function()
-				Snacks.picker.git_stash()
-			end,
-			desc = "Git Stash",
-		},
-		{
-			"<leader>gd",
-			function()
-				Snacks.picker.git_diff()
-			end,
-			desc = "Git Diff",
-		},
-		{
-			"<leader>gf",
-			function()
-				Snacks.picker.git_log_file()
-			end,
-			desc = "Git Log File",
-		},
-		{
-			"<leader>gi",
-			function()
-				Snacks.picker.gh_issue()
-			end,
-			desc = "GitHub Issues (open)",
-		},
-		{
-			"<leader>gI",
-			function()
-				Snacks.picker.gh_issue({ state = "all" })
-			end,
-			desc = "GitHub Issues (all)",
-		},
-		{
-			"<leader>gp",
-			function()
-				Snacks.picker.gh_pr()
-			end,
-			desc = "GitHub Pull Requests (open)",
-		},
-		{
-			"<leader>gP",
-			function()
-				Snacks.picker.gh_pr({ state = "all" })
-			end,
-			desc = "GitHub Pull Requests (all)",
-		},
-		-- Search Pickers
-		{
-			'<leader>s"',
-			function()
-				Snacks.picker.registers()
-			end,
-			desc = "Registers",
-		},
-		{
-			"<leader>s/",
-			function()
-				Snacks.picker.search_history()
-			end,
-			desc = "History",
-		},
-		{
-			"<leader>sa",
-			function()
-				Snacks.picker.autocmds()
-			end,
-			desc = "Autocmds",
-		},
-		{
-			"<leader>sC",
-			function()
-				Snacks.picker.colorschemes({
-					layout = {
-						preset = "vscode",
-						hidden = {},
-					},
-				})
-			end,
-			desc = "Colorschemes",
-		},
-		{
-			"<leader>sD",
-			function()
-				Snacks.picker.diagnostics()
-			end,
-			desc = "All Diagnostics",
-		},
-		{
-			"<leader>sd",
-			function()
-				Snacks.picker.diagnostics_buffer()
-			end,
-			desc = "Buffer Diagnostics",
-		},
-		{
-			"<leader>sh",
-			function()
-				Snacks.picker.help()
-			end,
-			desc = "Help Pages",
-		},
-		{
-			"<leader>sH",
-			function()
-				Snacks.picker.highlights()
-			end,
-			desc = "Highlights",
-		},
-		{
-			"<leader>si",
-			function()
-				Snacks.picker.icons()
-			end,
-			desc = "Icons (Nerd Fonts, Emojis, etc.)",
-		},
-		{
-			"<leader>sj",
-			function()
-				Snacks.picker.jumps()
-			end,
-			desc = "Jumps",
-		},
-		{
-			"<leader>sk",
-			function()
-				Snacks.picker.keymaps()
-			end,
-			desc = "Keymaps",
-		},
-		{
-			"<leader>sl",
-			function()
-				Snacks.picker.loclist()
-			end,
-			desc = "Location List",
-		},
-		{
-			"<leader>sL",
-			function()
-				Snacks.picker.lsp_config()
-			end,
-			desc = "Attached LSPs",
-		},
-		{
-			"<leader>sm",
-			function()
-				Snacks.picker.marks()
-			end,
-			desc = "Marks",
-		},
-		{
-			"<leader>sM",
-			function()
-				Snacks.picker.man()
-			end,
-			desc = "Man Pages",
-		},
-		{
-			"<leader>sp",
-			function()
-				Snacks.picker.projects()
-			end,
-			desc = "Projects",
-		},
-		{
-			"<leader>sP",
-			function()
-				Snacks.picker.lazy({
-					title = "Lazy Plugin Spec",
-				})
-			end,
-			desc = "Lazy Plugin Spec",
-		},
-		{
-			"<leader>sq",
-			function()
-				Snacks.picker.qflist()
-			end,
-			desc = "Quickfix List",
-		},
-		{
-			"<leader>sr",
-			function()
-				Snacks.picker.recent()
-			end,
-			desc = "Recent",
-		},
-		{
-			"<leader>ss",
-			function()
-				Snacks.picker.lsp_symbols()
-			end,
-			desc = "LSP Symbols",
-		},
-		{
-			"<leader>sS",
-			function()
-				Snacks.picker.lsp_workspace_symbols()
-			end,
-			desc = "LSP Workspace Symbols",
-		},
-		{
-			"<leader>su",
-			function()
-				Snacks.picker.undo()
-			end,
-			desc = "Undo History",
-		},
-		-- LSP Actions
-		{
-			"gai",
-			function()
-				Snacks.picker.lsp_incoming_calls()
-			end,
-			desc = "C[a]lls Incoming",
-		},
-		{
-			"gao",
-			function()
-				Snacks.picker.lsp_outgoing_calls()
-			end,
-			desc = "C[a]lls Outgoing",
-		},
-		-- Toggle Terminals
-		{
-			"<leader>tt",
-			function()
-				Snacks.terminal.toggle()
-			end,
-			desc = "Toggle terminal",
-		},
-		{
-			"<leader>tT",
-			function()
-				Snacks.terminal.open()
-			end,
-			desc = "Toggle new terminal",
-		},
-		-- (Dashboard) Pull up dashboard from anywhere
-		{
-			"<leader><CR>",
-			function()
-				Snacks.dashboard.open()
-			end,
-			desc = "Open Dashboard",
+	-- Reorganize the statuscolumn and add clickable 'fold' icons
+	statuscolumn = {
+		enabled = true,
+		folds = {
+			open = true,
+			git_hl = true,
 		},
 	},
-}
+})
+
+-- Primary Pickers
+vim.keymap.set("n", "<leader><space>", Snacks.picker.smart, { desc = "Find File" })
+vim.keymap.set("n", "<leader>,", Snacks.picker.buffers, { desc = "View Buffers" })
+vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep Files" })
+vim.keymap.set("x", "<leader>/", Snacks.picker.grep_word, { desc = "Grep Selection" })
+vim.keymap.set("n", "<leader>:", Snacks.picker.command_history, { desc = "View Command History" })
+vim.keymap.set("n", "<leader>.", Snacks.picker.resume, { desc = "Resume Previous Picker" })
+
+-- Git Pickers
+vim.keymap.set("n", "<leader>gB", Snacks.picker.git_branches, { desc = "Git Branches" })
+vim.keymap.set("n", "<leader>gl", Snacks.picker.git_log, { desc = "Git Log" })
+vim.keymap.set("n", "<leader>gL", Snacks.picker.git_log_line, { desc = "Git Log Line" })
+vim.keymap.set("n", "<leader>gf", Snacks.picker.git_log_file, { desc = "Git Log File" })
+vim.keymap.set("n", "<leader>gs", Snacks.picker.git_status, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gS", Snacks.picker.git_stash, { desc = "Git Stash" })
+
+-- Search Pickers
+vim.keymap.set("n", '<leader>s"', Snacks.picker.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>s/", Snacks.picker.search_history, { desc = "History" })
+vim.keymap.set("n", "<leader>sa", Snacks.picker.autocmds, { desc = "Autocmds" })
+vim.keymap.set("n", "<leader>sC", function()
+	Snacks.picker.colorschemes({
+		layout = {
+			preset = "vscode",
+			hidden = {},
+		},
+	})
+end, { desc = "Colorschemes" })
+vim.keymap.set("n", "<leader>sd", Snacks.picker.diagnostics_buffer, { desc = "Buffer Diagnostics" })
+vim.keymap.set("n", "<leader>sD", Snacks.picker.diagnostics, { desc = "All Diagnostics" })
+vim.keymap.set("n", "<leader>sh", Snacks.picker.help, { desc = "Help Pages" })
+vim.keymap.set("n", "<leader>sH", Snacks.picker.highlights, { desc = "Highlights" })
+vim.keymap.set("n", "<leader>si", Snacks.picker.icons, { desc = "Icons (Nerd Fonts, Emojis, etc.)" })
+vim.keymap.set("n", "<leader>sj", Snacks.picker.jumps, { desc = "Jumps" })
+vim.keymap.set("n", "<leader>sk", Snacks.picker.keymaps, { desc = "Keymaps" })
+vim.keymap.set("n", "<leader>sl", Snacks.picker.loclist, { desc = "Location List" })
+vim.keymap.set("n", "<leader>sL", Snacks.picker.lsp_config, { desc = "Attached LSPs" })
+vim.keymap.set("n", "<leader>sm", Snacks.picker.marks, { desc = "Marks" })
+vim.keymap.set("n", "<leader>sM", Snacks.picker.man, { desc = "Man Pages" })
+vim.keymap.set("n", "<leader>sp", Snacks.picker.projects, { desc = "Projects" })
+vim.keymap.set("n", "<leader>sq", Snacks.picker.qflist, { desc = "Quickfix List" })
+vim.keymap.set("n", "<leader>sr", Snacks.picker.recent, { desc = "Recent" })
+vim.keymap.set("n", "<leader>ss", Snacks.picker.lsp_symbols, { desc = "LSP Symbols" })
+vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
+vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
+
+-- Toggle Terminals
+vim.keymap.set("n", "<leader>tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
+vim.keymap.set("n", "<leader>tT", Snacks.terminal.open, { desc = "Toggle new terminal" })
+
+-- (Dashboard) Pull up dashboard from anywhere
+vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
