@@ -63,6 +63,11 @@ require("oil").setup({
 		timeout_ms = 1000,
 		autosave_changes = true,
 	},
+	git = {
+		mv = function()
+			return true
+		end,
+	},
 	view_options = {
 		show_hidden = true,
 		is_always_hidden = function(name)
