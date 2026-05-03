@@ -1,3 +1,6 @@
-require("core.lazy")
+require("options")
+require("autocmds")
+require("keymaps")
+require("diagnostics")
 
-vim.cmd.colorscheme("tokyonight-night")
+-- vim.cmd.colorscheme("tokyonight-night")
