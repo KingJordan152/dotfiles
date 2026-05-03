@@ -1,8 +1,10 @@
 local utils = require("utils")
 
 vim.pack.add({
-	{ src = "https://github.com/saghen/blink.cmp", version = "v1" },
+	-- Dependencies
 	"https://github.com/L3MON4D3/LuaSnip",
+
+	{ src = "https://github.com/saghen/blink.cmp", version = "v1" },
 })
 
 require("blink.cmp").setup({
