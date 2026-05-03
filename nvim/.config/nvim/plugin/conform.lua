@@ -1,3 +1,7 @@
+vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
+
+-- ==== Helper Functions and Values ====
+
 local web_dev_formatters = {
 	"oxfmt",
 	"prettierd",
@@ -85,137 +89,120 @@ local function web_dev_adjacent_config(bufnr)
 	return config
 end
 
---[[
---  Formatter plugin (with "format on save").
---]]
-return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
-	---@module "conform"
-	---@type conform.setupOpts
-	opts = {
-		formatters_by_ft = {
-			-- Individual Languages
-			lua = { "stylua" },
-			rust = { "rustfmt" },
-			go = { "goimports", "gofmt", stop_after_first = true },
-			python = {
-				-- To fix auto-fixable lint errors.
-				"ruff_fix",
-				-- To run the Ruff formatter.
-				"ruff_format",
-				-- To organize the imports.
-				"ruff_organize_imports",
-			},
+-- ==== Plugin Configuration ====
 
-			-- Web Dev
-			html = web_dev_config,
-			css = web_dev_config,
-			scss = web_dev_config,
-			less = web_dev_config,
-			javascript = web_dev_config,
-			typescript = web_dev_config,
-			typescriptreact = web_dev_config,
-			javascriptreact = web_dev_config,
-			vue = web_dev_config,
-			astro = web_dev_config,
-			svelte = web_dev_config,
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" -- Ensures `conform` is used for formatting globally
 
-			-- Etc.
-			json = web_dev_adjacent_config,
-			jsonc = web_dev_adjacent_config,
-			json5 = web_dev_adjacent_config,
-			yaml = web_dev_adjacent_config,
-			toml = web_dev_adjacent_config,
-			markdown = function(bufnr)
-				return add_injected(web_dev_adjacent_config(bufnr))
-			end,
-			mdx = function(bufnr)
-				return add_injected(web_dev_adjacent_config(bufnr))
-			end,
+require("conform").setup({
+	formatters_by_ft = {
+		-- Individual Languages
+		lua = { "stylua" },
+		rust = { "rustfmt" },
+		go = { "goimports", "gofmt", stop_after_first = true },
+		python = {
+			-- To fix auto-fixable lint errors.
+			"ruff_fix",
+			-- To run the Ruff formatter.
+			"ruff_format",
+			-- To organize the imports.
+			"ruff_organize_imports",
 		},
 
-		default_format_opts = {
-			lsp_format = "fallback",
-		},
+		-- Web Dev
+		html = web_dev_config,
+		css = web_dev_config,
+		scss = web_dev_config,
+		less = web_dev_config,
+		javascript = web_dev_config,
+		typescript = web_dev_config,
+		typescriptreact = web_dev_config,
+		javascriptreact = web_dev_config,
+		vue = web_dev_config,
+		astro = web_dev_config,
+		svelte = web_dev_config,
 
-		format_on_save = function(bufnr)
-			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-				return
-			end
-			return { lsp_format = "fallback", timeout_ms = 500 }
+		-- Etc.
+		json = web_dev_adjacent_config,
+		jsonc = web_dev_adjacent_config,
+		json5 = web_dev_adjacent_config,
+		yaml = web_dev_adjacent_config,
+		toml = web_dev_adjacent_config,
+		markdown = function(bufnr)
+			return add_injected(web_dev_adjacent_config(bufnr))
+		end,
+		mdx = function(bufnr)
+			return add_injected(web_dev_adjacent_config(bufnr))
 		end,
 	},
-	init = function()
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-		vim.api.nvim_create_user_command("FormatDisable", function(args)
-			if args.bang then
-				-- FormatDisable! will disable formatting just for this buffer
-				vim.b.disable_autoformat = true
-				vim.notify("Disabled auto-formatting for the current buffer", vim.log.levels.WARN)
-			else
-				vim.g.disable_autoformat = true
-				vim.notify("Disabled auto-formatting", vim.log.levels.WARN)
-			end
-		end, {
-			desc = "Disable auto-formatting on save",
-			bang = true,
-		})
-
-		vim.api.nvim_create_user_command("FormatEnable", function()
-			vim.b.disable_autoformat = false
-			vim.g.disable_autoformat = false
-			vim.notify("Enabled auto-formatting", vim.log.levels.WARN)
-		end, {
-			desc = "Enable auto-formatting on save",
-		})
-
-		vim.api.nvim_create_user_command("FormatToggle", function(args)
-			if vim.b.disable_autoformat or vim.g.disable_autoformat then
-				vim.cmd("FormatEnable")
-			else
-				if args.bang then
-					vim.cmd("FormatDisable!")
-				else
-					vim.cmd("FormatDisable")
-				end
-			end
-		end, {
-			desc = "Toggle auto-formatting on save",
-			bang = true,
-		})
-	end,
-	keys = {
-		{
-			"<leader>f",
-			function()
-				require("conform").format({ async = false, timeout_ms = 500, lsp_format = "fallback" }, function(err)
-					if not err then
-						local mode = vim.api.nvim_get_mode().mode
-						if vim.startswith(string.lower(mode), "v") then
-							vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-						end
-					end
-				end)
-			end,
-			mode = { "n", "v" },
-			desc = "Format code",
-		},
-		{
-			"<leader>tF",
-			function()
-				vim.cmd("FormatToggle")
-			end,
-			desc = "Toggle auto-formatting globally",
-		},
-		{
-			"<leader>tf",
-			function()
-				vim.cmd("FormatToggle!")
-			end,
-			desc = "Toggle auto-formatting for the current buffer",
-		},
+	default_format_opts = {
+		lsp_format = "fallback",
 	},
-}
+
+	format_on_save = function(bufnr)
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			return
+		end
+		return { lsp_format = "fallback", timeout_ms = 500 }
+	end,
+})
+
+-- ==== User Commands ====
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		-- FormatDisable! will disable formatting just for this buffer
+		vim.b.disable_autoformat = true
+		vim.notify("Disabled auto-formatting for the current buffer", vim.log.levels.WARN)
+	else
+		vim.g.disable_autoformat = true
+		vim.notify("Disabled auto-formatting", vim.log.levels.WARN)
+	end
+end, {
+	desc = "Disable auto-formatting on save",
+	bang = true,
+})
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+	vim.notify("Enabled auto-formatting", vim.log.levels.WARN)
+end, {
+	desc = "Enable auto-formatting on save",
+})
+
+vim.api.nvim_create_user_command("FormatToggle", function(args)
+	if vim.b.disable_autoformat or vim.g.disable_autoformat then
+		vim.cmd("FormatEnable")
+	else
+		if args.bang then
+			vim.cmd("FormatDisable!")
+		else
+			vim.cmd("FormatDisable")
+		end
+	end
+end, {
+	desc = "Toggle auto-formatting on save",
+	bang = true,
+})
+
+-- ==== Keymaps ====
+
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
+	require("conform").format({ async = false, timeout_ms = 500, lsp_format = "fallback" }, function(err)
+		if not err then
+			local mode = vim.api.nvim_get_mode().mode
+			if vim.startswith(string.lower(mode), "v") then
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+			end
+		end
+	end)
+end, { desc = "Format code" })
+
+vim.keymap.set("n", "<leader>tf", function()
+	vim.cmd("FormatToggle!")
+end, { desc = "Toggle auto-formatting for the current buffer" })
+
+vim.keymap.set("n", "<leader>tF", function()
+	vim.cmd("FormatToggle")
+end, { desc = "Toggle auto-formatting globally" })
