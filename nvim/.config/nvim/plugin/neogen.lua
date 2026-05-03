@@ -1,13 +1,5 @@
-return {
-	"danymat/neogen",
-	config = true,
-	keys = {
-		{
-			"<leader>@",
-			function()
-				require("neogen").generate()
-			end,
-			desc = "Generate annotation",
-		},
-	},
-}
+vim.pack.add({ "https://github.com/danymat/neogen" })
+
+require("neogen").setup({})
+
+vim.keymap.set("n", "<leader>@", require("neogen").generate, { desc = "Generate annotation" })
