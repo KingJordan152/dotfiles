@@ -1,20 +1,19 @@
-return {
-	"fedepujol/move.nvim",
-	keys = {
-		-- Normal Mode
-		{ "<A-j>", ":MoveLine(1)<CR>", desc = "Move Line Up", silent = true },
-		{ "<A-k>", ":MoveLine(-1)<CR>", desc = "Move Line Down", silent = true },
-		{ "<A-h>", ":MoveHChar(-1)<CR>", desc = "Move Character Left", silent = true },
-		{ "<A-l>", ":MoveHChar(1)<CR>", desc = "Move Character Right", silent = true },
-		-- Visual Mode
-		{ "<A-j>", ":MoveBlock(1)<CR>", mode = { "x" }, desc = "Move Block Up", silent = true },
-		{ "<A-k>", ":MoveBlock(-1)<CR>", mode = { "x" }, desc = "Move Block Down", silent = true },
-		{ "<A-h>", ":MoveHBlock(-1)<CR>", mode = { "x" }, desc = "Move Block Left", silent = true },
-		{ "<A-l>", ":MoveHBlock(1)<CR>", mode = { "x" }, desc = "Move Block Right", silent = true },
+vim.pack.add({ "https://github.com/fedepujol/move.nvim" })
+
+require("move").setup({
+	char = {
+		enable = true,
 	},
-	opts = {
-		char = {
-			enable = true,
-		},
-	},
-}
+})
+
+-- Normal Mode Keymaps
+vim.keymap.set("n", "<M-j>", "<cmd>MoveLine(1)<CR>", { desc = "Move line up", silent = true })
+vim.keymap.set("n", "<M-k>", "<cmd>MoveLine(-1)<CR>", { desc = "Move line down", silent = true })
+vim.keymap.set("n", "<M-h>", "<cmd>MoveHChar(-1)<CR>", { desc = "Move character left", silent = true })
+vim.keymap.set("n", "<M-l>", "<cmd>MoveHChar(1)<CR>", { desc = "Move character right", silent = true })
+
+-- Visual Mode Keymaps (need to use `:` instead of `<cmd>` otherwise it won't work)
+vim.keymap.set("x", "<M-j>", ":MoveBlock(1)<CR>", { desc = "Move block up", silent = true })
+vim.keymap.set("x", "<M-k>", ":MoveBlock(-1)<CR>", { desc = "Move block down", silent = true })
+vim.keymap.set("x", "<M-h>", ":MoveHBlock(-1)<CR>", { desc = "Move block left", silent = true })
+vim.keymap.set("x", "<M-l>", ":MoveHBlock(1)<CR>", { desc = "Move block right", silent = true })
