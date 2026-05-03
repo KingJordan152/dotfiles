@@ -1,4 +1,4 @@
-local utils = require("core.utils")
+local utils = require("utils")
 
 --- Customize how diagnostics work/appear
 vim.diagnostic.config({
