@@ -44,30 +44,40 @@ autocmd("LspAttach", {
 		end, { desc = "Hover Documentation", buf = buf })
 
 		if client:supports_method("textDocument/codeAction") then
-			-- Use to generate actions that are relevant to where the cursor is currently positioned.
-			vim.keymap.set({ "n", "x" }, "gra", function()
-				vim.lsp.buf.code_action({
-					---@diagnostic disable-next-line: missing-fields
-					context = {
-						only = {
-							"refactor", -- "Move to...", "Extract to...", etc.
-							"quickfix", -- Disable error, Fix issue, etc.
-						},
-					},
-				})
-			end, { desc = "LSP Code Action" })
+			local codeActionProvider = client.server_capabilities.codeActionProvider
 
-			-- Use to generate actions that are relevant anywhere in the current file.
-			vim.keymap.set({ "n", "x" }, "grs", function()
-				vim.lsp.buf.code_action({
-					context = {
-						only = {
-							"source", -- Sort imports, fix all issues, remove unused code, etc.
+			-- Code Action providers may not return the `codeActionKinds` that they support.
+			-- This is typically true for in-process LSPs, like `vim-pack`.
+			-- In this case, default to the built-in `gra` code action keymap to ensure any available
+			-- code actions still shown.
+			if
+				type(codeActionProvider) == "table"
+				and client.server_capabilities.codeActionProvider["codeActionKinds"] ~= nil
+			then
+				-- Use to generate actions that are relevant to where the cursor is currently positioned.
+				vim.keymap.set({ "n", "x" }, "gra", function()
+					vim.lsp.buf.code_action({
+						context = {
+							only = {
+								"refactor", -- "Move to...", "Extract to...", etc.
+								"quickfix", -- Disable error, Fix issue, etc.
+							},
 						},
-						diagnostics = {},
-					},
-				})
-			end, { desc = "LSP Source Action" })
+					})
+				end, { desc = "LSP Code Action", buf = buf })
+
+				-- Use to generate actions that are relevant anywhere in the current file.
+				vim.keymap.set({ "n", "x" }, "grs", function()
+					vim.lsp.buf.code_action({
+						context = {
+							only = {
+								"source", -- Sort imports, fix all issues, remove unused code, etc.
+							},
+							diagnostics = {},
+						},
+					})
+				end, { desc = "LSP Source Action", buf = buf })
+			end
 		end
 
 		if client:supports_method("textDocument/documentColor") then
