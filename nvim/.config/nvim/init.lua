@@ -1,4 +1,5 @@
 require("options")
 require("autocmds")
+require("lsp")
 require("keymaps")
 require("diagnostics")
