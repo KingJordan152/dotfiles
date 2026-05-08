@@ -22,35 +22,12 @@ local function toggle_conditional_breakpoint()
 	end)
 end
 
-local dap = require("dap")
-local dap_utils = require("dap.utils")
-local has_mac = vim.fn.has("mac") == 1
-local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
-local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
-
--- Define custom icons
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapLogPoint", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIStop", linehl = "DapStoppedLine" })
-
-local js_debug_adapter = {
-	type = "server",
-	host = "localhost",
-	port = "${port}",
-	executable = {
-		command = "node",
-		args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
-	},
-}
-
 ---Configures common VS Code adapters from a given `launch.json` file to use correlating Neovim adapters.
 ---@param callback fun(adapter: dap.Adapter)
 ---@param config dap.Configuration
 local function js_debug_adapter_for_vscode(callback, config)
 	local pwa_name = "pwa-" .. config.type
-	local pwa_adapter = dap.adapters[pwa_name]
+	local pwa_adapter = require("dap").adapters[pwa_name]
 
 	-- Intercept the user's config and change the `type` to match the `pwa_adapter`'s name.
 	config.type = pwa_name
@@ -62,6 +39,22 @@ local function js_debug_adapter_for_vscode(callback, config)
 		callback(pwa_adapter)
 	end
 end
+
+local dap = require("dap")
+local dap_utils = require("dap.utils")
+local has_mac = vim.fn.has("mac") == 1
+local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
+local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+
+local js_debug_adapter = {
+	type = "server",
+	host = "localhost",
+	port = "${port}",
+	executable = {
+		command = "node",
+		args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+	},
+}
 
 dap.adapters = {
 	["pwa-node"] = js_debug_adapter,
@@ -157,6 +150,13 @@ dap.configurations.java = {
 		port = 5005,
 	},
 }
+
+-- Custom icon definitions
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "Error" })
+vim.fn.sign_define("DapLogPoint", { text = "", texthl = "Error" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
+vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIStop", linehl = "DapStoppedLine" })
 
 -- VS Code-inspired Keymaps
 vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debugger: Continue" })
