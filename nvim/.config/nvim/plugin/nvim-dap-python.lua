@@ -1,9 +1,14 @@
-return {
-	"mfussenegger/nvim-dap-python",
-	ft = "python",
-	dependencies = { "mfussenegger/nvim-dap" },
-	config = function()
-		local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "python" },
+	callback = function()
+		vim.pack.add({
+			-- Dependencies
+			"https://codeberg.org/mfussenegger/nvim-dap",
+
+			"https://codeberg.org/mfussenegger/nvim-dap-python",
+		})
+
+		local mason_package_path = vim.fn.expand("$MASON/packages")
 		local dap_python = require("dap-python")
 
 		dap_python.setup(mason_package_path .. "/debugpy/debugpy-adapter")
@@ -12,4 +17,4 @@ return {
 		vim.keymap.set("n", "<leader>dC", dap_python.test_class, { desc = "Python - Run test class above cursor" })
 		vim.keymap.set("n", "<leader>dm", dap_python.test_method, { desc = "Python - Run test method above cursor" })
 	end,
-}
+})
