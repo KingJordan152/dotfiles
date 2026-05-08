@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "python" },
+	group = vim.api.nvim_create_augroup("nvim-dap-python", {}),
 	callback = function()
 		vim.pack.add({
 			-- Dependencies

@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "go", "gomod", "gowork", "gotmpl" },
+	group = vim.api.nvim_create_augroup("nvim-dap-go", {}),
 	callback = function()
 		vim.pack.add({
 			-- Dependencies

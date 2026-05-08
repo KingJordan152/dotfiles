@@ -1,5 +1,6 @@
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "java" },
+	group = vim.api.nvim_create_augroup("nvim-jdtls", {}),
 	callback = function()
 		vim.pack.add({
 			-- Dependencies
