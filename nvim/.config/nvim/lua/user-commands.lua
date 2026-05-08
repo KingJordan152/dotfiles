@@ -74,7 +74,7 @@ user_command("PackClean", function()
 	local inactive = get_inactive_plugins()
 
 	if #inactive == 0 then
-		vim.notify(" No inactive plugins found!", vim.log.levels.INFO)
+		vim.notify("No inactive plugins found!", vim.log.levels.INFO)
 		return
 	end
 
@@ -99,7 +99,7 @@ Delete ALL inactive plugins from disk?]],
 
 	if choice == 1 then
 		vim.pack.del(inactive)
-		vim.notify("󰩹 Deleted " .. #inactive .. " inactive plugin(s)", vim.log.levels.INFO)
+		vim.notify("Deleted " .. #inactive .. " inactive plugin(s)", vim.log.levels.INFO)
 	else
 		vim.notify("Cancelled. No plugins were deleted!", vim.log.levels.INFO)
 	end
