@@ -1,25 +1,13 @@
-local utils = require("utils")
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
-
-local hybrid_line_exclude_files = utils.Set({
-	"snacks_dashboard",
-	"snacks_explorer",
-	"lazy",
-	"mason",
-	"snacks_picker_list",
-	"snacks_terminal",
-	"TelescopePrompt",
-	"help",
-})
 
 local hybrid_line_numbers = augroup("hybrid_line_numbers", { clear = true })
 
 autocmd("InsertEnter", {
 	desc = "Disable relative line numbers when entering Insert mode",
 	group = hybrid_line_numbers,
-	callback = function()
-		if not hybrid_line_exclude_files[vim.bo.filetype] then
+	callback = function(args)
+		if vim.bo[args.buf].modifiable then
 			vim.o.relativenumber = false
 		end
 	end,
@@ -28,8 +16,8 @@ autocmd("InsertEnter", {
 autocmd("InsertLeave", {
 	desc = "Enable relative line numbers when leaving Insert mode",
 	group = hybrid_line_numbers,
-	callback = function()
-		if not hybrid_line_exclude_files[vim.bo.filetype] then
+	callback = function(args)
+		if vim.bo[args.buf].modifiable then
 			vim.o.relativenumber = true
 		end
 	end,
