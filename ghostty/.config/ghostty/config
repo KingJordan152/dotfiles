@@ -37,12 +37,15 @@ macos-option-as-alt = left
 font-thicken = true
 window-colorspace = display-p3
 
-# ==== Keybindings ====
+# ==== Custom Keybinds ====
 keybind = ctrl+i=text:\x09
 keybind = ctrl+[=text:\x1b
 keybind = ctrl+tab=text:\x1b[9;5u
 keybind = ctrl+shift+tab=text:\x1b[9;6u
+
+# ==== Unbind Default Keybinds ====
 keybind = ctrl+enter=unbind
+keybind = ctrl+shift+j=unbind
 
 # Use this optional config file to make platform-specific overrides
 config-file = ?platform-overrides/config

@@ -1,0 +1,30 @@
+vim.pack.add({
+	-- Dependencies
+	"https://github.com/nvim-tree/nvim-web-devicons",
+
+	"https://github.com/folke/which-key.nvim",
+})
+
+require("which-key").setup({
+	preset = "helix",
+
+	---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
+	delay = function(ctx)
+		return (ctx.plugin and ctx.plugin ~= "marks") and 0 or 1000
+	end,
+
+	---@type wk.Spec
+	spec = {
+		{ "<leader>g", group = "Git" },
+		{ "<leader>gh", group = "Git Hunk" },
+		{ "<leader>ga", group = "Git Add (Stage)" },
+		{ "<leader>s", group = "Search" },
+		{ "<leader>X", group = "Exchange Treesitter node" },
+		{ "<leader>d", group = "Debugger" },
+		{ "<leader>l", group = "LSP Method" },
+	},
+})
+
+vim.keymap.set("n", "<leader>?", function()
+	require("which-key").show()
+end, { desc = "Available Keymaps" })
