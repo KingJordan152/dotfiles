@@ -72,15 +72,19 @@ end, {
 -- Adapted from https://github.com/Sin-cy/dotfiles/blob/ca13116138957d7a87a1f946fde36f5e9cf7a1cb/nvim-nightly/.config/nvim-nightly/lua/sethy/pack.lua#L108
 user_command("PackClean", function()
 	local inactive = get_inactive_plugins()
+	local inactive_list_string = ""
 
 	if #inactive == 0 then
 		vim.notify("No inactive plugins found!", vim.log.levels.INFO)
 		return
 	end
 
-	local inactive_list_string = ""
-	for _, name in ipairs(inactive) do
-		inactive_list_string = inactive_list_string .. name .. "\n"
+	for i, name in ipairs(inactive) do
+		inactive_list_string = inactive_list_string .. name
+
+		if i > #inactive then
+			inactive_list_string = inactive_list_string .. "\n"
+		end
 	end
 
 	local confirmation_message = string.format(
