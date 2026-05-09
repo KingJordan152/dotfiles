@@ -32,13 +32,13 @@ autocmd("TextYankPost", {
 })
 
 autocmd("FileType", {
-	desc = "Add unique keymaps to readonly files",
+	desc = "Add unique keymaps to unmodifiable buffers",
 	group = augroup("readonly_keymaps", { clear = true }),
 	pattern = "*",
 	callback = function(args)
 		local bufnr = args.buf
 
-		if vim.bo[bufnr].readonly or not vim.bo[bufnr].modifiable then
+		if vim.bo[bufnr].readonly and not vim.bo[bufnr].modifiable then
 			vim.keymap.set("n", "gq", "<cmd>q<cr>", {
 				desc = "Quit the current window",
 				buf = bufnr,
