@@ -114,7 +114,7 @@ user_command("PackCount", function()
 	local inactive = get_inactive_plugins()
 
 	vim.notify(
-		string.format("%d plugins are installed (%d are inactive)", #active + #inactive, #inactive),
+		string.format("%d total plugins are installed (%d are inactive)", #active + #inactive, #inactive),
 		vim.log.levels.INFO
 	)
 end, { desc = "List the number of plugins that are currently installed" })
