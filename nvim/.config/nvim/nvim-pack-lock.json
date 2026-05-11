@@ -78,7 +78,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.comment": {
-      "rev": "8e5ff3ed3cc0e8f216617aae01020c00c20f7a87",
+      "rev": "bd086159fd7dd05ec3f86acf7729f130c3ce9673",
       "src": "https://github.com/nvim-mini/mini.comment"
     },
     "move.nvim": {
