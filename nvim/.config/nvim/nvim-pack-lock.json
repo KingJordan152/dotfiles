@@ -21,6 +21,10 @@
       "rev": "28c22791153a90bb61a86fbeeae0f812e048ade7",
       "src": "https://github.com/bullets-vim/bullets.vim"
     },
+    "canola.nvim": {
+      "rev": "88af183e96724cca98a4602511061662cd5e88f3",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "conform.nvim": {
       "rev": "dca1a190aa85f9065979ef35802fb77131911106",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -144,10 +148,6 @@
     "oil-lsp-diagnostics.nvim": {
       "rev": "282308383d8d8485937aaf3c28b44fa1cb26007a",
       "src": "https://github.com/JezerM/oil-lsp-diagnostics.nvim"
-    },
-    "oil.nvim": {
-      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
-      "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",

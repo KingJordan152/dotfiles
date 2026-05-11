@@ -7,7 +7,8 @@ vim.pack.add({
 	"https://github.com/malewicz1337/oil-git.nvim",
 
 	-- Plugin
-	"https://github.com/stevearc/oil.nvim",
+	-- "https://github.com/stevearc/oil.nvim",
+	"https://github.com/barrettruth/canola.nvim",
 })
 
 require("oil-lsp-diagnostics").setup({
