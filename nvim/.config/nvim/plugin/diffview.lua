@@ -12,8 +12,6 @@ local function hide_winbar(should_hide)
 	require("lualine").hide({ place = { "winbar" }, unhide = not should_hide })
 end
 
-local autocmd_id
-
 require("diffview").setup({
 	enhanced_diff_hl = true,
 	view = {
@@ -40,7 +38,7 @@ require("diffview").setup({
 			---This will cause the winbar to briefly flicker. You can adjust the `hide_winbar_timeout`
 			---value to change when the flicker occurs, however setting too low of a value (e.g., `100`)
 			---can cause a race condition that will break the winbar.
-			autocmd_id = vim.api.nvim_create_autocmd("FocusGained", {
+			vim.g.diffview_autocmd = vim.api.nvim_create_autocmd("FocusGained", {
 				desc = "Ensure Diffview's winbars are shown after switching Tmux sessions",
 				group = vim.api.nvim_create_augroup("diffview_tmux", { clear = true }),
 				callback = function()
@@ -53,9 +51,9 @@ require("diffview").setup({
 		view_leave = function()
 			hide_winbar(false)
 
-			if autocmd_id ~= nil then
-				vim.api.nvim_del_autocmd(autocmd_id)
-				autocmd_id = nil
+			if vim.g.diffview_autocmd ~= nil then
+				vim.api.nvim_del_autocmd(vim.g.diffview_autocmd)
+				vim.g.diffview_autocmd = nil
 			end
 		end,
 	},
