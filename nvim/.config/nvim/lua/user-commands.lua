@@ -82,7 +82,7 @@ user_command("PackClean", function()
 	for i, name in ipairs(inactive) do
 		inactive_list_string = inactive_list_string .. name
 
-		if i > #inactive then
+		if i < #inactive then
 			inactive_list_string = inactive_list_string .. "\n"
 		end
 	end
