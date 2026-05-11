@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				-- Use to generate actions that are relevant to where the cursor is currently positioned.
 				vim.keymap.set({ "n", "x" }, "gra", function()
 					vim.lsp.buf.code_action({
+						---@diagnostic disable-next-line: missing-fields
 						context = {
 							only = {
 								"refactor", -- "Move to...", "Extract to...", etc.
