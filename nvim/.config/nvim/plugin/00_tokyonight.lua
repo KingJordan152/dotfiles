@@ -11,6 +11,7 @@ require("tokyonight").setup({
 		-- General overrides
 		colors.bg_statusline = colors.none
 		colors.magenta2 = "#BA3C97" -- Special color from VS Code Tokyonight theme
+		colors.diff.change = colors.blue7 -- Make changes more visible
 
 		-- Git overrides
 		colors.git.change = colors.yellow
@@ -42,6 +43,10 @@ require("tokyonight").setup({
 
 		highlights["GitSignsDeleteInline"] = {
 			bg = util.darken(colors.git.delete, git_inline_diff_darken_amount),
+		}
+
+		highlights["DiffsConflictActions"] = {
+			link = "LspCodeLens",
 		}
 
 		highlights["RainbowDelimiterGreen"] = {
