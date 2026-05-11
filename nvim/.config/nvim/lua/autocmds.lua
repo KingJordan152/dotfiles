@@ -32,14 +32,18 @@ autocmd("TextYankPost", {
 })
 
 autocmd("FileType", {
-	desc = "Add unique keymaps to unmodifiable buffers",
+	desc = "Add special 'close' keymap to unmodifiable buffers",
 	group = augroup("readonly_keymaps", { clear = true }),
 	pattern = "*",
 	callback = function(args)
 		local bufnr = args.buf
+		local excluded_filetypes = {
+			"oil",
+			"fugitive",
+		}
 
-		if vim.bo[bufnr].readonly and not vim.bo[bufnr].modifiable then
-			vim.keymap.set("n", "gq", "<cmd>q<cr>", {
+		if not vim.bo[bufnr].modifiable and not vim.list_contains(excluded_filetypes, vim.bo[bufnr].filetype) then
+			vim.keymap.set("n", "gq", "<Cmd>q<CR>", {
 				desc = "Quit the current window",
 				buf = bufnr,
 			})
