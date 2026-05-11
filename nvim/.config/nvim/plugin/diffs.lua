@@ -18,4 +18,10 @@ vim.g.diffs = {
 	},
 }
 
-vim.pack.add({ "https://git.barrettruth.com/barrettruth/diffs.nvim" })
+vim.pack.add({
+	-- Dependencies
+	"https://github.com/tpope/vim-fugitive",
+	"https://github.com/lewis6991/gitsigns.nvim",
+
+	"https://git.barrettruth.com/barrettruth/diffs.nvim",
+})
