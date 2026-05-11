@@ -84,6 +84,7 @@ require("oil").setup({
 	keymaps = {
 		["<C-c>"] = false, -- Replace with below keymap
 		["q"] = "actions.close",
+		["gq"] = "actions.close",
 		["<C-q>"] = "actions.send_to_qflist",
 		["<leader>%"] = {
 			desc = "Copy relative path",
