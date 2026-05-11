@@ -76,6 +76,10 @@ require("tokyonight").setup({
 
 		highlights["TreesitterContext"] = colors.none
 
+		highlights["DiagnosticUnnecessary"] = {
+			dim = true,
+		}
+
 		highlights["@variable"] = {
 			fg = colors.red,
 		}
