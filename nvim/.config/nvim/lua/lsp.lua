@@ -64,8 +64,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 					})
 				end, { desc = "LSP Code Action", buf = buf })
 
-				-- Use to generate actions that are relevant anywhere in the current file.
-				vim.keymap.set({ "n", "x" }, "grs", function()
+				-- Use to generate "source" actions that are relevant anywhere in the current file.
+				vim.keymap.set({ "n", "x" }, "grA", function()
 					vim.lsp.buf.code_action({
 						context = {
 							only = {
