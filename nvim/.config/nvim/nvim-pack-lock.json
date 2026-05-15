@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "SchemaStore.nvim": {
-      "rev": "7127911cc824a1d2f600492edd9667b476cf3eda",
+      "rev": "1c28767e3a7f3c9b7c5cc66e7f16b268c964e2c9",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "auto-session": {
@@ -26,7 +26,7 @@
       "src": "https://github.com/barrettruth/canola.nvim"
     },
     "conform.nvim": {
-      "rev": "dca1a190aa85f9065979ef35802fb77131911106",
+      "rev": "18aeab3d63d350dcf44d64c462cc489a3412af40",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffs.nvim": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chentoast/marks.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "51feb0ada33d18f3c5c71ffb46005dbf8b33bef4",
+      "rev": "eaa34887d444cb002e1b165fac399ae4bbc771f7",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -74,11 +74,11 @@
       "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
     },
     "mason.nvim": {
-      "rev": "e54f5bf5f12c560da31c17eee5b3e1bd369f3ff9",
+      "rev": "8e921c2b68571e978db5d4d3fef9c9a7f8755473",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.comment": {
-      "rev": "bd086159fd7dd05ec3f86acf7729f130c3ce9673",
+      "rev": "fc87ba6554f182161d9a4bab5017c575571f000f",
       "src": "https://github.com/nvim-mini/mini.comment"
     },
     "move.nvim": {
@@ -106,7 +106,7 @@
       "src": "https://github.com/rcarriga/nvim-dap-ui"
     },
     "nvim-lspconfig": {
-      "rev": "451d4ef9abd4f0f08e379ef0d55d1c391b6125a7",
+      "rev": "8f7e64066e2641d5e7d494962a9c7051e3d38dd5",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -154,7 +154,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "quicker.nvim": {
-      "rev": "063cc44da1eef8681bbd653b29d3bc961780886a",
+      "rev": "1c9322b7e2967472548ba9bccd1ccd40e49d0a49",
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "rainbow-delimiters.nvim": {
