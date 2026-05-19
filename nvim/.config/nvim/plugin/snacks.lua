@@ -166,9 +166,70 @@ vim.keymap.set("n", "<leader>ss", Snacks.picker.lsp_symbols, { desc = "LSP Symbo
 vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
 vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
 
+-- (Dashboard) Pull up dashboard from anywhere
+vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
+
 -- Toggle Terminals
 vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
 
--- (Dashboard) Pull up dashboard from anywhere
-vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
+-- Toggles | Generic
+Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>td")
+Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
+Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
+Snacks.toggle
+	.new({
+		id = "diagnostics_virtual_text",
+		name = " Diagnostics Virtual Text",
+		get = function()
+			return vim.diagnostic.config().virtual_text ~= false
+		end,
+		set = function(state)
+			if state then
+				-- Keep in sync with default in `diagnostics.lua`
+				vim.diagnostic.config({
+					virtual_text = { source = "if_many", spacing = 2 },
+				})
+			else
+				vim.diagnostic.config({ virtual_text = false })
+			end
+		end,
+	})
+	:map("<leader>tv")
+
+-- Toggles | LSP
+-- These overwrite the ones in `lsp.lua`
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("snacks_lsp_toggles", {}),
+	callback = function(event)
+		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+		local buf = event.buf
+
+		if client:supports_method("textDocument/inlayHint") then
+			Snacks.toggle
+				.new({
+					id = "inlay_hints",
+					name = " LSP Inlay Hints",
+					get = vim.lsp.inlay_hint.is_enabled,
+					set = function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+					end,
+				})
+				:map("<leader>th", { buf = buf })
+		end
+
+		if client:supports_method("textDocument/codeLens") then
+			Snacks.toggle
+				.new({
+					id = "code_lens",
+					name = " LSP Code Lens",
+					get = vim.lsp.codelens.is_enabled,
+					set = function()
+						vim.lsp.get_clients()
+						vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+					end,
+				})
+				:map("<leader>tl", { buf = buf })
+		end
+	end,
+})
