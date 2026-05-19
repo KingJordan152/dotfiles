@@ -229,7 +229,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 						vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
 					end,
 				})
-				:map("<leader>tl", { buf = buf })
+				:map("<leader>tx", { buf = buf })
 		end
 	end,
 })
