@@ -159,6 +159,7 @@ vim.keymap.set("n", "<leader>sl", Snacks.picker.loclist, { desc = "Location List
 vim.keymap.set("n", "<leader>sL", Snacks.picker.lsp_config, { desc = "Attached LSPs" })
 vim.keymap.set("n", "<leader>sm", Snacks.picker.marks, { desc = "Marks" })
 vim.keymap.set("n", "<leader>sM", Snacks.picker.man, { desc = "Man Pages" })
+vim.keymap.set("n", "<leader>sn", Snacks.picker.notifications, { desc = "Notifications" })
 vim.keymap.set("n", "<leader>sp", Snacks.picker.projects, { desc = "Projects" })
 vim.keymap.set("n", "<leader>sq", Snacks.picker.qflist, { desc = "Quickfix List" })
 vim.keymap.set("n", "<leader>sr", Snacks.picker.recent, { desc = "Recent" })
