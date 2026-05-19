@@ -120,6 +120,9 @@ require("snacks").setup({
 	},
 })
 
+-- (Dashboard) Pull up dashboard from anywhere
+vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
+
 -- Primary Pickers
 vim.keymap.set("n", "<leader><space>", Snacks.picker.smart, { desc = "Find File" })
 vim.keymap.set("n", "<leader>,", Snacks.picker.buffers, { desc = "View Buffers" })
@@ -167,14 +170,7 @@ vim.keymap.set("n", "<leader>ss", Snacks.picker.lsp_symbols, { desc = "LSP Symbo
 vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
 vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
 
--- (Dashboard) Pull up dashboard from anywhere
-vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
-
--- Toggle Terminals
-vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
-vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
-
--- Toggles | Generic
+-- Generic Toggles
 Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>td")
 Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
 Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
@@ -198,8 +194,7 @@ Snacks.toggle
 	})
 	:map("<leader>tv")
 
--- Toggles | LSP
--- These overwrite the ones in `lsp.lua`
+-- LSP Toggles (overwrite the ones in `lsp.lua`)
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("snacks_lsp_toggles", {}),
 	callback = function(event)
@@ -234,3 +229,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
+
+-- Terminal Toggles
+vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
+vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
