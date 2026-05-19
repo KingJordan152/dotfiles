@@ -167,8 +167,8 @@ vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = 
 vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
 
 -- Toggle Terminals
-vim.keymap.set("n", "<leader>tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
-vim.keymap.set("n", "<leader>tT", Snacks.terminal.open, { desc = "Toggle new terminal" })
+vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
+vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
 
 -- (Dashboard) Pull up dashboard from anywhere
 vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
