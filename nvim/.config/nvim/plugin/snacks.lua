@@ -209,7 +209,6 @@ Snacks.toggle
 		end,
 	})
 	:map("<leader>tf")
-
 Snacks.toggle
 	.new({
 		id = "format_on_save",
