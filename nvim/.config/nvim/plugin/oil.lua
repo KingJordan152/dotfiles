@@ -23,28 +23,7 @@ require("oil-lsp-diagnostics").setup({
 require("oil-git").setup({
 	show_directory_highlights = false,
 	symbol_position = "signcolumn",
-	symbols = {
-		file = {
-			added = "",
-			modified = "",
-			deleted = "",
-			copied = "",
-			renamed = "",
-			untracked = "",
-			conflict = "",
-			ignored = "",
-		},
-		directory = {
-			added = "󱞩",
-			modified = "󱞩",
-			renamed = "󱞩",
-			deleted = "󱞩",
-			copied = "󱞩",
-			conflict = "",
-			untracked = "",
-			ignored = "",
-		},
-	},
+	symbols = utils.icons.git,
 	highlights = {
 		OilGitAdded = { link = "GitSignsAdd" },
 		OilGitModified = { link = "GitSignsChange" },

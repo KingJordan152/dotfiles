@@ -1,5 +1,7 @@
 vim.pack.add({ "https://codeberg.org/mfussenegger/nvim-dap" })
 
+local utils = require("utils")
+
 ---Prompts the user for a message to use for a logpoint breakpoint.
 local function toggle_logpoint()
 	return vim.ui.input({ prompt = "Logpoint Message (expressions within {} are interpolated)" }, function(input)
@@ -152,11 +154,27 @@ dap.configurations.java = {
 }
 
 -- Custom icon definitions
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapLogPoint", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "Error" })
-vim.fn.sign_define("DapStopped", { text = "", texthl = "DapUIStop", linehl = "DapStoppedLine" })
+vim.fn.sign_define("DapBreakpoint", {
+	text = utils.icons.debugger.breakpoint,
+	texthl = "Error",
+})
+vim.fn.sign_define("DapBreakpointCondition", {
+	text = utils.icons.debugger.conditional,
+	texthl = "Error",
+})
+vim.fn.sign_define("DapLogPoint", {
+	text = utils.icons.debugger.log_point,
+	texthl = "Error",
+})
+vim.fn.sign_define("DapBreakpointRejected", {
+	text = utils.icons.debugger.rejected,
+	texthl = "Error",
+})
+vim.fn.sign_define("DapStopped", {
+	text = utils.icons.debugger.stopped,
+	texthl = "DapUIStop",
+	linehl = "DapStoppedLine",
+})
 
 -- VS Code-inspired Keymaps
 vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debugger: Continue" })

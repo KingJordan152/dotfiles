@@ -175,13 +175,13 @@ vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle termi
 vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
 
 -- Generic Toggles
-Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>td")
-Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
-Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
+Snacks.toggle.diagnostics({ name = "Diagnostics" }):map("<leader>td")
+Snacks.toggle.option("spell", { name = "Spell Checking" }):map("<leader>ts")
+Snacks.toggle.option("wrap", { name = "Wrap Long Lines" }):map("<leader>tw")
 Snacks.toggle
 	.new({
 		id = "diagnostics_virtual_text",
-		name = " Diagnostics Virtual Text",
+		name = "Diagnostics Virtual Text",
 		get = function()
 			return vim.diagnostic.config().virtual_text ~= false
 		end,
@@ -200,7 +200,7 @@ Snacks.toggle
 Snacks.toggle
 	.new({
 		id = "format_on_save_buffer",
-		name = "󰊄 Format on Save (buffer)",
+		name = "Format on Save (buffer)",
 		get = function()
 			return not vim.b.disable_autoformat
 		end,
@@ -212,7 +212,7 @@ Snacks.toggle
 Snacks.toggle
 	.new({
 		id = "format_on_save",
-		name = "󰊄 Format on Save (global)",
+		name = "Format on Save (global)",
 		get = function()
 			return not vim.g.disable_autoformat
 		end,
@@ -233,7 +233,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			Snacks.toggle
 				.new({
 					id = "inlay_hints",
-					name = " LSP Inlay Hints",
+					name = "LSP Inlay Hints",
 					get = vim.lsp.inlay_hint.is_enabled,
 					set = function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -246,7 +246,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			Snacks.toggle
 				.new({
 					id = "code_lens",
-					name = " LSP Code Lens",
+					name = "LSP Code Lens",
 					get = vim.lsp.codelens.is_enabled,
 					set = function()
 						vim.lsp.get_clients()

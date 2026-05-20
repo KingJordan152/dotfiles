@@ -7,11 +7,42 @@ M.floating_windows = {
 }
 
 M.icons = {
+	lsp = "",
+	formatting = "",
 	diagnostics = {
-		error = "",
-		warn = "",
-		info = "",
-		hint = "󱠂",
+		error = " ",
+		warn = " ",
+		info = " ",
+		hint = "󱠂 ",
+	},
+	debugger = {
+		breakpoint = "",
+		conditional = "",
+		log_point = "",
+		rejected = "",
+		stopped = "",
+	},
+	git = {
+		file = {
+			added = " ",
+			modified = " ",
+			deleted = " ",
+			copied = " ",
+			renamed = " ",
+			untracked = "",
+			conflict = "",
+			ignored = " ",
+		},
+		directory = {
+			added = "󱞩",
+			modified = "󱞩",
+			renamed = "󱞩",
+			deleted = "󱞩",
+			copied = "󱞩",
+			conflict = "",
+			untracked = "",
+			ignored = "",
+		},
 	},
 }
 

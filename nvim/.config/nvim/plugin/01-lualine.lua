@@ -129,7 +129,11 @@ require("lualine").setup({
 			},
 			{
 				"diff",
-				symbols = { added = " ", modified = " ", removed = " " },
+				symbols = {
+					added = utils.icons.git.file.added,
+					modified = utils.icons.git.file.modified,
+					removed = utils.icons.git.file.deleted,
+				},
 			},
 		},
 		lualine_c = {
@@ -165,13 +169,10 @@ require("lualine").setup({
 					"emmet_language_server",
 					"render-markdown",
 				},
-				-- on_click = function()
-				-- 	Snacks.picker.lsp_config()
-				-- end,
 			},
 			{
 				formatter_status,
-				icon = { "", color = { fg = colors.yellow } },
+				icon = { utils.icons.formatting, color = { fg = colors.yellow } },
 				-- If formatting is disabled, make the component red with a strikethrough.
 				color = function()
 					if vim.b.disable_autoformat or vim.g.disable_autoformat then
