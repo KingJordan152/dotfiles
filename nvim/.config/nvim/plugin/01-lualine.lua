@@ -12,6 +12,7 @@ local winbar_disabled_filetypes = {
 	"fugitive",
 	"dap-repl",
 	"qf",
+	"snacks_terminal",
 }
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
