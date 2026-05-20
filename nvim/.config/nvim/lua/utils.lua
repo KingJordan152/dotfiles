@@ -6,6 +6,15 @@ M.floating_windows = {
 	max_height = 25,
 }
 
+M.icons = {
+	diagnostics = {
+		error = "",
+		warn = "",
+		info = "",
+		hint = "󱠂",
+	},
+}
+
 ---Creates a collection of unique strings.
 ---@param list string[] All the strings you wish to place in the Set. Any duplicated string will be ignored.
 ---@return {string: boolean} set A table indexed by all the strings from the given `list`.

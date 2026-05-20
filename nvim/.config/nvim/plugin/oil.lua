@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 vim.pack.add({
 	-- Dependencies
 	"https://github.com/nvim-tree/nvim-web-devicons",
@@ -12,10 +14,10 @@ vim.pack.add({
 })
 
 require("oil-lsp-diagnostics").setup({
-	error = " ",
-	warn = "",
-	info = "",
-	hint = "󰌶",
+	error = utils.icons.diagnostics.error,
+	warn = utils.icons.diagnostics.warn,
+	info = utils.icons.diagnostics.info,
+	hint = utils.icons.diagnostics.hint,
 })
 
 require("oil-git").setup({

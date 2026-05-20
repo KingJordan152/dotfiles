@@ -23,10 +23,10 @@ vim.diagnostic.config({
 	},
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.INFO] = " ",
-			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.ERROR] = utils.icons.diagnostics.error,
+			[vim.diagnostic.severity.WARN] = utils.icons.diagnostics.warn,
+			[vim.diagnostic.severity.INFO] = utils.icons.diagnostics.info,
+			[vim.diagnostic.severity.HINT] = utils.icons.diagnostics.hint,
 		},
 	},
 })

@@ -189,7 +189,12 @@ require("lualine").setup({
 			{
 				"diagnostics",
 				sections = { "error", "warn" },
-				symbols = { error = " ", warn = " ", hint = " ", info = " " },
+				symbols = {
+					error = utils.icons.diagnostics.error,
+					warn = utils.icons.diagnostics.warn,
+					hint = utils.icons.diagnostics.hint,
+					info = utils.icons.diagnostics.info,
+				},
 				always_visible = true,
 				cond = function()
 					return not utils.Set({
