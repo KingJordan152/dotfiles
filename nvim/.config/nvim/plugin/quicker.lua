@@ -1,5 +1,7 @@
 vim.pack.add({ "https://github.com/stevearc/quicker.nvim" })
 
+local utils = require("utils")
+
 require("quicker").setup({
 	opts = {
 		relativenumber = true,
@@ -13,6 +15,13 @@ require("quicker").setup({
 		lsp = true,
 		-- Load the referenced buffers to apply more accurate highlights (may be slow)
 		load_buffers = true,
+	},
+	type_icons = {
+		E = utils.icons.diagnostics.error,
+		W = utils.icons.diagnostics.warn,
+		I = utils.icons.diagnostics.info,
+		N = utils.icons.diagnostics.info,
+		H = utils.icons.diagnostics.hint,
 	},
 	keys = {
 		{
