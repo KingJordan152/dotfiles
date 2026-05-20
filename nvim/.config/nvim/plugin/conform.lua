@@ -147,45 +147,6 @@ require("conform").setup({
 	end,
 })
 
--- ==== User Commands ====
-
-vim.api.nvim_create_user_command("FormatDisable", function(args)
-	if args.bang then
-		-- FormatDisable! will disable formatting just for this buffer
-		vim.b.disable_autoformat = true
-		vim.notify("Disabled auto-formatting for the current buffer", vim.log.levels.WARN)
-	else
-		vim.g.disable_autoformat = true
-		vim.notify("Disabled auto-formatting", vim.log.levels.WARN)
-	end
-end, {
-	desc = "Disable auto-formatting on save",
-	bang = true,
-})
-
-vim.api.nvim_create_user_command("FormatEnable", function()
-	vim.b.disable_autoformat = false
-	vim.g.disable_autoformat = false
-	vim.notify("Enabled auto-formatting", vim.log.levels.WARN)
-end, {
-	desc = "Enable auto-formatting on save",
-})
-
-vim.api.nvim_create_user_command("FormatToggle", function(args)
-	if vim.b.disable_autoformat or vim.g.disable_autoformat then
-		vim.cmd("FormatEnable")
-	else
-		if args.bang then
-			vim.cmd("FormatDisable!")
-		else
-			vim.cmd("FormatDisable")
-		end
-	end
-end, {
-	desc = "Toggle auto-formatting on save",
-	bang = true,
-})
-
 -- ==== Keymaps ====
 
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
@@ -198,11 +159,3 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
 		end
 	end)
 end, { desc = "Format code" })
-
-vim.keymap.set("n", "<leader>tf", function()
-	vim.cmd("FormatToggle!")
-end, { desc = "Toggle auto-formatting for the current buffer" })
-
-vim.keymap.set("n", "<leader>tF", function()
-	vim.cmd("FormatToggle")
-end, { desc = "Toggle auto-formatting globally" })

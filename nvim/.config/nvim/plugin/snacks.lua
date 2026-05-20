@@ -170,6 +170,10 @@ vim.keymap.set("n", "<leader>ss", Snacks.picker.lsp_symbols, { desc = "LSP Symbo
 vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
 vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
 
+-- Terminal Toggles
+vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
+vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
+
 -- Generic Toggles
 Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>td")
 Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
@@ -193,6 +197,31 @@ Snacks.toggle
 		end,
 	})
 	:map("<leader>tv")
+Snacks.toggle
+	.new({
+		id = "format_on_save_buffer",
+		name = "󰊄 Format on Save (buffer)",
+		get = function()
+			return not vim.b.disable_autoformat
+		end,
+		set = function(state)
+			vim.b.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tf")
+
+Snacks.toggle
+	.new({
+		id = "format_on_save",
+		name = "󰊄 Format on Save (global)",
+		get = function()
+			return not vim.g.disable_autoformat
+		end,
+		set = function(state)
+			vim.g.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tF")
 
 -- LSP Toggles (overwrite the ones in `lsp.lua`)
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -229,7 +258,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-
--- Terminal Toggles
-vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
-vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
