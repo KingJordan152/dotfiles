@@ -94,7 +94,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		if client:supports_method("textDocument/codeLens") then
-			vim.keymap.set("n", "<leader>tl", function()
+			vim.keymap.set("n", "<leader>tx", function()
 				vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = buf }))
 			end, { desc = "Toggle CodeLens", buf = buf })
 		end
