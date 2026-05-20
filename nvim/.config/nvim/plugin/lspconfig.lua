@@ -1,5 +1,6 @@
 vim.pack.add({
 	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/b0o/SchemaStore.nvim",
 	"https://github.com/mason-org/mason.nvim",
 	"https://github.com/mason-org/mason-lspconfig.nvim",
 	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -31,8 +32,6 @@ require("mason-lspconfig").setup({
 		exclude = {
 			"tsgo",
 			"ts_ls",
-			"jsonls",
-			"yamlls",
 
 			-- Prefer formatting with Conform
 			"stylua",
