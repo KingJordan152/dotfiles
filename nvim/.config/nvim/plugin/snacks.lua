@@ -196,6 +196,31 @@ Snacks.toggle
 		end,
 	})
 	:map("<leader>tv")
+Snacks.toggle
+	.new({
+		id = "format_on_save_buffer",
+		name = "󰊄 Format on Save (buffer)",
+		get = function()
+			return not vim.b.disable_autoformat
+		end,
+		set = function(state)
+			vim.b.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tf")
+
+Snacks.toggle
+	.new({
+		id = "format_on_save",
+		name = "󰊄 Format on Save (global)",
+		get = function()
+			return not vim.g.disable_autoformat
+		end,
+		set = function(state)
+			vim.g.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tF")
 
 -- Toggles | LSP
 -- These overwrite the ones in `lsp.lua`
