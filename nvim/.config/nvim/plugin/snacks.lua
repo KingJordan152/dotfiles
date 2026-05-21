@@ -28,6 +28,9 @@ require("snacks").setup({
 			},
 		},
 		sources = {
+			explorer = {
+				auto_close = true,
+			},
 			projects = {
 				dev = { "~/Documents", "~/Projects" },
 				filter = {
@@ -130,6 +133,7 @@ vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep Files" })
 vim.keymap.set("x", "<leader>/", Snacks.picker.grep_word, { desc = "Grep Selection" })
 vim.keymap.set("n", "<leader>:", Snacks.picker.command_history, { desc = "View Command History" })
 vim.keymap.set("n", "<leader>.", Snacks.picker.resume, { desc = "Resume Previous Picker" })
+vim.keymap.set("n", "<leader>E", Snacks.picker.explorer, { desc = "Open file explorer [Snacks]" })
 
 -- Git Pickers
 vim.keymap.set("n", "<leader>gB", Snacks.picker.git_branches, { desc = "Git Branches" })
