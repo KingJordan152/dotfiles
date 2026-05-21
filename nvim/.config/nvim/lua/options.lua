@@ -1,4 +1,3 @@
--- Editor Settings
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.o.termguicolors = true -- Enable 24-bit RGB color
@@ -24,7 +23,22 @@ vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (
 vim.o.swapfile = false -- Disable swapfile creation
 vim.o.spelllang = "en_us" -- Set the language `spell` uses to U.S. English
 vim.o.spelloptions = "camel" -- Spellcheck the individual parts of a camelCased word
+vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
+vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation) *only* when `indentexpr` isn't set
+vim.o.breakindent = true -- Preserves indentation across wrapped lines
+vim.o.splitright = true -- Ensure vertical splits are split to the **right**
+vim.o.splitbelow = true -- Ensure horizontal splits are split to the **bottom**
+vim.o.ignorecase = true -- Ignore case when performing a search (`/`)
+vim.o.smartcase = true -- Disregard `ignorecase` setting if a search pattern contains a capital letter or search is prepended with `\C`
 vim.g.markdown_recommended_style = 0 -- Disable all preset Markdown styles (they overwrite the ones set here)
+
+-- Enable "hybrid" line numbers (i.e., relative numbers except for current line)
+vim.o.number = true
+vim.o.relativenumber = true
+
+-- Only highlight the current line number (specific color depends on colorscheme)
+vim.o.cursorline = true
+vim.o.cursorlineopt = "both"
 
 -- Defines the characters to use for different special lines throughout Neovim
 vim.opt.fillchars:append({
@@ -32,27 +46,6 @@ vim.opt.fillchars:append({
 	lastline = ".",
 	eob = " ",
 })
-
--- Indentation options
-vim.o.autoindent = true -- Preserves previous indentation level when entering a newline
-vim.o.smartindent = true -- Correctly indents next lines based on programmatic scope (i.e., C-like indentation) *only* when `indentexpr` isn't set
-vim.o.breakindent = true -- Preserves indentation across wrapped lines
-
--- Screen splitting direction preference
-vim.o.splitright = true
-vim.o.splitbelow = true
-
--- Perform case-insensitive searching UNLESS you write a capital letter or prepend search with `\C`
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Enable "hybrid" line numbers (i.e., relative numbers except for current line)
-vim.o.relativenumber = true
-vim.o.number = true
-
--- Only highlight the current line number (specific color depends on colorscheme)
-vim.o.cursorline = true
-vim.o.cursorlineopt = "both"
 
 -- Sync clipboard between OS and Neovim.
 -- Using `schedule` can increase startup time.
