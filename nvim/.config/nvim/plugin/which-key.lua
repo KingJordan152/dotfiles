@@ -16,9 +16,11 @@ require("which-key").setup({
 	---@type wk.Spec
 	spec = {
 		{ "<leader>g", group = "Git" },
-		{ "<leader>gh", group = "Git Hunk" },
-		{ "<leader>ga", group = "Git Add (Stage)" },
+		{ "<leader>ga", group = "Add (Stage)" },
+		{ "<leader>gr", group = "Reset" },
 		{ "<leader>s", group = "Search" },
+		{ "<leader>t", group = "Toggle" },
+		{ "<leader>T", group = "Terminal" },
 		{ "<leader>X", group = "Exchange Treesitter node" },
 		{ "<leader>d", group = "Debugger" },
 		{ "<leader>l", group = "LSP Method" },

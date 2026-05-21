@@ -97,15 +97,15 @@ require("gitsigns").setup({
       end, { desc = "Visually selected changes" })
 
 			-- Blame Keymaps
-			vim.keymap.set("n", "<leader>gb", function() gitsigns.blame_line({ full = true }) end, { desc = "Git Blame Line" })
+			vim.keymap.set("n", "<leader>gb", function() gitsigns.blame_line({ full = true }) end, { desc = "Blame Line" })
 
       -- Quickfix List Keymaps
-      vim.keymap.set('n', '<leader>gq', gitsigns.setqflist, { desc = "Add buffer changes to quickfix list" } )
-      vim.keymap.set('n', '<leader>gQ', function() gitsigns.setqflist('all') end, { desc = "Add all changes to the quickfix list" })
+      vim.keymap.set('n', '<leader>gq', gitsigns.setqflist, { desc = "Send changes to quickfix (buffer)" } )
+      vim.keymap.set('n', '<leader>gQ', function() gitsigns.setqflist('all') end, { desc = "Send changes to quickfix (global)" })
 
 			-- Preview Keymaps
-			vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Git Hunk - Preview" })
-			vim.keymap.set( "n", "<leader>gP", gitsigns.preview_hunk_inline, { buffer = bufnr, desc = "Git Hunk - Preview Inline" })
+			vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Preview" })
+			vim.keymap.set( "n", "<leader>gP", gitsigns.preview_hunk_inline, { buffer = bufnr, desc = "Preview Inline" })
 		-- stylua: ignore end
 
 		-- Text object

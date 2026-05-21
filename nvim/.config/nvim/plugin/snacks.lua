@@ -136,12 +136,12 @@ vim.keymap.set("n", "<leader>.", Snacks.picker.resume, { desc = "Resume Previous
 vim.keymap.set("n", "<leader>E", Snacks.picker.explorer, { desc = "Open file explorer [Snacks]" })
 
 -- Git Pickers
-vim.keymap.set("n", "<leader>gB", Snacks.picker.git_branches, { desc = "Git Branches" })
-vim.keymap.set("n", "<leader>gl", Snacks.picker.git_log, { desc = "Git Log" })
-vim.keymap.set("n", "<leader>gL", Snacks.picker.git_log_line, { desc = "Git Log Line" })
-vim.keymap.set("n", "<leader>gf", Snacks.picker.git_log_file, { desc = "Git Log File" })
-vim.keymap.set("n", "<leader>gs", Snacks.picker.git_status, { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gS", Snacks.picker.git_stash, { desc = "Git Stash" })
+vim.keymap.set("n", "<leader>gB", Snacks.picker.git_branches, { desc = "Branches" })
+vim.keymap.set("n", "<leader>gl", Snacks.picker.git_log, { desc = "Log" })
+vim.keymap.set("n", "<leader>gL", Snacks.picker.git_log_line, { desc = "Log Line" })
+vim.keymap.set("n", "<leader>gf", Snacks.picker.git_log_file, { desc = "Log File" })
+vim.keymap.set("n", "<leader>gs", Snacks.picker.git_status, { desc = "Status" })
+vim.keymap.set("n", "<leader>gS", Snacks.picker.git_stash, { desc = "Stash" })
 
 -- Search Pickers
 vim.keymap.set("n", '<leader>s"', Snacks.picker.registers, { desc = "Registers" })
