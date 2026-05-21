@@ -36,7 +36,7 @@ vim.g.markdown_recommended_style = 0 -- Disable all preset Markdown styles (they
 vim.o.number = true
 vim.o.relativenumber = true
 
--- Only highlight the current line number (specific color depends on colorscheme)
+-- Highlight current line AND line number
 vim.o.cursorline = true
 vim.o.cursorlineopt = "both"
 
