@@ -201,6 +201,8 @@ Snacks.toggle
 		end,
 	})
 	:map("<leader>tv")
+
+-- Format on Save Toggles (used by `Conform`)
 Snacks.toggle
 	.new({
 		id = "format_on_save_buffer",
