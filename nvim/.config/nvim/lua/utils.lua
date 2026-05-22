@@ -45,8 +45,8 @@ M.icons = {
 		},
 	},
 	toggles = {
-		spell = " ",
-		wrap = "󰖶 ",
+		spell = "󰓆",
+		wrap = "󰖶",
 		list = "󱁐",
 	},
 }
