@@ -74,6 +74,36 @@ local function formatter_status()
 	return result
 end
 
+---Displays an icon for each enabled `Snacks` toggle that corresponds to a built-in
+---Neovim option (i.e., `vim.o` option).
+---@return string
+local function option_toggle_status()
+	local option_toggles = {}
+	local result = ""
+
+	for k in pairs(Snacks.toggle.toggles) do
+		local is_enabled = Snacks.toggle.toggles[k]:get()
+		local is_valid_option = pcall(function()
+			return vim.o[k] -- Check if `k` is an actual `vim.o` option
+		end)
+
+		if is_valid_option and is_enabled then
+			table.insert(option_toggles, k)
+		end
+	end
+
+	-- Prevents the icons from being rearranged upon session restore.
+	table.sort(option_toggles)
+
+	-- Add an icon to the statusline for each enabled option toggle.
+	for i, toggle in ipairs(option_toggles) do
+		local separator = i == 1 and "" or "  "
+		result = result .. separator .. utils.icons.toggles[toggle]
+	end
+
+	return result
+end
+
 ---Determines whether the current window contains any splits.
 ---@return boolean
 local function has_splits()
@@ -180,12 +210,10 @@ require("lualine").setup({
 					end
 					return "lualine_c_normal"
 				end,
-				on_click = function(_, _, modifier)
-					-- See `:h stl` for info on using `stridx`
-					-- Can't use "shift" because Ghostty uses it as a global click modifier.
-					local pressed_alt = vim.fn.stridx(modifier, "a") ~= -1
-					vim.cmd("FormatToggle" .. (not pressed_alt and "!" or ""))
-				end,
+			},
+			{
+				option_toggle_status,
+				color = { fg = colors.green },
 			},
 			{
 				"diagnostics",
