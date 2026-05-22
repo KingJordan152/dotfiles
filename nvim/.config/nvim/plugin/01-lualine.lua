@@ -279,5 +279,6 @@ require("lualine").setup({
 		"mason",
 		"man",
 		"oil",
+		"fugitive",
 	},
 })
