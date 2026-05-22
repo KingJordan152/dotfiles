@@ -174,9 +174,11 @@ vim.keymap.set("n", "<leader>ss", Snacks.picker.lsp_symbols, { desc = "LSP Symbo
 vim.keymap.set("n", "<leader>sS", Snacks.picker.lsp_workspace_symbols, { desc = "LSP Workspace Symbols" })
 vim.keymap.set("n", "<leader>su", Snacks.picker.undo, { desc = "Undo History" })
 
--- Terminal Toggles
-vim.keymap.set("n", "<leader>Tt", Snacks.terminal.toggle, { desc = "Toggle terminal" })
-vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new terminal" })
+-- Terminal Keymaps (includes VS Code-inspired)
+vim.keymap.set({ "n", "t" }, "<C-`>", Snacks.terminal.focus, { desc = "Toggle/focus terminal" })
+vim.keymap.set({ "n", "t" }, "<C-S-`>", Snacks.terminal.open, { desc = "Open new terminal" })
+vim.keymap.set("n", "<leader>Tt", Snacks.terminal.focus, { desc = "Toggle/focus terminal" })
+vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Open new terminal" })
 
 -- Generic Toggles
 Snacks.toggle.diagnostics({ name = "Diagnostics" }):map("<leader>td")
