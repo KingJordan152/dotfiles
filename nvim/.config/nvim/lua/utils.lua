@@ -44,6 +44,10 @@ M.icons = {
 			ignored = "",
 		},
 	},
+	toggles = {
+		spell = " ",
+		wrap = "󰖶 ",
+	},
 }
 
 ---Creates a collection of unique strings.
