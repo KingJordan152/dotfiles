@@ -41,11 +41,20 @@ vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.cursorlineopt = "both"
 
--- Defines the characters to use for different special lines throughout Neovim
+-- Special icons used for various UI elements
 vim.opt.fillchars:append({
 	diff = "╱",
 	lastline = ".",
 	eob = " ",
+})
+
+-- Special icons used for various whitespace (non-visible) characters
+vim.opt.listchars:append({
+	tab = "» ",
+	trail = "·",
+	space = "·",
+	nbsp = "␣",
+	eol = "󰌑",
 })
 
 -- Sync clipboard between OS and Neovim.

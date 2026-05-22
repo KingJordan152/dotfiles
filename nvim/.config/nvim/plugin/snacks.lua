@@ -182,6 +182,7 @@ vim.keymap.set("n", "<leader>TT", Snacks.terminal.open, { desc = "Toggle new ter
 Snacks.toggle.diagnostics({ name = "Diagnostics" }):map("<leader>td")
 Snacks.toggle.option("spell", { name = "Spellcheck" }):map("<leader>ts")
 Snacks.toggle.option("wrap", { name = "Wrap Long Lines" }):map("<leader>tw")
+Snacks.toggle.option("list", { name = "List (Visible Whitespace)" }):map("<leader>tl")
 Snacks.toggle
 	.new({
 		id = "diagnostics_virtual_text",
