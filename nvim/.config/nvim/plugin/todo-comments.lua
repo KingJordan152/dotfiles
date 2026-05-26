@@ -8,11 +8,13 @@ vim.pack.add({
 
 -- TODO: Example :)
 
+local utils = require("utils")
+
 require("todo-comments").setup({
   keywords = {
-    TODO = { icon = " ", color = "hint" },
-    NOTE = { icon = " ", color = "info", alt = { "INFO" } },
-    TICKET = { icon = " ", color = "ticket", alt = { "JIRA", "LINEAR" } },
+    TODO = { icon = utils.icons.checkmark, color = "hint" },
+    NOTE = { icon = utils.icons.diagnostics.info, color = "info", alt = { "INFO" } },
+    TICKET = { icon = utils.icons.ticket, color = "ticket", alt = { "JIRA", "LINEAR" } },
   },
   highlight = {
     multiline = false,
