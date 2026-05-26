@@ -162,6 +162,21 @@ require("conform").setup({
 
     return { lsp_format = "fallback", timeout_ms = 500 }
   end,
+
+  formatters = {
+    oxfmt = {
+      cwd = require("conform.util").root_file({
+        -- https://oxc.rs/docs/guide/usage/formatter/config.html#create-a-config-file
+        ".oxfmtrc.json",
+        ".oxfmtrc.jsonc",
+        "oxfmt.config.ts",
+        -- NOTE: Bandage fix - remove all `vite.config.-` root filetypes to prevent `oxfmt` from accidentally activating
+        -- https://viteplus.dev/guide/fmt#configuration
+        -- "vite.config.ts",
+        -- "vite.config.js",
+      }),
+    },
+  },
 })
 
 -- ==== Keymaps ====
