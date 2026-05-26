@@ -5,26 +5,26 @@ local sub_range = require("substitute.range")
 local sub_exchange = require("substitute.exchange")
 
 sub.setup({
-	highlight_substituted_text = {
-		enabled = true,
-		timer = 150, -- Match highlight on yank timeout
-	},
-	range = {
-		confirm = true,
-	},
+  highlight_substituted_text = {
+    enabled = true,
+    timer = 150, -- Match highlight on yank timeout
+  },
+  range = {
+    confirm = true,
+  },
 })
 
 -- Substitute (replace)
 vim.keymap.set("n", "gs", function()
-	sub.operator({
-		modifiers = { "reindent" },
-	})
+  sub.operator({
+    modifiers = { "reindent" },
+  })
 end, { desc = "Substitute" })
 
 vim.keymap.set("n", "gss", function()
-	sub.line({
-		modifiers = { "reindent" },
-	})
+  sub.line({
+    modifiers = { "reindent" },
+  })
 end, { desc = "Substitute line" })
 
 vim.keymap.set("n", "gS", sub.eol, { desc = "Substitute (up to EOL)" })

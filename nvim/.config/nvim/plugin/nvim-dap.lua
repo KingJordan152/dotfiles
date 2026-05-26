@@ -4,42 +4,38 @@ local utils = require("utils")
 
 ---Prompts the user for a message to use for a logpoint breakpoint.
 local function toggle_logpoint()
-	return vim.ui.input({ prompt = "Logpoint Message (expressions within {} are interpolated)" }, function(input)
-		if input == nil then
-			return
-		end
+  return vim.ui.input({ prompt = "Logpoint Message (expressions within {} are interpolated)" }, function(input)
+    if input == nil then return end
 
-		require("dap").set_breakpoint(nil, nil, input)
-	end)
+    require("dap").set_breakpoint(nil, nil, input)
+  end)
 end
 
 ---Prompts the user for an expression to use for a conditional breakpoint.
 local function toggle_conditional_breakpoint()
-	return vim.ui.input({ prompt = "Break when the following expression evaluates to true" }, function(input)
-		if input == nil then
-			return
-		end
+  return vim.ui.input({ prompt = "Break when the following expression evaluates to true" }, function(input)
+    if input == nil then return end
 
-		require("dap").set_breakpoint(input, nil, nil)
-	end)
+    require("dap").set_breakpoint(input, nil, nil)
+  end)
 end
 
 ---Configures common VS Code adapters from a given `launch.json` file to use correlating Neovim adapters.
 ---@param callback fun(adapter: dap.Adapter)
 ---@param config dap.Configuration
 local function js_debug_adapter_for_vscode(callback, config)
-	local pwa_name = "pwa-" .. config.type
-	local pwa_adapter = require("dap").adapters[pwa_name]
+  local pwa_name = "pwa-" .. config.type
+  local pwa_adapter = require("dap").adapters[pwa_name]
 
-	-- Intercept the user's config and change the `type` to match the `pwa_adapter`'s name.
-	config.type = pwa_name
+  -- Intercept the user's config and change the `type` to match the `pwa_adapter`'s name.
+  config.type = pwa_name
 
-	-- Perform type narrowing to avoid error (either condition has the same outcome).
-	if type(pwa_adapter) == "function" then
-		pwa_adapter(callback, config)
-	else
-		callback(pwa_adapter)
-	end
+  -- Perform type narrowing to avoid error (either condition has the same outcome).
+  if type(pwa_adapter) == "function" then
+    pwa_adapter(callback, config)
+  else
+    callback(pwa_adapter)
+  end
 end
 
 local dap = require("dap")
@@ -49,131 +45,128 @@ local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages"
 local js_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
 
 local js_debug_adapter = {
-	type = "server",
-	host = "localhost",
-	port = "${port}",
-	executable = {
-		command = "node",
-		args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
-	},
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = "node",
+    args = { mason_package_path .. "/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}" },
+  },
 }
 
 dap.adapters = {
-	["pwa-node"] = js_debug_adapter,
-	["pwa-chrome"] = js_debug_adapter,
-	["node"] = js_debug_adapter_for_vscode,
-	["chrome"] = js_debug_adapter_for_vscode,
-	["codelldb"] = {
-		type = "executable",
-		command = mason_package_path .. "/codelldb/codelldb",
-	},
+  ["pwa-node"] = js_debug_adapter,
+  ["pwa-chrome"] = js_debug_adapter,
+  ["node"] = js_debug_adapter_for_vscode,
+  ["chrome"] = js_debug_adapter_for_vscode,
+  ["codelldb"] = {
+    type = "executable",
+    command = mason_package_path .. "/codelldb/codelldb",
+  },
 }
 
 for _, filetype in ipairs(js_filetypes) do
-	dap.configurations[filetype] = {
-		{
-			type = "pwa-node",
-			request = "launch",
-			name = "Launch file",
-			program = "${file}",
-			cwd = "${workspaceFolder}",
-			sourceMaps = true,
-		},
-		{
-			type = "pwa-node",
-			request = "attach",
-			name = "Attach",
-			processId = dap_utils.pick_process,
-			cwd = "${workspaceFolder}",
-			sourceMaps = true,
-		},
-		{
-			type = "pwa-chrome",
-			request = "launch",
-			name = "Launch Brave",
-			url = "http://localhost:5173", -- Assume Vite
-			webRoot = "${workspaceFolder}",
-			sourceMaps = true,
-			runtimeExecutable = has_mac and "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
-				or "/usr/bin/brave-browser",
-			runtimeArgs = {
-				"--remote-debugging-port=9222",
-				"--user-data-dir=remote-debug-profile",
-			},
-		},
-		{
-			type = "pwa-chrome",
-			request = "attach",
-			name = "Attach to Brave",
-			webRoot = "${workspaceFolder}",
-			urlFilter = "http://localhost:5173/*", -- Assume Vite
-			port = 9222,
-			sourceMaps = true,
-		},
-		{
-			type = "pwa-node",
-			request = "launch",
-			name = "Launch file (Deno)",
-			runtimeExecutable = "deno",
-			runtimeArgs = {
-				"run",
-				"--inspect-wait",
-				"--allow-all",
-			},
-			program = "${file}",
-			cwd = "${workspaceFolder}",
-			attachSimplePort = 9229,
-		},
-	}
+  dap.configurations[filetype] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = dap_utils.pick_process,
+      cwd = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+    {
+      type = "pwa-chrome",
+      request = "launch",
+      name = "Launch Brave",
+      url = "http://localhost:5173", -- Assume Vite
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+      runtimeExecutable = has_mac and "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser" or "/usr/bin/brave-browser",
+      runtimeArgs = {
+        "--remote-debugging-port=9222",
+        "--user-data-dir=remote-debug-profile",
+      },
+    },
+    {
+      type = "pwa-chrome",
+      request = "attach",
+      name = "Attach to Brave",
+      webRoot = "${workspaceFolder}",
+      urlFilter = "http://localhost:5173/*", -- Assume Vite
+      port = 9222,
+      sourceMaps = true,
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file (Deno)",
+      runtimeExecutable = "deno",
+      runtimeArgs = {
+        "run",
+        "--inspect-wait",
+        "--allow-all",
+      },
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      attachSimplePort = 9229,
+    },
+  }
 end
 
 dap.configurations.cpp = {
-	{
-		name = "Launch file",
-		type = "codelldb",
-		request = "launch",
-		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-		end,
-		cwd = "${workspaceFolder}",
-		stopOnEntry = false,
-	},
+  {
+    name = "Launch file",
+    type = "codelldb",
+    request = "launch",
+    program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+    cwd = "${workspaceFolder}",
+    stopOnEntry = false,
+  },
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 dap.configurations.zig = dap.configurations.cpp
 
 dap.configurations.java = {
-	{
-		type = "java",
-		request = "attach",
-		name = "Debug (Attach) - Remote",
-		hostName = "127.0.0.1",
-		port = 5005,
-	},
+  {
+    type = "java",
+    request = "attach",
+    name = "Debug (Attach) - Remote",
+    hostName = "127.0.0.1",
+    port = 5005,
+  },
 }
 
 -- Custom icon definitions
 vim.fn.sign_define("DapBreakpoint", {
-	text = utils.icons.debugger.breakpoint,
-	texthl = "Error",
+  text = utils.icons.debugger.breakpoint,
+  texthl = "Error",
 })
 vim.fn.sign_define("DapBreakpointCondition", {
-	text = utils.icons.debugger.conditional,
-	texthl = "Error",
+  text = utils.icons.debugger.conditional,
+  texthl = "Error",
 })
 vim.fn.sign_define("DapLogPoint", {
-	text = utils.icons.debugger.log_point,
-	texthl = "Error",
+  text = utils.icons.debugger.log_point,
+  texthl = "Error",
 })
 vim.fn.sign_define("DapBreakpointRejected", {
-	text = utils.icons.debugger.rejected,
-	texthl = "Error",
+  text = utils.icons.debugger.rejected,
+  texthl = "Error",
 })
 vim.fn.sign_define("DapStopped", {
-	text = utils.icons.debugger.stopped,
-	texthl = "DapUIStop",
-	linehl = "DapStoppedLine",
+  text = utils.icons.debugger.stopped,
+  texthl = "DapUIStop",
+  linehl = "DapStoppedLine",
 })
 
 -- VS Code-inspired Keymaps

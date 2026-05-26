@@ -4,10 +4,10 @@ local smart_splits = require("smart-splits")
 
 ---@diagnostic disable-next-line: missing-fields
 smart_splits.setup({
-	default_amount = 2,
-	cursor_follows_swapped_bufs = true,
-	float_win_behavior = "mux", -- Ensures floating windows are properly focused when leaving/entering a split
-	at_edge = "stop",
+  default_amount = 2,
+  cursor_follows_swapped_bufs = true,
+  float_win_behavior = "mux", -- Ensures floating windows are properly focused when leaving/entering a split
+  at_edge = "stop",
 })
 
 -- Moving between splits

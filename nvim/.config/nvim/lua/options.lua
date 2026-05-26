@@ -43,44 +43,42 @@ vim.o.cursorlineopt = "both"
 
 -- Special icons used for various UI elements
 vim.opt.fillchars:append({
-	diff = "╱",
-	lastline = ".",
-	eob = " ",
+  diff = "╱",
+  lastline = ".",
+  eob = " ",
 })
 
 -- Special icons used for various whitespace (non-visible) characters
 vim.opt.listchars:append({
-	tab = "» ",
-	trail = "·",
-	space = "·",
-	nbsp = "␣",
-	eol = "󰌑",
+  tab = "» ",
+  trail = "·",
+  space = "·",
+  nbsp = "␣",
+  eol = "󰌑",
 })
 
 -- Sync clipboard between OS and Neovim.
 -- Using `schedule` can increase startup time.
-vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
-end)
+vim.schedule(function() vim.o.clipboard = "unnamedplus" end)
 
 -- Experimental; replaces builtin message and cmdline presentation layer
 require("vim._core.ui2").enable({
-	enable = true,
-	msg = {
-		targets = {
-			progress = "msg",
-		},
-	},
+  enable = true,
+  msg = {
+    targets = {
+      progress = "msg",
+    },
+  },
 })
 
 -- Customize which filetypes are assigned to different extensions/filenames
 vim.filetype.add({
-	extension = {
-		["code-snippets"] = "json",
-	},
-	pattern = {
-		["[jt]sconfig.*%.json"] = "jsonc", -- TS/JS config files
-		[".*/%.vscode/.*%.json"] = "jsonc", -- All special VS Code files
-		[".*/%.zed/.*%.json"] = "jsonc", -- All special Zed files
-	},
+  extension = {
+    ["code-snippets"] = "json",
+  },
+  pattern = {
+    ["[jt]sconfig.*%.json"] = "jsonc", -- TS/JS config files
+    [".*/%.vscode/.*%.json"] = "jsonc", -- All special VS Code files
+    [".*/%.zed/.*%.json"] = "jsonc", -- All special Zed files
+  },
 })

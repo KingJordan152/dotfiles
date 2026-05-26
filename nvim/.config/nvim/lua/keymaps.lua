@@ -10,8 +10,8 @@ vim.keymap.set({ "i", "c" }, "<M-Del>", "<C-o>dw", { desc = "Delete word forward
 vim.keymap.set("n", "]p", "<Cmd>ip<CR>", { desc = "Paste below current line" })
 vim.keymap.set("n", "[p", "<Cmd>ip!<CR>", { desc = "Paste above current line" })
 vim.keymap.set("n", "<C-CR>", function()
-	-- Must specify count because `]<Space>` will ignore it by default.
-	return "[<Space>" .. vim.v.count1 .. "]<Space>"
+  -- Must specify count because `]<Space>` will ignore it by default.
+  return "[<Space>" .. vim.v.count1 .. "]<Space>"
 end, { remap = true, expr = true, desc = "Add empty line above and below cursor" })
 
 -- Emacs-inspired Insert/Command-line mode keymaps
@@ -32,42 +32,42 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Copy and paste lines down (VS Code-inspired)
 vim.keymap.set({ "n", "v" }, "<M-S-J>", function()
-	local command = ":co -1<CR>j"
-	local mode = vim.api.nvim_get_mode().mode
-	local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
+  local command = ":co -1<CR>j"
+  local mode = vim.api.nvim_get_mode().mode
+  local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
 
-	return is_visual and command .. "gv" or command
+  return is_visual and command .. "gv" or command
 end, { expr = true, silent = true })
 
 -- Copy and paste lines up (VS Code-inspired)
 vim.keymap.set({ "n", "v" }, "<M-S-K>", function()
-	local command = ":co +0<CR>k"
-	local mode = vim.api.nvim_get_mode().mode
-	local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
+  local command = ":co +0<CR>k"
+  local mode = vim.api.nvim_get_mode().mode
+  local is_visual = mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
 
-	return is_visual and command .. "gv" or command
+  return is_visual and command .. "gv" or command
 end, { expr = true, silent = true })
 
 -- Efficiently move across wrapped lines and add current position to jumplist before relative line movement
 vim.keymap.set({ "n", "x" }, "j", function()
-	local j = utils.wrapped_lines_movement("j")
-	return vim.v.count > 1 and "m'" .. vim.v.count .. j or j
+  local j = utils.wrapped_lines_movement("j")
+  return vim.v.count > 1 and "m'" .. vim.v.count .. j or j
 end, { expr = true })
 
 vim.keymap.set({ "n", "x" }, "k", function()
-	local k = utils.wrapped_lines_movement("k")
-	return vim.v.count > 1 and "m'" .. vim.v.count .. k or k
+  local k = utils.wrapped_lines_movement("k")
+  return vim.v.count > 1 and "m'" .. vim.v.count .. k or k
 end, { expr = true })
 
 -- Copy filepaths (excludes filename)
 vim.keymap.set("n", "<leader>%", function()
-	local path = vim.fn.expand("%:h")
-	vim.fn.setreg("+", path)
-	vim.notify('Copied relative path: "' .. path .. '"')
+  local path = vim.fn.expand("%:h")
+  vim.fn.setreg("+", path)
+  vim.notify('Copied relative path: "' .. path .. '"')
 end, { desc = "Copy relative path" })
 
 vim.keymap.set("n", "<leader>~", function()
-	local path = vim.fn.expand("%:p:~:h")
-	vim.fn.setreg("+", path)
-	vim.notify('Copied absolute path: "' .. path .. '"')
+  local path = vim.fn.expand("%:p:~:h")
+  vim.fn.setreg("+", path)
+  vim.notify('Copied absolute path: "' .. path .. '"')
 end, { desc = "Copy absolute path" })

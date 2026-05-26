@@ -1,25 +1,25 @@
 vim.pack.add({
-	-- Dependencies
-	"https://github.com/nvim-tree/nvim-web-devicons",
+  -- Dependencies
+  "https://github.com/nvim-tree/nvim-web-devicons",
 
-	"https://github.com/cbochs/grapple.nvim",
+  "https://github.com/cbochs/grapple.nvim",
 })
 
 require("grapple").setup({
-	scope = "git_branch", -- Assign default
-	default_scopes = {
-		git_branch = {
-			cache = {
-				-- `CmdlineLeave` fires cache update when switching branches with Fugitive.
-				event = { "BufEnter", "FocusGained", "CmdlineLeave" },
-				debounce = 1000, -- ms
-			},
-		},
-	},
-	---@type grapple.vim.win_opts
-	win_opts = {
-		border = vim.o.winborder,
-	},
+  scope = "git_branch", -- Assign default
+  default_scopes = {
+    git_branch = {
+      cache = {
+        -- `CmdlineLeave` fires cache update when switching branches with Fugitive.
+        event = { "BufEnter", "FocusGained", "CmdlineLeave" },
+        debounce = 1000, -- ms
+      },
+    },
+  },
+  ---@type grapple.vim.win_opts
+  win_opts = {
+    border = vim.o.winborder,
+  },
 })
 
 -- General keymaps

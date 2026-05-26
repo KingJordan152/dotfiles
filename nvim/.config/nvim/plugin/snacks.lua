@@ -1,109 +1,109 @@
 vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 
 require("snacks").setup({
-	bigfile = {
-		enabled = true,
-	},
-	-- Custom `vim.ui.input`
-	input = {
-		enabled = true,
-	},
-	image = {
-		enabled = true,
-		convert = {
-			notify = false,
-		},
-	},
-	-- Auto-highlight LSP references
-	words = {
-		enabled = true,
-	},
-	-- Floating picker windows (like Telescope)
-	picker = {
-		enabled = true,
-		ui_select = true, -- Custom `vim.ui.select`
-		formatters = {
-			file = {
-				filename_first = true,
-			},
-		},
-		sources = {
-			explorer = {
-				auto_close = true,
-			},
-			projects = {
-				dev = { "~/Documents", "~/Projects" },
-				filter = {
-					paths = {
-						["/opt"] = false,
-						["~/.local/share"] = false,
-					},
-				},
-			},
-			smart = {
-				filter = {
-					cwd = true,
-				},
-				title = "Find File",
-			},
-			recent = {
-				filter = {
-					cwd = true,
-				},
-			},
-			lsp_config = {
-				configured = true,
-				attached = true,
-				title = "Attached LSPs",
-				layout = "dropdown",
-			},
-		},
-		win = {
-			input = {
-				keys = {
-					["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
-					["<m-/>"] = { "toggle_help_input", mode = "i" },
-				},
-			},
-		},
-	},
-	terminal = {
-		enabled = true,
-		auto_close = false,
-	},
-	-- Cool central-hub page (like Alpha)
-	dashboard = {
-		enabled = true,
-		sections = {
-			{ section = "header" },
-			{ section = "keys", gap = 1, padding = 1 },
-		},
-		preset = {
-			---@type snacks.dashboard.Item[]
-			keys = {
-				{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-				{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-				{
-					icon = " ",
-					key = "r",
-					desc = "Recent Files",
-					action = ":lua Snacks.dashboard.pick('oldfiles')",
-				},
-				{
-					icon = " ",
-					key = "p",
-					desc = "Recent Projects",
-					action = ":lua Snacks.dashboard.pick('projects')",
-				},
-				{
-					icon = " ",
-					key = "c",
-					desc = "Config",
-					action = ":e ~/.config/nvim/lua/options.lua",
-				},
-				{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-			},
-			header = [[
+  bigfile = {
+    enabled = true,
+  },
+  -- Custom `vim.ui.input`
+  input = {
+    enabled = true,
+  },
+  image = {
+    enabled = true,
+    convert = {
+      notify = false,
+    },
+  },
+  -- Auto-highlight LSP references
+  words = {
+    enabled = true,
+  },
+  -- Floating picker windows (like Telescope)
+  picker = {
+    enabled = true,
+    ui_select = true, -- Custom `vim.ui.select`
+    formatters = {
+      file = {
+        filename_first = true,
+      },
+    },
+    sources = {
+      explorer = {
+        auto_close = true,
+      },
+      projects = {
+        dev = { "~/Documents", "~/Projects" },
+        filter = {
+          paths = {
+            ["/opt"] = false,
+            ["~/.local/share"] = false,
+          },
+        },
+      },
+      smart = {
+        filter = {
+          cwd = true,
+        },
+        title = "Find File",
+      },
+      recent = {
+        filter = {
+          cwd = true,
+        },
+      },
+      lsp_config = {
+        configured = true,
+        attached = true,
+        title = "Attached LSPs",
+        layout = "dropdown",
+      },
+    },
+    win = {
+      input = {
+        keys = {
+          ["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
+          ["<m-/>"] = { "toggle_help_input", mode = "i" },
+        },
+      },
+    },
+  },
+  terminal = {
+    enabled = true,
+    auto_close = false,
+  },
+  -- Cool central-hub page (like Alpha)
+  dashboard = {
+    enabled = true,
+    sections = {
+      { section = "header" },
+      { section = "keys", gap = 1, padding = 1 },
+    },
+    preset = {
+      ---@type snacks.dashboard.Item[]
+      keys = {
+        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        {
+          icon = " ",
+          key = "r",
+          desc = "Recent Files",
+          action = ":lua Snacks.dashboard.pick('oldfiles')",
+        },
+        {
+          icon = " ",
+          key = "p",
+          desc = "Recent Projects",
+          action = ":lua Snacks.dashboard.pick('projects')",
+        },
+        {
+          icon = " ",
+          key = "c",
+          desc = "Config",
+          action = ":e ~/.config/nvim/lua/options.lua",
+        },
+        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+      },
+      header = [[
        ████ ██████           █████      ██                     
       ███████████             █████                             
       █████████ ███████████████████ ███   ███████████   
@@ -111,16 +111,16 @@ require("snacks").setup({
     █████████ ██████████ █████████ █████ █████ ████ █████   
   ███████████ ███    ███ █████████ █████ █████ ████ █████  
  ██████  █████████████████████ ████ █████ █████ ████ ██████]],
-		},
-	},
-	-- Reorganize the statuscolumn and add clickable 'fold' icons
-	statuscolumn = {
-		enabled = true,
-		folds = {
-			open = true,
-			git_hl = true,
-		},
-	},
+    },
+  },
+  -- Reorganize the statuscolumn and add clickable 'fold' icons
+  statuscolumn = {
+    enabled = true,
+    folds = {
+      open = true,
+      git_hl = true,
+    },
+  },
 })
 
 -- (Dashboard) Pull up dashboard from anywhere
@@ -147,14 +147,19 @@ vim.keymap.set("n", "<leader>gS", Snacks.picker.git_stash, { desc = "Stash" })
 vim.keymap.set("n", '<leader>s"', Snacks.picker.registers, { desc = "Registers" })
 vim.keymap.set("n", "<leader>s/", Snacks.picker.search_history, { desc = "History" })
 vim.keymap.set("n", "<leader>sa", Snacks.picker.autocmds, { desc = "Autocmds" })
-vim.keymap.set("n", "<leader>sC", function()
-	Snacks.picker.colorschemes({
-		layout = {
-			preset = "vscode",
-			hidden = {},
-		},
-	})
-end, { desc = "Colorschemes" })
+vim.keymap.set(
+  "n",
+  "<leader>sC",
+  function()
+    Snacks.picker.colorschemes({
+      layout = {
+        preset = "vscode",
+        hidden = {},
+      },
+    })
+  end,
+  { desc = "Colorschemes" }
+)
 vim.keymap.set("n", "<leader>sd", Snacks.picker.diagnostics_buffer, { desc = "Buffer Diagnostics" })
 vim.keymap.set("n", "<leader>sD", Snacks.picker.diagnostics, { desc = "All Diagnostics" })
 vim.keymap.set("n", "<leader>sh", Snacks.picker.help, { desc = "Help Pages" })
@@ -186,83 +191,71 @@ Snacks.toggle.option("spell", { name = "Spellcheck" }):map("<leader>ts")
 Snacks.toggle.option("wrap", { name = "Wrap Long Lines" }):map("<leader>tw")
 Snacks.toggle.option("list", { name = "List (Visible Whitespace)" }):map("<leader>tl")
 Snacks.toggle
-	.new({
-		id = "diagnostics_virtual_text",
-		name = "Diagnostics Virtual Text",
-		get = function()
-			return vim.diagnostic.config().virtual_text ~= false
-		end,
-		set = function(state)
-			if state then
-				-- Keep in sync with default in `diagnostics.lua`
-				vim.diagnostic.config({
-					virtual_text = { source = "if_many", spacing = 2 },
-				})
-			else
-				vim.diagnostic.config({ virtual_text = false })
-			end
-		end,
-	})
-	:map("<leader>tv")
+  .new({
+    id = "diagnostics_virtual_text",
+    name = "Diagnostics Virtual Text",
+    get = function() return vim.diagnostic.config().virtual_text ~= false end,
+    set = function(state)
+      if state then
+        -- Keep in sync with default in `diagnostics.lua`
+        vim.diagnostic.config({
+          virtual_text = { source = "if_many", spacing = 2 },
+        })
+      else
+        vim.diagnostic.config({ virtual_text = false })
+      end
+    end,
+  })
+  :map("<leader>tv")
 
 -- Format on Save Toggles (used by `Conform`)
 Snacks.toggle
-	.new({
-		id = "format_on_save_buffer",
-		name = "Format on Save (buffer)",
-		get = function()
-			return not vim.b.disable_autoformat
-		end,
-		set = function(state)
-			vim.b.disable_autoformat = not state
-		end,
-	})
-	:map("<leader>tf")
+  .new({
+    id = "format_on_save_buffer",
+    name = "Format on Save (buffer)",
+    get = function() return not vim.b.disable_autoformat end,
+    set = function(state) vim.b.disable_autoformat = not state end,
+  })
+  :map("<leader>tf")
 Snacks.toggle
-	.new({
-		id = "format_on_save",
-		name = "Format on Save (global)",
-		get = function()
-			return not vim.g.disable_autoformat
-		end,
-		set = function(state)
-			vim.g.disable_autoformat = not state
-		end,
-	})
-	:map("<leader>tF")
+  .new({
+    id = "format_on_save",
+    name = "Format on Save (global)",
+    get = function() return not vim.g.disable_autoformat end,
+    set = function(state) vim.g.disable_autoformat = not state end,
+  })
+  :map("<leader>tF")
 
 -- LSP Toggles (overwrite the ones in `lsp.lua`)
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("snacks_lsp_toggles", {}),
-	callback = function(event)
-		local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
-		local buf = event.buf
+  group = vim.api.nvim_create_augroup("snacks_lsp_toggles", {}),
+  callback = function(event)
+    local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
+    local buf = event.buf
 
-		if client:supports_method("textDocument/inlayHint") then
-			Snacks.toggle
-				.new({
-					id = "inlay_hints",
-					name = "LSP Inlay Hints",
-					get = vim.lsp.inlay_hint.is_enabled,
-					set = function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-					end,
-				})
-				:map("<leader>th", { buf = buf })
-		end
+    if client:supports_method("textDocument/inlayHint") then
+      Snacks.toggle
+        .new({
+          id = "inlay_hints",
+          name = "LSP Inlay Hints",
+          get = vim.lsp.inlay_hint.is_enabled,
+          set = function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+        })
+        :map("<leader>th", { buf = buf })
+    end
 
-		if client:supports_method("textDocument/codeLens") then
-			Snacks.toggle
-				.new({
-					id = "code_lens",
-					name = "LSP Code Lens",
-					get = vim.lsp.codelens.is_enabled,
-					set = function()
-						vim.lsp.get_clients()
-						vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
-					end,
-				})
-				:map("<leader>tx", { buf = buf })
-		end
-	end,
+    if client:supports_method("textDocument/codeLens") then
+      Snacks.toggle
+        .new({
+          id = "code_lens",
+          name = "LSP Code Lens",
+          get = vim.lsp.codelens.is_enabled,
+          set = function()
+            vim.lsp.get_clients()
+            vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+          end,
+        })
+        :map("<leader>tx", { buf = buf })
+    end
+  end,
 })

@@ -1,18 +1,18 @@
 vim.pack.add({
-	-- Dependencies
-	"https://github.com/folke/tokyonight.nvim",
+  -- Dependencies
+  "https://github.com/folke/tokyonight.nvim",
 
-	"https://github.com/nvim-lualine/lualine.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
 })
 
 local utils = require("utils")
 local colors = require("tokyonight.colors").setup()
 local winbar_disabled_filetypes = {
-	"oil",
-	"fugitive",
-	"dap-repl",
-	"qf",
-	"snacks_terminal",
+  "oil",
+  "fugitive",
+  "dap-repl",
+  "qf",
+  "snacks_terminal",
 }
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
@@ -23,27 +23,19 @@ local highlight = require("lualine.highlight")
 
 ---Initialize the filename component to have different colors when modified/saved.
 function custom_filename:init(options)
-	custom_filename.super.init(self, options)
-	self.status_colors = {
-		saved = highlight.create_component_highlight_group({ gui = "" }, "filename_status_saved", self.options),
-		modified = highlight.create_component_highlight_group(
-			{ gui = "bold" },
-			"filename_status_modified",
-			self.options
-		),
-	}
-	if self.options.color == nil then
-		self.options.color = ""
-	end
+  custom_filename.super.init(self, options)
+  self.status_colors = {
+    saved = highlight.create_component_highlight_group({ gui = "" }, "filename_status_saved", self.options),
+    modified = highlight.create_component_highlight_group({ gui = "bold" }, "filename_status_modified", self.options),
+  }
+  if self.options.color == nil then self.options.color = "" end
 end
 
 ---Ensure the filename's color updates whenever the buffer is either modified or saved.
 function custom_filename:update_status()
-	local data = custom_filename.super.update_status(self)
-	data = highlight.component_format_highlight(
-		vim.bo.modified and self.status_colors.modified or self.status_colors.saved
-	) .. data
-	return data
+  local data = custom_filename.super.update_status(self)
+  data = highlight.component_format_highlight(vim.bo.modified and self.status_colors.modified or self.status_colors.saved) .. data
+  return data
 end
 
 ---Determines the formatters that will run against the current buffer.
@@ -54,72 +46,68 @@ end
 ---If there are neither formatters nor LSPs configured for the current buffer, the empty string will be returned.
 ---@return string
 local function formatter_status()
-	local conform = require("conform")
-	local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
-	local result = ""
+  local conform = require("conform")
+  local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
+  local result = ""
 
-	if next(formatters_for_current_buffer) == nil then
-		if lsp_fallback then
-			result = result .. "LSP"
-		else
-			result = ""
-		end
-	else
-		for i, formatter in ipairs(formatters_for_current_buffer) do
-			local separator = i == 1 and "" or ", "
-			result = result .. separator .. formatter.name
-		end
-	end
+  if next(formatters_for_current_buffer) == nil then
+    if lsp_fallback then
+      result = result .. "LSP"
+    else
+      result = ""
+    end
+  else
+    for i, formatter in ipairs(formatters_for_current_buffer) do
+      local separator = i == 1 and "" or ", "
+      result = result .. separator .. formatter.name
+    end
+  end
 
-	return result
+  return result
 end
 
 ---Displays an icon for each enabled `Snacks` toggle that corresponds to a built-in
 ---Neovim option (i.e., `vim.o` option).
 ---@return string
 local function option_toggle_status()
-	local option_toggles = {}
-	local result = ""
+  local option_toggles = {}
+  local result = ""
 
-	for k in pairs(Snacks.toggle.toggles) do
-		local is_enabled = Snacks.toggle.toggles[k]:get()
-		local is_valid_option = pcall(function()
-			return vim.o[k] -- Check if `k` is an actual `vim.o` option
-		end)
+  for k in pairs(Snacks.toggle.toggles) do
+    local is_enabled = Snacks.toggle.toggles[k]:get()
+    local is_valid_option = pcall(function()
+      return vim.o[k] -- Check if `k` is an actual `vim.o` option
+    end)
 
-		if is_valid_option and is_enabled then
-			table.insert(option_toggles, k)
-		end
-	end
+    if is_valid_option and is_enabled then table.insert(option_toggles, k) end
+  end
 
-	-- Prevents the icons from being rearranged upon session restore.
-	table.sort(option_toggles)
+  -- Prevents the icons from being rearranged upon session restore.
+  table.sort(option_toggles)
 
-	-- Add an icon to the statusline for each enabled option toggle.
-	for i, toggle in ipairs(option_toggles) do
-		local separator = i == 1 and "" or "  "
-		result = result .. separator .. utils.icons.toggles[toggle]
-	end
+  -- Add an icon to the statusline for each enabled option toggle.
+  for i, toggle in ipairs(option_toggles) do
+    local separator = i == 1 and "" or "  "
+    result = result .. separator .. utils.icons.toggles[toggle]
+  end
 
-	return result
+  return result
 end
 
 ---Determines whether the current window contains any splits.
 ---@return boolean
 local function has_splits()
-	local wins = vim.api.nvim_tabpage_list_wins(0)
-	local split_count = 0
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  local split_count = 0
 
-	for _, win in ipairs(wins) do
-		local win_config = vim.api.nvim_win_get_config(win)
+  for _, win in ipairs(wins) do
+    local win_config = vim.api.nvim_win_get_config(win)
 
-		-- Filter out all floating windows to get the true split count.
-		if win_config.relative == "" then
-			split_count = split_count + 1
-		end
-	end
+    -- Filter out all floating windows to get the true split count.
+    if win_config.relative == "" then split_count = split_count + 1 end
+  end
 
-	return split_count > 1
+  return split_count > 1
 end
 
 ---Determines whether the winbar (`:h winbar`) should be displayed.
@@ -129,156 +117,152 @@ end
 ---  - there's at least one active split
 ---@return boolean
 local function should_display_winbar()
-	local buf_name = vim.api.nvim_buf_get_name(0)
-	local no_name = buf_name == "" or buf_name == "null"
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local no_name = buf_name == "" or buf_name == "null"
 
-	return not no_name and has_splits()
+  return not no_name and has_splits()
 end
 
 require("lualine").setup({
-	options = {
-		theme = "auto",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		globalstatus = true,
-		disabled_filetypes = {
-			winbar = winbar_disabled_filetypes,
-		},
-	},
-	sections = {
-		lualine_a = {
-			{
-				"mode",
-				separator = { left = "", right = "" },
-			},
-		},
-		lualine_b = {
-			{
-				"branch",
-				draw_empty = true,
-			},
-			{
-				"diff",
-				symbols = {
-					added = utils.icons.git.file.added,
-					modified = utils.icons.git.file.modified,
-					removed = utils.icons.git.file.deleted,
-				},
-			},
-		},
-		lualine_c = {
-			{
-				custom_filename,
-				colored = true,
-				symbols = {
-					modified = "●",
-					readonly = "",
-				},
-			},
-			{
-				"grapple",
-				color = { fg = colors.blue },
-				cond = function()
-					return not utils.Set({ "snacks_picker_input", "snacks_picker_list" })[vim.bo.filetype]
-				end,
-			},
-		},
-		lualine_x = {
-			{
-				"lsp_status",
-				icon = { "", color = { fg = colors.blue1 } },
-				symbols = {
-					done = "",
-					separator = ", ",
-				},
-				ignore_lsp = {
-					"cssmodules_ls",
-					"css_variables",
-					"stylua",
-					"tailwindcss",
-					"emmet_language_server",
-					"render-markdown",
-				},
-			},
-			{
-				formatter_status,
-				icon = { utils.icons.formatting, color = { fg = colors.yellow } },
-				-- If formatting is disabled, make the component red with a strikethrough.
-				color = function()
-					if vim.b.disable_autoformat or vim.g.disable_autoformat then
-						return { fg = colors.red, gui = "strikethrough" }
-					end
-					return "lualine_c_normal"
-				end,
-			},
-			{
-				option_toggle_status,
-				color = { fg = colors.green },
-			},
-			{
-				"diagnostics",
-				sections = { "error", "warn" },
-				symbols = {
-					error = utils.icons.diagnostics.error,
-					warn = utils.icons.diagnostics.warn,
-					hint = utils.icons.diagnostics.hint,
-					info = utils.icons.diagnostics.info,
-				},
-				always_visible = true,
-				cond = function()
-					return not utils.Set({
-						"help",
-						"snacks_picker_input",
-						"snacks_picker_list",
-						"gitcommit",
-					})[vim.bo.filetype]
-				end,
-			},
-		},
-		lualine_y = { "progress" },
-		lualine_z = {
-			{
-				"location",
-				separator = { left = "", right = "" },
-			},
-		},
-	},
-	winbar = {
-		lualine_c = {
-			{
-				custom_filename,
-				colored = true,
-				symbols = {
-					modified = "●",
-					readonly = "",
-				},
-				cond = should_display_winbar,
-				separator = { left = "", right = "" },
-				color = "lualine_b_normal",
-			},
-		},
-	},
-	inactive_winbar = {
-		lualine_c = {
-			{
-				custom_filename,
-				colored = true,
-				symbols = {
-					modified = "●",
-					readonly = "",
-				},
-				cond = should_display_winbar,
-				separator = { left = "", right = "" },
-				padding = 2,
-			},
-		},
-	},
-	extensions = {
-		"quickfix",
-		"lazy",
-		"mason",
-		"man",
-		"oil",
-		"fugitive",
-	},
+  options = {
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    globalstatus = true,
+    disabled_filetypes = {
+      winbar = winbar_disabled_filetypes,
+    },
+  },
+  sections = {
+    lualine_a = {
+      {
+        "mode",
+        separator = { left = "", right = "" },
+      },
+    },
+    lualine_b = {
+      {
+        "branch",
+        draw_empty = true,
+      },
+      {
+        "diff",
+        symbols = {
+          added = utils.icons.git.file.added,
+          modified = utils.icons.git.file.modified,
+          removed = utils.icons.git.file.deleted,
+        },
+      },
+    },
+    lualine_c = {
+      {
+        custom_filename,
+        colored = true,
+        symbols = {
+          modified = "●",
+          readonly = "",
+        },
+      },
+      {
+        "grapple",
+        color = { fg = colors.blue },
+        cond = function() return not utils.Set({ "snacks_picker_input", "snacks_picker_list" })[vim.bo.filetype] end,
+      },
+    },
+    lualine_x = {
+      {
+        "lsp_status",
+        icon = { "", color = { fg = colors.blue1 } },
+        symbols = {
+          done = "",
+          separator = ", ",
+        },
+        ignore_lsp = {
+          "cssmodules_ls",
+          "css_variables",
+          "stylua",
+          "tailwindcss",
+          "emmet_language_server",
+          "render-markdown",
+        },
+      },
+      {
+        formatter_status,
+        icon = { utils.icons.formatting, color = { fg = colors.yellow } },
+        -- If formatting is disabled, make the component red with a strikethrough.
+        color = function()
+          if vim.b.disable_autoformat or vim.g.disable_autoformat then return { fg = colors.red, gui = "strikethrough" } end
+          return "lualine_c_normal"
+        end,
+      },
+      {
+        option_toggle_status,
+        color = { fg = colors.green },
+      },
+      {
+        "diagnostics",
+        sections = { "error", "warn" },
+        symbols = {
+          error = utils.icons.diagnostics.error,
+          warn = utils.icons.diagnostics.warn,
+          hint = utils.icons.diagnostics.hint,
+          info = utils.icons.diagnostics.info,
+        },
+        always_visible = true,
+        cond = function()
+          return not utils.Set({
+            "help",
+            "snacks_picker_input",
+            "snacks_picker_list",
+            "gitcommit",
+          })[vim.bo.filetype]
+        end,
+      },
+    },
+    lualine_y = { "progress" },
+    lualine_z = {
+      {
+        "location",
+        separator = { left = "", right = "" },
+      },
+    },
+  },
+  winbar = {
+    lualine_c = {
+      {
+        custom_filename,
+        colored = true,
+        symbols = {
+          modified = "●",
+          readonly = "",
+        },
+        cond = should_display_winbar,
+        separator = { left = "", right = "" },
+        color = "lualine_b_normal",
+      },
+    },
+  },
+  inactive_winbar = {
+    lualine_c = {
+      {
+        custom_filename,
+        colored = true,
+        symbols = {
+          modified = "●",
+          readonly = "",
+        },
+        cond = should_display_winbar,
+        separator = { left = "", right = "" },
+        padding = 2,
+      },
+    },
+  },
+  extensions = {
+    "quickfix",
+    "lazy",
+    "mason",
+    "man",
+    "oil",
+    "fugitive",
+  },
 })
