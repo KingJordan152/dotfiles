@@ -21,7 +21,9 @@ local function first(bufnr, ...)
 
   for i = 1, select("#", ...) do
     local formatter = select(i, ...)
-    if conform.get_formatter_info(formatter, bufnr).available then return formatter end
+    if conform.get_formatter_info(formatter, bufnr).available then
+      return formatter
+    end
   end
 
   return select(1, ...)
@@ -45,7 +47,9 @@ local function require_cwd(bufnr, formatters)
   local config = {}
 
   for _, formatter in ipairs(formatters) do
-    if conform.get_formatter_info(formatter, bufnr).cwd ~= nil then table.insert(config, formatter) end
+    if conform.get_formatter_info(formatter, bufnr).cwd ~= nil then
+      table.insert(config, formatter)
+    end
   end
 
   return config
@@ -74,7 +78,9 @@ local function web_dev_config(bufnr) return require_cwd(bufnr, web_dev_formatter
 local function web_dev_adjacent_config(bufnr)
   local config = web_dev_config(bufnr)
 
-  if vim.tbl_isempty(config) then config = { first(bufnr, unpack(web_dev_formatters)) } end
+  if vim.tbl_isempty(config) then
+    config = { first(bufnr, unpack(web_dev_formatters)) }
+  end
 
   return config
 end
@@ -126,7 +132,10 @@ require("conform").setup({
   },
 
   format_on_save = function(bufnr)
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+      return
+    end
+
     return { lsp_format = "fallback", timeout_ms = 500 }
   end,
 })
@@ -137,7 +146,9 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
   require("conform").format({ async = false, timeout_ms = 500, lsp_format = "fallback" }, function(err)
     if not err then
       local mode = vim.api.nvim_get_mode().mode
-      if vim.startswith(string.lower(mode), "v") then vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true) end
+      if vim.startswith(string.lower(mode), "v") then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+      end
     end
   end)
 end, { desc = "Format code" })

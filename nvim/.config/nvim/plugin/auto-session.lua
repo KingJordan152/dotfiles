@@ -66,7 +66,9 @@ require("auto-session").setup({
       for buf, buf_bps in pairs(breakpoints_by_buf) do
         bps[vim.api.nvim_buf_get_name(buf)] = buf_bps
       end
-      if not vim.tbl_isempty(bps) then extra_data.breakpoints = bps end
+      if not vim.tbl_isempty(bps) then
+        extra_data.breakpoints = bps
+      end
     end
 
     return vim.fn.json_encode(extra_data)
@@ -93,7 +95,9 @@ require("auto-session").setup({
 
             -- Create or load buffer to prevent breakpoints from resolving to line 1
             local bufnr = vim.fn.bufnr(buf_name, true)
-            if vim.fn.bufloaded(bufnr) == 0 then vim.api.nvim_buf_call(bufnr, vim.cmd.edit) end
+            if vim.fn.bufloaded(bufnr) == 0 then
+              vim.api.nvim_buf_call(bufnr, vim.cmd.edit)
+            end
 
             breakpoints.set(opts, bufnr, line)
           end

@@ -136,7 +136,9 @@ require("blink.cmp").setup({
           local found_trigger_character = string.find(ctx.line, "[.= ]") ~= nil
 
           -- When typing a command, only show completion menu when the keyword is 3 or more characters
-          if ctx.mode == "cmdline" and not found_trigger_character then return 3 end
+          if ctx.mode == "cmdline" and not found_trigger_character then
+            return 3
+          end
 
           return 0
         end,

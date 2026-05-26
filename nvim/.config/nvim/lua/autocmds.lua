@@ -7,7 +7,9 @@ autocmd("InsertEnter", {
   desc = "Disable relative line numbers when entering Insert mode",
   group = hybrid_line_numbers,
   callback = function(args)
-    if vim.bo[args.buf].modifiable then vim.o.relativenumber = false end
+    if vim.bo[args.buf].modifiable then
+      vim.o.relativenumber = false
+    end
   end,
 })
 
@@ -15,7 +17,9 @@ autocmd("InsertLeave", {
   desc = "Enable relative line numbers when leaving Insert mode",
   group = hybrid_line_numbers,
   callback = function(args)
-    if vim.bo[args.buf].modifiable then vim.o.relativenumber = true end
+    if vim.bo[args.buf].modifiable then
+      vim.o.relativenumber = true
+    end
   end,
 })
 

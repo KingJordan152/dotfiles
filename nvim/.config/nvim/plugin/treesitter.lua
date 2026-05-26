@@ -4,7 +4,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
     if name == "nvim-treesitter" and kind == "update" then
-      if not ev.data.active then vim.cmd.packadd("nvim-treesitter") end
+      if not ev.data.active then
+        vim.cmd.packadd("nvim-treesitter")
+      end
       vim.cmd("TSUpdate")
     end
   end,
@@ -44,7 +46,9 @@ vim.api.nvim_create_autocmd("FileType", {
     local language = vim.treesitter.language.get_lang(filetype) or filetype
 
     -- Prevents Treesitter from running on buffers that don't correspond to an available language/parser
-    if not vim.tbl_contains(ts.get_available(), language) then return end
+    if not vim.tbl_contains(ts.get_available(), language) then
+      return
+    end
 
     -- Auto-install a language; already installed languages are ignored
     ts.install(language):await(function()

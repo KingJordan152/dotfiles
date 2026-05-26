@@ -7,7 +7,9 @@ vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
 ---@param blame_info Gitsigns.BlameInfo | Gitsigns.CommitInfo
 ---@return [string,string][]
 local function current_line_blame_formatter(name, blame_info)
-  if blame_info.author == name then blame_info.author = "You" end
+  if blame_info.author == name then
+    blame_info.author = "You"
+  end
 
   local should_display = vim.fn.getline(".") ~= ""
   local date_time = require("gitsigns.util").get_relative_time(blame_info.author_time)

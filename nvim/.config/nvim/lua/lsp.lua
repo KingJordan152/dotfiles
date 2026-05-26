@@ -20,7 +20,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.ui.select(vim.list_extend({ "ALL" }, vim.diagnostic.severity), {
         prompt = "Select severity level",
       }, function(choice)
-        if choice == nil then return end
+        if choice == nil then
+          return
+        end
 
         vim.diagnostic.setqflist(choice ~= "ALL" and {
           severity = choice,
@@ -118,7 +120,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local message = (not value.message and status ~= "success") and status or value.message or "done"
 
         -- Truncate messages if they're too long (e.g., Rust Analyzer)
-        if #message > 40 then message = message:sub(1, 37) .. "..." end
+        if #message > 40 then
+          message = message:sub(1, 37) .. "..."
+        end
 
         vim.api.nvim_echo({ { message } }, false, {
           id = "lsp." .. ev.data.client_id,

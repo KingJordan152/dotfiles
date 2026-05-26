@@ -28,7 +28,9 @@ function custom_filename:init(options)
     saved = highlight.create_component_highlight_group({ gui = "" }, "filename_status_saved", self.options),
     modified = highlight.create_component_highlight_group({ gui = "bold" }, "filename_status_modified", self.options),
   }
-  if self.options.color == nil then self.options.color = "" end
+  if self.options.color == nil then
+    self.options.color = ""
+  end
 end
 
 ---Ensure the filename's color updates whenever the buffer is either modified or saved.
@@ -79,7 +81,9 @@ local function option_toggle_status()
       return vim.o[k] -- Check if `k` is an actual `vim.o` option
     end)
 
-    if is_valid_option and is_enabled then table.insert(option_toggles, k) end
+    if is_valid_option and is_enabled then
+      table.insert(option_toggles, k)
+    end
   end
 
   -- Prevents the icons from being rearranged upon session restore.
@@ -104,7 +108,9 @@ local function has_splits()
     local win_config = vim.api.nvim_win_get_config(win)
 
     -- Filter out all floating windows to get the true split count.
-    if win_config.relative == "" then split_count = split_count + 1 end
+    if win_config.relative == "" then
+      split_count = split_count + 1
+    end
   end
 
   return split_count > 1
@@ -191,7 +197,9 @@ require("lualine").setup({
         icon = { utils.icons.formatting, color = { fg = colors.yellow } },
         -- If formatting is disabled, make the component red with a strikethrough.
         color = function()
-          if vim.b.disable_autoformat or vim.g.disable_autoformat then return { fg = colors.red, gui = "strikethrough" } end
+          if vim.b.disable_autoformat or vim.g.disable_autoformat then
+            return { fg = colors.red, gui = "strikethrough" }
+          end
           return "lualine_c_normal"
         end,
       },

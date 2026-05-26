@@ -105,7 +105,9 @@ end
 ---@param char string
 ---@return string
 function M.wrapped_lines_movement(char)
-  if not vim.o.wrap then return char end
+  if not vim.o.wrap then
+    return char
+  end
 
   return vim.v.count > 0 and char or "g" .. char
 end
@@ -120,7 +122,9 @@ function M.treesitter_node_equals(node_list)
     pos = { row - 1, math.max(0, column - 1) }, -- Properly captures node at the cursor (0-indexed)
   })
 
-  if not success or not node then return false end
+  if not success or not node then
+    return false
+  end
 
   return vim.tbl_contains(node_list, node:type())
 end

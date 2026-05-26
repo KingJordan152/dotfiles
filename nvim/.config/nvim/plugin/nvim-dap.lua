@@ -5,7 +5,9 @@ local utils = require("utils")
 ---Prompts the user for a message to use for a logpoint breakpoint.
 local function toggle_logpoint()
   return vim.ui.input({ prompt = "Logpoint Message (expressions within {} are interpolated)" }, function(input)
-    if input == nil then return end
+    if input == nil then
+      return
+    end
 
     require("dap").set_breakpoint(nil, nil, input)
   end)
@@ -14,7 +16,9 @@ end
 ---Prompts the user for an expression to use for a conditional breakpoint.
 local function toggle_conditional_breakpoint()
   return vim.ui.input({ prompt = "Break when the following expression evaluates to true" }, function(input)
-    if input == nil then return end
+    if input == nil then
+      return
+    end
 
     require("dap").set_breakpoint(input, nil, nil)
   end)
