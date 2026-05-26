@@ -55,24 +55,48 @@ local function require_cwd(bufnr, formatters)
   return config
 end
 
+---Takes a list of formatters and filters out the ones that aren't currently installed in the user's
+---*project-local* `node_modules` directory.
+---@param bufnr integer Current buffer index.
+---@param formatters string[] List of formatters to filter.
+---@return string[]
+local function require_node_modules(bufnr, formatters)
+  local config = {}
+  local node_modules_path = vim.fs.joinpath(vim.fs.root(bufnr, "node_modules/.bin"), "/.bin") -- Get the absolute path of `node_modules/.bin`
+
+  -- Certain binaries should activate different or additional formatters
+  local formatter_binary_map = {
+    prettierd = "prettier",
+    ["biome-organize-imports"] = "biome",
+  }
+
+  for _, formatter in ipairs(formatters) do
+    local binaries = vim.fs.find(formatter_binary_map[formatter] or formatter, { path = node_modules_path })
+
+    if not vim.tbl_isempty(binaries) then
+      table.insert(config, formatter)
+    end
+  end
+
+  return config
+end
+
 ---Determines the formatters that will be used for all web development filetypes.
 ---
----A formatter must have a dedicated configuration file in order to be activated.
+---A formatter must be installed in the user's `node_modules` directory in order for it to be activated.
 ---Otherwise, fallback to LSP formatters.
----
----Examples of formatter configuration files include `.prettierrc`, `.oxfmtrc.json`, etc.
 ---@param bufnr integer Current buffer index.
 ---@return string[]
-local function web_dev_config(bufnr) return require_cwd(bufnr, web_dev_formatters) end
+local function web_dev_config(bufnr) return require_cwd(bufnr, require_node_modules(bufnr, web_dev_formatters)) end
 
 ---Determines the formatters that will be used for all web development-adjacent filetypes
 ---(i.e., files that can reasonably be found both inside and outside web development projects).
 ---
 ---For these files, the `web_dev_config` is applied, but rather than falling back to the LSP when
----formatter configuration files aren't found, we default to the first available formatter provided.
+---the formatter isn't installed in the user's `node_modules` directory, default to the first available formatter.
 ---
 ---This makes it so that filetypes like `Markdown` can still receive dedicated formatting even when
----they're outside a web development project and don't have an associated configuration file.
+---they're outside a web development project.
 ---@param bufnr integer Current buffer index.
 ---@return string[]
 local function web_dev_adjacent_config(bufnr)
