@@ -131,4 +131,41 @@ function M.treesitter_node_equals(node_list)
   return vim.tbl_contains(node_list, node:type())
 end
 
+---Opens a JSON file and returns its content as a table.
+---If the JSON file wasn't able to be read, `nil` is returned instead.
+---@param file string
+---@return nil|table
+function M.read_json(file)
+  local f = io.open(file, "r")
+  if not f then
+    vim.notify(string.format("Unable to open file %s", file), vim.log.levels.ERROR)
+    return nil
+  end
+
+  local file_content = f:read("*a") -- Read entire file contents
+  f:close()
+
+  local ok, json = pcall(vim.json.decode, file_content)
+  if not ok then
+    vim.notify(string.format("Unable to parse JSON file %s", file), vim.log.levels.ERROR)
+    return nil
+  end
+
+  return json
+end
+
+---Returns a table containing the content of the nearest `package.json` file.
+---If a `package.json` file doesn't exist in the current working directory, `nil`
+---is returned instead.
+---@return nil|table
+function M.read_package_json()
+  local package_json_path = vim.fs.root(0, { "package.json" })
+
+  if package_json_path == nil then
+    return nil
+  end
+
+  return M.read_json(vim.fs.joinpath(package_json_path, "package.json"))
+end
+
 return M
