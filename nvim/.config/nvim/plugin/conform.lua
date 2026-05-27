@@ -1,13 +1,19 @@
 vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
--- ==== Helper Functions and Values ====
+-- ==== Helper Functions and Variables ====
 
+local utils = require("utils")
+local package_json = nil
 local web_dev_formatters = {
   "oxfmt",
   "prettierd",
   "biome",
   "biome-organize-imports",
 }
+
+vim.schedule(function()
+  package_json = utils.read_package_json() -- Only read once during plugin load; non-blocking
+end)
 
 ---Runs the first available formatter given as an argument.
 ---You can use this function to run one formatter from a list first *then* another one.
@@ -55,45 +61,46 @@ local function require_cwd(bufnr, formatters)
   return config
 end
 
----Takes a list of formatters and filters out the ones that aren't currently installed in the user's
----*project-local* `node_modules` directory.
----@param bufnr integer Current buffer index.
+---Takes a list of formatters and filters out the ones that aren't listed as a dependency in the
+---user's `package.json` file.
+---
+---If a `package.json` file isn't found in the current working directory, **all** the formatters will
+---be filtered out.
+---@param _ integer Placeholder for the current buffer index.
 ---@param formatters string[] List of formatters to filter.
 ---@return string[]
-local function require_node_modules(bufnr, formatters)
-  local config = {}
-  local node_modules_path = vim.fs.joinpath(vim.fs.root(bufnr, "node_modules/.bin"), "/.bin") -- Get the absolute path of `node_modules/.bin`
-
-  -- Certain binaries should activate different or additional formatters
-  local formatter_binary_map = {
-    prettierd = "prettier",
-    ["biome-organize-imports"] = "biome",
-  }
-
-  for _, formatter in ipairs(formatters) do
-    local binaries = vim.fs.find(formatter_binary_map[formatter] or formatter, { path = node_modules_path })
-
-    if not vim.tbl_isempty(binaries) then
-      table.insert(config, formatter)
-    end
+local function require_package_json(_, formatters)
+  -- Immediately filter out all formatters if there isn't a `package.json` file in the current working directory
+  if not package_json then
+    return {}
   end
 
-  return config
+  -- Certain dependencies should activate different or additional formatters
+  local formatter_dependency_map = {
+    prettierd = "prettier",
+    biome = "@biomejs/biome",
+    ["biome-organize-imports"] = "@biomejs/biome",
+  }
+
+  return vim.tbl_filter(function(formatter)
+    formatter = formatter_dependency_map[formatter] or formatter
+    return package_json.dependencies[formatter] or package_json.devDependencies[formatter]
+  end, formatters)
 end
 
 ---Determines the formatters that will be used for all web development filetypes.
 ---
----A formatter must be installed in the user's `node_modules` directory in order for it to be activated.
----Otherwise, fallback to LSP formatters.
+---A formatter must be listed as a dependency in the user's `package.json` _and_ have an associated configuration
+---file in order for it to be activated. Otherwise, fallback to LSP formatters.
 ---@param bufnr integer Current buffer index.
 ---@return string[]
-local function web_dev_config(bufnr) return require_cwd(bufnr, require_node_modules(bufnr, web_dev_formatters)) end
+local function web_dev_config(bufnr) return require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters)) end
 
 ---Determines the formatters that will be used for all web development-adjacent filetypes
 ---(i.e., files that can reasonably be found both inside and outside web development projects).
 ---
 ---For these files, the `web_dev_config` is applied, but rather than falling back to the LSP when
----the formatter isn't installed in the user's `node_modules` directory, default to the first available formatter.
+---no formatters are applicable, default to the first available formatter on the user's system.
 ---
 ---This makes it so that filetypes like `Markdown` can still receive dedicated formatting even when
 ---they're outside a web development project.
@@ -109,7 +116,7 @@ local function web_dev_adjacent_config(bufnr)
   return config
 end
 
--- ==== Plugin Configuration ====
+-- ==== Plugin Config ====
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" -- Ensures `conform` is used for formatting globally
 
@@ -162,21 +169,6 @@ require("conform").setup({
 
     return { lsp_format = "fallback", timeout_ms = 500 }
   end,
-
-  formatters = {
-    oxfmt = {
-      cwd = require("conform.util").root_file({
-        -- https://oxc.rs/docs/guide/usage/formatter/config.html#create-a-config-file
-        ".oxfmtrc.json",
-        ".oxfmtrc.jsonc",
-        "oxfmt.config.ts",
-        -- NOTE: Bandage fix - remove all `vite.config.-` root filetypes to prevent `oxfmt` from accidentally activating
-        -- https://viteplus.dev/guide/fmt#configuration
-        -- "vite.config.ts",
-        -- "vite.config.js",
-      }),
-    },
-  },
 })
 
 -- ==== Keymaps ====
@@ -191,3 +183,12 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
     end
   end)
 end, { desc = "Format code" })
+
+-- ==== Autocmds ====
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  desc = "Reread the user's package.json file whenever a dependency is installed or removed via `npm`",
+  pattern = "package.json",
+  group = vim.api.nvim_create_augroup("conform_reload_package_json", {}),
+  callback = function() package_json = utils.read_package_json() end,
+})
