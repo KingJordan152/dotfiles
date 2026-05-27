@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.o.termguicolors = true -- Enable 24-bit RGB color
+vim.o.autoread = true -- Detect when a file has been changed outside of Neovim and re-read it
 vim.o.expandtab = true -- Use spaces instead of <Tab>
 vim.o.tabstop = 2 -- Number of spaces to use for a <Tab>
 vim.o.softtabstop = 2 -- Number of spaces to use for a <Tab> while performing insert actions

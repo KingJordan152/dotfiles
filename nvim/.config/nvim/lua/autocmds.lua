@@ -59,3 +59,12 @@ autocmd("VimResized", {
     vim.api.nvim_set_current_tabpage(current_tab)
   end,
 })
+
+-- Requires `vim.o.autoread = true` in order to work.
+-- By default, Neovim does this for the `FocusGained` event but not `BufEnter`.
+autocmd("BufEnter", {
+  desc = "Check file for external changes upon entering its buffer",
+  pattern = "*",
+  group = augroup("autoread_file_on_bufenter", {}),
+  command = "if mode() != 'c' | checktime | endif",
+})
