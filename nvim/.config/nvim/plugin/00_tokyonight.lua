@@ -25,10 +25,6 @@ require("tokyonight").setup({
       fg = util.darken(colors.git.add, git_staged_darken_amount),
     }
 
-    highlights["MsgSeparator"] = {
-      bg = util.darken(colors.comment, 0.25), -- Arbitrary gray color
-    }
-
     highlights["GitSignsStagedChange"] = {
       fg = util.darken(colors.git.change, git_staged_darken_amount),
     }
@@ -67,6 +63,10 @@ require("tokyonight").setup({
 
     highlights["WinSeparator"] = {
       fg = colors.border_highlight,
+    }
+
+    highlights["MsgSeparator"] = {
+      bg = util.darken(colors.comment, 0.25), -- Arbitrary gray color
     }
 
     highlights["DapStoppedLine"] = {
