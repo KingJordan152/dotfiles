@@ -192,6 +192,14 @@ Snacks.toggle.option("wrap", { name = "Wrap Long Lines" }):map("<leader>tw")
 Snacks.toggle.option("list", { name = "List (Visible Whitespace)" }):map("<leader>tl")
 Snacks.toggle
   .new({
+    id = "globalstatus",
+    name = "Global Statusline",
+    get = function() return require("lualine").get_config().options.globalstatus end,
+    set = function(state) return require("lualine").setup({ options = { globalstatus = state } }) end,
+  })
+  :map("<leader>tS")
+Snacks.toggle
+  .new({
     id = "diagnostics_virtual_text",
     name = "Diagnostics Virtual Text",
     get = function() return vim.diagnostic.config().virtual_text ~= false end,

@@ -7,13 +7,6 @@ vim.pack.add({
 
 local utils = require("utils")
 local colors = require("tokyonight.colors").setup()
-local winbar_disabled_filetypes = {
-  "oil",
-  "fugitive",
-  "dap-repl",
-  "qf",
-  "snacks_terminal",
-}
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
 local custom_filename = require("lualine.components.filename"):extend()
@@ -98,46 +91,12 @@ local function option_toggle_status()
   return result
 end
 
----Determines whether the current window contains any splits.
----@return boolean
-local function has_splits()
-  local wins = vim.api.nvim_tabpage_list_wins(0)
-  local split_count = 0
-
-  for _, win in ipairs(wins) do
-    local win_config = vim.api.nvim_win_get_config(win)
-
-    -- Filter out all floating windows to get the true split count.
-    if win_config.relative == "" then
-      split_count = split_count + 1
-    end
-  end
-
-  return split_count > 1
-end
-
----Determines whether the winbar (`:h winbar`) should be displayed.
----
----The winbar is only shown under the following circumstances:
----  - the current buffer has a name (i.e., not "No Name")
----  - there's at least one active split
----@return boolean
-local function should_display_winbar()
-  local buf_name = vim.api.nvim_buf_get_name(0)
-  local no_name = buf_name == "" or buf_name == "null"
-
-  return not no_name and has_splits()
-end
-
 require("lualine").setup({
   options = {
     theme = "auto",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     globalstatus = true,
-    disabled_filetypes = {
-      winbar = winbar_disabled_filetypes,
-    },
   },
   sections = {
     lualine_a = {
@@ -232,36 +191,6 @@ require("lualine").setup({
       {
         "location",
         separator = { left = "", right = "" },
-      },
-    },
-  },
-  winbar = {
-    lualine_c = {
-      {
-        custom_filename,
-        colored = true,
-        symbols = {
-          modified = "●",
-          readonly = "",
-        },
-        cond = should_display_winbar,
-        separator = { left = "", right = "" },
-        color = "lualine_b_normal",
-      },
-    },
-  },
-  inactive_winbar = {
-    lualine_c = {
-      {
-        custom_filename,
-        colored = true,
-        symbols = {
-          modified = "●",
-          readonly = "",
-        },
-        cond = should_display_winbar,
-        separator = { left = "", right = "" },
-        padding = 2,
       },
     },
   },
