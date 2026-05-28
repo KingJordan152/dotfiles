@@ -68,3 +68,11 @@ autocmd("BufEnter", {
   group = augroup("autoread_file_on_bufenter", {}),
   command = "if mode() != 'c' | checktime | endif",
 })
+
+-- Makes Neovim terminals behave more like regular terminals
+autocmd("TermOpen", {
+  desc = "Enable wrap for all terminal buffers",
+  group = augroup("enable_terminal_wrap", {}),
+  pattern = "*",
+  command = "setlocal wrap",
+})
