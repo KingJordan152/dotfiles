@@ -11,9 +11,8 @@ local web_dev_formatters = {
   "biome-organize-imports",
 }
 
-vim.schedule(function()
-  package_json = utils.read_package_json() -- Only read once during plugin load; non-blocking
-end)
+-- Only read `package.json` once during intial plugin load (non-blocking)
+vim.schedule(function() package_json = utils.read_package_json() end)
 
 ---Runs the first available formatter given as an argument.
 ---You can use this function to run one formatter from a list first *then* another one.
@@ -50,15 +49,7 @@ local function add_injected(formatters) return vim.list_extend(formatters, { "in
 ---@return string[]
 local function require_cwd(bufnr, formatters)
   local conform = require("conform")
-  local config = {}
-
-  for _, formatter in ipairs(formatters) do
-    if conform.get_formatter_info(formatter, bufnr).cwd ~= nil then
-      table.insert(config, formatter)
-    end
-  end
-
-  return config
+  return vim.tbl_filter(function(formatter) return conform.get_formatter_info(formatter, bufnr).cwd ~= nil end, formatters)
 end
 
 ---Takes a list of formatters and filters out the ones that aren't listed as a dependency in the
