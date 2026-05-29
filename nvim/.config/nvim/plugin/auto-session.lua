@@ -54,6 +54,7 @@ require("auto-session").setup({
   bypass_save_filetypes = { "netrw", "snacks_dashboard", "dapui_console" },
   git_use_branch_name = true,
   git_auto_restore_on_branch_change = true,
+  legacy_cmds = false,
 
   save_extra_data = function()
     local extra_data = save_variables({ "disable_autoformat" })
