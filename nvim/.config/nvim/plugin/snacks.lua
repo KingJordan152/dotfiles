@@ -18,6 +18,10 @@ require("snacks").setup({
   words = {
     enabled = true,
   },
+  -- Add textobjects for selecting inner/outer scope (uses Treesitter)
+  scope = {
+    enabled = true,
+  },
   -- Floating picker windows (like Telescope)
   picker = {
     enabled = true,
