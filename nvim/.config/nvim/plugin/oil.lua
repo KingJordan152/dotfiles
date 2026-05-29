@@ -24,6 +24,8 @@ require("oil-git").setup({
   show_directory_highlights = false,
   symbol_position = "signcolumn",
   symbols = utils.icons.git,
+  show_branch = true,
+  branch_format = utils.icons.git.branch .. " %s",
   highlights = {
     OilGitAdded = { link = "GitSignsAdd" },
     OilGitModified = { link = "GitSignsChange" },
