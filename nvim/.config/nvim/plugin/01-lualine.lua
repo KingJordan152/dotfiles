@@ -209,14 +209,14 @@ require("lualine").setup({
           readonly = "",
         },
         colored = true,
-        color = { fg = colors.fg_dark, bg = colors.bg },
+        color = { fg = colors.fg_dark },
       },
     },
     lualine_x = {
       {
         "location",
         colored = true,
-        color = { fg = colors.fg_dark, bg = colors.bg },
+        color = { fg = colors.fg_dark },
       },
     },
   },
