@@ -114,6 +114,7 @@ require("lualine").setup({
     lualine_b = {
       {
         "branch",
+        icon = utils.icons.git.branch,
         draw_empty = true,
       },
       {

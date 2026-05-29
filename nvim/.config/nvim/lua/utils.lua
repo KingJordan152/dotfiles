@@ -25,6 +25,7 @@ M.icons = {
     stopped = "",
   },
   git = {
+    branch = "󰘬",
     file = {
       added = " ",
       modified = " ",
