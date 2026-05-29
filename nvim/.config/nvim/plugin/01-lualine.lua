@@ -93,7 +93,13 @@ end
 
 require("lualine").setup({
   options = {
-    theme = "auto",
+    -- Use the "auto" theme but change the "inactive" background color to be more visible.
+    -- This helps draw a more distinguishable border between horizontal inactive and active windows.
+    theme = vim.tbl_deep_extend("force", require("lualine.themes.auto"), {
+      inactive = {
+        c = { bg = colors.bg },
+      },
+    }),
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     globalstatus = true,
@@ -191,6 +197,26 @@ require("lualine").setup({
       {
         "location",
         separator = { left = "", right = "" },
+      },
+    },
+  },
+  inactive_sections = {
+    lualine_c = {
+      {
+        custom_filename,
+        symbols = {
+          modified = "●",
+          readonly = "",
+        },
+        colored = true,
+        color = { fg = colors.fg_dark, bg = colors.bg },
+      },
+    },
+    lualine_x = {
+      {
+        "location",
+        colored = true,
+        color = { fg = colors.fg_dark, bg = colors.bg },
       },
     },
   },
