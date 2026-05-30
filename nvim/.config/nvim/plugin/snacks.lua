@@ -62,11 +62,21 @@ require("snacks").setup({
         layout = "dropdown",
       },
     },
+    actions = {
+      opencode_send = function(...)
+        if package.loaded["opencode"] then
+          return require("opencode").snacks_picker_send(...)
+        end
+
+        vim.notify("Cannot send to OpenCode because it's not installed!", vim.log.levels.ERROR)
+      end,
+    },
     win = {
       input = {
         keys = {
           ["<Esc>"] = { "close", mode = { "n", "i" } }, -- Don't enter Normal mode inside picker
           ["<m-/>"] = { "toggle_help_input", mode = "i" },
+          ["<m-a>"] = { "opencode_send", mode = { "n", "i" } }, -- Only works if OpenCode is installed
         },
       },
     },

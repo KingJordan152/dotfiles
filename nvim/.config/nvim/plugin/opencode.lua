@@ -37,19 +37,3 @@ vim.keymap.set("n", "<S-C-u>", function() opencode.command("session.half.page.up
 vim.keymap.set("n", "<S-C-d>", function() opencode.command("session.half.page.down") end, { desc = "Scroll TUI down" })
 vim.keymap.set("n", "<leader>ol", function() opencode.command("session.list") end, { desc = "List sessions" })
 vim.keymap.set("n", "<leader>o<tab>", function() opencode.command("agent.cycle") end, { desc = "Cycle through agents" })
-
--- Enhance `Snacks` picker with OpenCode features
-require("snacks").config = {
-  picker = {
-    actions = {
-      opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
-    },
-    win = {
-      input = {
-        keys = {
-          ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-        },
-      },
-    },
-  },
-}
