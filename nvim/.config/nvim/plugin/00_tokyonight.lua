@@ -66,7 +66,7 @@ require("tokyonight").setup({
     }
 
     highlights["MsgSeparator"] = {
-      bg = util.darken(colors.comment, 0.25), -- Arbitrary gray color
+      fg = colors.orange,
     }
 
     highlights["DapStoppedLine"] = {

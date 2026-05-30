@@ -45,8 +45,9 @@ vim.o.cursorlineopt = "both"
 -- Special icons used for various UI elements
 vim.opt.fillchars:append({
   diff = "╱",
-  lastline = ".",
-  eob = " ",
+  lastline = ".", -- Truncated text
+  eob = " ", -- Empty lines at end of buffer
+  msgsep = "╍", -- Border icon for pager
 })
 
 -- Special icons used for various whitespace (non-visible) characters
