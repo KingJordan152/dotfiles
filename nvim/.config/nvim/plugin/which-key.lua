@@ -22,6 +22,8 @@ require("which-key").setup({
     { "<leader>X", group = "Exchange Treesitter node" },
     { "<leader>d", group = "Debugger" },
     { "<leader>l", group = "LSP Method" },
+    { "<leader>o", group = "OpenCode", icon = "" },
+    { "<leader>oa", group = "Ask with Context", icon = "󰁥" },
   },
 })
 
