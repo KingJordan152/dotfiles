@@ -57,7 +57,7 @@ require("auto-session").setup({
   legacy_cmds = false,
 
   save_extra_data = function()
-    local extra_data = save_variables({ "disable_autoformat" })
+    local extra_data = save_variables({ "disable_autoformat", "enable_no_neck_pain" })
 
     -- Save all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
     local ok, breakpoints = pcall(require, "dap.breakpoints")
@@ -78,7 +78,7 @@ require("auto-session").setup({
   restore_extra_data = function(_, json_data)
     local extra_data = vim.fn.json_decode(json_data)
 
-    restore_variables({ "disable_autoformat" }, extra_data)
+    restore_variables({ "disable_autoformat", "enable_no_neck_pain" }, extra_data)
 
     -- Restore all breakpoints (code from https://github.com/rmagatti/auto-session?tab=readme-ov-file#%EF%B8%8F-saving-custom-data)
     if extra_data.breakpoints then

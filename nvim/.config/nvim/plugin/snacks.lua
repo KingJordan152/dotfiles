@@ -204,6 +204,17 @@ Snacks.toggle
   :map("<leader>tS")
 Snacks.toggle
   .new({
+    id = "no-neck-pain",
+    name = "No-Neck-Pain",
+    get = function() return vim.g.enable_no_neck_pain end,
+    set = function(state)
+      vim.g.enable_no_neck_pain = state
+      vim.cmd("NoNeckPain")
+    end,
+  })
+  :map("<leader>tz")
+Snacks.toggle
+  .new({
     id = "diagnostics_virtual_text",
     name = "Diagnostics Virtual Text",
     get = function() return vim.diagnostic.config().virtual_text ~= false end,
