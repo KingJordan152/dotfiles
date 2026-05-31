@@ -163,10 +163,38 @@ function M.read_package_json()
   local package_json_path = vim.fs.root(0, { "package.json" })
 
   if package_json_path == nil then
-    return nil
+    return
   end
 
   return M.read_json(vim.fs.joinpath(package_json_path, "package.json"))
+end
+
+---Watch a file for changes. Changes must be saved in order for them to be noticed.
+---@param path string Path to the file that will be watched.
+---@param callback function Function that will be called whenever the file has been changed.
+---@return uv.uv_fs_event_t|nil
+function M.watch_file(path, callback)
+  local watcher = vim.uv.new_fs_event()
+  assert(watcher, "Failed to create file watcher")
+
+  watcher:start(path, {}, function(err, _, events)
+    vim.schedule(function()
+      if err then
+        vim.notify("Error in watcher: " .. err, vim.log.levels.ERROR)
+        watcher:stop()
+      end
+
+      if events.change then
+        callback()
+
+        -- Must stop and re-watch file, otherwise the `callback` will only fire once
+        watcher:stop()
+        M.watch_file(path, callback)
+      end
+    end)
+  end)
+
+  return watcher
 end
 
 return M
