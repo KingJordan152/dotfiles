@@ -11,9 +11,6 @@ local web_dev_formatters = {
   "biome-organize-imports",
 }
 
--- Only read `package.json` once during intial plugin load (non-blocking)
-vim.schedule(function() package_json = utils.read_package_json() end)
-
 ---Runs the first available formatter given as an argument.
 ---You can use this function to run one formatter from a list first *then* another one.
 ---
@@ -107,9 +104,25 @@ local function web_dev_adjacent_config(bufnr)
   return config
 end
 
+---Watch the `package.json` (if it exists) and reread it whenever changes are made to it
+---For example, this function will run when a package is installed via `npm`
+---@return uv.uv_fs_event_t|nil
+local function watch_package_json()
+  local package_json_root = vim.fs.root(0, { "package.json" })
+
+  if not package_json_root then
+    return
+  end
+
+  return utils.watch_file(vim.fs.joinpath(package_json_root, "package.json"), function() package_json = utils.read_package_json() end)
+end
+
 -- ==== Plugin Config ====
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" -- Ensures `conform` is used for formatting globally
+
+vim.schedule(function() package_json = utils.read_package_json() end) -- Only read `package.json` once during intial plugin load (non-blocking)
+watch_package_json()
 
 require("conform").setup({
   formatters_by_ft = {
@@ -174,12 +187,3 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
     end
   end)
 end, { desc = "Format code" })
-
--- ==== Autocmds ====
-
-vim.api.nvim_create_autocmd("FileChangedShellPost", {
-  desc = "Reread the user's package.json file whenever a dependency is installed or removed via `npm`",
-  pattern = "package.json",
-  group = vim.api.nvim_create_augroup("conform_reload_package_json", {}),
-  callback = function() package_json = utils.read_package_json() end,
-})
