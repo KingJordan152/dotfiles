@@ -104,9 +104,8 @@ local function web_dev_adjacent_config(bufnr)
   return config
 end
 
----Watch the `package.json` (if it exists) and reread it whenever changes are made to it
----For example, this function will run when a package is installed via `npm`
----@return uv.uv_fs_event_t|nil
+---Watch the `package.json` (if it exists) and reread it whenever changes are made to it.
+---For example, this function will run when a package is installed via `npm`.
 local function watch_package_json()
   local package_json_root = vim.fs.root(0, { "package.json" })
 
@@ -114,7 +113,17 @@ local function watch_package_json()
     return
   end
 
-  return utils.watch_file(vim.fs.joinpath(package_json_root, "package.json"), function() package_json = utils.read_package_json() end)
+  utils.watch_file(vim.fs.joinpath(package_json_root, "package.json"), function(_, events, unwatch)
+    if events.change then
+      package_json = utils.read_package_json()
+
+      -- Must unwatch current watcher and create a new one, otherwise changes to `package.json` will only be noticed once.
+      -- This happens because of the way Neovim handles file modifications.
+      -- For more info, see https://unix.stackexchange.com/questions/188873/using-inotifywait-along-with-vim.
+      unwatch()
+      watch_package_json()
+    end
+  end)
 end
 
 -- ==== Plugin Config ====
