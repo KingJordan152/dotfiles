@@ -169,30 +169,32 @@ function M.read_package_json()
   return M.read_json(vim.fs.joinpath(package_json_path, "package.json"))
 end
 
----Watch a file for changes. Changes must be saved in order for them to be noticed.
+---Watch a file for various events. A file must be saved in order for "change" events to be emitted.
+---Inspired by https://github.com/rktjmp/fwatch.nvim/blob/main/lua/fwatch.lua.
 ---@param path string Path to the file that will be watched.
----@param callback function Function that will be called whenever the file has been changed.
+---@param callback fun(filename: string, events: uv.fs_event_start.callback.events, unwatch: function): nil Function that will be called whenever the file has been changed.
 ---@return uv.uv_fs_event_t|nil
 function M.watch_file(path, callback)
   local watcher = vim.uv.new_fs_event()
   assert(watcher, "Failed to create file watcher")
 
-  watcher:start(path, {}, function(err, _, events)
-    vim.schedule(function()
+  ---Stops watching the Watchmen
+  local unwatch_cb = function() watcher:stop() end
+
+  watcher:start(
+    path,
+    {},
+    -- MUST be wrapped in `schedule_wrap` to stay synchronized with Neovim's event loop.
+    vim.schedule_wrap(function(err, filename, events)
       if err then
         vim.notify("Error in watcher: " .. err, vim.log.levels.ERROR)
-        watcher:stop()
+        unwatch_cb()
+        return
       end
 
-      if events.change then
-        callback()
-
-        -- Must stop and re-watch file, otherwise the `callback` will only fire once
-        watcher:stop()
-        M.watch_file(path, callback)
-      end
+      callback(filename, events, unwatch_cb)
     end)
-  end)
+  )
 
   return watcher
 end
