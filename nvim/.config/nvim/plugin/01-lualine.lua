@@ -61,34 +61,27 @@ local function formatter_status()
   return result
 end
 
----Displays an icon for each enabled `Snacks` toggle that corresponds to a built-in
----Neovim option (i.e., `vim.o` option).
+---Displays an icon for each enabled `Snacks` toggle that has an associated icon in `utils.icons`.
 ---@return string
-local function option_toggle_status()
-  local option_toggles = {}
-  local result = ""
+local function toggle_status()
+  local enabled_toggles = {}
 
-  for k in pairs(Snacks.toggle.toggles) do
+  for k, v in pairs(utils.icons.toggles) do
     local is_enabled = Snacks.toggle.toggles[k]:get()
-    local is_valid_option = pcall(function()
-      return vim.o[k] -- Check if `k` is an actual `vim.o` option
-    end)
 
-    if is_valid_option and is_enabled then
-      table.insert(option_toggles, k)
+    if is_enabled then
+      table.insert(enabled_toggles, v)
     end
   end
 
-  -- Prevents the icons from being rearranged upon session restore.
-  table.sort(option_toggles)
-
-  -- Add an icon to the statusline for each enabled option toggle.
-  for i, toggle in ipairs(option_toggles) do
-    local separator = i == 1 and "" or "  "
-    result = result .. separator .. utils.icons.toggles[toggle]
+  if #enabled_toggles == 0 then
+    return ""
   end
 
-  return result
+  -- Ensure the icons are displayed in the same order every time.
+  table.sort(enabled_toggles)
+
+  return table.concat(enabled_toggles, "  ") .. " " -- Pad component with extra space, otherwise it looks awkward
 end
 
 require("lualine").setup({
