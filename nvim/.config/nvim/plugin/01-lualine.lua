@@ -124,8 +124,8 @@ require("lualine").setup({
         custom_filename,
         colored = true,
         symbols = {
-          modified = "●",
-          readonly = "",
+          modified = utils.icons.unsaved,
+          readonly = utils.icons.lock,
         },
       },
       {
