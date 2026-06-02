@@ -185,7 +185,7 @@ require("lualine").setup({
     lualine_x = {
       {
         "lsp_status",
-        icon = { "", color = { fg = colors.blue1 } },
+        icon = { utils.icons.lsp, color = { fg = colors.blue1 } },
         symbols = {
           done = "",
           separator = ", ",
@@ -244,8 +244,8 @@ require("lualine").setup({
       {
         custom_filename,
         symbols = {
-          modified = "●",
-          readonly = "",
+          modified = utils.icons.unsaved,
+          readonly = utils.icons.lock,
         },
         colored = true,
         color = { fg = colors.fg_dark },
