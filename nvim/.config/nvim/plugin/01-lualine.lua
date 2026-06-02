@@ -197,14 +197,7 @@ require("lualine").setup({
           info = utils.icons.diagnostics.info,
         },
         always_visible = true,
-        cond = function()
-          return not utils.Set({
-            "help",
-            "snacks_picker_input",
-            "snacks_picker_list",
-            "gitcommit",
-          })[vim.bo.filetype]
-        end,
+        cond = function() return vim.diagnostic.is_enabled({ bufnr = 0 }) end,
       },
       {
         toggle_status,
