@@ -33,30 +33,53 @@ function custom_filename:update_status()
   return data
 end
 
+---Custom statusline for `:help` buffers (similar to "man" extension)
 local help_extension = {
   filetypes = { "help" },
   sections = {
-    lualine_a = {
-      {
-        function() return "HELP" end,
-        separator = { left = "", right = "" },
-      },
-    },
-    lualine_b = {
-      {
-        "filename",
-        file_status = false,
-      },
-    },
+    lualine_a = { function() return "HELP" end },
+    lualine_b = { { "filename", file_status = false } },
     lualine_y = { "progress" },
-    lualine_z = {
-      {
-        "location",
-        separator = { left = "", right = "" },
-      },
-    },
+    lualine_z = { "location" },
   },
 }
+
+---Inserts custom "edge separators" into a given statusline config.
+---"Edge separators" here are defined as the icons used for the very edge of either side of the statusline.
+---@param component table Statusline section config to add edge separators into.
+---@return table|nil
+local function insert_edge_separators(component)
+  local modified_component = component
+  local left_edge_separators = { left = "", right = "" }
+  local right_edge_separators = { left = "", right = "" }
+
+  -- Indicates an invalid component was passed.
+  if not (component and component.sections) then
+    return
+  end
+
+  -- Add separators to _left_ edge (if it exists)
+  if component.sections.lualine_a then
+    modified_component.sections.lualine_a = {
+      {
+        modified_component.sections.lualine_a[1],
+        separator = left_edge_separators,
+      },
+    }
+  end
+
+  -- Add separators to _right_ edge (if it exists)
+  if component.sections.lualine_z then
+    modified_component.sections.lualine_z = {
+      {
+        modified_component.sections.lualine_z[1],
+        separator = right_edge_separators,
+      },
+    }
+  end
+
+  return modified_component
+end
 
 ---Determines the formatters that will run against the current buffer.
 ---
@@ -237,12 +260,11 @@ require("lualine").setup({
     },
   },
   extensions = {
-    "quickfix",
-    "lazy",
-    "mason",
-    "man",
-    "oil",
-    "fugitive",
-    help_extension,
+    insert_edge_separators(require("lualine.extensions.quickfix")),
+    insert_edge_separators(require("lualine.extensions.mason")),
+    insert_edge_separators(require("lualine.extensions.man")),
+    insert_edge_separators(require("lualine.extensions.oil")),
+    insert_edge_separators(require("lualine.extensions.fugitive")),
+    insert_edge_separators(help_extension),
   },
 })
