@@ -33,6 +33,31 @@ function custom_filename:update_status()
   return data
 end
 
+local help_extension = {
+  filetypes = { "help" },
+  sections = {
+    lualine_a = {
+      {
+        function() return "HELP" end,
+        separator = { left = "", right = "" },
+      },
+    },
+    lualine_b = {
+      {
+        "filename",
+        file_status = false,
+      },
+    },
+    lualine_y = { "progress" },
+    lualine_z = {
+      {
+        "location",
+        separator = { left = "", right = "" },
+      },
+    },
+  },
+}
+
 ---Determines the formatters that will run against the current buffer.
 ---
 ---If there aren't any configured formatters for the current buffer *but* it has an LSP,
@@ -225,5 +250,6 @@ require("lualine").setup({
     "man",
     "oil",
     "fugitive",
+    help_extension,
   },
 })
