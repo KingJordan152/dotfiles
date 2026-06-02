@@ -7,6 +7,8 @@ vim.pack.add({
 
 local utils = require("utils")
 local colors = require("tokyonight.colors").setup()
+local left_edge_separators = { left = "", right = "" }
+local right_edge_separators = { left = "", right = "" }
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
 local custom_filename = require("lualine.components.filename"):extend()
@@ -50,8 +52,6 @@ local help_extension = {
 ---@return table|nil
 local function insert_edge_separators(component)
   local modified_component = component
-  local left_edge_separators = { left = "", right = "" }
-  local right_edge_separators = { left = "", right = "" }
 
   -- Indicates an invalid component was passed.
   if not (component and component.sections) then
@@ -149,7 +149,7 @@ require("lualine").setup({
     lualine_a = {
       {
         "mode",
-        separator = { left = "", right = "" },
+        separator = left_edge_separators,
       },
     },
     lualine_b = {
@@ -235,7 +235,7 @@ require("lualine").setup({
     lualine_z = {
       {
         "location",
-        separator = { left = "", right = "" },
+        separator = right_edge_separators,
       },
     },
   },
