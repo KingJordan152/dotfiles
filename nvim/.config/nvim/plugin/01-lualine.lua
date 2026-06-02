@@ -249,6 +249,7 @@ require("lualine").setup({
         },
         colored = true,
         color = { fg = colors.fg_dark },
+        separator = left_edge_separators,
       },
     },
     lualine_x = {
@@ -256,6 +257,7 @@ require("lualine").setup({
         "location",
         colored = true,
         color = { fg = colors.fg_dark },
+        separator = right_edge_separators,
       },
     },
   },
