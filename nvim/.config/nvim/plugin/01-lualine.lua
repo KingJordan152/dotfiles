@@ -163,10 +163,6 @@ require("lualine").setup({
         end,
       },
       {
-        option_toggle_status,
-        color = { fg = colors.green },
-      },
-      {
         "diagnostics",
         sections = { "error", "warn" },
         symbols = {
@@ -185,8 +181,16 @@ require("lualine").setup({
           })[vim.bo.filetype]
         end,
       },
+      {
+        toggle_status,
+        color = { fg = colors.green },
+      },
     },
-    lualine_y = { "progress" },
+    lualine_y = {
+      {
+        "progress",
+      },
+    },
     lualine_z = {
       {
         "location",
