@@ -14,10 +14,12 @@ vim.pack.add({
 })
 
 require("oil-lsp-diagnostics").setup({
-  error = utils.icons.diagnostics.error,
-  warn = utils.icons.diagnostics.warn,
-  info = utils.icons.diagnostics.info,
-  hint = utils.icons.diagnostics.hint,
+  diagnostic_symbols = {
+    error = " " .. utils.icons.diagnostics.error,
+    warn = " " .. utils.icons.diagnostics.warn,
+    info = " " .. utils.icons.diagnostics.info,
+    hint = " " .. utils.icons.diagnostics.hint,
+  },
 })
 
 require("oil-git").setup({
