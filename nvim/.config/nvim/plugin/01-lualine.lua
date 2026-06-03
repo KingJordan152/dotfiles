@@ -46,6 +46,14 @@ local help_extension = {
   },
 }
 
+-- "Fugitive" extension doesn't use `icon` key; this fixes that and uses custom branch icon
+require("lualine.extensions.fugitive").sections.lualine_a = {
+  {
+    function() return vim.fn.FugitiveHead() end,
+    icon = utils.icons.git.branch,
+  },
+}
+
 ---Inserts custom "edge separators" into a given statusline config.
 ---"Edge separators" here are defined as the icons used for the very edge of either side of the statusline.
 ---@param config table Statusline section config to add edge separators into.
