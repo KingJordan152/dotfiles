@@ -84,12 +84,12 @@ require("gitsigns").setup({
     -- Staging (`git add ...`)
     vim.keymap.set("n", "<leader>ga%", gitsigns.stage_buffer, { desc = "Buffer" })
     vim.keymap.set("n", "<leader>gah", gitsigns.stage_hunk, { desc = "Hunk" })
-    vim.keymap.set("v", "<leader>gah", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Visually selected changes" })
+    vim.keymap.set("n", "<leader>gaa", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line(".") }) end, { desc = "Current line" })
 
     -- Reset/Restore Keymaps (`git reset ...`)
     vim.keymap.set("n", "<leader>gr%", gitsigns.reset_buffer, { desc = "Buffer" })
     vim.keymap.set("n", "<leader>grh", gitsigns.reset_hunk, { desc = "Hunk" })
-    vim.keymap.set("v", "<leader>grh", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Visually selected changes" })
+    vim.keymap.set("n", "<leader>grr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line(".") }) end, { desc = "Current line" })
 
     -- Blame Keymaps
     vim.keymap.set("n", "<leader>gb", function() gitsigns.blame_line({ full = true }) end, { desc = "Blame Line" })
