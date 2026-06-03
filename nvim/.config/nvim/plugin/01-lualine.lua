@@ -215,13 +215,24 @@ require("lualine").setup({
       },
       {
         formatter_status,
-        icon = { utils.icons.formatting, color = { fg = colors.yellow } },
-        -- If formatting is disabled, make the component red with a strikethrough.
+        icon = {
+          utils.icons.formatting,
+          color = function()
+            local color = { fg = colors.yellow }
+            if vim.b.disable_autoformat or vim.g.disable_autoformat then
+              color.gui = "dim,italic"
+            end
+            return color
+          end,
+        },
         color = function()
-          if vim.b.disable_autoformat or vim.g.disable_autoformat then
-            return { fg = colors.red, gui = "strikethrough" }
+          local gui = "dim,italic,strikethrough"
+          if vim.g.disable_autoformat then
+            return { fg = colors.red, gui = gui } -- Become red when disabled globally
           end
-          return "lualine_c_normal"
+          if vim.b.disable_autoformat then
+            return { gui = gui }
+          end
         end,
       },
       {
