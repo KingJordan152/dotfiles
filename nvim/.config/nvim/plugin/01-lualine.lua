@@ -48,37 +48,43 @@ local help_extension = {
 
 ---Inserts custom "edge separators" into a given statusline config.
 ---"Edge separators" here are defined as the icons used for the very edge of either side of the statusline.
----@param component table Statusline section config to add edge separators into.
+---@param config table Statusline section config to add edge separators into.
 ---@return table|nil
-local function insert_edge_separators(component)
-  local modified_component = component
+local function insert_edge_separators(config)
+  local modified_config = config
 
   -- Indicates an invalid component was passed.
-  if not (component and component.sections) then
+  if not (config and config.sections) then
     return
   end
 
-  -- Add separators to _left_ edge (if it exists)
-  if component.sections.lualine_a then
-    modified_component.sections.lualine_a = {
-      {
-        modified_component.sections.lualine_a[1],
-        separator = left_edge_separators,
-      },
-    }
+  ---Adds the correct separators to the designated edge.
+  ---Modifies `section` in-place.
+  ---@param section table
+  ---@param edge "left"|"right"
+  local function modify_section(section, edge)
+    local separators = edge == "left" and left_edge_separators or right_edge_separators
+
+    -- Indicates section doesn't have any components
+    if not section then
+      return
+    end
+
+    if type(section[1]) == "function" or type(section[1]) == "string" then
+      -- Must construct a new table wherein the `separator` key can be added
+      section[1] = {
+        section[1],
+        separator = separators,
+      }
+    elseif type(section[1]) == "table" then
+      section[1].separator = separators
+    end
   end
 
-  -- Add separators to _right_ edge (if it exists)
-  if component.sections.lualine_z then
-    modified_component.sections.lualine_z = {
-      {
-        modified_component.sections.lualine_z[1],
-        separator = right_edge_separators,
-      },
-    }
-  end
+  modify_section(modified_config.sections.lualine_a, "left")
+  modify_section(modified_config.sections.lualine_z, "right")
 
-  return modified_component
+  return modified_config
 end
 
 ---Determines the formatters that will run against the current buffer.
