@@ -24,10 +24,6 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   automatic_enable = {
     exclude = {
-      -- "tsgo",
-      "ts_ls",
-      "vtsls",
-
       -- Prefer formatting with Conform
       "stylua",
       "oxfmt",
@@ -47,8 +43,7 @@ require("mason-tool-installer").setup({
     -- LSPs
     "html",
     -- "emmet_language_server",
-    "ts_ls",
-    "vtsls",
+    "tsgo",
     "denols",
     "eslint",
     "biome",
