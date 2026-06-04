@@ -36,7 +36,7 @@ ts.install({
   "gitcommit",
   "c",
   "diff", -- For diff hover previews
-})
+}):wait(300000) -- Wait max 5 minutes
 
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("treesitter.setup", {}),
@@ -51,16 +51,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 
     -- Auto-install a language; already installed languages are ignored
-    ts.install(language):await(function()
-      -- Enable highlighting
-      vim.treesitter.start(buf, language)
+    ts.install(language):wait(300000) -- Wait max 5 minutes
 
-      -- Enable folds
-      vim.wo.foldmethod = "expr"
-      vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    -- Enable highlighting
+    vim.treesitter.start(buf, language)
 
-      -- Enable indents
-      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end)
+    -- Enable folds
+    vim.wo.foldmethod = "expr"
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+    -- Enable indents
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
