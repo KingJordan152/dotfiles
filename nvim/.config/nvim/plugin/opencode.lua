@@ -33,7 +33,7 @@ vim.keymap.set({ "n", "x" }, "go", function() return opencode.operator("@this ")
 vim.keymap.set("n", "goo", function() return opencode.operator("@this ") .. "_" end, { desc = "Add line to prompt", expr = true })
 
 -- Commands to control OpenCode TUI
-vim.keymap.set("n", "<S-C-u>", function() opencode.command("session.half.page.up") end, { desc = "Scroll TUI up" })
-vim.keymap.set("n", "<S-C-d>", function() opencode.command("session.half.page.down") end, { desc = "Scroll TUI down" })
-vim.keymap.set("n", "<leader>ol", function() opencode.command("session.list") end, { desc = "List sessions" })
-vim.keymap.set("n", "<leader>o<tab>", function() opencode.command("agent.cycle") end, { desc = "Cycle through agents" })
+vim.keymap.set("n", "<C-M-u>", function() opencode.command("session.half.page.up") end, { desc = "Scroll TUI up" })
+vim.keymap.set("n", "<C-M-d>", function() opencode.command("session.half.page.down") end, { desc = "Scroll TUI down" })
+vim.keymap.set("n", "<leader>o<Tab>", function() opencode.command("agent.cycle") end, { desc = "Cycle through agents" })
+vim.keymap.set("n", "<leader>on", function() opencode.command("session.new") end, { desc = "Create a new session" })
