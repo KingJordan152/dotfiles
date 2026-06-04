@@ -1,6 +1,7 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby", "eruby" },
   group = vim.api.nvim_create_augroup("nvim-dap-ruby", {}),
+  once = true,
   callback = function()
     vim.pack.add({
       -- Dependencies
