@@ -9,6 +9,7 @@ local utils = require("utils")
 local colors = require("tokyonight.colors").setup()
 local left_edge_separators = { left = "", right = "" }
 local right_edge_separators = { left = "", right = "" }
+local formatter_status_cache = { bufnr = -1, filetype = nil, active_lsps = {}, result = nil }
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
 local custom_filename = require("lualine.components.filename"):extend()
@@ -97,28 +98,51 @@ end
 
 ---Determines the formatters that will run against the current buffer.
 ---
----If there aren't any configured formatters for the current buffer *but* it has an LSP,
----`"LSP"` will be returned.
+---If there aren't any configured formatters for the current buffer *but* an LSP formatter
+---is available, `"LSP"` will be returned.
 ---
----If there are neither formatters nor LSPs configured for the current buffer, the empty string will be returned.
+---If there are neither formatters nor LSPs configured for the current buffer, the component
+---will be hidden.
 ---@return string
 local function formatter_status()
-  local conform = require("conform")
-  local formatters_for_current_buffer, lsp_fallback = conform.list_formatters_to_run(0)
-  local result = ""
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filetype = vim.bo[bufnr].filetype
 
-  if next(formatters_for_current_buffer) == nil then
+  -- Perform cache validation; return saved statusline result if it's unlikely that the list has changed.
+  if formatter_status_cache.bufnr == bufnr and formatter_status_cache.filetype == filetype then
+    local lsp_clients = vim.lsp.get_clients({ bufnr = bufnr })
+    local added_new_lsp = false
+
+    for _, lsp in ipairs(lsp_clients) do
+      if formatter_status_cache.active_lsps[lsp.name] == nil then
+        formatter_status_cache.active_lsps[lsp.name] = true
+        added_new_lsp = true
+      end
+    end
+
+    if not added_new_lsp then
+      return formatter_status_cache.result
+    end
+  end
+
+  local result = ""
+  local conform = require("conform")
+  local formatter_data, lsp_fallback = conform.list_formatters_to_run(0) -- Apparently expensive to run, hence why this function uses a cache.
+  local formatters = vim.iter(formatter_data):map(function(value) return value.name end):totable()
+
+  if #formatters == 0 then
     if lsp_fallback then
       result = result .. "LSP"
     else
       result = ""
     end
   else
-    for i, formatter in ipairs(formatters_for_current_buffer) do
-      local separator = i == 1 and "" or ", "
-      result = result .. separator .. formatter.name
-    end
+    result = table.concat(formatters, ", ")
   end
+
+  formatter_status_cache.bufnr = bufnr
+  formatter_status_cache.filetype = filetype
+  formatter_status_cache.result = result
 
   return result
 end
