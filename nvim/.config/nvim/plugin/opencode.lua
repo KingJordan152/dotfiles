@@ -13,20 +13,20 @@ local opencode = require("opencode")
 vim.o.autoread = true -- Required for `opts.events.reload`
 
 -- Toggles
-vim.keymap.set({ "n", "t", "i", "x" }, "<C-.>", opencode.toggle, { desc = "Toggle OpenCode" })
-vim.keymap.set({ "n", "x" }, "<leader>oo", opencode.toggle, { desc = "Toggle TUI" })
+-- vim.keymap.set({ "n", "t", "i", "x" }, "<C-.>", opencode.toggle, { desc = "Toggle OpenCode" })
+-- vim.keymap.set({ "n", "x" }, "<leader>oo", opencode.toggle, { desc = "Toggle TUI" })
 
 -- Open `select` dropdown with many options
 vim.keymap.set({ "n", "x" }, "<leader>os", opencode.select, { desc = "Select option" })
 
 -- General prompt to OpenCode
 vim.keymap.set("n", "<leader>op", opencode.ask, { desc = "Prompt" })
-vim.keymap.set("x", "<leader>op", function() opencode.ask("@this: ", { submit = true }) end, { desc = "Prompt selection" })
+vim.keymap.set("x", "<leader>op", function() opencode.ask("@this: ") end, { desc = "Prompt selection" })
 
 -- Ask OpenCode with specific context
-vim.keymap.set({ "n", "x" }, "<leader>oat", function() opencode.ask("@this: ", { submit = true }) end, { desc = "@this" })
-vim.keymap.set("n", "<leader>oa%", function() opencode.ask("@buffer: ", { submit = true }) end, { desc = "@buffer" }) -- Similar to GitSigns `<leader>ga%`
-vim.keymap.set("n", "<leader>oad", function() opencode.ask("@diagnostics: ", { submit = true }) end, { desc = "@diagnostics" })
+vim.keymap.set({ "n", "x" }, "<leader>oat", function() opencode.ask("@this: ") end, { desc = "@this" })
+vim.keymap.set("n", "<leader>oa%", function() opencode.ask("@buffer: ") end, { desc = "@buffer" }) -- Similar to GitSigns `<leader>ga%`
+vim.keymap.set("n", "<leader>oad", function() opencode.ask("@diagnostics: ") end, { desc = "@diagnostics" })
 
 -- Add ranges to OpenCode's context
 vim.keymap.set({ "n", "x" }, "go", function() return opencode.operator("@this ") end, { desc = "Add range to prompt", expr = true })
