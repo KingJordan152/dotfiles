@@ -2,6 +2,22 @@ if not require("utils").executable_exists("opencode") then
   return
 end
 
+local opencode_cmd = "opencode --port"
+---@type snacks.terminal.Opts
+local snacks_terminal_opts = {
+  win = {
+    position = "right",
+    enter = true,
+  },
+}
+
+---@type opencode.Opts
+vim.g.opencode_opts = {
+  server = {
+    start = function() require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts) end,
+  },
+}
+
 vim.pack.add({
   -- Dependencies
   "https://github.com/folke/snacks.nvim",
@@ -12,9 +28,8 @@ vim.pack.add({
 local opencode = require("opencode")
 vim.o.autoread = true -- Required for `opts.events.reload`
 
--- Toggles
--- vim.keymap.set({ "n", "t", "i", "x" }, "<C-.>", opencode.toggle, { desc = "Toggle OpenCode" })
--- vim.keymap.set({ "n", "x" }, "<leader>oo", opencode.toggle, { desc = "Toggle TUI" })
+-- Toggle
+vim.keymap.set({ "n", "t" }, "<C-.>", function() require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts) end, { desc = "Toggle opencode" })
 
 -- Open `select` dropdown with many options
 vim.keymap.set({ "n", "x" }, "<leader>os", opencode.select, { desc = "Select option" })
@@ -37,3 +52,19 @@ vim.keymap.set("n", "<C-M-u>", function() opencode.command("session.half.page.up
 vim.keymap.set("n", "<C-M-d>", function() opencode.command("session.half.page.down") end, { desc = "Scroll TUI down" })
 vim.keymap.set("n", "<leader>o<Tab>", function() opencode.command("agent.cycle") end, { desc = "Cycle through agents" })
 vim.keymap.set("n", "<leader>on", function() opencode.command("session.new") end, { desc = "Create a new session" })
+
+vim.api.nvim_create_autocmd("User", {
+  desc = "Open OpenCode TUI upon submitting a prompt",
+  pattern = { "OpencodeEvent:tui.command.execute" },
+  group = vim.api.nvim_create_augroup("opencode_auto_open", {}),
+  callback = function(args)
+    ---@type opencode.server.Event
+    local event = args.data.event
+    if event.properties.command == "prompt.submit" then
+      local win = require("snacks.terminal").get(opencode_cmd, { create = false })
+      if win then
+        win:show()
+      end
+    end
+  end,
+})
