@@ -1,9 +1,16 @@
 -- Configuration MUST be defined before plugin loads
 vim.g.diffs = {
-  hide_prefix = true,
+  view = {
+    prefix = false,
+  },
   integrations = {
     fugitive = true,
     gitsigns = true,
+  },
+  highlights = {
+    intra = {
+      algorithm = "vscode",
+    },
   },
   conflict = {
     show_actions = true,
@@ -23,5 +30,5 @@ vim.pack.add({
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
 
-  "https://git.barrettruth.com/barrettruth/diffs.nvim",
+  "https://github.com/barrettruth/diffs.nvim",
 })
