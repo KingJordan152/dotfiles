@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "SchemaStore.nvim": {
-      "rev": "8a1c2472b53269bb368d1ffc5edddccfc782e8bb",
+      "rev": "3dca2d2153cfbc9aab937c1be0441e371101b0b8",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "auto-session": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/bullets-vim/bullets.vim"
     },
     "canola.nvim": {
-      "rev": "d8566edbde9a20f77098cf7e142011923ebeb0f8",
+      "rev": "b6e41f866ae01a1f14e73fd1f57317a15020987a",
       "src": "https://github.com/barrettruth/canola.nvim"
     },
     "codediff.nvim": {
@@ -34,7 +34,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffs.nvim": {
-      "rev": "3a6c7035aebb6ad525804dfccb849db63dde5afb",
+      "rev": "cb4b79e86f83f34fdd52dab373454888e4d569ba",
       "src": "https://github.com/barrettruth/diffs.nvim"
     },
     "friendly-snippets": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/chentoast/marks.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "906c32c8a034dd3d51353d63226bf91aeacd927c",
+      "rev": "21c5b3ebeaa0412e28096bb0701434c51c1fbf76",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -114,7 +114,7 @@
       "src": "https://codeberg.org/mfussenegger/nvim-jdtls"
     },
     "nvim-lspconfig": {
-      "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
+      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -158,7 +158,7 @@
       "src": "https://github.com/JezerM/oil-lsp-diagnostics.nvim"
     },
     "opencode.nvim": {
-      "rev": "b48c3aa94559be787c65b32c55fbc12767062f02",
+      "rev": "97c90dd0936c9076cbe78d8f94c7a2d119509d2c",
       "src": "https://github.com/nickjvandyke/opencode.nvim"
     },
     "plenary.nvim": {
@@ -182,7 +182,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "6806149fd36d1c5e797debe3e18b2c07219b685a",
+      "rev": "501ea73e433246cbd53f0b14bbd205fa44831e4d",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
