@@ -63,4 +63,7 @@ require("ibl").setup({
       },
     },
   },
+  exclude = {
+    filetypes = { "diff" },
+  },
 })
