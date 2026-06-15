@@ -49,6 +49,14 @@ require("tokyonight").setup({
       link = "LspCodeLens",
     }
 
+    highlights["DiffsAddText"] = {
+      bg = util.blend(colors.green, 0.15, colors.diff.add),
+    }
+
+    highlights["DiffsDeleteText"] = {
+      bg = util.blend(colors.red, 0.15, colors.diff.delete),
+    }
+
     highlights["RainbowDelimiterGreen"] = {
       fg = util.darken(colors.green, 0.8),
     }
