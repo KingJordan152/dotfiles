@@ -3,6 +3,9 @@ vim.g.diffs = {
   view = {
     prefix = false,
   },
+  extra_filetypes = {
+    "diff",
+  },
   integrations = {
     fugitive = true,
     gitsigns = true,
