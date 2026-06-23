@@ -47,7 +47,7 @@ require("mini.pairs").setup({
       action = "open",
       pair = "  ",
       neigh_pattern = "[%({%[][%])}]",
-      register = { bs = false },
+      register = { bs = false }, -- Would be nice, but causes two consecutive spaces to be deleted *anywhere*
     },
   },
 })
