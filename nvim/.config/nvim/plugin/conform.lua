@@ -7,8 +7,16 @@ local package_json = nil
 local web_dev_formatters = {
   "oxfmt",
   "prettierd",
+
+  -- Linters,
+  "oxlint",
+  "eslint_d",
+  "biome-check",
+}
+local web_dev_formatters_without_linters = {
+  "oxfmt",
+  "prettierd",
   "biome",
-  "biome-organize-imports",
 }
 
 ---Runs the first available formatter given as an argument.
@@ -65,8 +73,10 @@ local function require_package_json(_, formatters)
 
   -- Certain dependencies should activate different or additional formatters
   local formatter_dependency_map = {
+    eslint_d = "eslint",
     prettierd = "prettier",
     biome = "@biomejs/biome",
+    ["biome-check"] = "@biomejs/biome",
     ["biome-organize-imports"] = "@biomejs/biome",
   }
 
@@ -83,6 +93,11 @@ end
 ---@param bufnr integer Current buffer index.
 ---@return string[]
 local function web_dev_config(bufnr) return require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters)) end
+
+---Same as `web_dev_config`, except this excludes linter formatters (e.g., `eslint_d`, `oxlint`, etc.)
+---@param bufnr integer Current buffer index.
+---@return string[]
+local function web_dev_config_without_linters(bufnr) return require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters_without_linters)) end
 
 ---Determines the formatters that will be used for all web development-adjacent filetypes
 ---(i.e., files that can reasonably be found both inside and outside web development projects).
@@ -150,9 +165,9 @@ require("conform").setup({
 
     -- Web Dev
     html = web_dev_config,
-    css = web_dev_config,
-    scss = web_dev_config,
-    less = web_dev_config,
+    css = web_dev_config_without_linters,
+    scss = web_dev_config_without_linters,
+    less = web_dev_config_without_linters,
     javascript = web_dev_config,
     typescript = web_dev_config,
     typescriptreact = web_dev_config,
@@ -170,17 +185,29 @@ require("conform").setup({
     markdown = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
     mdx = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
   },
-
+  formatters = {
+    eslint_d = {
+      env = {
+        ESLINT_D_PPID = "auto", -- Ensures `eslint_d` stays alive for the lifetime of this Neovim instance
+      },
+    },
+  },
   default_format_opts = {
     lsp_format = "fallback",
   },
-
-  format_on_save = function(bufnr)
+  -- format_on_save = function(bufnr)
+  --   if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+  --     return
+  --   end
+  --
+  --   return { lsp_format = "fallback", timeout_ms = 500 }
+  -- end,
+  format_after_save = function(bufnr)
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
       return
     end
 
-    return { lsp_format = "fallback", timeout_ms = 500 }
+    return { lsp_format = "fallback" }
   end,
 })
 
