@@ -1,46 +1,53 @@
 vim.pack.add({ "https://github.com/nvim-mini/mini.pairs" })
 
+---A neigh pattern that makes most pairs act similar to VS Code's autopair system.
+---
+---For example, the following behavior applies:
+---
+----foo|bar -> press "[" -> foo[bar
+----foobar| -> press "[" -> foobar[]
+----|foobar -> press "[" -> [foobar
+----| foobar -> press "[" -> [] foobar
+----foobar | -> press "[" -> foobar []
+----{|} -> press "[" -> {[]}
+----(|) -> press "[" -> ([])
+----\[|\] -> press "[" -> [[]]
+---
+---Special cases are made for certain characters, like `=` and `;`
+local vscode_neigh_pattern = ".[%s%z;:,=%)}%]<>`]"
+
 require("mini.pairs").setup({
-  modes = { insert = true, command = true, terminal = false },
+  modes = { insert = true, command = true, terminal = true },
   mappings = {
     -- Opening pairs
     ["["] = {
       action = "open",
       pair = "[]",
-      neigh_pattern = ".[%s%z%)}%]]",
-      -- The following applies to all braces/brackets/parentheses:
-      -- foo|bar -> press "[" -> foo[bar
-      -- foobar| -> press "[" -> foobar[]
-      -- |foobar -> press "[" -> [foobar
-      -- | foobar -> press "[" -> [] foobar
-      -- foobar | -> press "[" -> foobar []
-      -- {|} -> press "[" -> {[]}
-      -- (|) -> press "[" -> ([])
-      -- [|] -> press "[" -> [[]]
+      neigh_pattern = vscode_neigh_pattern,
     },
     ["{"] = {
       action = "open",
       pair = "{}",
-      neigh_pattern = ".[%s%z%)}%]]",
+      neigh_pattern = vscode_neigh_pattern,
     },
     ["("] = {
       action = "open",
       pair = "()",
-      neigh_pattern = ".[%s%z%)]",
+      neigh_pattern = vscode_neigh_pattern,
     },
 
-    -- Closing pairs
-    [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
-    ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
-    ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
-
     -- Special mappings
-    ["<"] = { action = "close", pair = "><" }, -- HTML/JSX tags
-    [" "] = { action = "open", pair = "  ", neigh_pattern = "[({%[][%])}]" }, -- {|} -> <Space> -> { | }
-    ["'"] = {
-      action = "closeopen",
-      pair = "''",
-      neigh_pattern = "[^%w\\][^%w]", -- Handle contractions (e.g., "that's")
+    ["<"] = { -- HTML/JSX tags
+      action = "close",
+      pair = "><",
+      neigh_pattern = "[%z]", -- Throwaway pattern; prevents skipping over neighboring `<`
+      register = { bs = false },
+    },
+    [" "] = { -- {|} -> <Space> -> { | }
+      action = "open",
+      pair = "  ",
+      neigh_pattern = "[%({%[][%])}]",
+      register = { bs = false },
     },
   },
 })
