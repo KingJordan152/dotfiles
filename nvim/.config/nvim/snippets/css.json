@@ -1,0 +1,10 @@
+{
+  "!important": {
+    "prefix": "!",
+    "body": "!important"
+  },
+  "!important (alt)": {
+    "prefix": "i",
+    "body": "!important"
+  }
+}

@@ -17,7 +17,14 @@ local code_snippet_files = vscode_dir_exists
   or {}
 
 -- Load snippets from `friendly-snippets`
-luasnip_vscode.lazy_load()
+luasnip_vscode.lazy_load({
+  exclude = {
+    "css", -- Prefer custom ones
+  },
+})
+
+-- Load custom snippets from `snippets` folder
+luasnip_vscode.lazy_load({ paths = "./snippets" })
 
 -- Apply snippets from all `.vscode/*.code-snippets` files in the cwd, if they exist.
 -- See https://github.com/L3MON4D3/LuaSnip/issues/1186
