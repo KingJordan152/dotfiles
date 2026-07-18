@@ -27,10 +27,6 @@ local styled_components_plugin = {
 ---@type vim.lsp.Config
 return {
   filetypes = {
-    "typescript",
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
     "vue",
   },
   ---@type lspconfig.settings.vtsls

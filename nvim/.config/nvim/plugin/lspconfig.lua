@@ -44,6 +44,7 @@ require("mason-tool-installer").setup({
     "html",
     -- "emmet_language_server",
     "tsgo",
+    "vtsls", -- Only used by Vue (for now)
     "denols",
     "eslint",
     "biome",
