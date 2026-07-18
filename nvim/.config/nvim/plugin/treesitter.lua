@@ -15,6 +15,11 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 
 local ts = require("nvim-treesitter")
+local indent_ignore_filetypes = {
+  "css",
+  "scss",
+  "less",
+}
 
 -- Ensure the following parsers are immediately installed
 ts.install({
@@ -60,7 +65,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.wo.foldmethod = "expr"
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
-    -- Enable indents
-    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    -- Enable indents (only for specific filetypes)
+    if not vim.tbl_contains(indent_ignore_filetypes, vim.bo[buf].filetype) then
+      vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
   end,
 })
