@@ -13,6 +13,11 @@ require("snacks").setup({
     convert = {
       notify = false,
     },
+    doc = {
+      -- Prefer toggling inline/floating images
+      inline = false,
+      float = false,
+    },
   },
   -- Auto-highlight LSP references
   words = {
@@ -292,3 +297,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- Misc.
+local img_hover_close = Snacks.image.doc.hover_close
+Snacks.image.doc.hover_close = function()
+  vim.g.snacks_image_hover = false
+  img_hover_close()
+end
+
+vim.keymap.set("n", "<C-w>i", function()
+  if vim.g.snacks_image_hover then
+    Snacks.image.doc.hover_close()
+  else
+    Snacks.image.doc.at_cursor(function(image_src)
+      if image_src then
+        Snacks.image.hover()
+        vim.g.snacks_image_hover = true
+      end
+    end)
+  end
+end, { desc = "Show image under the cursor" })
