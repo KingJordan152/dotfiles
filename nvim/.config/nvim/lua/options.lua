@@ -32,6 +32,7 @@ vim.o.splitright = true -- Ensure vertical splits are split to the **right**
 vim.o.splitbelow = true -- Ensure horizontal splits are split to the **bottom**
 vim.o.ignorecase = true -- Ignore case when performing a search (`/`)
 vim.o.smartcase = true -- Disregard `ignorecase` setting if a search pattern contains a capital letter or search is prepended with `\C`
+vim.o.previewheight = 20 -- Increase size of all preview windows slightly
 vim.g.markdown_recommended_style = 0 -- Disable all preset Markdown styles (they overwrite the ones set here)
 
 -- Enable "hybrid" line numbers (i.e., relative numbers except for current line)
