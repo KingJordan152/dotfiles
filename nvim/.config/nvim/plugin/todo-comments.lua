@@ -7,6 +7,7 @@ vim.pack.add({
 })
 
 -- TODO: Example :)
+-- TODO(jordan): Example with name
 
 local utils = require("utils")
 
@@ -18,6 +19,10 @@ require("todo-comments").setup({
   },
   highlight = {
     multiline = false,
+    pattern = [[.*<((KEYWORDS)(\(\w+\))?)\s*:]],
+  },
+  search = {
+    pattern = [[\b(KEYWORDS)(?:\(\w+\))?\s*:]],
   },
   colors = {
     ticket = { "#339CFF" },
