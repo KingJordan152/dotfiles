@@ -47,6 +47,7 @@ require("ibl").setup({
           "arguments", -- TS/JS: argument list that's written across multiple lines
           "import_clause", -- TS/JS: multiple exports from a single module listed across multiple lines
           "class_body",
+          "switch_statement",
         },
         css = css_nodes,
         scss = css_nodes,
