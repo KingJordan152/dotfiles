@@ -5,6 +5,7 @@ vim.pack.add({
   "https://github.com/L3MON4D3/LuaSnip",
 })
 
+local luasnip = require("luasnip")
 local luasnip_vscode = require("luasnip.loaders.from_vscode")
 local vscode_dir = vim.fn.getcwd() .. "/.vscode"
 local vscode_dir_exists = vim.fn.isdirectory(vscode_dir) == 1
@@ -22,6 +23,11 @@ luasnip_vscode.lazy_load({
     "css", -- Prefer custom ones
   },
 })
+
+-- Extend various filetypes to use optional `friendly-snippets` snippets
+luasnip.filetype_extend("typescriptreact", { "loremipsum" })
+luasnip.filetype_extend("javascriptreact", { "loremipsum" })
+luasnip.filetype_extend("html", { "loremipsum" })
 
 -- Load custom snippets from `snippets` folder
 luasnip_vscode.lazy_load({ paths = "./snippets" })
