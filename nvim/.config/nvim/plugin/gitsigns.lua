@@ -69,7 +69,8 @@ require("gitsigns").setup({
       if vim.wo.diff then
         vim.cmd.normal({ "]h", bang = true })
       else
-        gitsigns.nav_hunk("next")
+        ---@diagnostic disable-next-line: missing-fields
+        gitsigns.nav_hunk("next", { target = "all" })
       end
     end, { buffer = bufnr, desc = "Go to Next Hunk" })
 
@@ -77,7 +78,8 @@ require("gitsigns").setup({
       if vim.wo.diff then
         vim.cmd.normal({ "[h", bang = true })
       else
-        gitsigns.nav_hunk("prev")
+        ---@diagnostic disable-next-line: missing-fields
+        gitsigns.nav_hunk("prev", { target = "all" })
       end
     end, { buffer = bufnr, desc = "Go to Previous Hunk" })
 
