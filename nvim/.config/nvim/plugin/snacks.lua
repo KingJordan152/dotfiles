@@ -68,12 +68,16 @@ require("snacks").setup({
       },
     },
     actions = {
-      opencode_send = function(...)
+      opencode_send = function(picker) ---@param picker snacks.Picker
         if package.loaded["opencode"] then
-          return require("opencode").snacks_picker_send(...)
-        end
+          local items = vim.tbl_map(function(item) ---@param item snacks.picker.Item
+            return item.file and require("opencode").format({ path = item.file, from = item.pos, to = item.end_pos }) or item.text
+          end, picker:selected({ fallback = true }))
 
-        vim.notify("Cannot send to OpenCode because it's not installed!", vim.log.levels.ERROR)
+          require("opencode").prompt(table.concat(items, ", ") .. " ")
+        else
+          vim.notify("Cannot send to OpenCode because it's not installed!", vim.log.levels.ERROR)
+        end
       end,
     },
     win = {
