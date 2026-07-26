@@ -8,6 +8,11 @@ vim.pack.add({
 require("grapple").setup({
   scope = "git_branch", -- Assign default
   default_scopes = {
+    -- Disable less-frequently used/broken scopes
+    lsp = false,
+    static = false,
+
+    -- Scope settings
     git_branch = {
       cache = {
         -- `CmdlineLeave` fires cache update when switching branches with Fugitive.
@@ -27,6 +32,8 @@ vim.keymap.set("n", "<leader>a", "<cmd>Grapple toggle<CR>", { desc = "Grapple - 
 vim.keymap.set("n", "<leader>;", "<cmd>Grapple toggle_tags<CR>", { desc = "Grapple - Open tags window" })
 vim.keymap.set("n", "]g", "<cmd>Grapple cycle_tags next<CR>", { desc = "Grapple - Cycle next tag" })
 vim.keymap.set("n", "[g", "<cmd>Grapple cycle_tags prev<CR>", { desc = "Grapple - Cycle previous tag" })
+vim.keymap.set("n", "]G", "<cmd>Grapple cycle_scopes next<CR>", { desc = "Grapple - Cycle next scope" })
+vim.keymap.set("n", "[G", "<cmd>Grapple cycle_scopes prev<CR>", { desc = "Grapple - Cycle previous scope" })
 
 -- Tag-jump keymaps
 vim.keymap.set("n", "<leader>1", "<cmd>Grapple select index=1<CR>", { desc = "Grapple - Select tag 1" })
