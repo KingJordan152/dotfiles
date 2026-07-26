@@ -1,6 +1,7 @@
 vim.pack.add({
   -- Dependencies
   "https://github.com/folke/tokyonight.nvim",
+  "https://github.com/cbochs/grapple.nvim", -- Provides a custom component
 
   "https://github.com/nvim-lualine/lualine.nvim",
 })
