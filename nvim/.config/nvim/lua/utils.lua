@@ -1,6 +1,9 @@
 ---Collection of global methods and variables that I might use throughout my config.
 local M = {}
 
+M.is_mac = vim.fn.has("mac") == 1
+M.is_linux = vim.fn.has("linux") == 1
+
 M.floating_windows = {
   max_width = 100,
   max_height = 25,
@@ -158,17 +161,18 @@ function M.read_json(file)
 end
 
 ---Returns a table containing the content of the nearest `package.json` file.
----If a `package.json` file doesn't exist in the current working directory, `nil`
----is returned instead.
+---If a `package.json` file doesn't exist in the current working directory, return
+---`nil` instead.
 ---@return nil|table
 function M.read_package_json()
-  local package_json_path = vim.fs.root(0, { "package.json" })
+  local package_json_path = vim.fs.joinpath(vim.fn.getcwd(), "package.json")
+  local is_readable = vim.fn.filereadable(package_json_path) == 1
 
-  if package_json_path == nil then
+  if not is_readable then
     return
   end
 
-  return M.read_json(vim.fs.joinpath(package_json_path, "package.json"))
+  return M.read_json(package_json_path)
 end
 
 ---Watch a file for various events. A file must be saved in order for "change" events to be emitted.

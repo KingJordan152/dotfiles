@@ -122,22 +122,24 @@ end
 ---Watch the `package.json` (if it exists) and reread it whenever changes are made to it.
 ---For example, this function will run when a package is installed via `npm`.
 local function watch_package_json()
-  local package_json_root = vim.fs.root(0, { "package.json" })
+  local package_json_path = vim.fs.joinpath(vim.fn.getcwd(), "package.json")
+  local is_readable = vim.fn.filereadable(package_json_path) == 1
 
-  if not package_json_root then
+  if not is_readable then
     return
   end
 
-  utils.watch_file(vim.fs.joinpath(package_json_root, "package.json"), function(_, events, unwatch)
-    if events.change then
+  utils.watch_file(package_json_path, function(_, events, unwatch)
+    -- Files are saved in different ways on different OS's
+    if (utils.is_linux and events.change) or (utils.is_mac and events.rename) then
       package_json = utils.read_package_json()
-
-      -- Must unwatch current watcher and create a new one, otherwise changes to `package.json` will only be noticed once.
-      -- This happens because of the way Neovim handles file modifications.
-      -- For more info, see https://unix.stackexchange.com/questions/188873/using-inotifywait-along-with-vim.
-      unwatch()
-      watch_package_json()
     end
+
+    -- Must unwatch current watcher and create a new one, otherwise changes to `package.json` will only be noticed once.
+    -- This happens because of the way Neovim handles file modifications.
+    -- For more info, see https://unix.stackexchange.com/questions/188873/using-inotifywait-along-with-vim.
+    unwatch()
+    watch_package_json()
   end)
 end
 
