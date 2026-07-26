@@ -120,7 +120,7 @@ require("blink.cmp").setup({
       if utils.treesitter_node_equals({ "comment", "line_comment", "block_comment", "comment_content" }) then
         return { "lsp" } -- Ignore "path" and "snippets" sources inside comments
       else
-        return { "lsp", "path", "snippets" }
+        return { "lsp", "snippets", "path" }
       end
     end,
     per_filetype = {
