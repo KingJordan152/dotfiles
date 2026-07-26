@@ -84,6 +84,20 @@ function M.merge_arrays(...)
   return result
 end
 
+---Treat every element in a list as a key in a table and assign a value to it.
+---This is a soft wrapper around the `fold` method (which is just a reducer) that
+---eliminates most of the boilerplate.
+---@generic A
+---@param list A[]
+---@param cb fun(currentvalue: A): any
+---@return { [A]: any }
+function M.list_to_table(list, cb)
+  return vim.iter(list):fold({}, function(accumulator, currentValue)
+    accumulator[currentValue] = cb(currentValue)
+    return accumulator
+  end)
+end
+
 ---Determines whether the given executable is installed on the user's system.
 ---@param executable string The name of the executable you want to check.
 ---@return boolean
