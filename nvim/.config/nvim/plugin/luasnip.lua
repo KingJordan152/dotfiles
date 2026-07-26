@@ -21,18 +21,27 @@ local code_snippet_files = vscode_dir_exists
 -- Load snippets from `friendly-snippets`
 luasnip_vscode.lazy_load({
   -- Exclude the following languages so custom snippets can be used instead.
-  -- These can be found in `../snippets`.
   exclude = {
     unpack(utils.css_filetypes),
+    "javascriptreact",
+    "typescriptreact",
   },
 })
 
--- Extend various filetypes to use optional `friendly-snippets` snippets
-luasnip.filetype_extend("typescriptreact", { "loremipsum" })
-luasnip.filetype_extend("javascriptreact", { "loremipsum" })
+-- Extend various filetypes to use optional or custom `friendly-snippets` snippets
+luasnip.filetype_extend("typescriptreact", {
+  "javascript",
+  "react-ts",
+  "loremipsum",
+})
+luasnip.filetype_extend("javascriptreact", {
+  "javascript",
+  "react",
+  "loremipsum",
+})
 luasnip.filetype_extend("html", { "loremipsum" })
 
--- Load custom snippets from `snippets` folder
+-- Load custom snippets from `../snippets`
 luasnip_vscode.lazy_load({ paths = "./snippets" })
 
 -- Apply snippets from all `.vscode/*.code-snippets` files in the cwd, if they exist.
