@@ -1,7 +1,5 @@
-local npm_global_install_path = vim.trim(vim.system({ "npm", "config", "get", "prefix" }, { text = true }):wait().stdout) .. "/lib"
-
+local npm_global_install_path = vim.fn.systemlist("npm config get prefix")[1] .. "/lib"
 local vue_language_server_path = vim.fn.expand("$MASON/packages") .. "/vue-language-server" .. "/node_modules/@vue/language-server"
-
 local svelte_language_server_path = vim.fn.expand("$MASON/packages") .. "/svelte-language-server" .. "/node_modules/typescript-svelte-plugin"
 
 local vue_plugin = {
