@@ -217,7 +217,21 @@ require("lualine").setup({
       },
       {
         "grapple",
-        color = { fg = colors.blue },
+        color = function()
+          local current_scope = require("grapple").app():current_scope().name
+
+          if current_scope == "global" then
+            return { fg = colors.red }
+          elseif current_scope == "cwd" then
+            return { fg = colors.green1 }
+          elseif current_scope == "git_branch" then
+            return { fg = colors.blue }
+          elseif current_scope == "git" then
+            return { fg = colors.orange }
+          end
+
+          return { fg = colors.blue } -- Default color
+        end,
         cond = function() return not utils.Set({ "snacks_picker_input", "snacks_picker_list" })[vim.bo.filetype] end,
       },
     },
