@@ -150,8 +150,10 @@ vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" -- Ensures `conform` is
 vim.schedule(function() package_json = utils.read_package_json() end) -- Only read `package.json` once during intial plugin load (non-blocking)
 watch_package_json()
 
+local css_formatters = utils.list_to_table(utils.css_filetypes, function() return web_dev_config_without_linters end)
+
 require("conform").setup({
-  formatters_by_ft = {
+  formatters_by_ft = vim.tbl_extend("error", {
     -- Individual Languages
     lua = { "stylua" },
     rust = { "rustfmt" },
@@ -167,9 +169,6 @@ require("conform").setup({
 
     -- Web Dev
     html = web_dev_config,
-    css = web_dev_config_without_linters,
-    scss = web_dev_config_without_linters,
-    less = web_dev_config_without_linters,
     javascript = web_dev_config,
     typescript = web_dev_config,
     typescriptreact = web_dev_config,
@@ -186,7 +185,7 @@ require("conform").setup({
     toml = web_dev_adjacent_config,
     markdown = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
     mdx = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
-  },
+  }, css_formatters),
   formatters = {
     eslint_d = {
       env = {

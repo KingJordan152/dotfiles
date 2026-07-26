@@ -9,6 +9,7 @@ local luasnip = require("luasnip")
 local luasnip_vscode = require("luasnip.loaders.from_vscode")
 local vscode_dir = vim.fn.getcwd() .. "/.vscode"
 local vscode_dir_exists = vim.fn.isdirectory(vscode_dir) == 1
+local utils = require("utils")
 
 ---@type string[]
 local code_snippet_files = vscode_dir_exists
@@ -19,8 +20,10 @@ local code_snippet_files = vscode_dir_exists
 
 -- Load snippets from `friendly-snippets`
 luasnip_vscode.lazy_load({
+  -- Exclude the following languages so custom snippets can be used instead.
+  -- These can be found in `../snippets`.
   exclude = {
-    "css", -- Prefer custom ones
+    unpack(utils.css_filetypes),
   },
 })
 

@@ -5,6 +5,7 @@ vim.pack.add({
   "https://github.com/lukas-reineke/indent-blankline.nvim",
 })
 
+local utils = require("utils")
 local hooks = require("ibl.hooks")
 local highlight = {
   -- "RainbowDelimiterRed", (usually indicates error)
@@ -15,9 +16,11 @@ local highlight = {
   "RainbowDelimiterGreen",
   "RainbowDelimiterYellow",
 }
-local css_nodes = {
-  "block",
-}
+local css_nodes = utils.list_to_table(utils.css_filetypes, function()
+  return {
+    "block",
+  }
+end)
 
 -- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
 vim.g.rainbow_delimiters = vim.tbl_deep_extend("keep", vim.g.rainbow_delimiters, { highlight = highlight })
@@ -33,7 +36,7 @@ require("ibl").setup({
     show_end = false,
     highlight = highlight,
     include = {
-      node_type = {
+      node_type = vim.tbl_extend("error", {
         ["*"] = {
           "table_constructor",
           "if_statement",
@@ -50,10 +53,7 @@ require("ibl").setup({
           "class_body",
           "switch_statement",
         },
-        css = css_nodes,
-        scss = css_nodes,
-        less = css_nodes,
-      },
+      }, css_nodes),
     },
     exclude = {
       language = { "yaml" },

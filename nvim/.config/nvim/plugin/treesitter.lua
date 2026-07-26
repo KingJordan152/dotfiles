@@ -15,10 +15,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
 
 local ts = require("nvim-treesitter")
+local utils = require("utils")
 local indent_ignore_filetypes = {
-  "css",
-  "scss",
-  "less",
+  unpack(utils.css_filetypes),
 }
 
 -- Ensure the following parsers are immediately installed
