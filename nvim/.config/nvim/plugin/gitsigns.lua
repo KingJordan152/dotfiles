@@ -52,7 +52,7 @@ require("gitsigns").setup({
     virt_text = true,
     virt_text_pos = "eol",
     virt_text_priority = 5000, -- MUST be higher than 4096 to appear after diagnostics (https://github.com/lewis6991/gitsigns.nvim/issues/605)
-    delay = 500,
+    delay = 750,
     use_focus = true,
   },
   current_line_blame_formatter = current_line_blame_formatter,
