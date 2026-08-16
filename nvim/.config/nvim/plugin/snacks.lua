@@ -149,6 +149,10 @@ require("snacks").setup({
 -- (Dashboard) Pull up dashboard from anywhere
 vim.keymap.set("n", "<leader><CR>", Snacks.dashboard.open, { desc = "Open Dashboard" })
 
+-- Jump through LSP references
+vim.keymap.set("n", "]w", function() Snacks.words.jump(1, true) end, { desc = "Next LSP reference" })
+vim.keymap.set("n", "[w", function() Snacks.words.jump(-1, true) end, { desc = "Next LSP reference" })
+
 -- Primary Pickers
 vim.keymap.set("n", "<leader><space>", Snacks.picker.smart, { desc = "Find File" })
 vim.keymap.set("n", "<leader>,", Snacks.picker.buffers, { desc = "View Buffers" })
