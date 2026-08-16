@@ -55,6 +55,7 @@ require("auto-session").setup({
   git_use_branch_name = true,
   git_auto_restore_on_branch_change = true,
   legacy_cmds = false,
+  preserve_buffer_on_restore = function() return true end,
 
   save_extra_data = function()
     local extra_data = save_variables({ "disable_autoformat", "enable_no_neck_pain" })
