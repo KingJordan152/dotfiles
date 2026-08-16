@@ -227,4 +227,11 @@ function M.watch_file(path, callback)
   return watcher
 end
 
+---Determines whether the editor is currently in Visual mode.
+---@return boolean
+function M.in_visual_mode()
+  local mode = vim.api.nvim_get_mode().mode
+  return mode == "v" or mode == "V" or mode == vim.keycode("<C-v>")
+end
+
 return M
