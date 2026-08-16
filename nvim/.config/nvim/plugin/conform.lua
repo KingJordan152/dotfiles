@@ -143,6 +143,24 @@ local function watch_package_json()
   end)
 end
 
+---Gets all the formatters associated with the current buffer's filetype.
+---@return string[] | nil
+local function get_formatters_for_buffer()
+  local formatters = nil
+
+  local available_formatters = require("conform").formatters_by_ft[vim.bo.filetype]
+
+  if type(available_formatters) == "function" then
+    -- Make the assumption that a function represents a web dev formatter.
+    -- WARN: This may change in the future!
+    formatters = web_dev_formatters
+  else
+    formatters = available_formatters
+  end
+
+  return formatters
+end
+
 -- ==== Plugin Config ====
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" -- Ensures `conform` is used for formatting globally
@@ -212,15 +230,101 @@ require("conform").setup({
   end,
 })
 
+-- ==== User Commands ====
+
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+
+  require("conform").format({
+    async = true,
+    lsp_format = "fallback",
+    range = range,
+  })
+end, {
+  desc = "Format the current file or selection with the active formatter(s)",
+  range = true,
+})
+
+vim.api.nvim_create_user_command("FormatWith", function(args)
+  local conform = require("conform")
+  local formatters = args.fargs
+  local range = nil
+
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+
+  conform.format({
+    formatters = formatters,
+    async = true,
+    range = range,
+    lsp_format = "never",
+  })
+end, {
+  desc = "Format the current file or selection with a specific formatter",
+  range = true,
+  nargs = "+",
+  complete = get_formatters_for_buffer,
+})
+
 -- ==== Keymaps ====
 
-vim.keymap.set({ "n", "v" }, "<leader>f", function()
-  require("conform").format({ async = false, timeout_ms = 500, lsp_format = "fallback" }, function(err)
-    if not err then
-      local mode = vim.api.nvim_get_mode().mode
-      if vim.startswith(string.lower(mode), "v") then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+---Format either the current file or selection with a formatter that's chosen from a select dropdown.
+local function format_with_dropdown()
+  local formatters = get_formatters_for_buffer()
+  local default_formatters, _ = require("conform").list_formatters_to_run(0)
+  local was_in_visual_mode = utils.in_visual_mode()
+
+  if formatters == nil then
+    vim.notify("No formatters are available for this buffer", vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.select(formatters, {
+    prompt = ("Format %s with…"):format(was_in_visual_mode and "selection" or "file"),
+    ---Indicate which formatters are already applied to the current buffer (if any)
+    format_item = function(item)
+      local is_default = vim
+        .iter(default_formatters)
+        :filter(function(formatter) return formatter.available end)
+        :any(function(formatter) return formatter.name == item end)
+
+      if is_default then
+        return item .. " (default)"
       end
+
+      return item
+    end,
+  }, function(choice)
+    if not choice then
+      return
     end
+
+    vim.api.nvim_cmd({
+      cmd = "FormatWith",
+      args = { choice },
+      range = was_in_visual_mode and {
+        vim.fn.getpos("'<")[2],
+        vim.fn.getpos("'>")[2],
+      } or nil,
+    }, {})
   end)
-end, { desc = "Format code" })
+end
+
+vim.keymap.set({ "n" }, "<leader>ff", ":Format<CR>", { desc = "Format file", silent = true })
+vim.keymap.set({ "x" }, "<leader>ff", ":Format<CR>", { desc = "Format selection", silent = true })
+vim.keymap.set({ "n" }, "<leader>fw", format_with_dropdown, { desc = "Format file with…" })
+vim.keymap.set({ "x" }, "<leader>fw", format_with_dropdown, { desc = "Format selection with…" })
