@@ -10,7 +10,6 @@ local utils = require("utils")
 local colors = require("tokyonight.colors").setup()
 local left_edge_separators = { left = "", right = "" }
 local right_edge_separators = { left = "", right = "" }
-local formatter_status_cache = { bufnr = -1, filetype = nil, active_lsps = {}, result = nil }
 
 -- Setup a `filename` component that includes a filetype icon and becomes bold when the buffer has been modified.
 local custom_filename = require("lualine.components.filename"):extend()
@@ -106,46 +105,14 @@ end
 ---will be hidden.
 ---@return string
 local function formatter_status()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local filetype = vim.bo[bufnr].filetype
-
-  -- Perform cache validation; return saved statusline result if it's unlikely that the list has changed.
-  if formatter_status_cache.bufnr == bufnr and formatter_status_cache.filetype == filetype then
-    local lsp_clients = vim.lsp.get_clients({ bufnr = bufnr })
-    local added_new_lsp = false
-
-    for _, lsp in ipairs(lsp_clients) do
-      if formatter_status_cache.active_lsps[lsp.name] == nil then
-        formatter_status_cache.active_lsps[lsp.name] = true
-        added_new_lsp = true
-      end
-    end
-
-    if not added_new_lsp then
-      return formatter_status_cache.result
-    end
-  end
-
-  local result = ""
-  local conform = require("conform")
-  local formatter_data, lsp_fallback = conform.list_formatters_to_run(0) -- Apparently expensive to run, hence why this function uses a cache.
+  local formatter_data, lsp_fallback = require("conform").list_formatters_to_run(0)
   local formatters = vim.iter(formatter_data):map(function(value) return value.name end):totable()
 
-  if #formatters == 0 then
-    if lsp_fallback then
-      result = result .. "LSP"
-    else
-      result = ""
-    end
-  else
-    result = table.concat(formatters, ", ")
+  if lsp_fallback then
+    table.insert(formatters, "LSP")
   end
 
-  formatter_status_cache.bufnr = bufnr
-  formatter_status_cache.filetype = filetype
-  formatter_status_cache.result = result
-
-  return result
+  return table.concat(formatters, ", ")
 end
 
 ---Displays an icon for each enabled `Snacks` toggle that has an associated icon in `utils.icons`.
