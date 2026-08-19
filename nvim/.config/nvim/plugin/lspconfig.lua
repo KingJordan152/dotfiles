@@ -43,7 +43,7 @@ require("mason-tool-installer").setup({
     -- LSPs
     "html",
     -- "emmet_language_server",
-    "tsgo",
+    "tsc",
     "vtsls", -- Only used by Vue (for now)
     "denols",
     "eslint",
