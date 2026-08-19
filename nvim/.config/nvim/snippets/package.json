@@ -11,6 +11,22 @@
           "stylus"
         ],
         "path": "./css.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact"
+        ],
+        "path": "./javascript/javascript.json"
+      },
+      {
+        "language": [
+          "javascriptreact",
+          "typescriptreact"
+        ],
+        "path": "./javascript/react.json"
       }
     ]
   }

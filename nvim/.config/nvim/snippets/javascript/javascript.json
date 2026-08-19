@@ -1,0 +1,128 @@
+{
+  "addEventListener": {
+    "prefix": "ael",
+    "body": "${1:document}.addEventListener('${2:event}', ${3:e} => {\n\t${0}\n})"
+  },
+  "removeEventListener": {
+    "prefix": "rel",
+    "body": "${1:document}.removeEventListener('${2:event}', ${3:listener})"
+  },
+  "dom event cancel default and propagation": {
+    "prefix": "evc",
+    "body": "e.preventDefault()\ne.stopPropagation()\n"
+  },
+  "const statement from destructuring": {
+    "prefix": "cd",
+    "body": "const { ${2:prop} } = ${1:value}"
+  },
+  "const statement from array destructuring": {
+    "prefix": "cad",
+    "body": "const [ ${2:prop} ] = ${1:value}"
+  },
+  "class": {
+    "prefix": "cs",
+    "body": "class ${1:name} {\n\tconstructor (${2:arguments}) {\n\t\t${0}\n\t}\n}"
+  },
+  "class extends": {
+    "prefix": "csx",
+    "body": "class ${1:name} extends ${2:base} {\n\tconstructor (${3:arguments}) {\n\t\tsuper(${3:arguments})\n\t\t${0}\n\t}\n}"
+  },
+  "export named function": {
+    "prefix": "ef",
+    "body": "export function ${1:member} (${2:arguments}) {\n\t${0}\n}"
+  },
+  "import module": {
+    "prefix": "im",
+    "body": "import ${2:*} from '${1:module}'"
+  },
+  "import module as": {
+    "prefix": "ima",
+    "body": "import ${2:*} as ${3:name} from '${1:module}'"
+  },
+  "import module destructured": {
+    "prefix": "imd",
+    "body": "import {$2} from '${1:module}'"
+  },
+  "try/catch": {
+    "prefix": "tc",
+    "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}"
+  },
+  "try/finally": {
+    "prefix": "tf",
+    "body": "try {\n\t${0}\n} finally {\n\t\n}"
+  },
+  "try/catch/finally": {
+    "prefix": "tcf",
+    "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n} finally {\n\t\n}"
+  },
+  "anonymous function": {
+    "prefix": "fan",
+    "body": "function (${1:arguments}) {${0}}"
+  },
+  "named function": {
+    "prefix": "fn",
+    "body": "function ${1:name} (${2:arguments}) {\n\t${0}\n}"
+  },
+  "async function": {
+    "prefix": "asf",
+    "body": "async function (${1:arguments}) {\n\t${0}\n}"
+  },
+  "async arrow function": {
+    "prefix": "aa",
+    "body": "async (${1:arguments}) => {\n\t${0}\n}"
+  },
+  "immediately-invoked function expression": {
+    "prefix": "iife",
+    "body": ";(function (${1:arguments}) {\n\t${0}\n})(${2})"
+  },
+  "async immediately-invoked function expression": {
+    "prefix": "aiife",
+    "body": ";(async (${1:arguments}) => {\n\t${0}\n})(${2})"
+  },
+  "arrow function": {
+    "prefix": "af",
+    "body": "(${1:arguments}) => ${2:statement}"
+  },
+  "arrow function with destructuring": {
+    "prefix": "afd",
+    "body": "({${1:arguments}}) => ${2:statement}"
+  },
+  "arrow function with body": {
+    "prefix": "afb",
+    "body": "(${1:arguments}) => {\n\t${0}\n}"
+  },
+  "arrow function with return": {
+    "prefix": "afr",
+    "body": "(${1:arguments}) => {\n\treturn ${0}\n}"
+  },
+  "getter + setter": {
+    "prefix": "gs",
+    "body": "get ${1:property} () {\n\t${0}\n}\nset ${1:property} (${2:value}) {\n\t\n}"
+  },
+  "ternary": {
+    "prefix": "te",
+    "body": "${1:cond} ? ${2:true} : ${3:false}"
+  },
+  "console.log": {
+    "prefix": "cl",
+    "body": "console.log(${0})"
+  },
+  "console.log with log": {
+    "prefix": "log",
+    "body": "console.log(${0})"
+  },
+  "console.error": {
+    "prefix": "ce",
+    "body": "console.error(${0})"
+  },
+  "wrap selection in arrow function": {
+    "prefix": "wrap selection in arrow function",
+    "body": "() => {\n\t{$TM_SELECTED_TEXT}\n}",
+    "description": "wraps text in arrow function"
+  },
+  "wrap selection in async arrow function": {
+    "prefix": "wrap selection in async arrow function",
+    "body": "async () => {\n\t{$TM_SELECTED_TEXT}\n}",
+    "description": "wraps text in arrow function"
+  }
+}

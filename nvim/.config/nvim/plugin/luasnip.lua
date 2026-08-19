@@ -28,15 +28,11 @@ luasnip_vscode.lazy_load({
   },
 })
 
--- Extend various filetypes to use optional or custom `friendly-snippets` snippets
+-- Make certain filetypes only use the `friendly-snippets` snippets that I want (instead of all of them)
 luasnip.filetype_extend("typescriptreact", {
-  "javascript",
-  "react-ts",
   "loremipsum",
 })
 luasnip.filetype_extend("javascriptreact", {
-  "javascript",
-  "react",
   "loremipsum",
 })
 luasnip.filetype_extend("html", { "loremipsum" })
