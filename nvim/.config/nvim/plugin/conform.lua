@@ -118,7 +118,7 @@ end
 ---A formatter must be listed as a dependency in the user's `package.json` _and_ have an associated configuration
 ---file in order for it to be activated. Otherwise, fallback to LSP formatters.
 ---@param bufnr integer Current buffer index.
----@return string[]
+---@return conform.FiletypeFormatterInternal
 local function web_dev_config(bufnr) return replace_eslint_with_lsp(require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters))) end
 
 ---Same as `web_dev_config`, except this excludes linter formatters (e.g., `eslint_d`, `oxlint`, etc.)
