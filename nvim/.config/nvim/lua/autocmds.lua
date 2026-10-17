@@ -26,7 +26,7 @@ autocmd("InsertLeave", {
 autocmd("TextYankPost", {
   desc = "Briefly highlight yanked text",
   group = augroup("highlight_yank", { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+  callback = function() vim.hl.on_yank({ priority = 300 }) end,
 })
 
 autocmd("FileType", {
