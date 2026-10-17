@@ -17,6 +17,15 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "'v1'"
     },
+    "blink.lib": {
+      "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",
+      "src": "https://github.com/saghen/blink.lib"
+    },
+    "blink.pairs": {
+      "rev": "70673231ba75e3b6094c43a62ac3bf5967926a30",
+      "src": "https://github.com/saghen/blink.pairs",
+      "version": "0.7.0 - 0.7.0"
+    },
     "bullets.vim": {
       "rev": "81570b98ca44b4100b3ddcf8d9ca74b9a9b0c884",
       "src": "https://github.com/bullets-vim/bullets.vim"
@@ -80,10 +89,6 @@
     "mini.move": {
       "rev": "48fcaac289a19b8eff2fd5fe203267d478a8abdc",
       "src": "https://github.com/nvim-mini/mini.move"
-    },
-    "mini.pairs": {
-      "rev": "b1c5a726921b7a8c9321e9a7a208aa0571de5810",
-      "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neogen": {
       "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
@@ -164,10 +169,6 @@
     "quicker.nvim": {
       "rev": "4a6883cb13fe097a20a046eb55f6dffd239276e3",
       "src": "https://github.com/stevearc/quicker.nvim"
-    },
-    "rainbow-delimiters.nvim": {
-      "rev": "012f1480cd9a5fc99fce7678e0a536421a53fc46",
-      "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
     },
     "render-markdown.nvim": {
       "rev": "4663eb3ecd538bd5062628fb6d95bbe6bdca78f6",

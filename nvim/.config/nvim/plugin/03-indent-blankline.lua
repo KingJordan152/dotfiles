@@ -1,29 +1,17 @@
 vim.pack.add({
-  -- Dependencies
-  "https://github.com/HiPhish/rainbow-delimiters.nvim",
-
   "https://github.com/lukas-reineke/indent-blankline.nvim",
 })
 
 local utils = require("utils")
 local hooks = require("ibl.hooks")
-local highlight = {
-  -- "RainbowDelimiterRed", (usually indicates error)
-  -- "RainbowDelimiterOrange", (too similar to yellow)
-  "RainbowDelimiterBlue",
-  "RainbowDelimiterViolet",
-  "RainbowDelimiterCyan",
-  "RainbowDelimiterGreen",
-  "RainbowDelimiterYellow",
-}
+local highlights = require("plugin.02-blink-pairs").highlights
 local css_nodes = utils.list_to_table(utils.css_filetypes, function()
   return {
     "block",
   }
 end)
 
--- Ensures Rainbow Delimiters and Indent Blankline highlight groups are synced
-vim.g.rainbow_delimiters = vim.tbl_deep_extend("keep", vim.g.rainbow_delimiters, { highlight = highlight })
+-- Ensures `blink.pairs` and `indent-blankline` highlight groups are synced
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 require("ibl").setup({
@@ -34,7 +22,7 @@ require("ibl").setup({
   scope = {
     show_start = false,
     show_end = false,
-    highlight = highlight,
+    highlight = highlights,
     include = {
       node_type = vim.tbl_extend("error", {
         ["*"] = {
