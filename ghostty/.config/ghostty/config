@@ -33,7 +33,7 @@ freetype-load-flags = no-light
 
 # ==== Mac-Only ====
 macos-titlebar-proxy-icon = hidden
-macos-option-as-alt = left
+macos-option-as-alt = true
 font-thicken = true
 window-colorspace = display-p3
 
