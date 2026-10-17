@@ -240,6 +240,14 @@ require("conform").setup({
         ESLINT_D_PPID = "auto", -- Ensures `eslint_d` stays alive for the lifetime of this Neovim instance
       },
     },
+    oxlint = {
+      cwd = require("conform.util").root_file({
+        ".oxlintrc.json",
+        ".oxlintrc.jsonc",
+        "oxlint.config.ts",
+        "oxlint.config.mts",
+      }),
+    },
   },
   default_format_opts = {
     lsp_format = "fallback",
