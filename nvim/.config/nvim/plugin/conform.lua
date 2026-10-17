@@ -230,6 +230,9 @@ require("conform").setup({
     toml = web_dev_adjacent_config,
     markdown = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
     mdx = function(bufnr) return add_injected(web_dev_adjacent_config(bufnr)) end,
+
+    -- Filetypes that don't have a formatter configured
+    ["_"] = { "trim_whitespace" },
   }, css_formatters),
   formatters = {
     eslint_d = {
