@@ -9,15 +9,7 @@ vim.pack.add({
 })
 
 local pairs = require("blink-pairs")
-local highlights = {
-  -- "RainbowDelimiterRed", (usually indicates error)
-  -- "RainbowDelimiterOrange", (too similar to yellow)
-  "RainbowDelimiterBlue",
-  "RainbowDelimiterViolet",
-  "RainbowDelimiterCyan",
-  "RainbowDelimiterGreen",
-  "RainbowDelimiterYellow",
-}
+local utils = require("utils")
 
 -- Download prebuilt binaries from GitHub releases (must be on a versioned release)
 ---@diagnostic disable-next-line: undefined-field
@@ -53,13 +45,10 @@ pairs.setup({
   highlights = {
     enabled = true,
     cmdline = false,
-    groups = highlights,
+    groups = utils.pair_highlights,
     matchparen = {
       cmdline = false,
       include_surrounding = true,
     },
   },
 })
-
--- Allows `indent-blankline` plugin to reuse the highlights established here
-return { highlights = highlights }

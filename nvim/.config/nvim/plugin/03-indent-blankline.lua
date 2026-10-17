@@ -4,7 +4,6 @@ vim.pack.add({
 
 local utils = require("utils")
 local hooks = require("ibl.hooks")
-local highlights = require("plugin.02-blink-pairs").highlights
 local css_nodes = utils.list_to_table(utils.css_filetypes, function()
   return {
     "block",
@@ -22,7 +21,7 @@ require("ibl").setup({
   scope = {
     show_start = false,
     show_end = false,
-    highlight = highlights,
+    highlight = utils.pair_highlights,
     include = {
       node_type = vim.tbl_extend("error", {
         ["*"] = {

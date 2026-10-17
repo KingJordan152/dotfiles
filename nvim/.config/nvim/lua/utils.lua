@@ -67,6 +67,16 @@ M.icons = {
   },
 }
 
+M.pair_highlights = {
+  -- "RainbowDelimiterRed", (usually indicates error)
+  -- "RainbowDelimiterOrange", (too similar to yellow)
+  "RainbowDelimiterBlue",
+  "RainbowDelimiterViolet",
+  "RainbowDelimiterCyan",
+  "RainbowDelimiterGreen",
+  "RainbowDelimiterYellow",
+}
+
 ---Creates a collection of unique strings.
 ---@param list string[] All the strings you wish to place in the Set. Any duplicated string will be ignored.
 ---@return {string: boolean} set A table indexed by all the strings from the given `list`.
