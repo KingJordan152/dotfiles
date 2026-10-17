@@ -1,6 +1,7 @@
 vim.pack.add({ "https://github.com/tpope/vim-fugitive" })
 
-vim.keymap.set("n", "<C-S-G>", "<leader>gg", { remap = true })
+vim.keymap.set("n", "<C-S-M-G>", "<cmd>$tab Git<CR>", { desc = "Open Fugitive summary in a new tab" })
+vim.keymap.set("n", "<C-S-G>", "<leader>gg", { remap = true, desc = "Toggle Fugitive summary window" })
 vim.keymap.set("n", "<leader>gg", function()
   local fugitive_win = nil
 
