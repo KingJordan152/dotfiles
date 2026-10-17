@@ -82,6 +82,12 @@ local function require_package_json(_, formatters)
 
   return vim.tbl_filter(function(formatter)
     formatter = formatter_dependency_map[formatter] or formatter
+
+    -- Ensure these field exist before proceeding
+    if not package_json.dependencies or not package_json.devDependencies then
+      return false
+    end
+
     return package_json.dependencies[formatter] or package_json.devDependencies[formatter]
   end, formatters)
 end
