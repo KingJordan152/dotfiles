@@ -92,13 +92,34 @@ local function require_package_json(_, formatters)
   end, formatters)
 end
 
+---Replace any "eslint" linter formatter entry with the Conform option `{ lsp_format = "last" }`.
+---
+---**Reasoning**
+---- `eslint` doesn't exist as a proper, standalone formatter
+---- `eslint_d` is quite slow, memory-intensive, and only only reliably works with `async` formatting
+---- `eslint-lsp` is the fastest and most consistent solution
+---  - This assumes the `format` option in `eslint-lsp`'s config is set to `true`
+---@param formatters  string[]
+---@return conform.FiletypeFormatterInternal
+local function replace_eslint_with_lsp(formatters)
+  return vim.iter(formatters):fold({}, function(accumulator, currentValue)
+    if currentValue == "eslint_d" then
+      accumulator["lsp_format"] = "last"
+    else
+      table.insert(accumulator, currentValue)
+    end
+
+    return accumulator
+  end)
+end
+
 ---Determines the formatters that will be used for all web development filetypes.
 ---
 ---A formatter must be listed as a dependency in the user's `package.json` _and_ have an associated configuration
 ---file in order for it to be activated. Otherwise, fallback to LSP formatters.
 ---@param bufnr integer Current buffer index.
 ---@return string[]
-local function web_dev_config(bufnr) return require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters)) end
+local function web_dev_config(bufnr) return replace_eslint_with_lsp(require_cwd(bufnr, require_package_json(bufnr, web_dev_formatters))) end
 
 ---Same as `web_dev_config`, except this excludes linter formatters (e.g., `eslint_d`, `oxlint`, etc.)
 ---@param bufnr integer Current buffer index.
