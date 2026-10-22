@@ -2,6 +2,9 @@
 return {
   settings = {
     ["js/ts"] = {
+      format = {
+        enabled = true,
+      },
       referencesCodeLens = {
         enabled = false,
       },
