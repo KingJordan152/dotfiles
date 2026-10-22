@@ -69,6 +69,10 @@ require("tokyonight").setup({
       link = "LspReferenceRead",
     }
 
+    highlights["TabLineFill"] = {
+      bg = colors.none,
+    }
+
     highlights["WinSeparator"] = {
       fg = colors.border_highlight,
     }

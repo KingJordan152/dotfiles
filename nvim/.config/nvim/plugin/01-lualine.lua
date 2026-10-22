@@ -149,6 +149,7 @@ require("lualine").setup({
     }),
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
+    always_show_tabline = false,
     globalstatus = true,
   },
   sections = {
@@ -289,6 +290,32 @@ require("lualine").setup({
         colored = true,
         color = { fg = colors.fg_dark },
         separator = right_edge_separators,
+      },
+    },
+  },
+  tabline = {
+    lualine_a = {
+      {
+        "tabs",
+        component_separators = { left = "" },
+        section_separators = { left = "" },
+        separator = { left = "", right = "" },
+        mode = 2, -- Show tab name and number
+        path = 0, -- Only show file name (not path)
+        max_length = vim.o.columns - 1, -- Allow tab to expand the full width of the terminal
+        show_modified_status = true,
+        symbols = {
+          modified = " " .. utils.icons.unsaved,
+        },
+        tabs_color = {
+          inactive = "lualine_x_location_inactive",
+        },
+        -- Add the filetype icon next to the filename
+        fmt = function(name)
+          local devicons = require("nvim-web-devicons")
+          local icon, _ = devicons.get_icon(name, nil, { default = true })
+          return icon .. " " .. name
+        end,
       },
     },
   },
