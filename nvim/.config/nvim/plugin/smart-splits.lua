@@ -1,13 +1,28 @@
-vim.pack.add({ "https://github.com/mrjones2014/smart-splits.nvim" })
+---@diagnostic disable: missing-fields
+vim.pack.add({
+  -- Dependencies (backends)
+  "https://github.com/smart-splits-nvim/backend-tmux",
+
+  "https://github.com/smart-splits-nvim/smart-splits.nvim",
+})
 
 local smart_splits = require("smart-splits")
 
----@diagnostic disable-next-line: missing-fields
 smart_splits.setup({
-  default_amount = 2,
-  cursor_follows_swapped_bufs = true,
-  float_win_behavior = "mux", -- Ensures floating windows are properly focused when leaving/entering a split
-  at_edge = "stop",
+  move = {
+    at_edge = "stop",
+    float = "mux",
+  },
+  swap = {
+    move_cursor = true,
+  },
+  resize = {
+    amount = 2,
+  },
+  mux = {
+    backend = { "smart-splits-backend-tmux" },
+    warn_if_unusable = false,
+  },
 })
 
 -- Moving between splits
@@ -15,7 +30,6 @@ vim.keymap.set("n", "<C-h>", smart_splits.move_cursor_left, { desc = "Go to the 
 vim.keymap.set("n", "<C-j>", smart_splits.move_cursor_down, { desc = "Go to the lower window" })
 vim.keymap.set("n", "<C-k>", smart_splits.move_cursor_up, { desc = "Go to the upper window" })
 vim.keymap.set("n", "<C-l>", smart_splits.move_cursor_right, { desc = "Go to the right window" })
-vim.keymap.set("n", "<C-\\>", smart_splits.move_cursor_previous, { desc = "Go to the previous window" })
 
 -- Resizing splits
 vim.keymap.set("n", "<C-M-h>", smart_splits.resize_left, { desc = "Resize split left" })

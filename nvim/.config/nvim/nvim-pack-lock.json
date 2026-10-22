@@ -12,6 +12,10 @@
       "rev": "c8e6139a2e52a38101fecaba6014d7dd75489044",
       "src": "https://github.com/rmagatti/auto-session"
     },
+    "backend-tmux": {
+      "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+      "src": "https://github.com/smart-splits-nvim/backend-tmux"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -179,7 +183,7 @@
       "src": "https://github.com/Aasim-A/scrollEOF.nvim"
     },
     "smart-splits.nvim": {
-      "rev": "289971cfdbc7f7b1c91670a228b239d870130af7",
+      "rev": "69ab668d96b54fa15907ac3245548fd8a3ce2318",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
