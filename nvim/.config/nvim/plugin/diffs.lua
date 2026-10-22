@@ -33,5 +33,5 @@ vim.pack.add({
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
 
-  "https://github.com/barrettruth/diffs.nvim",
+  "https://forge.barrettruth.com/barrettruth/diffs.nvim",
 })
