@@ -2,6 +2,12 @@ vim.pack.add({ "https://github.com/shortcuts/no-neck-pain.nvim" })
 
 require("no-neck-pain").setup({
   width = 110,
+  integrations = {
+    dap = { position = "none" },
+    oil = { position = "none" },
+    snacks_picker = { position = "left" },
+    dashboard = { enabled = true },
+  },
 })
 
 -- Must setup autocmd here because the one in `setup` won't update when the global variable changes
