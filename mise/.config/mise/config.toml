@@ -1,3 +1,6 @@
+[settings]
+auto_update = true
+
 [tools]
 deno = "latest"
 go = "latest"
