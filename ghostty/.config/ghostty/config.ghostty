@@ -1,11 +1,13 @@
 # ==== Style ====
 theme = TokyoNight
 window-padding-balance = true
+window-padding-color = extend
 window-padding-x = 10
 window-padding-y = 5
 window-theme = ghostty
 adjust-cursor-thickness = 2
 adjust-underline-position = 4
+resize-overlay = never
 
 # ==== Fonts ====
 font-family = CaskaydiaCove Nerd Font
@@ -14,6 +16,7 @@ font-feature = -calt
 
 # ==== Editor Behavior ====
 window-inherit-working-directory = false
+window-subtitle = working-directory
 tab-inherit-working-directory = false
 split-inherit-working-directory = true
 shell-integration = detect
@@ -21,11 +24,13 @@ shell-integration-features = true
 mouse-hide-while-typing = true
 cursor-style-blink = false
 notify-on-command-finish = unfocused
+notify-on-command-finish-action = no-bell,notify
 quit-after-last-window-closed = true
 title = " "
 
 # ==== Linux-Only ====
 gtk-toolbar-style = flat
+gtk-single-instance = true
 app-notifications = no-clipboard-copy
 
 # Prevents fonts from stretching vertically
