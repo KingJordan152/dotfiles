@@ -2,6 +2,13 @@
 auto_update = true
 
 [tools]
+# CLI
+eza = "latest"
+fd = "latest"
+ripgrep = "latest"
+starship = "latest"
+
+# Development
 deno = "latest"
 go = "latest"
 java = "latest"
@@ -11,3 +18,4 @@ pnpm = "latest"
 python = "latest"
 ruby = "latest"
 rust = "latest"
+opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
