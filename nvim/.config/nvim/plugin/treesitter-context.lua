@@ -9,4 +9,5 @@ require("treesitter-context").setup({
   mode = "topline",
   multiwindow = true,
   multiline_threshold = 1, -- Similar behavior to Zed/VS Code
+  max_lines = 3,
 })
