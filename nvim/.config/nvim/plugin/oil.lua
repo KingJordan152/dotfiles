@@ -10,7 +10,7 @@ vim.pack.add({
 
   -- Plugin
   -- "https://github.com/stevearc/oil.nvim",
-  "https://github.com/barrettruth/canola.nvim",
+  "https://forge.barrettruth.com/barrettruth/canola.nvim",
 })
 
 require("oil-lsp-diagnostics").setup({
