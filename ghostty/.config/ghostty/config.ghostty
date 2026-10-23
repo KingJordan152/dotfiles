@@ -52,4 +52,4 @@ keybind = ctrl+enter=unbind
 keybind = ctrl+shift+j=unbind
 
 # Use this optional config file to make platform-specific overrides
-config-file = ?platform-overrides/config
+config-file = ?overrides.ghostty
