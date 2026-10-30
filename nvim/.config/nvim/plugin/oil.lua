@@ -66,7 +66,16 @@ require("oil").setup({
     signcolumn = vim.o.signcolumn,
   },
   keymaps = {
-    ["<C-c>"] = false, -- Replace with below keymap
+    -- Remove some defaults
+    ["<C-c>"] = false,
+    ["<C-l>"] = false, -- Interferes with `smart-splits`
+    ["<C-h>"] = false, -- Interferes with `smart-splits`
+    ["g."] = false,
+
+    ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+    ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
+    ["<M-h>"] = { "actions.toggle_hidden", mode = "n" }, -- Same as `snacks` picker
+    ["<M-r>"] = "actions.refresh",
     ["q"] = "actions.close",
     ["gq"] = "actions.close",
     ["<C-q>"] = "actions.send_to_qflist",
