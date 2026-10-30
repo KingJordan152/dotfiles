@@ -65,6 +65,7 @@ require("mason-tool-installer").setup({
     "jsonls",
     "yamlls",
     "harper_ls",
+    "tombi",
     { "basedpyright", condition = is_installed.python },
     { "gopls", condition = is_installed.go },
     { "jdtls", condition = is_installed.java },
