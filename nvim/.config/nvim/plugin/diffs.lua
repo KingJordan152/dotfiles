@@ -21,7 +21,7 @@ vim.g.diffs = {
       ours = "<leader>co",
       theirs = "<leader>ct",
       both = "<leader>cb",
-      none = "<leader>cx",
+      none = "<leader>c0",
       next = "]x",
       prev = "[x",
     },
