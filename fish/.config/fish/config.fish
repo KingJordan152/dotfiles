@@ -3,6 +3,7 @@ if status is-interactive
   # GENERAL SETTINGS
   # ==================
   set fish_greeting # Remove greeting
+  fish_config theme choose custom_default
 
   set -gx EDITOR "nvim"
   set -gx VISUAL "$EDITOR"
