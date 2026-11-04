@@ -10,13 +10,9 @@ $directory\
 $git_branch\
 $git_status\
 [](#394260)\
-$fill\
 $status\
 \n$character
 """
-
-[fill]
-symbol = " "
 
 [character]
 vimcmd_symbol = '[](bold #9ece6a) '
