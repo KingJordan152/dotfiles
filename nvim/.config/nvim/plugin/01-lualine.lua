@@ -311,9 +311,10 @@ require("lualine").setup({
           inactive = "lualine_x_location_inactive",
         },
         -- Add the filetype icon next to the filename
-        fmt = function(name)
+        fmt = function(name, ctx)
           local devicons = require("nvim-web-devicons")
-          local icon, _ = devicons.get_icon(name, nil, { default = true })
+          local filetype = ctx.filetype == "fugitive" and "git" or ctx.filetype
+          local icon, _ = devicons.get_icon_by_filetype(filetype, { default = true })
           return icon .. " " .. name
         end,
       },
