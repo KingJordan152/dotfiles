@@ -21,7 +21,6 @@ vim.o.wrap = false -- Prevent line wrapping
 vim.o.linebreak = true -- When `wrap` is true, causes full words to wrap rather than individual characters
 vim.o.winborder = "rounded" -- Make all floating windows have a "rounded" border
 vim.o.pumborder = vim.o.winborder -- Make native popup menus (e.g., right-click menus) follow the `winborder` option
-vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
 vim.o.swapfile = false -- Disable swapfile creation
 vim.o.spelllang = "en_us" -- Set the language `spell` uses to U.S. English
 vim.o.spelloptions = "camel" -- Spellcheck the individual parts of a camelCased word
@@ -60,6 +59,16 @@ vim.opt.listchars:append({
   nbsp = "␣",
   eol = "󰌑",
 })
+
+-- Make folding appear/behave similar to VS Code/Zed
+vim.o.foldtext = "" -- Ensures highlights and line text are preserved
+vim.opt.fillchars:append({ fold = " " }) -- Remove all trailing characters
+vim.o.foldlevelstart = 99 -- Opens all folds created by Treesitter immediately (VS Code behavior)
+vim.o.foldlevel = 99
+vim.o.foldenable = true
+vim.o.foldcolumn = "1"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use `treesitter` folding by default (LSP may override)
 
 -- Sync clipboard between OS and Neovim.
 -- Using `schedule` can increase startup time.

@@ -60,10 +60,6 @@ vim.api.nvim_create_autocmd("FileType", {
     -- Enable highlighting
     vim.treesitter.start(buf, language)
 
-    -- Enable folds
-    vim.wo.foldmethod = "expr"
-    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-
     -- Enable indents (only for specific filetypes)
     if not vim.tbl_contains(indent_ignore_filetypes, vim.bo[buf].filetype) then
       vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

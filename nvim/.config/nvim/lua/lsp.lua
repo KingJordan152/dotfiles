@@ -102,6 +102,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       )
     end
 
+    if client:supports_method("textDocument/foldingRange") then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+    end
+
     if client.name == "eslint" or client.name == "oxlint" then
       vim.keymap.set("n", "<leader>lf", function()
         local Name = client.name:gsub("^%l", string.upper)
